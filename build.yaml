@@ -1,0 +1,9 @@
+targets:
+    $default:
+        builders:
+            json_serializable:
+                generate_for:
+                    - lib/**.dart
+                options:
+                    generic_argument_factories: true
+                    explicit_to_json: true

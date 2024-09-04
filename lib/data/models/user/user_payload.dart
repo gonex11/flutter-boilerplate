@@ -1,7 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'user_payload.g.dart';
+
 @JsonSerializable()
-class UserPayload {
+class UserPayload extends Equatable {
   final String? username;
   final String? firstName;
   final String? lastName;
@@ -14,21 +17,11 @@ class UserPayload {
     this.password,
   });
 
-  factory UserPayload.fromJson(Map<String, dynamic> json) {
-    return UserPayload(
-      username: json['username'],
-      firstName: json['first_name'],
-      lastName: json['last_name'],
-      password: json['password'],
-    );
-  }
+  factory UserPayload.fromJson(Map<String, dynamic> json) =>
+      _$UserPayloadFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'username': username,
-      'first_name': firstName,
-      'last_name': lastName,
-      'password': password,
-    };
-  }
+  Map<String, dynamic> toJson() => _$UserPayloadToJson(this);
+
+  @override
+  List<Object?> get props => [username, firstName, lastName, password];
 }

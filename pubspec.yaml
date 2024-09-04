@@ -17,12 +17,14 @@ dependencies:
     skeletonizer: ^1.4.2
     keyboard_dismisser: ^3.0.0
     dio: ^5.6.0
+    json_serializable: ^6.8.0
 
 dev_dependencies:
     build_runner: ^2.4.12
     flutter_lints: ^4.0.0
     flutter_test:
         sdk: flutter
+    json_annotation: ^4.9.0
 
 flutter:
     uses-material-design: true

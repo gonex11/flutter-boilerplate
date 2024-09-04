@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'generated/meta_response.g.dart';
+part 'meta_response.g.dart';
 
 @JsonSerializable()
 class MetaResponse extends Equatable {

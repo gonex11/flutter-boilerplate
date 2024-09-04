@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/presentation/widgets/app_bottom_sheet.dart';
 import 'package:flutter_boilerplate/core/services/remote/responses/error_detail_response.dart';
+import 'package:flutter_boilerplate/core/utils/utils.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 import 'package:flutter_boilerplate/data/models/user/user_payload.dart';
-import 'package:flutter_boilerplate/core/utils/utils.dart';
+import 'package:flutter_boilerplate/presentation/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';
 
 class CreateUserController extends GetxController with StateMixin<UserModel> {
@@ -52,28 +52,7 @@ class CreateUserController extends GetxController with StateMixin<UserModel> {
         update();
       } else {
         final message = Utils.getErrorMessage(error?.errors) ?? "";
-        Get.bottomSheet(
-          AppBottomSheet(
-            child: Center(
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.warning_rounded,
-                    color: Colors.red,
-                    size: 150,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    message,
-                    textAlign: TextAlign.center,
-                    style: Get.textTheme.bodyLarge,
-                  ),
-                  const SizedBox(height: 30),
-                ],
-              ),
-            ),
-          ),
-        );
+        Get.bottomSheet(AppErrorBottomSheet(message: message));
       }
     }, (data) {
       Get.back();
