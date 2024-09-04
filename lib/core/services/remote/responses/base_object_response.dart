@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'base_object_response.g.dart';
+part 'generated/base_object_response.g.dart';
 
 @JsonSerializable()
 class BaseObjectResponse<T> extends Equatable {

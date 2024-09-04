@@ -7,3 +7,8 @@ targets:
                 options:
                     generic_argument_factories: true
                     explicit_to_json: true
+            source_gen:combining_builder:
+                options:
+                    build_extensions:
+                        '^lib/data/models/{{dir}}/{{file}}.dart': 'lib/data/models/{{dir}}/generated/{{file}}.g.dart'
+                        '^lib/core/services/remote/responses/{{file}}.dart': 'lib/core/services/remote/responses/generated/{{file}}.g.dart'

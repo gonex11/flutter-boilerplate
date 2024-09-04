@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user_payload.g.dart';
+part 'generated/user_payload.g.dart';
 
 @JsonSerializable()
 class UserPayload extends Equatable {

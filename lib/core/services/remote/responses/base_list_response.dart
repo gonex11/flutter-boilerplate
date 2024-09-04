@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_boilerplate/core/services/remote/responses/meta_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'base_list_response.g.dart';
+part 'generated/base_list_response.g.dart';
 
 @JsonSerializable()
 class BaseListResponse<T> extends Equatable {

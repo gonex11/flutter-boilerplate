@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_boilerplate/core/services/remote/responses/error_detail_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'base_error_response.g.dart';
+part 'generated/base_error_response.g.dart';
 
 @JsonSerializable()
 class BaseErrorResponse extends Equatable {

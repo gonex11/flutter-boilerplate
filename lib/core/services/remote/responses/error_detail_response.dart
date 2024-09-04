@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'error_detail_response.g.dart';
+part 'generated/error_detail_response.g.dart';
 
 @JsonSerializable()
 class ErrorDetailResponse extends Equatable {
