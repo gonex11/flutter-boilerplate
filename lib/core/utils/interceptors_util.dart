@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_boilerplate/core/utils/app_constants.dart';
+import 'package:flutter_boilerplate/core/utils/constants_util.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class HeaderInterceptor extends Interceptor {
@@ -13,7 +13,7 @@ class HeaderInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     String? accessToken = await _secureStorage.read(
-      key: AppConstants.secureStorageKeys.accessToken,
+      key: ConstantsUtil.secureStorageKeys.accessToken,
     );
     if (accessToken?.isNotEmpty == true) {
       options.headers['Authorization'] = 'Bearer $accessToken';

@@ -1,5 +1,5 @@
-abstract class AppConstants {
-  AppConstants._();
+abstract class ConstantsUtil {
+  ConstantsUtil._();
 
   static final SecureStorageKeys _secureStorageKeys = SecureStorageKeys._();
   static SecureStorageKeys get secureStorageKeys => _secureStorageKeys;
