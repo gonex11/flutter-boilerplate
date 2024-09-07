@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_boilerplate/core/services/remote/helpers/api_service.dart';
+import 'package:flutter_boilerplate/core/services/remote/helpers/api_helper.dart';
 import 'package:flutter_boilerplate/core/services/remote/responses/base_list_response.dart';
-import 'package:flutter_boilerplate/core/utils/exceptions.dart';
-import 'package:flutter_boilerplate/core/utils/failure.dart';
+import 'package:flutter_boilerplate/core/utils/exception_util.dart';
+import 'package:flutter_boilerplate/core/utils/failure_util.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 import 'package:flutter_boilerplate/data/models/user/user_payload.dart';
 
 class UserRemoteDataSource {
-  final ApiService _apiService;
+  final ApiHelper _apiService;
 
   const UserRemoteDataSource(this._apiService);
 

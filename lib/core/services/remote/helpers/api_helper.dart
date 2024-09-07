@@ -1,18 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_boilerplate/core/utils/exceptions.dart';
-import 'package:flutter_boilerplate/core/utils/interceptors.dart';
-import 'package:flutter_boilerplate/core/services/remote/helpers/dio_service.dart';
+import 'package:flutter_boilerplate/core/utils/exception_util.dart';
+import 'package:flutter_boilerplate/core/utils/interceptors_util.dart';
+import 'package:flutter_boilerplate/core/services/remote/helpers/dio_helper.dart';
 import 'package:flutter_boilerplate/core/services/remote/responses/base_error_response.dart';
 import 'package:flutter_boilerplate/core/services/remote/responses/error_detail_response.dart';
 
 enum RequestMethod { get, post, put, patch, delete }
 
-class ApiService {
-  final DioService _dioService;
+class ApiHelper {
+  final DioHelper _dioService;
   final HeaderInterceptor _headerInterceptor;
 
-  const ApiService(this._dioService, this._headerInterceptor);
+  const ApiHelper(this._dioService, this._headerInterceptor);
 
   Future<Response> _sendRequest(
     RequestMethod method,

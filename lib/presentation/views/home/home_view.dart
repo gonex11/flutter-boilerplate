@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_state.dart';
-import 'package:flutter_boilerplate/core/routes/app_pages.dart';
+import 'package:flutter_boilerplate/core/routes/page_routes.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -19,7 +19,7 @@ class HomeView extends GetView<HomeController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
         onPressed: () {
-          Get.toNamed(AppRoutes.CREATE_USER);
+          Get.toNamed(Routes.CREATE_USER);
         },
         child: const Icon(
           Icons.add,
@@ -79,7 +79,7 @@ class HomeView extends GetView<HomeController> {
                     margin: EdgeInsets.zero,
                     child: ListTile(
                       onTap: () {
-                        Get.toNamed(AppRoutes.USER, arguments: user?.id);
+                        Get.toNamed(Routes.USER, arguments: user?.id);
                       },
                       dense: true,
                       title: Text(
