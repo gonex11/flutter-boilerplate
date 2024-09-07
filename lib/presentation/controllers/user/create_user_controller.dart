@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/services/remote/responses/error_detail_response.dart';
 import 'package:flutter_boilerplate/core/utils/utils.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 import 'package:flutter_boilerplate/data/models/user/user_payload.dart';
+import 'package:flutter_boilerplate/data/repositories/user_repository.dart';
+import 'package:flutter_boilerplate/presentation/controllers/home/home_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';
 
 class CreateUserController extends GetxController with StateMixin<UserModel> {
-  final UserRemoteDataSource _remoteDataSource;
+  final UserRepository _repository;
 
-  CreateUserController(this._remoteDataSource);
+  CreateUserController(this._repository);
 
   @override
   void onInit() {
@@ -43,7 +44,7 @@ class CreateUserController extends GetxController with StateMixin<UserModel> {
       lastName: lNameController.text,
       password: passController.text,
     );
-    final result = await _remoteDataSource.createUser(payload);
+    final result = await _repository.createUser(payload);
     result.fold((failure) {
       final error = failure.error;
 
@@ -54,8 +55,12 @@ class CreateUserController extends GetxController with StateMixin<UserModel> {
         final message = Utils.getErrorMessage(error?.errors) ?? "";
         Get.bottomSheet(AppErrorBottomSheet(message: message));
       }
-    }, (data) {
+    }, (data) async {
       Get.back();
+
+      final HomeController homeController = Get.find();
+      await homeController.getUsers();
+
       change(data, status: RxStatus.success());
     });
   }

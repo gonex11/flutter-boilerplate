@@ -1,12 +1,12 @@
-import 'package:flutter_boilerplate/data/data_sources/remote/user_remote_data_source.dart';
-import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 import 'package:flutter_boilerplate/core/utils/utils.dart';
+import 'package:flutter_boilerplate/data/models/user/user_model.dart';
+import 'package:flutter_boilerplate/data/repositories/user_repository.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController with StateMixin<UserModel> {
-  final UserRemoteDataSource _remoteDataSource;
+  final UserRepository _repository;
 
-  UserController(this._remoteDataSource) {
+  UserController(this._repository) {
     _getUserById();
   }
 
@@ -15,7 +15,7 @@ class UserController extends GetxController with StateMixin<UserModel> {
   Future<void> _getUserById() async {
     change(null, status: RxStatus.loading());
 
-    final result = await _remoteDataSource.getUserById(id);
+    final result = await _repository.getUserById(id);
     result.fold((failure) {
       final error = failure.error;
       final message = Utils.getErrorMessage(error?.errors) ?? "";

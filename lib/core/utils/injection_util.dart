@@ -1,19 +1,32 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_boilerplate/core/services/remote/helpers/api_helper.dart';
 import 'package:flutter_boilerplate/core/services/remote/helpers/dio_helper.dart';
 import 'package:flutter_boilerplate/core/utils/interceptors_util.dart';
+import 'package:flutter_boilerplate/data/data_sources/remote/user_remote_data_source.dart';
+import 'package:flutter_boilerplate/data/repositories/user_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class InjectionUtil extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<Dio>(() => Dio());
+    // Repositories
+    Get.lazyPut<UserRepository>(() => UserRepository(Get.find()));
+
+    // Data Sources
+    Get.lazyPut<UserRemoteDataSource>(() => UserRemoteDataSource(Get.find()));
+
+    // Helpers
+    Get.lazyPut<ApiHelper>(() => ApiHelper(Get.find(), Get.find()));
     Get.lazyPut<DioHelper>(() => DioHelper(dio: Get.find()));
+    Get.lazyPut<HeaderInterceptor>(() => HeaderInterceptor(Get.find()));
+
+    // Externals
+    Get.lazyPut<Dio>(() => Dio());
     Get.lazyPut<FlutterSecureStorage>(() {
       final androidOptions =
           const AndroidOptions(encryptedSharedPreferences: true);
       return FlutterSecureStorage(aOptions: androidOptions);
     });
-    Get.lazyPut<HeaderInterceptor>(() => HeaderInterceptor(Get.find()));
   }
 }

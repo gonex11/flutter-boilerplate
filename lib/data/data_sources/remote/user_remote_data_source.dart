@@ -1,8 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_boilerplate/core/services/remote/helpers/api_helper.dart';
 import 'package:flutter_boilerplate/core/services/remote/responses/base_list_response.dart';
-import 'package:flutter_boilerplate/core/utils/exception_util.dart';
-import 'package:flutter_boilerplate/core/utils/failure_util.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 import 'package:flutter_boilerplate/data/models/user/user_payload.dart';
 
@@ -11,43 +8,31 @@ class UserRemoteDataSource {
 
   const UserRemoteDataSource(this._apiService);
 
-  Future<Either<Failure, List<UserModel>>> getUsers() async {
-    try {
-      final response = await _apiService.get('http://10.0.2.2:3000/users',
-          authorized: false);
-      final result = BaseListResponse.fromJson(
-        response.data,
-        (json) => UserModel.fromJson((json as Map<String, dynamic>)["data"]),
-      );
+  Future<List<UserModel>> getUsers() async {
+    final response =
+        await _apiService.get('http://10.0.2.2:3000/users', authorized: false);
+    final result = BaseListResponse.fromJson(
+      response.data,
+      (json) => UserModel.fromJson((json as Map<String, dynamic>)),
+    );
 
-      return Right(result.data);
-    } on ApiException catch (e) {
-      return Left(ServerFailure(e.error));
-    }
+    return result.data;
   }
 
-  Future<Either<Failure, UserModel>> getUserById(int id) async {
-    try {
-      final response = await _apiService.get('http://10.0.2.2:3000/users/$id',
-          authorized: false);
-      final result = UserModel.fromJson(response.data["data"]);
-      return Right(result);
-    } on ApiException catch (e) {
-      return Left(ServerFailure(e.error));
-    }
+  Future<UserModel> getUserById(int id) async {
+    final response = await _apiService.get('http://10.0.2.2:3000/users/$id',
+        authorized: false);
+    final result = UserModel.fromJson(response.data["data"]);
+    return result;
   }
 
-  Future<Either<Failure, UserModel>> createUser(UserPayload payload) async {
-    try {
-      final response = await _apiService.post(
-        'http://10.0.2.2:3000/users',
-        data: payload.toJson(),
-        authorized: false,
-      );
-      final result = UserModel.fromJson(response.data["data"]);
-      return Right(result);
-    } on ApiException catch (e) {
-      return Left(ServerFailure(e.error));
-    }
+  Future<UserModel> createUser(UserPayload payload) async {
+    final response = await _apiService.post(
+      'http://10.0.2.2:3000/users',
+      data: payload.toJson(),
+      authorized: false,
+    );
+    final result = UserModel.fromJson(response.data["data"]);
+    return result;
   }
 }
