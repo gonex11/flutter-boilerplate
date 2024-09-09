@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/core/utils/utils.dart';
+import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 import 'package:flutter_boilerplate/data/repositories/user_repository.dart';
 import 'package:get/get.dart';

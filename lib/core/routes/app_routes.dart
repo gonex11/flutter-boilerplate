@@ -1,7 +1,7 @@
-part of 'page_routes.dart';
+part of 'app_pages.dart';
 
-abstract class Routes {
-  Routes._();
+abstract class AppRoutes {
+  AppRoutes._();
 
   static const HOME = _Paths.HOME;
   static const USER = _Paths.USER;

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_boilerplate/core/utils/enums_util.dart';
-import 'package:flutter_boilerplate/core/utils/exception_util.dart';
-import 'package:flutter_boilerplate/core/utils/interceptors_util.dart';
+import 'package:flutter_boilerplate/core/common/app_enums.dart';
+import 'package:flutter_boilerplate/core/common/exceptions.dart';
+import 'package:flutter_boilerplate/core/common/interceptors.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/services/dio_helper.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/base_error_response.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/error_detail_response.dart';

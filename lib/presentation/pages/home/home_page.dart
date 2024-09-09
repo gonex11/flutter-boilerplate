@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/routes/page_routes.dart';
+import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_refresh_layout.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class HomePage extends GetView<HomeController> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
         onPressed: () {
-          Get.toNamed(Routes.CREATE_USER);
+          Get.toNamed(AppRoutes.CREATE_USER);
         },
         child: const Icon(
           Icons.add,
@@ -77,7 +77,7 @@ class HomePage extends GetView<HomeController> {
                     margin: EdgeInsets.zero,
                     child: ListTile(
                       onTap: () {
-                        Get.toNamed(Routes.USER, arguments: user?.id);
+                        Get.toNamed(AppRoutes.USER, arguments: user?.id);
                       },
                       dense: true,
                       title: Text(

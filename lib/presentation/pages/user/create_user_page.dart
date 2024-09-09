@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/utils/utils.dart';
+import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/presentation/controllers/user/create_user_controller.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';

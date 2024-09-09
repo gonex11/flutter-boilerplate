@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 import '../../presentation/bindings/home/home_binding.dart';
 import '../../presentation/pages/home/home_page.dart';
 
-part 'routes.dart';
+part 'app_routes.dart';
 
-class PageRoutes {
-  PageRoutes._();
+class AppPages {
+  AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = AppRoutes.HOME;
 
-  static final routes = [
+  static final pages = [
     GetPage(
       name: _Paths.HOME,
       page: () => const HomePage(),

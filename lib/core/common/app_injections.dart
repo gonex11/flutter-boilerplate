@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_boilerplate/core/utils/interceptors_util.dart';
-import 'package:flutter_boilerplate/core/utils/network_info.dart';
+import 'package:flutter_boilerplate/core/common/interceptors.dart';
+import 'package:flutter_boilerplate/core/common/network_info.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/db/boxes/users_box.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/db/secure_storage.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/user_local_data_source.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/utils/utils.dart';
+import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/error_detail_response.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 import 'package:flutter_boilerplate/data/models/user/user_payload.dart';

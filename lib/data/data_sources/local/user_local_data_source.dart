@@ -1,5 +1,5 @@
-import 'package:flutter_boilerplate/core/utils/constants_util.dart';
-import 'package:flutter_boilerplate/core/utils/exception_util.dart';
+import 'package:flutter_boilerplate/core/common/app_constants.dart';
+import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/db/boxes/users_box.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 

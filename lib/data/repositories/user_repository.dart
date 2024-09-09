@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/utils/exception_util.dart';
-import 'package:flutter_boilerplate/core/utils/failure_util.dart';
+import 'package:flutter_boilerplate/core/common/exceptions.dart';
+import 'package:flutter_boilerplate/core/common/failures.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/user_local_data_source.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';

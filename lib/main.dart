@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/utils/injection_util.dart';
-import 'package:flutter_boilerplate/core/utils/utils.dart';
+import 'package:flutter_boilerplate/core/common/app_injections.dart';
+import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:get/get.dart';
 
-import 'core/routes/page_routes.dart';
+import 'core/routes/app_pages.dart';
 
 void main() async {
   await Utils.initProject();
@@ -17,8 +17,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: "Flutter Boilerplate",
-      getPages: PageRoutes.routes,
-      initialRoute: PageRoutes.INITIAL,
+      getPages: AppPages.pages,
+      initialRoute: AppPages.INITIAL,
       initialBinding: InjectionUtil(),
       theme: ThemeData(
         useMaterial3: true,
