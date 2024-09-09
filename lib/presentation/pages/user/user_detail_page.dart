@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/presentation/controllers/user/user_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
 import 'package:get/get.dart';
@@ -9,9 +10,10 @@ class UserDetailPage extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = context.theme.colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Detail Page'),
+        title: const Text('User Detail'),
       ),
       body: SafeArea(
         child: Center(
@@ -27,12 +29,18 @@ class UserDetailPage extends GetView<UserController> {
                       (controller.status == RxStatus.loading)
                           ? BoneMock.fullName
                           : user?.username ?? '-',
+                      style: AppFonts.lgSemiBold.copyWith(
+                        color: colorScheme.onSurface,
+                      ),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 4),
                     Text(
                       (controller.status == RxStatus.loading)
                           ? BoneMock.fullName
                           : '${user?.firstName} ${user?.lastName}',
+                      style: AppFonts.mdRegular.copyWith(
+                        color: colorScheme.onSurface,
+                      ),
                     ),
                   ],
                 ),

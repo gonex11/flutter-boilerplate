@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_bottom_sheet.dart';
+import 'package:flutter_boilerplate/presentation/widgets/app_button.dart';
 import 'package:get/get.dart';
 
 class AppErrorBottomSheet extends StatelessWidget {
@@ -9,13 +10,14 @@ class AppErrorBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = context.theme.colorScheme;
     return AppBottomSheet(
       child: Center(
         child: Column(
           children: [
             Icon(
               Icons.warning_rounded,
-              color: Colors.red,
+              color: colorScheme.error,
               size: 150,
             ),
             const SizedBox(height: 16),
@@ -25,6 +27,15 @@ class AppErrorBottomSheet extends StatelessWidget {
               style: Get.textTheme.bodyLarge,
             ),
             const SizedBox(height: 30),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+              child: AppButton(
+                onPressed: Get.back,
+                text: 'OK',
+              ),
+            )
           ],
         ),
       ),

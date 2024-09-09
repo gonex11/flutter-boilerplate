@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class AppSkeletonizer extends StatelessWidget {
@@ -19,14 +20,14 @@ class AppSkeletonizer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
     return Skeletonizer(
       containersColor: containersColor,
       ignoreContainers: ignoreContainers,
       enableSwitchAnimation: true,
       effect: ShimmerEffect(
-        baseColor:
-            (baseColor != null) ? baseColor! : Colors.grey.withOpacity(.3),
-        highlightColor: Colors.grey.withOpacity(.2),
+        baseColor: (baseColor != null) ? baseColor! : theme.disabledColor,
+        highlightColor: theme.dividerColor,
         duration: const Duration(seconds: 1),
       ),
       enabled: enabled,

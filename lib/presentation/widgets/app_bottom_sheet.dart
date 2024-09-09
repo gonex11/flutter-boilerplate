@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AppBottomSheet extends StatelessWidget {
   final Widget child;
@@ -10,14 +11,16 @@ class AppBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
+    final colorScheme = theme.colorScheme;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(
         top: 16,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+        bottom: context.mediaQueryViewInsets.bottom + 16,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surfaceBright,
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(16),
         ),
@@ -29,9 +32,9 @@ class AppBottomSheet extends StatelessWidget {
           Center(
             child: Container(
               width: 30,
-              height: 6,
+              height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(.3),
+                color: theme.dividerColor,
                 borderRadius: BorderRadius.circular(50),
               ),
             ),

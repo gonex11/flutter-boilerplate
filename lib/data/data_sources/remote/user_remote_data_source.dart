@@ -22,7 +22,7 @@ class UserRemoteDataSource {
   Future<UserModel> getUserById(int id) async {
     final response = await _apiService.get('http://10.0.2.2:3000/users/$id',
         authorized: false);
-    final result = UserModel.fromJson(response.data["data"]);
+    final result = UserModel.fromJson(response.data['data']);
     return result;
   }
 
@@ -32,7 +32,7 @@ class UserRemoteDataSource {
       data: payload.toJson(),
       authorized: false,
     );
-    final result = UserModel.fromJson(response.data["data"]);
+    final result = UserModel.fromJson(response.data['data']);
     return result;
   }
 }

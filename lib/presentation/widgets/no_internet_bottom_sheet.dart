@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
-import 'package:flutter_boilerplate/core/styles/app_typographies.dart';
+import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/presentation/controllers/connectivity/connectivity_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_bottom_sheet.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_button.dart';
@@ -11,6 +11,7 @@ class NoInternetBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = context.theme.colorScheme;
     return GetBuilder<ConnectivityController>(
       builder: (controller) {
         return AppBottomSheet(
@@ -21,23 +22,27 @@ class NoInternetBottomSheet extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.signal_wifi_statusbar_connected_no_internet_4_rounded,
-                    color: Colors.blue,
+                    color: colorScheme.primary,
                     size: 150,
                   ),
                   const SizedBox(height: 16),
                   Text(
                     AppConstants.messages.networkErrorTitle,
                     textAlign: TextAlign.center,
-                    style: AppTypographies.xlBold,
+                    style: AppFonts.xlBold.copyWith(
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     AppConstants.messages.networkErrorMessage,
                     textAlign: TextAlign.center,
-                    style: AppTypographies.mdRegular,
+                    style: AppFonts.mdRegular.copyWith(
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   const SizedBox(height: 24),
-                  AppButton.outlined(
+                  AppButton(
                     onPressed: () {},
                     text: 'Try Again',
                   ),

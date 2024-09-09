@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-abstract class AppTypographies {
+abstract class AppFonts {
   static final AppFontSize _fontSize = AppFontSize._();
   static final TextStyle _default = TextStyle();
 
   static TextStyle get xsRegular {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x10,
       fontWeight: FontWeight.w400,
     );
@@ -14,7 +13,6 @@ abstract class AppTypographies {
 
   static TextStyle get smRegular {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x12,
       fontWeight: FontWeight.w400,
     );
@@ -22,7 +20,6 @@ abstract class AppTypographies {
 
   static TextStyle get smMedium {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x12,
       fontWeight: FontWeight.w500,
     );
@@ -30,7 +27,6 @@ abstract class AppTypographies {
 
   static TextStyle get smSemiBold {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x12,
       fontWeight: FontWeight.w600,
     );
@@ -38,7 +34,6 @@ abstract class AppTypographies {
 
   static TextStyle get smBold {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x12,
       fontWeight: FontWeight.w700,
     );
@@ -46,7 +41,6 @@ abstract class AppTypographies {
 
   static TextStyle get mdRegular {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x14,
       fontWeight: FontWeight.w400,
     );
@@ -54,7 +48,6 @@ abstract class AppTypographies {
 
   static TextStyle get mdMedium {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x14,
       fontWeight: FontWeight.w500,
     );
@@ -62,7 +55,6 @@ abstract class AppTypographies {
 
   static TextStyle get mdSemiBold {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x14,
       fontWeight: FontWeight.w600,
     );
@@ -70,7 +62,6 @@ abstract class AppTypographies {
 
   static TextStyle get lgSemiBold {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x16,
       fontWeight: FontWeight.w600,
     );
@@ -78,7 +69,6 @@ abstract class AppTypographies {
 
   static TextStyle get lgBold {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x16,
       fontWeight: FontWeight.w700,
     );
@@ -86,7 +76,6 @@ abstract class AppTypographies {
 
   static TextStyle get xlMedium {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x18,
       fontWeight: FontWeight.w500,
     );
@@ -94,7 +83,6 @@ abstract class AppTypographies {
 
   static TextStyle get xlBold {
     return _default.copyWith(
-      color: Colors.black,
       fontSize: _fontSize.x18,
       fontWeight: FontWeight.w700,
     );

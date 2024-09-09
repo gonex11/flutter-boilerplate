@@ -1,3 +1,5 @@
+enum RequestMethod { get, post, put, patch, delete }
+
 enum AppButtonType { primary, outlined }
 
-enum RequestMethod { get, post, put, patch, delete }
+enum AppInputType { normal, password, textarea, date, time }

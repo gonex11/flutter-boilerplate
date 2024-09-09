@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/core/common/app_fakes.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_refresh_layout.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
+import 'package:flutter_boilerplate/presentation/widgets/user_tile.dart';
 import 'package:get/get.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../controllers/home/home_controller.dart';
 
@@ -12,18 +13,19 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = context.theme.colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Users'),
+        title: Text('Users'),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue,
+        backgroundColor: colorScheme.primary,
         onPressed: () {
           Get.toNamed(AppRoutes.CREATE_USER);
         },
-        child: const Icon(
+        child: Icon(
           Icons.add,
-          color: Colors.white,
+          color: colorScheme.onPrimary,
         ),
       ),
       body: SafeArea(
@@ -32,34 +34,33 @@ class HomePage extends GetView<HomeController> {
             enabled: true,
             child: ListView.separated(
               padding: EdgeInsets.all(16),
-              itemCount: 5,
+              itemCount: AppFakes.list.users.length,
               separatorBuilder: (_, __) {
                 return const SizedBox(height: 16);
               },
               itemBuilder: (context, index) {
-                return Card(
-                  margin: EdgeInsets.zero,
-                  child: ListTile(
-                    dense: true,
-                    title: Text(BoneMock.fullName),
-                    subtitle: Text(BoneMock.fullName),
-                  ),
+                final user = AppFakes.list.users[index];
+                return UserTile(
+                  onTap: null,
+                  user: user,
                 );
               },
             ),
           ),
           onEmpty: AppRefreshLayout(
             onRefresh: controller.getUsers,
-            child: const Text("There is no Users yet."),
+            child: const Text('There is no Users yet.'),
           ),
           onError: (error) {
             return AppRefreshLayout(
               onRefresh: controller.getUsers,
-              child: Text(error ?? ""),
+              child: Text(error ?? ''),
             );
           },
           (users) {
             return RefreshIndicator.adaptive(
+              backgroundColor: colorScheme.surfaceBright,
+              color: colorScheme.primary,
               onRefresh: controller.getUsers,
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(
@@ -72,28 +73,11 @@ class HomePage extends GetView<HomeController> {
                 },
                 itemBuilder: (context, index) {
                   final user = users?[index];
-                  return Card(
-                    color: Colors.white,
-                    margin: EdgeInsets.zero,
-                    child: ListTile(
-                      onTap: () {
-                        Get.toNamed(AppRoutes.USER, arguments: user?.id);
-                      },
-                      dense: true,
-                      title: Text(
-                        "${user?.firstName} ${user?.lastName}",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Text(
-                        user?.username ?? "",
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
+                  return UserTile(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.USER, arguments: user?.id);
+                    },
+                    user: user,
                   );
                 },
               ),

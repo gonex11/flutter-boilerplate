@@ -52,8 +52,8 @@ class CreateUserController extends GetxController with StateMixin<UserModel> {
         validationErrors.value = failure.error?.errors ?? [];
         update();
       } else {
-        final message = Utils.getErrorMessage(error?.errors) ?? "";
-        Get.bottomSheet(AppErrorBottomSheet(message: message));
+        final message = Utils.getErrorMessage(error?.errors) ?? '';
+        Utils.showBottomSheet(AppErrorBottomSheet(message: message));
       }
     }, (data) async {
       Get.back();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AppRefreshLayout extends StatelessWidget {
   final Future<void> Function() onRefresh;
@@ -12,9 +13,10 @@ class AppRefreshLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = context.theme.colorScheme;
     return RefreshIndicator.adaptive(
-      backgroundColor: Colors.white,
-      color: Colors.blue,
+      backgroundColor: colorScheme.surfaceBright,
+      color: colorScheme.primary,
       onRefresh: onRefresh,
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(

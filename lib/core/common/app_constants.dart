@@ -14,21 +14,21 @@ abstract class AppConstants {
 class Messages {
   Messages._();
 
-  String get cacheErrorMessage => "Can't get cache data";
-  String get networkErrorTitle => "No internet connection...";
+  String get cacheErrorMessage => 'Can\'t get cache data';
+  String get networkErrorTitle => 'No internet connection...';
   String get networkErrorMessage =>
-      "Please check your internet connection and try again.";
+      'Please check your internet connection and try again.';
 }
 
 class BoxNames {
   BoxNames._();
 
-  String get users => "users_box";
+  String get users => 'users_box';
 }
 
 class SecureStorageKeys {
   SecureStorageKeys._();
 
-  String get accessToken => "access_token";
-  String get refreshToken => "refresh_token";
+  String get accessToken => 'access_token';
+  String get refreshToken => 'refresh_token';
 }

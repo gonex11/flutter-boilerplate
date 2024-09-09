@@ -18,7 +18,7 @@ class UserController extends GetxController with StateMixin<UserModel> {
     final result = await _repository.getUserById(id);
     result.fold((failure) {
       final error = failure.error;
-      final message = Utils.getErrorMessage(error?.errors) ?? "";
+      final message = Utils.getErrorMessage(error?.errors) ?? '';
       change(null, status: RxStatus.error(message));
     }, (data) {
       change(data, status: RxStatus.success());
