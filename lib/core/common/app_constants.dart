@@ -1,5 +1,5 @@
-abstract class ConstantsUtil {
-  ConstantsUtil._();
+abstract class AppConstants {
+  AppConstants._();
 
   static final Messages _messages = Messages._();
   static Messages get messages => _messages;
@@ -15,8 +15,9 @@ class Messages {
   Messages._();
 
   String get cacheErrorMessage => "Can't get cache data";
+  String get networkErrorTitle => "No internet connection...";
   String get networkErrorMessage =>
-      "No internet connection. Please check your internet connection and try again.";
+      "Please check your internet connection and try again.";
 }
 
 class BoxNames {

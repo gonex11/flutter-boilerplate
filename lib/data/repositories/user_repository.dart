@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/failures.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/user_local_data_source.dart';
@@ -20,7 +19,6 @@ class UserRepository {
     try {
       final result = await _remoteDataSource.getUsers();
       _localDataSource.cacheUsers(result);
-      debugPrint("From Server");
       return Right(result);
     } on ApiException catch (e) {
       return Left(ServerFailure(e.error));
@@ -30,8 +28,6 @@ class UserRepository {
   Future<Either<Failure, List<UserModel>>> getCacheUsers() async {
     try {
       final result = await _localDataSource.getCachedUsers();
-      debugPrint("From Local");
-
       return Right(result);
     } on CacheException catch (e) {
       return Left(CacheFailure(e.message));

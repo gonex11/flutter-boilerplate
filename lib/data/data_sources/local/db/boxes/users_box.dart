@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 
 class UsersBox {
   static final Box<UserType> _box = Hive.box(
-    ConstantsUtil.boxNames.users,
+    AppConstants.boxNames.users,
   );
 
   Future<void> insertCache(List<UserType> users) async {

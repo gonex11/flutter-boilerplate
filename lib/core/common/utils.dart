@@ -1,7 +1,9 @@
-import 'package:flutter_boilerplate/core/extensions/string_ext.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/db/adapters/user_type.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/error_detail_response.dart';
+import 'package:flutter_boilerplate/presentation/widgets/no_internet_bottom_sheet.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class Utils {
@@ -12,8 +14,25 @@ abstract class Utils {
     Hive..registerAdapter(UserTypeAdapter());
 
     await Future.any([
-      Hive.openBox<UserType>(ConstantsUtil.boxNames.users),
+      Hive.openBox<UserType>(AppConstants.boxNames.users),
     ]);
+  }
+
+  static showBottomSheet(Widget child) {
+    Get.bottomSheet(
+      isDismissible: true,
+      isScrollControlled: true,
+      child,
+    );
+  }
+
+  static showNoInternetBottomSheet() {
+    Get.bottomSheet(
+      enableDrag: false,
+      isDismissible: false,
+      isScrollControlled: true,
+      NoInternetBottomSheet(),
+    );
   }
 
   static String? getErrorMessage(List<ErrorDetailResponse>? errors,
@@ -22,7 +41,7 @@ abstract class Utils {
       return null;
     } else {
       final message = errors?.where((e) => e.attr == attr).firstOrNull?.detail;
-      return message?.capitalize();
+      return message?.capitalize;
     }
   }
 }

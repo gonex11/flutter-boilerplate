@@ -13,7 +13,7 @@ class HeaderInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     String? accessToken = await _secureStorage.read(
-      ConstantsUtil.secureStorageKeys.accessToken,
+      AppConstants.secureStorageKeys.accessToken,
     );
     if (accessToken?.isNotEmpty == true) {
       options.headers['Authorization'] = 'Bearer $accessToken';

@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_boilerplate/core/common/app_enums.dart';
 import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/interceptors.dart';
@@ -47,7 +46,6 @@ class ApiHelper {
   }
 
   ApiException _handleError(dynamic error) {
-    debugPrint(error.toString());
     if (error is DioException) {
       final statusCode = error.response?.statusCode ?? 0;
       final errorResponse = BaseErrorResponse.fromJson(

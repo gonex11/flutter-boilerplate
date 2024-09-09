@@ -19,7 +19,7 @@ class UserLocalDataSource {
     if (result != null && result.isNotEmpty) {
       return result.map((e) => UserModel.fromAdapter(e)).toList();
     } else {
-      throw CacheException(ConstantsUtil.messages.cacheErrorMessage);
+      throw CacheException(AppConstants.messages.cacheErrorMessage);
     }
   }
 }
