@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AppState extends StatelessWidget {
+class AppRefreshLayout extends StatelessWidget {
   final Future<void> Function() onRefresh;
   final Widget child;
 
-  const AppState({
+  const AppRefreshLayout({
     super.key,
     required this.onRefresh,
     required this.child,
@@ -13,13 +13,17 @@ class AppState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator.adaptive(
+      backgroundColor: Colors.white,
+      color: Colors.blue,
       onRefresh: onRefresh,
       child: CustomScrollView(
-        physics: BouncingScrollPhysics(
+        physics: const BouncingScrollPhysics(
           parent: AlwaysScrollableScrollPhysics(),
         ),
         slivers: [
-          SliverFillRemaining(child: child),
+          SliverFillRemaining(
+            child: Center(child: child),
+          ),
         ],
       ),
     );

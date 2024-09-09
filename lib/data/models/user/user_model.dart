@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_boilerplate/data/data_sources/local/db/adapters/user_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'generated/user_model.g.dart';
@@ -20,7 +21,25 @@ class UserModel extends Equatable {
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 
+  factory UserModel.fromAdapter(UserType user) {
+    return UserModel(
+      id: user.id,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    );
+  }
+
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
+  UserType toAdapter() {
+    return UserType(
+      id: id,
+      username: username,
+      firstName: firstName,
+      lastName: lastName,
+    );
+  }
 
   @override
   List<Object?> get props => [id, username, firstName, lastName];

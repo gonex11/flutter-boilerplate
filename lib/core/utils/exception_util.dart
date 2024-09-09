@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/core/services/remote/responses/base_error_response.dart';
+import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/base_error_response.dart';
 
 class ApiException implements Exception {
   final int statusCode;
@@ -8,4 +8,10 @@ class ApiException implements Exception {
     required this.statusCode,
     required this.error,
   });
+}
+
+class CacheException implements Exception {
+  final String message;
+
+  CacheException(this.message);
 }

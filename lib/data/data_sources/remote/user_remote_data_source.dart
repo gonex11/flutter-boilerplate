@@ -1,5 +1,5 @@
-import 'package:flutter_boilerplate/core/services/remote/helpers/api_helper.dart';
-import 'package:flutter_boilerplate/core/services/remote/responses/base_list_response.dart';
+import 'package:flutter_boilerplate/data/data_sources/remote/services/api_helper.dart';
+import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/base_list_response.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 import 'package:flutter_boilerplate/data/models/user/user_payload.dart';
 

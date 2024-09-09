@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_boilerplate/core/services/remote/helpers/dio_helper.dart';
-import 'package:flutter_boilerplate/core/services/remote/responses/base_error_response.dart';
-import 'package:flutter_boilerplate/core/services/remote/responses/error_detail_response.dart';
 import 'package:flutter_boilerplate/core/utils/enums_util.dart';
 import 'package:flutter_boilerplate/core/utils/exception_util.dart';
 import 'package:flutter_boilerplate/core/utils/interceptors_util.dart';
+import 'package:flutter_boilerplate/data/data_sources/remote/services/dio_helper.dart';
+import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/base_error_response.dart';
+import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/error_detail_response.dart';
 
 class ApiHelper {
   final DioHelper _dioService;

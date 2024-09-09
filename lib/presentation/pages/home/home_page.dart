@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
-import 'package:flutter_boilerplate/presentation/widgets/app_state.dart';
 import 'package:flutter_boilerplate/core/routes/page_routes.dart';
+import 'package:flutter_boilerplate/presentation/widgets/app_refresh_layout.dart';
+import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../controllers/home/home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+class HomePage extends GetView<HomeController> {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,21 +48,19 @@ class HomeView extends GetView<HomeController> {
               },
             ),
           ),
-          onEmpty: AppState(
+          onEmpty: AppRefreshLayout(
             onRefresh: controller.getUsers,
             child: const Text("There is no Users yet."),
           ),
           onError: (error) {
-            return AppState(
+            return AppRefreshLayout(
               onRefresh: controller.getUsers,
               child: Text(error ?? ""),
             );
           },
           (users) {
             return RefreshIndicator.adaptive(
-              onRefresh: () async {
-                controller.getUsers();
-              },
+              onRefresh: controller.getUsers,
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics(),

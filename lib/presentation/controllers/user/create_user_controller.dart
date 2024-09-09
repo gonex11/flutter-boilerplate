@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/services/remote/responses/error_detail_response.dart';
 import 'package:flutter_boilerplate/core/utils/utils.dart';
+import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/error_detail_response.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 import 'package:flutter_boilerplate/data/models/user/user_payload.dart';
 import 'package:flutter_boilerplate/data/repositories/user_repository.dart';

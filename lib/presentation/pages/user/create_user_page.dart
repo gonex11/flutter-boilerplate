@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/presentation/controllers/user/create_user_controller.dart';
 import 'package:flutter_boilerplate/core/utils/utils.dart';
+import 'package:flutter_boilerplate/presentation/controllers/user/create_user_controller.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-class CreateUserView extends GetView<CreateUserController> {
-  const CreateUserView({super.key});
+class CreateUserPage extends GetView<CreateUserController> {
+  const CreateUserPage({super.key});
 
   @override
   Widget build(BuildContext context) {

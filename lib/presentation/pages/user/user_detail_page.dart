@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
 import 'package:flutter_boilerplate/presentation/controllers/user/user_controller.dart';
+import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class UserDetailView extends GetView<UserController> {
-  const UserDetailView({super.key});
+class UserDetailPage extends GetView<UserController> {
+  const UserDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_boilerplate/core/services/remote/responses/meta_response.dart';
+import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/meta_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'generated/base_list_response.g.dart';
