@@ -3,7 +3,6 @@ import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/presentation/controllers/connectivity/connectivity_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_bottom_sheet.dart';
-import 'package:flutter_boilerplate/presentation/widgets/app_button.dart';
 import 'package:get/get.dart';
 
 class NoInternetBottomSheet extends StatelessWidget {
@@ -41,11 +40,7 @@ class NoInternetBottomSheet extends StatelessWidget {
                       color: colorScheme.onSurface,
                     ),
                   ),
-                  const SizedBox(height: 24),
-                  AppButton(
-                    onPressed: () {},
-                    text: 'Try Again',
-                  ),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),
