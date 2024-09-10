@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/core/styles/app_colors.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
+import 'package:flutter_boilerplate/presentation/controllers/login_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_button.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_input.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   @override

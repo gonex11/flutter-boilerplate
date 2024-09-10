@@ -10,6 +10,8 @@ abstract class Utils {
   Utils._();
 
   static Future<void> initProject() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
     await Hive.initFlutter();
     Hive..registerAdapter(UserTypeAdapter());
 
