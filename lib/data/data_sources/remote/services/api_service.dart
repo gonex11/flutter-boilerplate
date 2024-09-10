@@ -2,15 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate/core/common/app_enums.dart';
 import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/interceptors.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/dio_helper.dart';
+import 'package:flutter_boilerplate/data/data_sources/remote/services/dio_service.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/base_error_response.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/error_detail_response.dart';
 
-class ApiHelper {
-  final DioHelper _dioService;
+class ApiService {
+  final DioService _dioService;
   final HeaderInterceptor _headerInterceptor;
 
-  const ApiHelper(this._dioService, this._headerInterceptor);
+  const ApiService(this._dioService, this._headerInterceptor);
 
   Future<Response> _sendRequest(
     RequestMethod method,

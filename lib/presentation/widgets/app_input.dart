@@ -20,6 +20,7 @@ class AppInput extends StatefulWidget {
   final double? width;
   final double? height;
   final String? error;
+  final Color? fillColor;
 
   const AppInput({
     super.key,
@@ -36,6 +37,7 @@ class AppInput extends StatefulWidget {
     this.width,
     this.height,
     this.error,
+    this.fillColor,
   }) : _type = AppInputType.normal;
 
   const AppInput.password({
@@ -53,6 +55,7 @@ class AppInput extends StatefulWidget {
     this.width,
     this.height,
     this.error,
+    this.fillColor,
   }) : _type = AppInputType.password;
 
   const AppInput.textarea({
@@ -67,6 +70,7 @@ class AppInput extends StatefulWidget {
     this.readonly = false,
     this.width,
     this.error,
+    this.fillColor,
   })  : _type = AppInputType.textarea,
         height = null,
         prefixIcon = null,
@@ -84,6 +88,7 @@ class AppInput extends StatefulWidget {
     this.width,
     this.height,
     this.error,
+    this.fillColor,
   })  : _type = AppInputType.date,
         controller = null,
         suffixIcon = null,
@@ -101,6 +106,7 @@ class AppInput extends StatefulWidget {
     this.width,
     this.height,
     this.error,
+    this.fillColor,
   })  : _type = AppInputType.time,
         controller = null,
         suffixIcon = null,
@@ -187,7 +193,9 @@ class _AppInputState extends State<AppInput> {
           filled: true,
           fillColor: (widget.enabled == false || widget.readonly == true)
               ? theme.disabledColor
-              : theme.colorScheme.surfaceBright,
+              : (widget.fillColor != null)
+                  ? widget.fillColor
+                  : theme.colorScheme.surfaceBright,
           errorText: widget.error,
           contentPadding: const EdgeInsets.fromLTRB(0, 12, 12, 12),
           prefix: Visibility(
@@ -230,9 +238,11 @@ class _AppInputState extends State<AppInput> {
         decoration: InputDecoration(
           isDense: true,
           filled: true,
-          fillColor: (widget.enabled == false)
+          fillColor: (widget.enabled == false || widget.readonly == true)
               ? theme.disabledColor
-              : theme.colorScheme.surfaceBright,
+              : (widget.fillColor != null)
+                  ? widget.fillColor
+                  : theme.colorScheme.surfaceBright,
           hintText: widget.hintText,
           hintStyle: AppFonts.mdRegular.copyWith(
             color: (widget.enabled == false)
@@ -285,9 +295,11 @@ class _AppInputState extends State<AppInput> {
         decoration: InputDecoration(
           isDense: true,
           filled: true,
-          // fillColor: (widget.enabled == false)
-          //     ? theme.disabledColor
-          //     : theme.colorScheme.surfaceBright,
+          fillColor: (widget.enabled == false || widget.readonly == true)
+              ? theme.disabledColor
+              : (widget.fillColor != null)
+                  ? widget.fillColor
+                  : theme.colorScheme.surfaceBright,
           hintText: widget.hintText,
           hintStyle: AppFonts.mdRegular.copyWith(
             color: (widget.enabled == false)
@@ -318,9 +330,11 @@ class _AppInputState extends State<AppInput> {
         decoration: InputDecoration(
           isDense: true,
           filled: true,
-          fillColor: (widget.enabled == false)
+          fillColor: (widget.enabled == false || widget.readonly == true)
               ? theme.disabledColor
-              : theme.colorScheme.surfaceBright,
+              : (widget.fillColor != null)
+                  ? widget.fillColor
+                  : theme.colorScheme.surfaceBright,
           hintText: widget.hintText,
           hintStyle: AppFonts.mdRegular.copyWith(
             color: (widget.enabled == false)
@@ -384,9 +398,11 @@ class _AppInputState extends State<AppInput> {
         decoration: InputDecoration(
           isDense: true,
           filled: true,
-          fillColor: (widget.enabled == false)
+          fillColor: (widget.enabled == false || widget.readonly == true)
               ? theme.disabledColor
-              : theme.colorScheme.surfaceBright,
+              : (widget.fillColor != null)
+                  ? widget.fillColor
+                  : theme.colorScheme.surfaceBright,
           hintText: widget.hintText,
           hintStyle: AppFonts.mdRegular.copyWith(
             color: (widget.enabled == false)

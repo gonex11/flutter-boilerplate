@@ -4,7 +4,7 @@ import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 import 'package:flutter_boilerplate/data/models/user/user_payload.dart';
 import 'package:flutter_boilerplate/data/repositories/user_repository.dart';
-import 'package:flutter_boilerplate/presentation/controllers/home/home_controller.dart';
+import 'package:flutter_boilerplate/presentation/controllers/home_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';
 

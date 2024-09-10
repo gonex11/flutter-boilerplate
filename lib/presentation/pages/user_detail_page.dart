@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
-import 'package:flutter_boilerplate/presentation/controllers/user/user_controller.dart';
+import 'package:flutter_boilerplate/presentation/controllers/user_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';

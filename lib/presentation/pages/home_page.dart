@@ -6,7 +6,7 @@ import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
 import 'package:flutter_boilerplate/presentation/widgets/user_tile.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/home/home_controller.dart';
+import '../controllers/home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
@@ -16,6 +16,7 @@ class HomePage extends GetView<HomeController> {
     final colorScheme = context.theme.colorScheme;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Users'),
       ),
       floatingActionButton: FloatingActionButton(

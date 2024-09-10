@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
-import 'package:flutter_boilerplate/presentation/controllers/user/create_user_controller.dart';
+import 'package:flutter_boilerplate/presentation/controllers/create_user_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_button.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_input.dart';
 import 'package:get/get.dart';
@@ -46,7 +46,6 @@ class CreateUserPage extends GetView<CreateUserController> {
                         ),
                         const SizedBox(height: 6),
                         AppInput(
-                          enabled: false,
                           controller: controller.unameController,
                           hintText: 'Enter your username',
                           error: Utils.getErrorMessage(

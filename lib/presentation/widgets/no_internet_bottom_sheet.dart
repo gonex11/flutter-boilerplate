@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
-import 'package:flutter_boilerplate/presentation/controllers/connectivity/connectivity_controller.dart';
+import 'package:flutter_boilerplate/presentation/controllers/connectivity_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_bottom_sheet.dart';
 import 'package:get/get.dart';
 

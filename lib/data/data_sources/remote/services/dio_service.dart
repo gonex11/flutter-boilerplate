@@ -5,10 +5,10 @@ import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class DioHelper {
+class DioService {
   final Dio dio;
 
-  DioHelper({required this.dio}) {
+  DioService({required this.dio}) {
     _setupHttpClientAdapter();
     _setupInterceptors();
   }

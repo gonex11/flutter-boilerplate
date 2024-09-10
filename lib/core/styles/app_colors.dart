@@ -23,7 +23,7 @@ class AppColors {
   static Color darkBackground = Color(0xFF121212);
   static Color darkText = white;
   static Color darkSurface = black;
-  static Color darkDivider = Color(0xFF333333);
+  static Color darkDivider = Color(0xFF444444);
   static Color darkDisabled = Color(0x0DFFFFFF);
 
   static final ColorScheme lightScheme = ColorScheme.light(
