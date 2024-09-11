@@ -1,4 +1,3 @@
-import 'package:flutter_boilerplate/core/common/failures.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
@@ -23,13 +22,8 @@ class HomeController extends GetxController with StateMixin<List<UserModel>> {
 
     final result = await _userRepository.getUsers();
     result.fold((remoteFailure) {
-      if (remoteFailure is NetworkFailure) {
-        change(null, status: RxStatus.error());
-        Utils.showNoInternetBottomSheet();
-      } else {
-        final message = Utils.getErrorMessage(remoteFailure.error?.errors);
-        change(null, status: RxStatus.error(message));
-      }
+      final message = Utils.getErrorMessage(remoteFailure.error?.errors);
+      change(null, status: RxStatus.error(message));
     }, (data) {
       if (data.isEmpty) {
         change([], status: RxStatus.empty());

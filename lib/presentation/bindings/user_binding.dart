@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class UserBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<CreateUserController>(() => CreateUserController(Get.find()));
-    Get.lazyPut<UserController>(() => UserController(Get.find()));
+    Get.put<CreateUserController>(CreateUserController(Get.find()));
+    Get.put<UserController>(UserController(Get.find()));
   }
 }

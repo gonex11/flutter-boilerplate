@@ -7,13 +7,13 @@ class ConnectivityController extends GetxController {
 
   ConnectivityController(this._networkInfo);
 
-  final isConnected = false.obs;
-
   @override
   void onInit() {
     checkConnectivity();
     super.onInit();
   }
+
+  final isConnected = false.obs;
 
   void checkConnectivity() async {
     _networkInfo.onConnectivityChanged.listen((isConnected) {

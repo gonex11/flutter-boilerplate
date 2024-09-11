@@ -20,7 +20,7 @@ abstract class Utils {
     ]);
   }
 
-  static showBottomSheet(Widget child) {
+  static void showBottomSheet(Widget child) {
     Get.bottomSheet(
       isDismissible: true,
       isScrollControlled: true,
@@ -28,12 +28,19 @@ abstract class Utils {
     );
   }
 
-  static showNoInternetBottomSheet() {
+  static void showNoInternetBottomSheet() {
     Get.bottomSheet(
       enableDrag: false,
       isDismissible: false,
       isScrollControlled: true,
       NoInternetBottomSheet(),
+    );
+  }
+
+  static showDialog(Widget child) {
+    Get.dialog(
+      barrierDismissible: true,
+      child,
     );
   }
 

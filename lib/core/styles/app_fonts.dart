@@ -11,6 +11,13 @@ abstract class AppFonts {
     );
   }
 
+  static TextStyle get xsMedium {
+    return _default.copyWith(
+      fontSize: _fontSize.x10,
+      fontWeight: FontWeight.w500,
+    );
+  }
+
   static TextStyle get smRegular {
     return _default.copyWith(
       fontSize: _fontSize.x12,

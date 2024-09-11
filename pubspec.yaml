@@ -9,6 +9,7 @@ dependencies:
   connectivity_plus: ^6.0.5
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
+  device_info_plus: ^10.1.2
   dio: ^5.6.0
   equatable: ^2.0.5
   flutter:
@@ -18,10 +19,12 @@ dependencies:
   get: 4.6.6
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  image_picker: ^1.1.2
   intl: ^0.19.0
   json_annotation: ^4.9.0
   jwt_decoder: ^2.0.1
   keyboard_dismisser: ^3.0.0
+  permission_handler: ^11.3.1
   pretty_dio_logger: ^1.4.0
   skeletonizer: ^1.4.2
 

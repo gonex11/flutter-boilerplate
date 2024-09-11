@@ -1,6 +1,9 @@
 abstract class AppConstants {
   AppConstants._();
 
+  static final General _general = General._();
+  static General get general => _general;
+
   static final Messages _messages = Messages._();
   static Messages get messages => _messages;
 
@@ -9,6 +12,12 @@ abstract class AppConstants {
 
   static final SecureStorageKeys _secureStorageKeys = SecureStorageKeys._();
   static SecureStorageKeys get secureStorageKeys => _secureStorageKeys;
+}
+
+class General {
+  General._();
+
+  String get appName => 'Flutter Boilerplate';
 }
 
 class Messages {

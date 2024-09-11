@@ -7,28 +7,20 @@ class AuthController extends GetxController {
 
   AuthController(this._repository);
 
-  final isAuthenticated = false.obs;
-
   @override
   void onInit() {
     authCheck();
-    isAuthenticated.stream.listen((authenticated) {
-      if (authenticated) {
-        Get.offAllNamed(AppRoutes.HOME);
-      } else {
-        Get.offAllNamed(AppRoutes.LOGIN);
-      }
-    });
-
     super.onInit();
   }
+
+  final isAuthenticated = false.obs;
 
   Future<void> authCheck() async {
     final result = await _repository.getLoggedUser();
     result.fold((_) {
-      isAuthenticated.value = false;
+      Get.offAllNamed(AppRoutes.LOGIN);
     }, (data) {
-      isAuthenticated.value = true;
+      Get.offAllNamed(AppRoutes.HOME);
     });
   }
 }

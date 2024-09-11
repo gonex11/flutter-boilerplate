@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate/core/common/interceptors.dart';
 import 'package:flutter_boilerplate/core/common/network_info.dart';
@@ -17,18 +18,20 @@ import 'package:flutter_boilerplate/presentation/controllers/auth_controller.dar
 import 'package:flutter_boilerplate/presentation/controllers/connectivity_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AppBinding extends Bindings {
   @override
   void dependencies() {
     // Externals
     Get.lazyPut<Dio>(() => Dio());
-    Get.lazyPut<FlutterSecureStorage>(() {
-      final androidOptions =
-          const AndroidOptions(encryptedSharedPreferences: true);
-      return FlutterSecureStorage(aOptions: androidOptions);
-    });
+    Get.lazyPut<AndroidOptions>(
+        () => AndroidOptions(encryptedSharedPreferences: true));
+    Get.lazyPut<FlutterSecureStorage>(
+        () => FlutterSecureStorage(aOptions: Get.find()));
     Get.lazyPut<Connectivity>(() => Connectivity());
+    Get.lazyPut<ImagePicker>(() => ImagePicker());
+    Get.lazyPut<DeviceInfoPlugin>(() => DeviceInfoPlugin());
 
     // Helpers
     Get.lazyPut<NetworkInfo>(() => NetworkInfo(Get.find()));

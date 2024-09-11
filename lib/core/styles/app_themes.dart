@@ -5,8 +5,8 @@ import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
 abstract class AppThemes {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
-    brightness: Brightness.light,
     colorScheme: AppColors.lightScheme,
+    dividerColor: AppColors.lightDivider,
     dividerTheme: DividerThemeData(
       color: AppColors.lightDivider,
     ),
@@ -80,8 +80,8 @@ abstract class AppThemes {
 
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
-    brightness: Brightness.dark,
     colorScheme: AppColors.darkScheme,
+    dividerColor: AppColors.darkDivider,
     dividerTheme: DividerThemeData(
       color: AppColors.darkDivider,
     ),
