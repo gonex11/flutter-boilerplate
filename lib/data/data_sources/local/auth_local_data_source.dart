@@ -1,21 +1,22 @@
 import 'dart:convert';
 
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
+import 'package:flutter_boilerplate/core/common/token_manager.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/db/secure_storage.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 
 class AuthLocalDataSource {
   final SecureStorage _secureStorage;
-  final bool Function(String token) _isExpired;
+  final TokenManager _tokenManager;
 
-  AuthLocalDataSource(this._secureStorage, this._isExpired);
+  AuthLocalDataSource(this._secureStorage, this._tokenManager);
 
   Future<bool> isTokenExpired() async {
     final key = AppConstants.secureStorageKeys.accessToken;
     final accessToken = await _secureStorage.read(key);
 
     if (accessToken == null) return false;
-    return _isExpired(accessToken);
+    return _tokenManager.isTokenExpired(accessToken);
   }
 
   Future<void> setUserSession(UserModel user) async {

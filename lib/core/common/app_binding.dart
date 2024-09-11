@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate/core/common/interceptors.dart';
 import 'package:flutter_boilerplate/core/common/network_info.dart';
+import 'package:flutter_boilerplate/core/common/token_manager.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/auth_local_data_source.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/db/boxes/users_box.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/db/secure_storage.dart';
@@ -16,7 +17,6 @@ import 'package:flutter_boilerplate/presentation/controllers/auth_controller.dar
 import 'package:flutter_boilerplate/presentation/controllers/connectivity_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 
 class AppBinding extends Bindings {
   @override
@@ -36,7 +36,7 @@ class AppBinding extends Bindings {
     Get.lazyPut<SecureStorage>(() => SecureStorage(Get.find()));
     Get.lazyPut<DioService>(() => DioService(dio: Get.find()));
     Get.lazyPut<HeaderInterceptor>(() => HeaderInterceptor(Get.find()));
-    Get.lazyPut<bool Function(String token)>(() => JwtDecoder.isExpired);
+    Get.lazyPut<TokenManager>(() => TokenManager());
 
     // Boxes
     Get.lazyPut<UsersBox>(() => UsersBox());
