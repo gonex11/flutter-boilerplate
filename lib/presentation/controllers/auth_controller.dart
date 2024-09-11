@@ -1,26 +1,37 @@
-import 'package:flutter_boilerplate/data/models/user/user_model.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/data/repositories/auth_repository.dart';
 import 'package:get/get.dart';
 
-class AuthController extends GetxController with StateMixin<UserModel> {
+class AuthController extends GetxController {
   final AuthRepository _repository;
 
-  AuthController(this._repository) {
-    authCheck();
-  }
+  AuthController(this._repository);
+
+  final isAuthenticated = false.obs;
 
   @override
   void onInit() {
-    change(null, status: RxStatus.empty());
+    authCheck();
+    isAuthenticated.stream.listen((authenticated) {
+      if (authenticated) {
+        Get.offAllNamed(AppRoutes.HOME);
+      } else {
+        Get.offAllNamed(AppRoutes.LOGIN);
+      }
+    });
+
     super.onInit();
   }
 
   Future<void> authCheck() async {
     final result = await _repository.getLoggedUser();
     result.fold((_) {
-      change(null, status: RxStatus.error());
+      isAuthenticated.value = false;
+      debugPrint("AUTH FAILURE: ${isAuthenticated.value}");
     }, (data) {
-      change(data, status: RxStatus.success());
+      isAuthenticated.value = true;
+      debugPrint("AUTH SUCCESS: ${isAuthenticated.value}");
     });
   }
 }

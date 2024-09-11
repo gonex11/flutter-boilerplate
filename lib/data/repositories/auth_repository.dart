@@ -18,11 +18,11 @@ class AuthRepository {
   );
 
   Future<Either<Failure, TokenResponse>> login(
-    String email,
+    String username,
     String password,
   ) async {
     try {
-      final result = await _remoteDataSource.login(email, password);
+      final result = await _remoteDataSource.login(username, password);
 
       await _localDataSource.setAccessToken(result.accessToken);
       await _localDataSource.setRefreshToken(result.refreshToken);
@@ -34,31 +34,44 @@ class AuthRepository {
   }
 
   Future<Either<Failure, UserModel>> getLoggedUser() async {
-    try {
-      final result = await _remoteDataSource.getLoggedUser();
-      return Right(result);
-    } on ApiException catch (e) {
-      final error = e.error?.errors?.firstOrNull;
+    final accessToken = await _localDataSource.getAccessToken();
 
-      if (error != null && error.code == "notAuthenticated") {
+    if (accessToken == null) {
+      return Left(AuthFailure());
+    }
+
+    final cachedUserSession = await _localDataSource.getUserSession();
+
+    if (cachedUserSession != null) {
+      if (await _localDataSource.isTokenExpired()) {
         final refreshToken = await _localDataSource.getRefreshToken();
 
         if (refreshToken != null) {
           final newTokens = await _remoteDataSource.refreshToken(refreshToken);
 
           await _localDataSource.setAccessToken(newTokens.accessToken);
-          await _localDataSource.setAccessToken(newTokens.refreshToken);
+          await _localDataSource.setRefreshToken(newTokens.refreshToken);
 
           final user = await _remoteDataSource.getLoggedUser();
-          return Right(user);
-        }
-      }
+          await _localDataSource.setUserSession(user);
 
-      return Left(ServerFailure(e.error));
+          return Right(user);
+        } else {
+          await _localDataSource.clearSession();
+          return Left(AuthFailure());
+        }
+      } else {
+        return Right(cachedUserSession);
+      }
     }
+
+    final user = await _remoteDataSource.getLoggedUser();
+    await _localDataSource.setUserSession(user);
+
+    return Right(user);
   }
 
   Future<bool> logout() async {
-    return await _localDataSource.clearToken();
+    return await _localDataSource.clearSession();
   }
 }

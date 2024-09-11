@@ -6,16 +6,10 @@ import 'package:flutter_boilerplate/data/repositories/auth_repository.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController with StateMixin {
+class LoginController extends GetxController {
   final AuthRepository _repository;
 
   LoginController(this._repository);
-
-  @override
-  void onInit() {
-    change(null, status: RxStatus.empty());
-    super.onInit();
-  }
 
   @override
   void dispose() {
@@ -27,25 +21,29 @@ class LoginController extends GetxController with StateMixin {
   final TextEditingController unameController = TextEditingController();
   final TextEditingController passController = TextEditingController();
 
+  final isLoading = false.obs;
   final validationErrors = RxList<ErrorDetailResponse>([]);
 
   Future<void> login() async {
-    final email = unameController.text;
+    isLoading.value = true;
+
+    final username = unameController.text;
     final password = passController.text;
 
-    final result = await _repository.login(email, password);
+    final result = await _repository.login(username, password);
     result.fold((failure) {
-      final error = failure.error;
+      isLoading.value = false;
 
+      final error = failure.error;
       if (error?.type == 'validation_error') {
         validationErrors.value = failure.error?.errors ?? [];
-        update();
       } else {
         final message = Utils.getErrorMessage(error?.errors) ?? '';
         Utils.showBottomSheet(AppErrorBottomSheet(message: message));
       }
     }, (data) {
-      Get.offAndToNamed(AppRoutes.LOGIN);
+      isLoading.value = false;
+      Get.offAndToNamed(AppRoutes.HOME);
     });
   }
 }

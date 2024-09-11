@@ -21,10 +21,12 @@ class CreateUserPage extends GetView<CreateUserController> {
         persistentFooterButtons: [
           Padding(
             padding: const EdgeInsets.all(8),
-            child: AppButton(
-              isLoading: controller.status == RxStatus.loading(),
-              onPressed: controller.createUser,
-              text: 'Save',
+            child: Obx(
+              () => AppButton(
+                isLoading: controller.isLoading.isTrue,
+                onPressed: controller.createUser,
+                text: 'Save',
+              ),
             ),
           ),
         ],
@@ -33,77 +35,81 @@ class CreateUserPage extends GetView<CreateUserController> {
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(16),
-                child: Obx(
-                  () {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Username',
-                          style: AppFonts.mdRegular.copyWith(
-                            color: colorScheme.onSurface,
-                          ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Username',
+                      style: AppFonts.mdRegular.copyWith(
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Obx(
+                      () => AppInput(
+                        controller: controller.unameController,
+                        hintText: 'Enter your username',
+                        error: Utils.getErrorMessage(
+                          controller.validationErrors,
+                          'username',
                         ),
-                        const SizedBox(height: 6),
-                        AppInput(
-                          controller: controller.unameController,
-                          hintText: 'Enter your username',
-                          error: Utils.getErrorMessage(
-                            controller.validationErrors,
-                            'username',
-                          ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'First Name',
+                      style: AppFonts.mdRegular.copyWith(
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Obx(
+                      () => AppInput(
+                        controller: controller.fNameController,
+                        hintText: 'Enter your first name',
+                        error: Utils.getErrorMessage(
+                          controller.validationErrors,
+                          'firstName',
                         ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'First Name',
-                          style: AppFonts.mdRegular.copyWith(
-                            color: colorScheme.onSurface,
-                          ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Last Name',
+                      style: AppFonts.mdRegular.copyWith(
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Obx(
+                      () => AppInput(
+                        controller: controller.lNameController,
+                        hintText: 'Enter your last name',
+                        error: Utils.getErrorMessage(
+                          controller.validationErrors,
+                          'lastName',
                         ),
-                        const SizedBox(height: 6),
-                        AppInput(
-                          controller: controller.fNameController,
-                          hintText: 'Enter your first name',
-                          error: Utils.getErrorMessage(
-                            controller.validationErrors,
-                            'first_name',
-                          ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Password',
+                      style: AppFonts.mdRegular.copyWith(
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Obx(
+                      () => AppInput.password(
+                        controller: controller.passController,
+                        hintText: 'Enter your password',
+                        error: Utils.getErrorMessage(
+                          controller.validationErrors,
+                          'password',
                         ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Last Name',
-                          style: AppFonts.mdRegular.copyWith(
-                            color: colorScheme.onSurface,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        AppInput(
-                          controller: controller.lNameController,
-                          hintText: 'Enter your last name',
-                          error: Utils.getErrorMessage(
-                            controller.validationErrors,
-                            'last_name',
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Password',
-                          style: AppFonts.mdRegular.copyWith(
-                            color: colorScheme.onSurface,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        AppInput.password(
-                          controller: controller.passController,
-                          hintText: 'Enter your password',
-                          error: Utils.getErrorMessage(
-                            controller.validationErrors,
-                            'password',
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

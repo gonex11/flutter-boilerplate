@@ -11,6 +11,10 @@ abstract class Failure extends Equatable {
   List<Object> get props => [error!, message!];
 }
 
+class AuthFailure extends Failure {
+  const AuthFailure() : super(null, null);
+}
+
 class ServerFailure extends Failure {
   final BaseErrorResponse? error;
 

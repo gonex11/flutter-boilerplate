@@ -6,11 +6,15 @@ import 'package:get/get.dart';
 class UserController extends GetxController with StateMixin<UserModel> {
   final UserRepository _repository;
 
-  UserController(this._repository) {
-    _getUserById();
-  }
+  UserController(this._repository);
 
   final id = Get.arguments ?? 0;
+
+  @override
+  void onInit() {
+    _getUserById();
+    super.onInit();
+  }
 
   Future<void> _getUserById() async {
     change(null, status: RxStatus.loading());

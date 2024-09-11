@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/routes/app_pages.dart';
+import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/styles/app_colors.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/presentation/controllers/login_controller.dart';
@@ -16,6 +16,7 @@ class LoginPage extends GetView<LoginController> {
     final colorScheme = context.theme.colorScheme;
     return KeyboardDismisser(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor:
             (context.isDarkMode) ? AppColors.darkBackground : AppColors.primary,
         body: SafeArea(
@@ -66,10 +67,16 @@ class LoginPage extends GetView<LoginController> {
                                     style: AppFonts.mdSemiBold,
                                   ),
                                   const SizedBox(height: 8),
-                                  AppInput(
-                                    hintText: 'Username',
-                                    onChanged: (value) {},
-                                  )
+                                  Obx(
+                                    () => AppInput(
+                                      controller: controller.unameController,
+                                      hintText: 'Username',
+                                      error: Utils.getErrorMessage(
+                                        controller.validationErrors,
+                                        'username',
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                               Column(
@@ -83,18 +90,25 @@ class LoginPage extends GetView<LoginController> {
                                   const SizedBox(
                                     height: 8,
                                   ),
-                                  AppInput.password(
-                                    hintText: 'Password',
-                                    onChanged: (value) {},
+                                  Obx(
+                                    () => AppInput.password(
+                                      controller: controller.passController,
+                                      hintText: 'Password',
+                                      error: Utils.getErrorMessage(
+                                        controller.validationErrors,
+                                        'password',
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 20),
-                              AppButton(
-                                onPressed: () {
-                                  Get.offAndToNamed(AppRoutes.HOME);
-                                },
-                                text: "Login",
+                              Obx(
+                                () => AppButton(
+                                  isLoading: controller.isLoading.isTrue,
+                                  onPressed: controller.login,
+                                  text: "Login",
+                                ),
                               ),
                             ],
                           ),

@@ -8,15 +8,15 @@ class AuthRemoteDataSource {
   const AuthRemoteDataSource(this._apiService);
 
   Future<UserModel> getLoggedUser() async {
-    final response = await _apiService.get('http://10.0.2.2:3000/me');
+    final response = await _apiService.get('http://10.0.2.2:3000/auth/me');
     final result = UserModel.fromJson(response.data['data']);
     return result;
   }
 
-  Future<TokenResponse> login(String email, String password) async {
-    final payload = {'email': email, 'password': password};
+  Future<TokenResponse> login(String username, String password) async {
+    final payload = {'username': username, 'password': password};
     final response = await _apiService.post(
-      'http://10.0.2.2:3000/login',
+      'http://10.0.2.2:3000/auth/login',
       data: payload,
       authorized: false,
     );
@@ -26,7 +26,7 @@ class AuthRemoteDataSource {
 
   Future<TokenResponse> refreshToken(String refreshToken) async {
     final response = await _apiService.post(
-      'http://10.0.2.2:3000/refresh',
+      'http://10.0.2.2:3000/auth/refresh',
       data: {'refresh_token': refreshToken},
       authorized: false,
     );

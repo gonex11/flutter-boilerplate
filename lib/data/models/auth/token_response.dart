@@ -5,9 +5,7 @@ part 'generated/token_response.g.dart';
 
 @JsonSerializable()
 class TokenResponse extends Equatable {
-  @JsonKey(name: 'access_token')
   final String accessToken;
-  @JsonKey(name: 'refresh_token')
   final String refreshToken;
 
   const TokenResponse({

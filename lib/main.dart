@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/common/app_injections.dart';
+import 'package:flutter_boilerplate/core/common/app_binding.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/styles/app_themes.dart';
 import 'package:get/get.dart';
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       title: 'Flutter Boilerplate',
       getPages: AppPages.pages,
       initialRoute: AppPages.INITIAL,
-      initialBinding: InjectionUtil(),
+      initialBinding: AppBinding(),
       themeMode: ThemeMode.system,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,

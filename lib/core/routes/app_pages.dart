@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/core/middlewares/auth_middleware.dart';
+import 'package:flutter_boilerplate/presentation/bindings/login_binding.dart';
 import 'package:flutter_boilerplate/presentation/bindings/user_binding.dart';
 import 'package:flutter_boilerplate/presentation/pages/create_user_page.dart';
 import 'package:flutter_boilerplate/presentation/pages/login_page.dart';
@@ -19,10 +19,7 @@ class AppPages {
     GetPage(
       name: _Paths.LOGIN,
       page: () => const LoginPage(),
-      binding: HomeBinding(),
-      middlewares: [
-        AuthMiddleware(),
-      ],
+      binding: LoginBinding(),
     ),
     GetPage(
       name: _Paths.HOME,

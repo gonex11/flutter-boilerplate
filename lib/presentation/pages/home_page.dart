@@ -18,6 +18,15 @@ class HomePage extends GetView<HomeController> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text('Users'),
+        actions: [
+          IconButton(
+            onPressed: controller.logout,
+            icon: Icon(
+              Icons.exit_to_app,
+              color: colorScheme.error,
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: colorScheme.primary,

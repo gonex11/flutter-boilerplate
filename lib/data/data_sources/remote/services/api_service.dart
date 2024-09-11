@@ -47,12 +47,20 @@ class ApiService {
 
   ApiException _handleError(dynamic error) {
     if (error is DioException) {
-      final statusCode = error.response?.statusCode ?? 0;
-      final errorResponse = BaseErrorResponse.fromJson(
-        error.response?.data,
-      );
+      final errorResponse = error.response != null
+          ? BaseErrorResponse.fromJson(error.response?.data)
+          : BaseErrorResponse(
+              type: 'unknown_error',
+              errors: [
+                ErrorDetailResponse(
+                  code: 'unexpected_error',
+                  detail: 'An unexpected error occurred: $error',
+                ),
+              ],
+            );
+
       return ApiException(
-        statusCode: statusCode,
+        statusCode: error.response?.statusCode ?? -1,
         error: errorResponse,
       );
     } else {
@@ -62,9 +70,10 @@ class ApiService {
           ErrorDetailResponse(
             code: 'unexpected_error',
             detail: 'An unexpected error occurred: $error',
-          )
+          ),
         ],
       );
+
       return ApiException(
         statusCode: -1,
         error: errorResponse,
