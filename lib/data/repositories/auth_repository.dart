@@ -12,10 +12,7 @@ class AuthRepository {
   final AuthRemoteDataSource _remoteDataSource;
   final AuthLocalDataSource _localDataSource;
 
-  AuthRepository(
-    this._remoteDataSource,
-    this._localDataSource,
-  );
+  AuthRepository(this._remoteDataSource, this._localDataSource);
 
   Future<Either<Failure, TokenResponse>> login(
     String username,
@@ -23,9 +20,7 @@ class AuthRepository {
   ) async {
     try {
       final result = await _remoteDataSource.login(username, password);
-
-      await _localDataSource.setAccessToken(result.accessToken);
-      await _localDataSource.setRefreshToken(result.refreshToken);
+      await _localDataSource.setToken(result);
 
       return Right(result);
     } on ApiException catch (e) {
@@ -42,33 +37,37 @@ class AuthRepository {
 
     final cachedUserSession = await _localDataSource.getUserSession();
 
-    if (cachedUserSession != null) {
-      if (await _localDataSource.isTokenExpired()) {
-        final refreshToken = await _localDataSource.getRefreshToken();
+    if (cachedUserSession == null) {
+      final user = await _remoteDataSource.getLoggedUser();
+      await _localDataSource.setUserSession(user);
 
-        if (refreshToken != null) {
-          final newTokens = await _remoteDataSource.refreshToken(refreshToken);
-
-          await _localDataSource.setAccessToken(newTokens.accessToken);
-          await _localDataSource.setRefreshToken(newTokens.refreshToken);
-
-          final user = await _remoteDataSource.getLoggedUser();
-          await _localDataSource.setUserSession(user);
-
-          return Right(user);
-        } else {
-          await _localDataSource.clearSession();
-          return Left(AuthFailure());
-        }
-      } else {
-        return Right(cachedUserSession);
-      }
+      return Right(user);
     }
 
-    final user = await _remoteDataSource.getLoggedUser();
-    await _localDataSource.setUserSession(user);
+    final isTokenExpired = await _localDataSource.isTokenExpired();
 
-    return Right(user);
+    if (!isTokenExpired) {
+      return Right(cachedUserSession);
+    }
+
+    final refreshToken = await _localDataSource.getRefreshToken();
+
+    if (refreshToken == null) {
+      await _localDataSource.clearSession();
+      return Left(AuthFailure());
+    }
+
+    try {
+      final newTokens = await _remoteDataSource.refreshToken(refreshToken);
+      await _localDataSource.setToken(newTokens);
+
+      final user = await _remoteDataSource.getLoggedUser();
+      await _localDataSource.setUserSession(user);
+
+      return Right(user);
+    } on ApiException catch (_) {
+      return Left(AuthFailure());
+    }
   }
 
   Future<bool> logout() async {

@@ -10,10 +10,7 @@ class UserRepository {
   final UserRemoteDataSource _remoteDataSource;
   final UserLocalDataSource _localDataSource;
 
-  const UserRepository(
-    this._remoteDataSource,
-    this._localDataSource,
-  );
+  const UserRepository(this._remoteDataSource, this._localDataSource);
 
   Future<Either<Failure, List<UserModel>>> getUsers() async {
     try {

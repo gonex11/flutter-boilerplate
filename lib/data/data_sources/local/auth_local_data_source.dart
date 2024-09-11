@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/core/common/token_manager.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/db/secure_storage.dart';
+import 'package:flutter_boilerplate/data/models/auth/token_response.dart';
 import 'package:flutter_boilerplate/data/models/user/user_model.dart';
 
 class AuthLocalDataSource {
@@ -35,14 +36,14 @@ class AuthLocalDataSource {
     return UserModel.fromJson(jsonDecode(result));
   }
 
-  Future<void> setAccessToken(String token) async {
-    final key = AppConstants.secureStorageKeys.accessToken;
-    return await _secureStorage.write(key, token);
-  }
+  Future<void> setToken(TokenResponse tokenResponse) async {
+    final refreshTokenKey = AppConstants.secureStorageKeys.refreshToken;
+    final accessTokenKey = AppConstants.secureStorageKeys.accessToken;
 
-  Future<void> setRefreshToken(String token) async {
-    final key = AppConstants.secureStorageKeys.refreshToken;
-    return await _secureStorage.write(key, token);
+    await Future.any([
+      _secureStorage.write(refreshTokenKey, tokenResponse.refreshToken),
+      _secureStorage.write(accessTokenKey, tokenResponse.accessToken),
+    ]);
   }
 
   Future<String?> getAccessToken() async {
