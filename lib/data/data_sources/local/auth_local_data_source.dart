@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/core/common/token_manager.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/db/secure_storage.dart';
-import 'package:flutter_boilerplate/data/models/auth/token_response.dart';
-import 'package:flutter_boilerplate/data/models/user/user_model.dart';
+import 'package:flutter_boilerplate/data/models/token_model.dart';
+import 'package:flutter_boilerplate/data/models/user_model.dart';
 
 class AuthLocalDataSource {
   final SecureStorage _secureStorage;
@@ -20,8 +20,8 @@ class AuthLocalDataSource {
     return _tokenManager.isTokenExpired(accessToken);
   }
 
-  Future<void> setUserSession(UserModel user) async {
-    await _secureStorage.write(
+  Future<bool> setUserSession(UserModel user) async {
+    return await _secureStorage.write(
       AppConstants.secureStorageKeys.userSession,
       jsonEncode(user.toJson()),
     );
@@ -36,11 +36,11 @@ class AuthLocalDataSource {
     return UserModel.fromJson(jsonDecode(result));
   }
 
-  Future<void> setToken(TokenResponse tokenResponse) async {
+  Future<bool> setToken(TokenModel tokenResponse) async {
     final refreshTokenKey = AppConstants.secureStorageKeys.refreshToken;
     final accessTokenKey = AppConstants.secureStorageKeys.accessToken;
 
-    await Future.any([
+    return await Future.any([
       _secureStorage.write(refreshTokenKey, tokenResponse.refreshToken),
       _secureStorage.write(accessTokenKey, tokenResponse.accessToken),
     ]);

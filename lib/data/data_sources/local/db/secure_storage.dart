@@ -9,8 +9,13 @@ class SecureStorage {
     return _secureStorage.read(key: key);
   }
 
-  Future<void> write(String key, String value) async {
-    await _secureStorage.write(key: key, value: value);
+  Future<bool> write(String key, String value) async {
+    try {
+      await _secureStorage.write(key: key, value: value);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<bool> delete(String key) async {

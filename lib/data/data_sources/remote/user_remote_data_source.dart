@@ -1,7 +1,7 @@
 import 'package:flutter_boilerplate/data/data_sources/remote/services/api_service.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/base_list_response.dart';
-import 'package:flutter_boilerplate/data/models/user/user_model.dart';
-import 'package:flutter_boilerplate/data/models/user/user_payload.dart';
+import 'package:flutter_boilerplate/data/models/base_list_response.dart';
+import 'package:flutter_boilerplate/data/models/user_model.dart';
+import 'package:flutter_boilerplate/data/models/user_payload.dart';
 
 class UserRemoteDataSource {
   final ApiService _apiService;

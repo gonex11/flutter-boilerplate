@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/error_detail_response.dart';
-import 'package:flutter_boilerplate/data/models/user/user_payload.dart';
+import 'package:flutter_boilerplate/data/models/error_detail_response.dart';
+import 'package:flutter_boilerplate/data/models/user_payload.dart';
 import 'package:flutter_boilerplate/data/repositories/user_repository.dart';
 import 'package:flutter_boilerplate/presentation/controllers/home_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_error_bottom_sheet.dart';

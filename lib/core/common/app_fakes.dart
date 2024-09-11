@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/data/models/user/user_model.dart';
+import 'package:flutter_boilerplate/data/models/user_model.dart';
 
 abstract class AppFakes {
   static FakeObject _object = FakeObject._();

@@ -1,6 +1,6 @@
 import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
-import 'package:flutter_boilerplate/data/models/user/user_model.dart';
+import 'package:flutter_boilerplate/data/models/user_model.dart';
 import 'package:flutter_boilerplate/data/repositories/auth_repository.dart';
 import 'package:flutter_boilerplate/data/repositories/user_repository.dart';
 import 'package:get/get.dart';
@@ -37,15 +37,12 @@ class HomeController extends GetxController with StateMixin<List<UserModel>> {
     change(null, status: RxStatus.loading());
 
     final cacheResult = await _userRepository.getCacheUsers();
-    cacheResult.fold((_) async {
+    if (cacheResult.isEmpty) {
       await getUsers();
-    }, (data) async {
-      if (data.isEmpty) {
-        await getUsers();
-        return;
-      }
-      change(data, status: RxStatus.success());
-    });
+      return;
+    }
+
+    change(cacheResult, status: RxStatus.success());
   }
 
   Future<void> logout() async {

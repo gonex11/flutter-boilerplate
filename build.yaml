@@ -10,6 +10,4 @@ targets:
             source_gen:combining_builder:
                 options:
                     build_extensions:
-                        '^lib/data/models/{{dir}}/{{file}}.dart': 'lib/data/models/{{dir}}/generated/{{file}}.g.dart'
-                        '^lib/data/data_sources/local/db/adapters/{{file}}.dart': 'lib/data/data_sources/local/db/adapters/generated/{{file}}.g.dart'
-                        '^lib/data/remote/services/responses/{{file}}.dart': 'lib/data/remote/services/responses/generated/{{file}}.g.dart'
+                        '^lib/data/models/{{file}}.dart': 'lib/data/models/generated/{{file}}.g.dart'

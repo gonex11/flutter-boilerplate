@@ -5,8 +5,8 @@ import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/failures.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/auth_local_data_source.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/auth_remote_data_source.dart';
-import 'package:flutter_boilerplate/data/models/auth/token_response.dart';
-import 'package:flutter_boilerplate/data/models/user/user_model.dart';
+import 'package:flutter_boilerplate/data/models/token_model.dart';
+import 'package:flutter_boilerplate/data/models/user_model.dart';
 
 class AuthRepository {
   final AuthRemoteDataSource _remoteDataSource;
@@ -14,7 +14,7 @@ class AuthRepository {
 
   AuthRepository(this._remoteDataSource, this._localDataSource);
 
-  Future<Either<Failure, TokenResponse>> login(
+  Future<Either<Failure, TokenModel>> login(
     String username,
     String password,
   ) async {

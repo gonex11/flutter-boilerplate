@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/error_detail_response.dart';
+import 'package:flutter_boilerplate/data/models/error_detail_response.dart';
 import 'package:flutter_boilerplate/data/repositories/auth_repository.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';

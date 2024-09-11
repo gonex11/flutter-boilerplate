@@ -1,5 +1,5 @@
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
-import 'package:flutter_boilerplate/data/data_sources/local/db/adapters/user_type.dart';
+import 'package:flutter_boilerplate/data/models/user_type.dart';
 import 'package:hive/hive.dart';
 
 class UsersBox {
@@ -7,15 +7,15 @@ class UsersBox {
     AppConstants.boxNames.users,
   );
 
-  Future<void> insertCache(List<UserType> users) async {
-    await _box.addAll(users);
+  Future<int> insertCache(List<UserType> users) async {
+    final result = (await _box.addAll(users)).map((e) async => e);
+    return await Future.any([
+      _box.clear(),
+      ...result,
+    ]);
   }
 
   List<UserType>? getCacheUsers() {
     return _box.values.toList();
-  }
-
-  Future<void> clearCache() async {
-    await _box.clear();
   }
 }

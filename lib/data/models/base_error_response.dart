@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/error_detail_response.dart';
+import 'package:flutter_boilerplate/data/models/error_detail_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'generated/base_error_response.g.dart';

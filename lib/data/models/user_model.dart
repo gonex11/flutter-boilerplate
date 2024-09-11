@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_boilerplate/data/data_sources/local/db/adapters/user_type.dart';
+import 'package:flutter_boilerplate/data/models/user_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'generated/user_model.g.dart';

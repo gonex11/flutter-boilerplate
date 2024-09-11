@@ -3,8 +3,8 @@ import 'package:flutter_boilerplate/core/common/app_enums.dart';
 import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/interceptors.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/services/dio_service.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/base_error_response.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/responses/error_detail_response.dart';
+import 'package:flutter_boilerplate/data/models/base_error_response.dart';
+import 'package:flutter_boilerplate/data/models/error_detail_response.dart';
 
 class ApiService {
   final DioService _dioService;

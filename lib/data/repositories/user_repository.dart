@@ -3,8 +3,8 @@ import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/failures.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/user_local_data_source.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/user_remote_data_source.dart';
-import 'package:flutter_boilerplate/data/models/user/user_model.dart';
-import 'package:flutter_boilerplate/data/models/user/user_payload.dart';
+import 'package:flutter_boilerplate/data/models/user_model.dart';
+import 'package:flutter_boilerplate/data/models/user_payload.dart';
 
 class UserRepository {
   final UserRemoteDataSource _remoteDataSource;
@@ -22,13 +22,9 @@ class UserRepository {
     }
   }
 
-  Future<Either<Failure, List<UserModel>>> getCacheUsers() async {
-    try {
-      final result = await _localDataSource.getCachedUsers();
-      return Right(result);
-    } on CacheException catch (e) {
-      return Left(CacheFailure(e.message));
-    }
+  Future<List<UserModel>> getCacheUsers() async {
+    final result = await _localDataSource.getCachedUsers();
+    return result;
   }
 
   Future<Either<Failure, UserModel>> getUserById(int id) async {

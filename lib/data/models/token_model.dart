@@ -1,22 +1,22 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'generated/token_response.g.dart';
+part 'generated/token_model.g.dart';
 
 @JsonSerializable()
-class TokenResponse extends Equatable {
+class TokenModel extends Equatable {
   final String accessToken;
   final String refreshToken;
 
-  const TokenResponse({
+  const TokenModel({
     required this.accessToken,
     required this.refreshToken,
   });
 
-  factory TokenResponse.fromJson(Map<String, dynamic> json) =>
-      _$TokenResponseFromJson(json);
+  factory TokenModel.fromJson(Map<String, dynamic> json) =>
+      _$TokenModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TokenResponseToJson(this);
+  Map<String, dynamic> toJson() => _$TokenModelToJson(this);
 
   @override
   List<Object?> get props => [accessToken, refreshToken];

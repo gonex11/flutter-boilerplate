@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
-import 'package:flutter_boilerplate/data/models/user/user_model.dart';
+import 'package:flutter_boilerplate/data/models/user_model.dart';
 import 'package:get/get.dart';
 
 class UserTile extends StatelessWidget {
