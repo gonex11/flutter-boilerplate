@@ -18,4 +18,16 @@ abstract class AppLocalizations {
         'permissionType': permissionType,
       });
   static String permissionMessage = 'permissionMessage'.tr;
+  static String usersTitle = 'usersTitle'.tr;
+  static String userDetail = 'userDetail'.tr;
+  static String username = 'username'.tr;
+  static String firstName = 'firstName'.tr;
+  static String lastName = 'lastName'.tr;
+  static String password = 'password'.tr;
+  static String usernamePlaceholder = 'usernamePlaceholder'.tr;
+  static String firstNamePlaceholder = 'firstNamePlaceholder'.tr;
+  static String lastNamePlaceholder = 'lastNamePlaceholder'.tr;
+  static String passwordPlaceholder = 'passwordPlaceholder'.tr;
+  static String login = 'login'.tr;
+  static String loginSubtitle = 'loginSubtitle'.tr;
 }

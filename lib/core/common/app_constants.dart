@@ -18,6 +18,8 @@ class General {
   General._();
 
   String get appName => 'Flutter Boilerplate';
+  String get idLocale => 'id';
+  String get enLocale => 'en';
 }
 
 class Messages {

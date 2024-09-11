@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/core/common/app_localizations.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/styles/app_colors.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
@@ -32,7 +33,7 @@ class LoginPage extends GetView<LoginController> {
                 children: [
                   Center(
                     child: Text(
-                      'Login',
+                      AppLocalizations.login,
                       style: AppFonts.xlBold.copyWith(
                         fontSize: 32,
                         color: colorScheme.onPrimary,
@@ -51,7 +52,7 @@ class LoginPage extends GetView<LoginController> {
                       child: Column(
                         children: [
                           Text(
-                            'Pastikan akun anda telah terdaftar dalam aplikasi',
+                            AppLocalizations.loginSubtitle,
                             style: AppFonts.smRegular.copyWith(
                               color: AppColors.grey,
                             ),
@@ -63,14 +64,15 @@ class LoginPage extends GetView<LoginController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Username',
+                                    AppLocalizations.username,
                                     style: AppFonts.mdSemiBold,
                                   ),
                                   const SizedBox(height: 8),
                                   Obx(
                                     () => AppInput(
                                       controller: controller.unameController,
-                                      hintText: 'Username',
+                                      hintText:
+                                          AppLocalizations.usernamePlaceholder,
                                       error: Utils.getErrorMessage(
                                         controller.validationErrors,
                                         'username',
@@ -84,7 +86,7 @@ class LoginPage extends GetView<LoginController> {
                                 children: [
                                   const SizedBox(height: 16),
                                   Text(
-                                    'Password',
+                                    AppLocalizations.password,
                                     style: AppFonts.mdSemiBold,
                                   ),
                                   const SizedBox(
@@ -93,7 +95,8 @@ class LoginPage extends GetView<LoginController> {
                                   Obx(
                                     () => AppInput.password(
                                       controller: controller.passController,
-                                      hintText: 'Password',
+                                      hintText:
+                                          AppLocalizations.passwordPlaceholder,
                                       error: Utils.getErrorMessage(
                                         controller.validationErrors,
                                         'password',
@@ -107,7 +110,7 @@ class LoginPage extends GetView<LoginController> {
                                 () => AppButton(
                                   isLoading: controller.isLoading.isTrue,
                                   onPressed: controller.login,
-                                  text: "Login",
+                                  text: AppLocalizations.login,
                                 ),
                               ),
                             ],

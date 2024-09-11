@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/core/common/app_localizations.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/presentation/controllers/create_user_controller.dart';
@@ -39,7 +40,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Username',
+                      AppLocalizations.username,
                       style: AppFonts.mdRegular.copyWith(
                         color: colorScheme.onSurface,
                       ),
@@ -48,7 +49,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                     Obx(
                       () => AppInput(
                         controller: controller.unameController,
-                        hintText: 'Enter your username',
+                        hintText: AppLocalizations.usernamePlaceholder,
                         error: Utils.getErrorMessage(
                           controller.validationErrors,
                           'username',
@@ -57,7 +58,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'First Name',
+                      AppLocalizations.firstName,
                       style: AppFonts.mdRegular.copyWith(
                         color: colorScheme.onSurface,
                       ),
@@ -66,7 +67,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                     Obx(
                       () => AppInput(
                         controller: controller.fNameController,
-                        hintText: 'Enter your first name',
+                        hintText: AppLocalizations.firstNamePlaceholder,
                         error: Utils.getErrorMessage(
                           controller.validationErrors,
                           'firstName',
@@ -75,7 +76,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Last Name',
+                      AppLocalizations.lastName,
                       style: AppFonts.mdRegular.copyWith(
                         color: colorScheme.onSurface,
                       ),
@@ -84,7 +85,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                     Obx(
                       () => AppInput(
                         controller: controller.lNameController,
-                        hintText: 'Enter your last name',
+                        hintText: AppLocalizations.lastNamePlaceholder,
                         error: Utils.getErrorMessage(
                           controller.validationErrors,
                           'lastName',
@@ -93,7 +94,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'Password',
+                      AppLocalizations.password,
                       style: AppFonts.mdRegular.copyWith(
                         color: colorScheme.onSurface,
                       ),
@@ -102,7 +103,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                     Obx(
                       () => AppInput.password(
                         controller: controller.passController,
-                        hintText: 'Enter your password',
+                        hintText: AppLocalizations.passwordPlaceholder,
                         error: Utils.getErrorMessage(
                           controller.validationErrors,
                           'password',

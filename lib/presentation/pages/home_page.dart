@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/common/app_fakes.dart';
+import 'package:flutter_boilerplate/core/common/app_localizations.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_refresh_layout.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
@@ -17,7 +18,7 @@ class HomePage extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Users'),
+        title: Text(AppLocalizations.usersTitle),
         actions: [
           IconButton(
             onPressed: controller.logout,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/common/app_binding.dart';
+import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/core/common/app_translations.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/styles/app_themes.dart';
@@ -21,8 +22,8 @@ class App extends StatelessWidget {
       title: 'Flutter Boilerplate',
       getPages: AppPages.pages,
       translations: AppTranslations(),
-      locale: Locale('id'),
-      fallbackLocale: Locale('id'),
+      locale: Locale(AppConstants.general.enLocale),
+      fallbackLocale: Locale(AppConstants.general.enLocale),
       initialRoute: AppPages.INITIAL,
       initialBinding: AppBinding(),
       themeMode: ThemeMode.system,

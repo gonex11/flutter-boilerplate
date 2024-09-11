@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/core/common/app_localizations.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/presentation/controllers/user_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_skeletonizer.dart';
@@ -13,7 +14,7 @@ class UserDetailPage extends GetView<UserController> {
     final colorScheme = context.theme.colorScheme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Detail'),
+        title: Text(AppLocalizations.userDetail),
       ),
       body: SafeArea(
         child: Center(
