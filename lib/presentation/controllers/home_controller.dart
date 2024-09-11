@@ -14,7 +14,7 @@ class HomeController extends GetxController with StateMixin<List<UserModel>> {
 
   @override
   void onInit() {
-    getUsers();
+    getCacheUsers();
     super.onInit();
   }
 

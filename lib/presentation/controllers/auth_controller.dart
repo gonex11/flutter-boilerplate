@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/data/repositories/auth_repository.dart';
 import 'package:get/get.dart';
@@ -28,10 +27,8 @@ class AuthController extends GetxController {
     final result = await _repository.getLoggedUser();
     result.fold((_) {
       isAuthenticated.value = false;
-      debugPrint("AUTH FAILURE: ${isAuthenticated.value}");
     }, (data) {
       isAuthenticated.value = true;
-      debugPrint("AUTH SUCCESS: ${isAuthenticated.value}");
     });
   }
 }

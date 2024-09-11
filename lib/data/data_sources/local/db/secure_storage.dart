@@ -6,7 +6,7 @@ class SecureStorage {
   const SecureStorage(this._secureStorage);
 
   Future<String?> read(String key) async {
-    return await _secureStorage.read(key: key);
+    return _secureStorage.read(key: key);
   }
 
   Future<void> write(String key, String value) async {
