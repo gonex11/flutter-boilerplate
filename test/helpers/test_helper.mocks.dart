@@ -521,18 +521,19 @@ class MockUserLocalDataSource extends _i1.Mock
   }
 
   @override
-  _i8.Future<int> cacheUsers(List<_i3.UserModel>? users) => (super.noSuchMethod(
+  _i8.Future<bool> cacheUsers(List<_i3.UserModel>? users) =>
+      (super.noSuchMethod(
         Invocation.method(
           #cacheUsers,
           [users],
         ),
-        returnValue: _i8.Future<int>.value(0),
-      ) as _i8.Future<int>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
 
   @override
-  _i8.Future<List<_i3.UserModel>> getCachedUsers() => (super.noSuchMethod(
+  _i8.Future<List<_i3.UserModel>> getCacheUsers() => (super.noSuchMethod(
         Invocation.method(
-          #getCachedUsers,
+          #getCacheUsers,
           [],
         ),
         returnValue: _i8.Future<List<_i3.UserModel>>.value(<_i3.UserModel>[]),
@@ -548,14 +549,14 @@ class MockUsersBox extends _i1.Mock implements _i16.UsersBox {
   }
 
   @override
-  _i8.Future<int> insertCache(List<_i17.UserType>? users) =>
+  _i8.Future<bool> insertCache(List<_i17.UserType>? users) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertCache,
           [users],
         ),
-        returnValue: _i8.Future<int>.value(0),
-      ) as _i8.Future<int>);
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
 }
 
 /// A class which mocks [ApiService].

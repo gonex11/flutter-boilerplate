@@ -1,4 +1,3 @@
-import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/user_local_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -18,20 +17,22 @@ void main() {
   group('cacheUsers', () {
     test('should return true when cache users is success', () async {
       // Arrange
-      when(mockUsersBox.insertCache(tUserAdapters)).thenAnswer((_) async => 1);
+      when(mockUsersBox.insertCache(tUserAdapters))
+          .thenAnswer((_) async => true);
       // Act
       final result = await dataSource.cacheUsers(tUserModels);
       // Assert
-      expect(result, 1);
+      expect(result, true);
     });
 
-    test('should throw CacheException when cache users is failed', () async {
+    test('should return false when cache users is failed', () async {
       // Arrange
-      when(mockUsersBox.insertCache(tUserAdapters)).thenThrow(Exception());
+      when(mockUsersBox.insertCache(tUserAdapters))
+          .thenAnswer((_) async => false);
       // Act
-      final result = dataSource.cacheUsers(tUserModels);
+      final result = await dataSource.cacheUsers(tUserModels);
       // Assert
-      expect(result, throwsA(isA<CacheException>()));
+      expect(result, false);
     });
   });
 
@@ -40,7 +41,7 @@ void main() {
       // Arrange
       when(mockUsersBox.getCacheUsers()).thenAnswer((_) => tUserAdapters);
       // Act
-      final result = await dataSource.getCachedUsers();
+      final result = await dataSource.getCacheUsers();
       // Assert
       expect(result, tUserModels);
     });

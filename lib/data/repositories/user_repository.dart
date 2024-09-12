@@ -15,7 +15,7 @@ class UserRepository {
   Future<Either<Failure, List<UserModel>>> getUsers() async {
     try {
       final result = await _remoteDataSource.getUsers();
-      _localDataSource.cacheUsers(result);
+      await _localDataSource.cacheUsers(result);
       return Right(result);
     } on ApiException catch (e) {
       return Left(ServerFailure(e.error));
@@ -23,7 +23,7 @@ class UserRepository {
   }
 
   Future<List<UserModel>> getCacheUsers() async {
-    final result = await _localDataSource.getCachedUsers();
+    final result = await _localDataSource.getCacheUsers();
     return result;
   }
 

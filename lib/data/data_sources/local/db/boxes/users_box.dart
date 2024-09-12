@@ -7,12 +7,14 @@ class UsersBox {
     AppConstants.boxNames.users,
   );
 
-  Future<int> insertCache(List<UserType> users) async {
-    final result = (await _box.addAll(users)).map((e) async => e);
-    return await Future.any([
-      _box.clear(),
-      ...result,
-    ]);
+  Future<bool> insertCache(List<UserType> users) async {
+    try {
+      await _box.clear();
+      await _box.addAll(users);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   List<UserType>? getCacheUsers() {

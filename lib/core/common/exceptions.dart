@@ -6,8 +6,8 @@ class ApiException extends DioException {
   final BaseErrorResponse? error;
 
   ApiException({
-    required this.statusCode,
-    required this.error,
+    this.statusCode,
+    this.error,
   }) : super(requestOptions: RequestOptions());
 }
 
