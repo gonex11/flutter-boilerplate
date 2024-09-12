@@ -27,7 +27,7 @@ void main() {
       (json) => UserModel.fromJson(json as Map<String, dynamic>),
     ).data;
 
-    test('should return a list of users when response code is 200', () async {
+    test('should return a list of users when success', () async {
       // Arrange
       when(mockApiService.get('http://10.0.2.2:3000/users')).thenAnswer(
         (_) async => Response(
@@ -51,8 +51,7 @@ void main() {
       jsonDecode(readJson('dummy_data/jsons/user_response.json'))["data"],
     );
 
-    test('should return a users by given id when response code is 200',
-        () async {
+    test('should return a users by given id when success', () async {
       // Arrange
       when(mockApiService.get('http://10.0.2.2:3000/users/$testId')).thenAnswer(
         (_) async => Response(
@@ -75,7 +74,7 @@ void main() {
       jsonDecode(readJson('dummy_data/jsons/user_response.json'))["data"],
     );
 
-    test('should create user when response code is 200', () async {
+    test('should create user when success', () async {
       // Arrange
       when(mockApiService.post(
         'http://10.0.2.2:3000/users',
