@@ -1,3 +1,4 @@
+import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/services/api_service.dart';
 import 'package:flutter_boilerplate/data/models/base_list_response.dart';
 import 'package:flutter_boilerplate/data/models/user_model.dart';
@@ -9,19 +10,24 @@ class UserRemoteDataSource {
   const UserRemoteDataSource(this._apiService);
 
   Future<List<UserModel>> getUsers() async {
-    final response =
-        await _apiService.get('http://10.0.2.2:3000/users', authorized: false);
-    final result = BaseListResponse.fromJson(
-      response.data,
-      (json) => UserModel.fromJson((json as Map<String, dynamic>)),
-    );
+    final response = await _apiService.get('http://10.0.2.2:3000/users');
 
-    return result.data;
+    if (response.statusCode == 200) {
+      final result = BaseListResponse.fromJson(
+        response.data,
+        (json) => UserModel.fromJson((json as Map<String, dynamic>)),
+      );
+      return result.data;
+    } else {
+      throw ApiException(
+        statusCode: response.statusCode,
+        error: response.data,
+      );
+    }
   }
 
   Future<UserModel> getUserById(int id) async {
-    final response = await _apiService.get('http://10.0.2.2:3000/users/$id',
-        authorized: false);
+    final response = await _apiService.get('http://10.0.2.2:3000/users/$id');
     final result = UserModel.fromJson(response.data['data']);
     return result;
   }
@@ -30,7 +36,6 @@ class UserRemoteDataSource {
     final response = await _apiService.post(
       'http://10.0.2.2:3000/users',
       data: payload.toJson(),
-      authorized: false,
     );
     final result = UserModel.fromJson(response.data['data']);
     return result;

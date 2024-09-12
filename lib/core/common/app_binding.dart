@@ -6,11 +6,9 @@ import 'package:flutter_boilerplate/core/common/network_info.dart';
 import 'package:flutter_boilerplate/core/common/token_manager.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/auth_local_data_source.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/db/boxes/users_box.dart';
-import 'package:flutter_boilerplate/data/data_sources/local/db/secure_storage.dart';
 import 'package:flutter_boilerplate/data/data_sources/local/user_local_data_source.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/services/api_service.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/dio_service.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:flutter_boilerplate/data/repositories/auth_repository.dart';
 import 'package:flutter_boilerplate/data/repositories/user_repository.dart';
@@ -35,9 +33,7 @@ class AppBinding extends Bindings {
 
     // Helpers
     Get.lazyPut<NetworkInfo>(() => NetworkInfo(Get.find()));
-    Get.lazyPut<ApiService>(() => ApiService(Get.find(), Get.find()));
-    Get.lazyPut<SecureStorage>(() => SecureStorage(Get.find()));
-    Get.lazyPut<DioService>(() => DioService(dio: Get.find()));
+    Get.lazyPut<ApiService>(() => ApiService(Get.find()));
     Get.lazyPut<HeaderInterceptor>(() => HeaderInterceptor(Get.find()));
     Get.lazyPut<TokenManager>(() => TokenManager());
 

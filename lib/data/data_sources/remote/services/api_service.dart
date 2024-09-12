@@ -1,16 +1,90 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_boilerplate/core/common/app_enums.dart';
 import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/interceptors.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/dio_service.dart';
 import 'package:flutter_boilerplate/data/models/base_error_response.dart';
 import 'package:flutter_boilerplate/data/models/error_detail_response.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiService {
-  final DioService _dioService;
-  final HeaderInterceptor _headerInterceptor;
+  final Dio _dio;
 
-  const ApiService(this._dioService, this._headerInterceptor);
+  ApiService(this._dio) {
+    _setupHttpClientAdapter();
+    _setupInterceptors();
+  }
+
+  void _setupHttpClientAdapter() {
+    _dio.httpClientAdapter = IOHttpClientAdapter(
+      createHttpClient: () {
+        final SecurityContext scontext = SecurityContext();
+        HttpClient client = HttpClient(context: scontext);
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
+        return client;
+      },
+    );
+  }
+
+  void _setupInterceptors() {
+    _dio.options.responseType = ResponseType.json;
+    if (kDebugMode) {
+      _dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          request: true,
+          responseBody: true,
+          responseHeader: true,
+          error: true,
+          compact: true,
+          maxWidth: 90,
+        ),
+      );
+    }
+  }
+
+  ApiException _handleError(dynamic error) {
+    if (error is DioException) {
+      final errorResponse = error.response != null
+          ? BaseErrorResponse.fromJson(error.response?.data)
+          : BaseErrorResponse(
+              type: 'unknown_error',
+              errors: [
+                ErrorDetailResponse(
+                  code: 'unexpected_error',
+                  detail: 'An unexpected error occurred: ${error.message}',
+                ),
+              ],
+            );
+
+      return ApiException(
+        statusCode: error.response?.statusCode ?? -1,
+        error: errorResponse,
+      );
+    } else {
+      final errorResponse = BaseErrorResponse(
+        type: 'unknown_error',
+        errors: [
+          ErrorDetailResponse(
+            code: 'unexpected_error',
+            detail: 'An unexpected error occurred: ${error.message}',
+          ),
+        ],
+      );
+
+      return ApiException(
+        statusCode: -1,
+        error: errorResponse,
+      );
+    }
+  }
 
   Future<Response> _sendRequest(
     RequestMethod method,
@@ -21,10 +95,11 @@ class ApiService {
     bool authorized = true,
   }) async {
     try {
+      final headerInterceptor = HeaderInterceptor(Get.find());
       if (authorized) {
-        _dioService.dio.interceptors.add(_headerInterceptor);
+        _dio.interceptors.add(headerInterceptor);
       }
-      final response = await _dioService.dio.request(
+      final response = await _dio.request(
         endpoint,
         data: data,
         queryParameters: queryParams,
@@ -40,44 +115,8 @@ class ApiService {
       throw _handleError(e);
     } finally {
       if (authorized) {
-        _dioService.dio.interceptors.removeWhere((i) => i is HeaderInterceptor);
+        _dio.interceptors.removeWhere((i) => i is HeaderInterceptor);
       }
-    }
-  }
-
-  ApiException _handleError(dynamic error) {
-    if (error is DioException) {
-      final errorResponse = error.response != null
-          ? BaseErrorResponse.fromJson(error.response?.data)
-          : BaseErrorResponse(
-              type: 'unknown_error',
-              errors: [
-                ErrorDetailResponse(
-                  code: 'unexpected_error',
-                  detail: 'An unexpected error occurred: $error',
-                ),
-              ],
-            );
-
-      return ApiException(
-        statusCode: error.response?.statusCode ?? -1,
-        error: errorResponse,
-      );
-    } else {
-      final errorResponse = BaseErrorResponse(
-        type: 'unknown_error',
-        errors: [
-          ErrorDetailResponse(
-            code: 'unexpected_error',
-            detail: 'An unexpected error occurred: $error',
-          ),
-        ],
-      );
-
-      return ApiException(
-        statusCode: -1,
-        error: errorResponse,
-      );
     }
   }
 
