@@ -32,6 +32,7 @@ class AuthRepository {
     final accessToken = await _localDataSource.getAccessToken();
 
     if (accessToken == null) {
+      await _localDataSource.clearSession();
       return Left(AuthFailure());
     }
 
@@ -66,6 +67,7 @@ class AuthRepository {
 
       return Right(user);
     } on ApiException catch (_) {
+      await _localDataSource.clearSession();
       return Left(AuthFailure());
     }
   }

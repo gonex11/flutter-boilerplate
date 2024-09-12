@@ -24,7 +24,7 @@ void main() {
 
   group('getUsers', () {
     test(
-        'should return remote data and cache data locally when the call to remote data source is successful',
+        'should return data and cache data locally when the call to data source is successful',
         () async {
       // Arrange
       when(mockRemoteDataSource.getUsers())
@@ -41,7 +41,7 @@ void main() {
     });
 
     test(
-        'should return server failure when the call to remote data source is unsuccessful',
+        'should return server failure when the call to data source is unsuccessful',
         () async {
       // Arrange
       when(mockRemoteDataSource.getUsers()).thenThrow(ApiException(
@@ -56,8 +56,7 @@ void main() {
   });
 
   group('getCacheUsers', () {
-    test(
-        'should return cache data when the call to local data source is successful',
+    test('should return cache data when the call to data source is successful',
         () async {
       // Arrange
       when(mockLocalDataSource.getCacheUsers())
@@ -73,7 +72,7 @@ void main() {
     final testId = 1;
 
     test(
-        'should return a user by given id when the call to remote data source is successful',
+        'should return a user by given id when the call to data source is successful',
         () async {
       // Arrange
       when(mockRemoteDataSource.getUserById(testId))
@@ -85,7 +84,7 @@ void main() {
     });
 
     test(
-        'should return server failure when the call to remote data source is unsuccessful',
+        'should return server failure when the call to data source is unsuccessful',
         () async {
       // Arrange
       when(mockRemoteDataSource.getUserById(testId)).thenThrow(ApiException(
@@ -101,7 +100,7 @@ void main() {
 
   group('createUser', () {
     test(
-        'should return created user when the call to remote data source is successful',
+        'should return created user when the call to data source is successful',
         () async {
       // Arrange
       when(mockRemoteDataSource.createUser(tUserPayload))
@@ -113,7 +112,7 @@ void main() {
     });
 
     test(
-        'should return server failure when the call to remote data source is unsuccessful',
+        'should return server failure when the call to data source is unsuccessful',
         () async {
       // Arrange
       when(mockRemoteDataSource.createUser(tUserPayload))
