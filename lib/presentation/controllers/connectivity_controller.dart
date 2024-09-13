@@ -8,14 +8,14 @@ class ConnectivityController extends GetxController {
   ConnectivityController(this._networkInfo);
 
   @override
-  void onInit() async {
-    await checkConnectivity();
+  Future<void> onInit() async {
+    checkConnectivity();
     super.onInit();
   }
 
   final isConnected = false.obs;
 
-  Future<void> checkConnectivity() async {
+  void checkConnectivity() {
     _networkInfo.onConnectivityChanged.listen((value) {
       isConnected.value = value;
 

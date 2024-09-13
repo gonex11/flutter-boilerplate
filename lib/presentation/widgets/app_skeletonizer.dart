@@ -26,8 +26,8 @@ class AppSkeletonizer extends StatelessWidget {
       ignoreContainers: ignoreContainers,
       enableSwitchAnimation: true,
       effect: ShimmerEffect(
-        baseColor: (baseColor != null) ? baseColor! : theme.disabledColor,
-        highlightColor: theme.dividerColor,
+        baseColor: (baseColor != null) ? baseColor! : theme.dividerColor,
+        highlightColor: theme.disabledColor,
         duration: const Duration(seconds: 1),
       ),
       enabled: enabled,

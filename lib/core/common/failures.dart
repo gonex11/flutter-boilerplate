@@ -11,22 +11,22 @@ abstract class Failure extends Equatable {
   List<Object?> get props => [error, message];
 }
 
-class AuthFailure extends Failure {
+final class AuthFailure extends Failure {
   const AuthFailure() : super(null, null);
 }
 
-class ServerFailure extends Failure {
+final class ServerFailure extends Failure {
   final BaseErrorResponse? error;
 
-  const ServerFailure(this.error) : super(error, '');
+  const ServerFailure(this.error) : super(error, null);
 }
 
-class CacheFailure extends Failure {
+final class CacheFailure extends Failure {
   final String? message;
 
   const CacheFailure(this.message) : super(null, message);
 }
 
-class NetworkFailure extends Failure {
+final class NetworkFailure extends Failure {
   const NetworkFailure() : super(null, null);
 }

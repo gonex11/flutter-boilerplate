@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate/data/models/base_error_response.dart';
 
-class ApiException extends DioException {
+final class ApiException extends DioException {
   final int? statusCode;
   final BaseErrorResponse? error;
 
@@ -11,7 +11,7 @@ class ApiException extends DioException {
   }) : super(requestOptions: RequestOptions());
 }
 
-class CacheException implements Exception {
+final class CacheException implements Exception {
   final String message;
 
   CacheException(this.message);

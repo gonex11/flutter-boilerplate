@@ -12,16 +12,15 @@ import 'package:flutter/widgets.dart' as _i23;
 import 'package:flutter_boilerplate/core/common/failures.dart' as _i13;
 import 'package:flutter_boilerplate/core/common/network_info.dart' as _i25;
 import 'package:flutter_boilerplate/core/common/token_manager.dart' as _i24;
+import 'package:flutter_boilerplate/core/services/api_service.dart' as _i22;
 import 'package:flutter_boilerplate/data/data_sources/local/auth_local_data_source.dart'
     as _i17;
-import 'package:flutter_boilerplate/data/data_sources/local/db/boxes/users_box.dart'
+import 'package:flutter_boilerplate/data/data_sources/local/db/users_db.dart'
     as _i20;
 import 'package:flutter_boilerplate/data/data_sources/local/user_local_data_source.dart'
     as _i19;
 import 'package:flutter_boilerplate/data/data_sources/remote/auth_remote_data_source.dart'
     as _i16;
-import 'package:flutter_boilerplate/data/data_sources/remote/services/api_service.dart'
-    as _i22;
 import 'package:flutter_boilerplate/data/data_sources/remote/user_remote_data_source.dart'
     as _i18;
 import 'package:flutter_boilerplate/data/models/token_model.dart' as _i5;
@@ -32,12 +31,14 @@ import 'package:flutter_boilerplate/data/repositories/auth_repository.dart'
     as _i12;
 import 'package:flutter_boilerplate/data/repositories/user_repository.dart'
     as _i14;
-import 'package:flutter_boilerplate/presentation/controllers/connectivity_controller.dart'
+import 'package:flutter_boilerplate/presentation/controllers/home_controller.dart'
     as _i8;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i7;
 import 'package:get/get.dart' as _i2;
 import 'package:get/get_state_manager/src/simple/list_notifier.dart' as _i10;
+import 'package:hive/hive.dart' as _i26;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i27;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -52,8 +53,9 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeRxBool_0 extends _i1.SmartFake implements _i2.RxBool {
-  _FakeRxBool_0(
+class _FakeInternalFinalCallback_0<T> extends _i1.SmartFake
+    implements _i2.InternalFinalCallback<T> {
+  _FakeInternalFinalCallback_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -62,9 +64,8 @@ class _FakeRxBool_0 extends _i1.SmartFake implements _i2.RxBool {
         );
 }
 
-class _FakeInternalFinalCallback_1<T> extends _i1.SmartFake
-    implements _i2.InternalFinalCallback<T> {
-  _FakeInternalFinalCallback_1(
+class _FakeRxStatus_1 extends _i1.SmartFake implements _i2.RxStatus {
+  _FakeRxStatus_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -175,28 +176,18 @@ class _FakeMacOsOptions_11 extends _i1.SmartFake implements _i7.MacOsOptions {
         );
 }
 
-/// A class which mocks [ConnectivityController].
+/// A class which mocks [HomeController].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockConnectivityController extends _i1.Mock
-    implements _i8.ConnectivityController {
-  MockConnectivityController() {
+class MockHomeController extends _i1.Mock implements _i8.HomeController {
+  MockHomeController() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.RxBool get isConnected => (super.noSuchMethod(
-        Invocation.getter(#isConnected),
-        returnValue: _FakeRxBool_0(
-          this,
-          Invocation.getter(#isConnected),
-        ),
-      ) as _i2.RxBool);
-
-  @override
   _i2.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
         Invocation.getter(#onStart),
-        returnValue: _FakeInternalFinalCallback_1<void>(
+        returnValue: _FakeInternalFinalCallback_0<void>(
           this,
           Invocation.getter(#onStart),
         ),
@@ -205,7 +196,7 @@ class MockConnectivityController extends _i1.Mock
   @override
   _i2.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
         Invocation.getter(#onDelete),
-        returnValue: _FakeInternalFinalCallback_1<void>(
+        returnValue: _FakeInternalFinalCallback_0<void>(
           this,
           Invocation.getter(#onDelete),
         ),
@@ -236,6 +227,24 @@ class MockConnectivityController extends _i1.Mock
       ) as int);
 
   @override
+  _i2.RxStatus get status => (super.noSuchMethod(
+        Invocation.getter(#status),
+        returnValue: _FakeRxStatus_1(
+          this,
+          Invocation.getter(#status),
+        ),
+      ) as _i2.RxStatus);
+
+  @override
+  set value(List<_i4.UserModel>? newValue) => super.noSuchMethod(
+        Invocation.setter(
+          #value,
+          newValue,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onInit() => super.noSuchMethod(
         Invocation.method(
           #onInit,
@@ -245,9 +254,29 @@ class MockConnectivityController extends _i1.Mock
       );
 
   @override
-  _i9.Future<void> checkConnectivity() => (super.noSuchMethod(
+  _i9.Future<void> getUsers() => (super.noSuchMethod(
         Invocation.method(
-          #checkConnectivity,
+          #getUsers,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> getCacheUsers() => (super.noSuchMethod(
+        Invocation.method(
+          #getCacheUsers,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> logout() => (super.noSuchMethod(
+        Invocation.method(
+          #logout,
           [],
         ),
         returnValue: _i9.Future<void>.value(),
@@ -389,6 +418,34 @@ class MockConnectivityController extends _i1.Mock
         Invocation.method(
           #disposeId,
           [id],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void change(
+    List<_i4.UserModel>? newState, {
+    _i2.RxStatus? status,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #change,
+          [newState],
+          {#status: status},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void append(
+    _i9.Future<List<_i4.UserModel>> Function() Function()? body, {
+    String? errorMessage,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #append,
+          [body],
+          {#errorMessage: errorMessage},
         ),
         returnValueForMissingStub: null,
       );
@@ -745,11 +802,11 @@ class MockUserLocalDataSource extends _i1.Mock
       ) as _i9.Future<List<_i4.UserModel>>);
 }
 
-/// A class which mocks [UsersBox].
+/// A class which mocks [UsersDb].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUsersBox extends _i1.Mock implements _i20.UsersBox {
-  MockUsersBox() {
+class MockUsersDb extends _i1.Mock implements _i20.UsersDb {
+  MockUsersDb() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -762,6 +819,15 @@ class MockUsersBox extends _i1.Mock implements _i20.UsersBox {
         ),
         returnValue: _i9.Future<bool>.value(false),
       ) as _i9.Future<bool>);
+
+  @override
+  List<_i21.UserType> getCacheUsers() => (super.noSuchMethod(
+        Invocation.method(
+          #getCacheUsers,
+          [],
+        ),
+        returnValue: <_i21.UserType>[],
+      ) as List<_i21.UserType>);
 }
 
 /// A class which mocks [ApiService].
@@ -1377,4 +1443,264 @@ class MockNetworkInfo extends _i1.Mock implements _i25.NetworkInfo {
         Invocation.getter(#onConnectivityChanged),
         returnValue: _i9.Stream<bool>.empty(),
       ) as _i9.Stream<bool>);
+}
+
+/// A class which mocks [Box].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserTypeBox extends _i1.Mock implements _i26.Box<_i21.UserType> {
+  MockUserTypeBox() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  Iterable<_i21.UserType> get values => (super.noSuchMethod(
+        Invocation.getter(#values),
+        returnValue: <_i21.UserType>[],
+      ) as Iterable<_i21.UserType>);
+
+  @override
+  String get name => (super.noSuchMethod(
+        Invocation.getter(#name),
+        returnValue: _i27.dummyValue<String>(
+          this,
+          Invocation.getter(#name),
+        ),
+      ) as String);
+
+  @override
+  bool get isOpen => (super.noSuchMethod(
+        Invocation.getter(#isOpen),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get lazy => (super.noSuchMethod(
+        Invocation.getter(#lazy),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  Iterable<dynamic> get keys => (super.noSuchMethod(
+        Invocation.getter(#keys),
+        returnValue: <dynamic>[],
+      ) as Iterable<dynamic>);
+
+  @override
+  int get length => (super.noSuchMethod(
+        Invocation.getter(#length),
+        returnValue: 0,
+      ) as int);
+
+  @override
+  bool get isEmpty => (super.noSuchMethod(
+        Invocation.getter(#isEmpty),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool get isNotEmpty => (super.noSuchMethod(
+        Invocation.getter(#isNotEmpty),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  Iterable<_i21.UserType> valuesBetween({
+    dynamic startKey,
+    dynamic endKey,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #valuesBetween,
+          [],
+          {
+            #startKey: startKey,
+            #endKey: endKey,
+          },
+        ),
+        returnValue: <_i21.UserType>[],
+      ) as Iterable<_i21.UserType>);
+
+  @override
+  _i21.UserType? getAt(int? index) => (super.noSuchMethod(Invocation.method(
+        #getAt,
+        [index],
+      )) as _i21.UserType?);
+
+  @override
+  Map<dynamic, _i21.UserType> toMap() => (super.noSuchMethod(
+        Invocation.method(
+          #toMap,
+          [],
+        ),
+        returnValue: <dynamic, _i21.UserType>{},
+      ) as Map<dynamic, _i21.UserType>);
+
+  @override
+  dynamic keyAt(int? index) => super.noSuchMethod(Invocation.method(
+        #keyAt,
+        [index],
+      ));
+
+  @override
+  _i9.Stream<_i26.BoxEvent> watch({dynamic key}) => (super.noSuchMethod(
+        Invocation.method(
+          #watch,
+          [],
+          {#key: key},
+        ),
+        returnValue: _i9.Stream<_i26.BoxEvent>.empty(),
+      ) as _i9.Stream<_i26.BoxEvent>);
+
+  @override
+  bool containsKey(dynamic key) => (super.noSuchMethod(
+        Invocation.method(
+          #containsKey,
+          [key],
+        ),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  _i9.Future<void> put(
+    dynamic key,
+    _i21.UserType? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #put,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> putAt(
+    int? index,
+    _i21.UserType? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #putAt,
+          [
+            index,
+            value,
+          ],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> putAll(Map<dynamic, _i21.UserType>? entries) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #putAll,
+          [entries],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<int> add(_i21.UserType? value) => (super.noSuchMethod(
+        Invocation.method(
+          #add,
+          [value],
+        ),
+        returnValue: _i9.Future<int>.value(0),
+      ) as _i9.Future<int>);
+
+  @override
+  _i9.Future<Iterable<int>> addAll(Iterable<_i21.UserType>? values) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addAll,
+          [values],
+        ),
+        returnValue: _i9.Future<Iterable<int>>.value(<int>[]),
+      ) as _i9.Future<Iterable<int>>);
+
+  @override
+  _i9.Future<void> delete(dynamic key) => (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [key],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> deleteAt(int? index) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteAt,
+          [index],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> deleteAll(Iterable<dynamic>? keys) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteAll,
+          [keys],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> compact() => (super.noSuchMethod(
+        Invocation.method(
+          #compact,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<int> clear() => (super.noSuchMethod(
+        Invocation.method(
+          #clear,
+          [],
+        ),
+        returnValue: _i9.Future<int>.value(0),
+      ) as _i9.Future<int>);
+
+  @override
+  _i9.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> deleteFromDisk() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteFromDisk,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> flush() => (super.noSuchMethod(
+        Invocation.method(
+          #flush,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }

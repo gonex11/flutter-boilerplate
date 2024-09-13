@@ -47,6 +47,15 @@ final tUserModel = UserModel(
 
 final tUserModels = [tUserModel];
 
+final tUserSessionModel = UserModel(
+  id: 1,
+  username: 'username',
+  firstName: 'firstName',
+  lastName: 'lastName',
+);
+
+final tUserSessionModels = [tUserSessionModel];
+
 final tUserAdapter = UserType(
   id: 1,
   username: 'username',

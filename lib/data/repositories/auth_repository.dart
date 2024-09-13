@@ -39,10 +39,14 @@ class AuthRepository {
     final cachedUserSession = await _localDataSource.getUserSession();
 
     if (cachedUserSession == null) {
-      final user = await _remoteDataSource.getLoggedUser();
-      await _localDataSource.setUserSession(user);
-
-      return Right(user);
+      try {
+        final user = await _remoteDataSource.getLoggedUser();
+        await _localDataSource.setUserSession(user);
+        return Right(user);
+      } catch (e) {
+        await _localDataSource.clearSession();
+        return Left(AuthFailure());
+      }
     }
 
     final isTokenExpired = await _localDataSource.isTokenExpired();

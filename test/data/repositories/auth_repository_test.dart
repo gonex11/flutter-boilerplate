@@ -33,37 +33,12 @@ void main() {
       when(mockLocalDataSource.getAccessToken())
           .thenAnswer((_) async => tAccessToken);
       when(mockLocalDataSource.getUserSession())
-          .thenAnswer((_) async => tUserModel);
+          .thenAnswer((_) async => tUserSessionModel);
       when(mockLocalDataSource.isTokenExpired()).thenAnswer((_) async => false);
       // Act
       final result = await repository.getLoggedUser();
       // Assert
-      expect(result, Right(tUserModel));
-    });
-
-    test(
-        'should refresh token and get new user data from remote when access token is expired',
-        () async {
-      // Arrange
-      when(mockLocalDataSource.getAccessToken())
-          .thenAnswer((_) async => tAccessToken);
-      when(mockLocalDataSource.getUserSession())
-          .thenAnswer((_) async => tUserModel);
-      when(mockLocalDataSource.isTokenExpired()).thenAnswer((_) async => true);
-      when(mockLocalDataSource.getRefreshToken())
-          .thenAnswer((_) async => tRefreshToken);
-      when(mockRemoteDataSource.refreshToken(tRefreshToken))
-          .thenAnswer((_) async => tTokenModel);
-      when(mockLocalDataSource.setToken(tTokenModel))
-          .thenAnswer((_) async => true);
-      when(mockRemoteDataSource.getLoggedUser())
-          .thenAnswer((_) async => tUserModel);
-      when(mockLocalDataSource.setUserSession(tUserModel))
-          .thenAnswer((_) async => true);
-      // Act
-      final result = await repository.getLoggedUser();
-      // Assert
-      expect(result, Right(tUserModel));
+      expect(result, Right(tUserSessionModel));
     });
 
     test(
@@ -79,13 +54,86 @@ void main() {
     });
 
     test(
+        'should return user data from remote when user session not saved locally and call to data source is successful',
+        () async {
+      // Arrange
+      when(mockLocalDataSource.getAccessToken())
+          .thenAnswer((_) async => tAccessToken);
+      when(mockLocalDataSource.getUserSession()).thenAnswer((_) async => null);
+      when(mockRemoteDataSource.getLoggedUser())
+          .thenAnswer((_) async => tUserModel);
+      when(mockLocalDataSource.setUserSession(tUserSessionModel))
+          .thenAnswer((_) async => true);
+      // Act
+      final result = await repository.getLoggedUser();
+      // Assert
+      expect(result, Right(tUserModel));
+    });
+
+    test(
+        'should return auth failure when user session not saved locally and call to data source is unsuccessful',
+        () async {
+      // Arrange
+      when(mockLocalDataSource.getAccessToken())
+          .thenAnswer((_) async => tAccessToken);
+      when(mockLocalDataSource.getUserSession()).thenAnswer((_) async => null);
+      when(mockRemoteDataSource.getLoggedUser()).thenThrow(ApiException(
+        statusCode: 500,
+        error: tBaseErrorResponse,
+      ));
+      when(mockLocalDataSource.clearSession()).thenAnswer((_) async => false);
+      // Act
+      final result = await repository.getLoggedUser();
+      // Assert
+      expect(result, Left(AuthFailure()));
+    });
+
+    test('should return user session when token is not expired', () async {
+      // Arrange
+      when(mockLocalDataSource.getAccessToken())
+          .thenAnswer((_) async => tAccessToken);
+      when(mockLocalDataSource.getUserSession())
+          .thenAnswer((_) async => tUserSessionModel);
+      when(mockLocalDataSource.isTokenExpired()).thenAnswer((_) async => false);
+      // Act
+      final result = await repository.getLoggedUser();
+      // Assert
+      expect(result, Right(tUserSessionModel));
+    });
+
+    test(
+        'should refresh token and get new user data from remote when access token is expired',
+        () async {
+      // Arrange
+      when(mockLocalDataSource.getAccessToken())
+          .thenAnswer((_) async => tAccessToken);
+      when(mockLocalDataSource.getUserSession())
+          .thenAnswer((_) async => tUserSessionModel);
+      when(mockLocalDataSource.isTokenExpired()).thenAnswer((_) async => true);
+      when(mockLocalDataSource.getRefreshToken())
+          .thenAnswer((_) async => tRefreshToken);
+      when(mockRemoteDataSource.refreshToken(tRefreshToken))
+          .thenAnswer((_) async => tTokenModel);
+      when(mockLocalDataSource.setToken(tTokenModel))
+          .thenAnswer((_) async => true);
+      when(mockRemoteDataSource.getLoggedUser())
+          .thenAnswer((_) async => tUserModel);
+      when(mockLocalDataSource.setUserSession(tUserSessionModel))
+          .thenAnswer((_) async => true);
+      // Act
+      final result = await repository.getLoggedUser();
+      // Assert
+      expect(result, Right(tUserModel));
+    });
+
+    test(
         'should return server failure and clear session when refresh token not saved in local',
         () async {
       // Arrange
       when(mockLocalDataSource.getAccessToken())
           .thenAnswer((_) async => tAccessToken);
       when(mockLocalDataSource.getUserSession())
-          .thenAnswer((_) async => tUserModel);
+          .thenAnswer((_) async => tUserSessionModel);
       when(mockLocalDataSource.isTokenExpired()).thenAnswer((_) async => true);
       when(mockLocalDataSource.getRefreshToken()).thenAnswer((_) async => null);
       when(mockLocalDataSource.clearSession()).thenAnswer((_) async => true);
@@ -102,7 +150,7 @@ void main() {
       when(mockLocalDataSource.getAccessToken())
           .thenAnswer((_) async => tAccessToken);
       when(mockLocalDataSource.getUserSession())
-          .thenAnswer((_) async => tUserModel);
+          .thenAnswer((_) async => tUserSessionModel);
       when(mockLocalDataSource.isTokenExpired()).thenAnswer((_) async => true);
       when(mockLocalDataSource.getRefreshToken())
           .thenAnswer((_) async => tRefreshToken);
@@ -125,7 +173,7 @@ void main() {
       when(mockLocalDataSource.getAccessToken())
           .thenAnswer((_) async => tAccessToken);
       when(mockLocalDataSource.getUserSession())
-          .thenAnswer((_) async => tUserModel);
+          .thenAnswer((_) async => tUserSessionModel);
       when(mockLocalDataSource.isTokenExpired()).thenAnswer((_) async => true);
       when(mockLocalDataSource.getRefreshToken())
           .thenAnswer((_) async => tRefreshToken);

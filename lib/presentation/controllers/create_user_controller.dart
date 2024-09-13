@@ -3,7 +3,6 @@ import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/data/models/error_detail_response.dart';
 import 'package:flutter_boilerplate/data/models/user_payload.dart';
 import 'package:flutter_boilerplate/data/repositories/user_repository.dart';
-import 'package:flutter_boilerplate/presentation/controllers/home_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';
 
@@ -27,36 +26,30 @@ class CreateUserController extends GetxController {
   final TextEditingController passController = TextEditingController();
 
   final isLoading = false.obs;
+  final isUserCreated = false.obs;
   final validationErrors = RxList<ErrorDetailResponse>([]);
 
-  Future<void> createUser() async {
+  Future<void> createUser(UserPayload payload) async {
     isLoading.value = true;
-
-    final payload = UserPayload(
-      username: unameController.text,
-      firstName: fNameController.text,
-      lastName: lNameController.text,
-      password: passController.text,
-    );
 
     final result = await _repository.createUser(payload);
     result.fold((failure) {
       isLoading.value = false;
+      isUserCreated.value = false;
 
       final error = failure.error;
       if (error?.type == 'validation_error') {
         validationErrors.value = failure.error?.errors ?? [];
       } else {
         final message = Utils.getErrorMessage(error?.errors) ?? '';
-        Utils.showBottomSheet(AppErrorBottomSheet(message: message));
+        if (Get.isBottomSheetOpen == false) {
+          Utils.showBottomSheet(AppErrorBottomSheet(message: message));
+        }
       }
     }, (data) async {
       isLoading.value = false;
-
-      final HomeController homeController = Get.find();
-      await homeController.getUsers();
-
-      Get.back();
+      isUserCreated.value = true;
+      Get.back(result: true);
     });
   }
 }

@@ -1,5 +1,4 @@
-import 'package:flutter_boilerplate/core/common/exceptions.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/api_service.dart';
+import 'package:flutter_boilerplate/core/services/api_service.dart';
 import 'package:flutter_boilerplate/data/models/base_list_response.dart';
 import 'package:flutter_boilerplate/data/models/user_model.dart';
 import 'package:flutter_boilerplate/data/models/user_payload.dart';
@@ -11,19 +10,11 @@ class UserRemoteDataSource {
 
   Future<List<UserModel>> getUsers() async {
     final response = await _apiService.get('http://10.0.2.2:3000/users');
-
-    if (response.statusCode == 200) {
-      final result = BaseListResponse.fromJson(
-        response.data,
-        (json) => UserModel.fromJson((json as Map<String, dynamic>)),
-      );
-      return result.data;
-    } else {
-      throw ApiException(
-        statusCode: response.statusCode,
-        error: response.data,
-      );
-    }
+    final result = BaseListResponse.fromJson(
+      response.data,
+      (json) => UserModel.fromJson((json as Map<String, dynamic>)),
+    );
+    return result.data;
   }
 
   Future<UserModel> getUserById(int id) async {

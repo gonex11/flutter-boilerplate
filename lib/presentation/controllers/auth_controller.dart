@@ -8,8 +8,8 @@ class AuthController extends GetxController {
   AuthController(this._repository);
 
   @override
-  void onInit() {
-    authCheck();
+  Future<void> onInit() async {
+    await authCheck();
     super.onInit();
   }
 
@@ -18,8 +18,10 @@ class AuthController extends GetxController {
   Future<void> authCheck() async {
     final result = await _repository.getLoggedUser();
     result.fold((_) {
+      isAuthenticated.value = false;
       Get.offAllNamed(AppRoutes.LOGIN);
     }, (data) {
+      isAuthenticated.value = true;
       Get.offAllNamed(AppRoutes.HOME);
     });
   }

@@ -109,7 +109,12 @@ class LoginPage extends GetView<LoginController> {
                               Obx(
                                 () => AppButton(
                                   isLoading: controller.isLoading.isTrue,
-                                  onPressed: controller.login,
+                                  onPressed: () async {
+                                    await controller.login(
+                                      controller.unameController.text,
+                                      controller.passController.text,
+                                    );
+                                  },
                                   text: AppLocalizations.login,
                                 ),
                               ),

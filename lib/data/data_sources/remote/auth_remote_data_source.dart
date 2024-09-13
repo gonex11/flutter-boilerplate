@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/data/data_sources/remote/services/api_service.dart';
+import 'package:flutter_boilerplate/core/services/api_service.dart';
 import 'package:flutter_boilerplate/data/models/token_model.dart';
 import 'package:flutter_boilerplate/data/models/user_model.dart';
 

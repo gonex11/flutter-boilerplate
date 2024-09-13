@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_boilerplate/data/data_sources/remote/services/api_service.dart';
+import 'package:flutter_boilerplate/core/services/api_service.dart';
 import 'package:flutter_boilerplate/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:flutter_boilerplate/data/models/base_list_response.dart';
 import 'package:flutter_boilerplate/data/models/user_model.dart';

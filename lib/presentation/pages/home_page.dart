@@ -15,85 +15,92 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = context.theme.colorScheme;
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(AppLocalizations.usersTitle),
-        actions: [
-          IconButton(
-            onPressed: controller.logout,
-            icon: Icon(
-              Icons.exit_to_app,
-              color: colorScheme.error,
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop && result == true) {
+          controller.getUsers();
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(AppLocalizations.usersTitle),
+          actions: [
+            IconButton(
+              onPressed: controller.logout,
+              icon: Icon(
+                Icons.exit_to_app,
+                color: colorScheme.error,
+              ),
             ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: colorScheme.primary,
-        onPressed: () {
-          Get.toNamed(AppRoutes.CREATE_USER);
-        },
-        child: Icon(
-          Icons.add,
-          color: colorScheme.onPrimary,
+          ],
         ),
-      ),
-      body: SafeArea(
-        child: controller.obx(
-          onLoading: AppSkeletonizer(
-            enabled: true,
-            child: ListView.separated(
-              padding: EdgeInsets.all(16),
-              itemCount: AppFakes.list.users.length,
-              separatorBuilder: (_, __) {
-                return const SizedBox(height: 16);
-              },
-              itemBuilder: (context, index) {
-                final user = AppFakes.list.users[index];
-                return UserTile(
-                  onTap: null,
-                  user: user,
-                );
-              },
-            ),
-          ),
-          onEmpty: AppRefreshLayout(
-            onRefresh: controller.getUsers,
-            child: const Text('There is no Users yet.'),
-          ),
-          onError: (error) {
-            return AppRefreshLayout(
-              onRefresh: controller.getUsers,
-              child: Text(error ?? ''),
-            );
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: colorScheme.primary,
+          onPressed: () {
+            Get.toNamed(AppRoutes.CREATE_USER);
           },
-          (users) {
-            return RefreshIndicator.adaptive(
-              backgroundColor: colorScheme.surfaceBright,
-              color: colorScheme.primary,
-              onRefresh: controller.getUsers,
+          child: Icon(
+            Icons.add,
+            color: colorScheme.onPrimary,
+          ),
+        ),
+        body: SafeArea(
+          child: controller.obx(
+            onLoading: AppSkeletonizer(
+              enabled: true,
               child: ListView.separated(
-                physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics(),
-                ),
                 padding: EdgeInsets.all(16),
-                itemCount: users?.length ?? 0,
+                itemCount: AppFakes.list.users.length,
                 separatorBuilder: (_, __) {
                   return const SizedBox(height: 16);
                 },
                 itemBuilder: (context, index) {
-                  final user = users?[index];
+                  final user = AppFakes.list.users[index];
                   return UserTile(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.USER, arguments: user?.id);
-                    },
+                    onTap: null,
                     user: user,
                   );
                 },
               ),
-            );
-          },
+            ),
+            onEmpty: AppRefreshLayout(
+              onRefresh: controller.getUsers,
+              child: const Text('There is no Users yet.'),
+            ),
+            onError: (error) {
+              return AppRefreshLayout(
+                onRefresh: controller.getUsers,
+                child: Text(error ?? ''),
+              );
+            },
+            (users) {
+              return RefreshIndicator.adaptive(
+                backgroundColor: colorScheme.surfaceBright,
+                color: colorScheme.primary,
+                onRefresh: controller.getUsers,
+                child: ListView.separated(
+                  physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
+                  padding: EdgeInsets.all(16),
+                  itemCount: users?.length ?? 0,
+                  separatorBuilder: (_, __) {
+                    return const SizedBox(height: 16);
+                  },
+                  itemBuilder: (context, index) {
+                    final user = users?[index];
+                    return UserTile(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.USER, arguments: user?.id);
+                      },
+                      user: user,
+                    );
+                  },
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

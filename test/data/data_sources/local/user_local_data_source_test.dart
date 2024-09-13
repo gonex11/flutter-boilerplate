@@ -7,17 +7,17 @@ import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late UserLocalDataSource dataSource;
-  late MockUsersBox mockUsersBox;
+  late MockUsersDb mockUsersDb;
 
   setUp(() {
-    mockUsersBox = MockUsersBox();
-    dataSource = UserLocalDataSource(mockUsersBox);
+    mockUsersDb = MockUsersDb();
+    dataSource = UserLocalDataSource(mockUsersDb);
   });
 
   group('cacheUsers', () {
     test('should return true when cache users is success', () async {
       // Arrange
-      when(mockUsersBox.insertCache(tUserAdapters))
+      when(mockUsersDb.insertCache(tUserAdapters))
           .thenAnswer((_) async => true);
       // Act
       final result = await dataSource.cacheUsers(tUserModels);
@@ -27,7 +27,7 @@ void main() {
 
     test('should return false when cache users is failed', () async {
       // Arrange
-      when(mockUsersBox.insertCache(tUserAdapters))
+      when(mockUsersDb.insertCache(tUserAdapters))
           .thenAnswer((_) async => false);
       // Act
       final result = await dataSource.cacheUsers(tUserModels);
@@ -39,7 +39,7 @@ void main() {
   group('getCacheUsers', () {
     test('should return users when get cache users is success', () async {
       // Arrange
-      when(mockUsersBox.getCacheUsers()).thenAnswer((_) => tUserAdapters);
+      when(mockUsersDb.getCacheUsers()).thenAnswer((_) => tUserAdapters);
       // Act
       final result = await dataSource.getCacheUsers();
       // Assert

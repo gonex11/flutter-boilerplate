@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/common/app_localizations.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/styles/app_fonts.dart';
+import 'package:flutter_boilerplate/data/models/user_payload.dart';
 import 'package:flutter_boilerplate/presentation/controllers/create_user_controller.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_button.dart';
 import 'package:flutter_boilerplate/presentation/widgets/app_input.dart';
@@ -25,7 +26,15 @@ class CreateUserPage extends GetView<CreateUserController> {
             child: Obx(
               () => AppButton(
                 isLoading: controller.isLoading.isTrue,
-                onPressed: controller.createUser,
+                onPressed: () {
+                  final payload = UserPayload(
+                    username: controller.unameController.text,
+                    firstName: controller.fNameController.text,
+                    lastName: controller.lNameController.text,
+                    password: controller.passController.text,
+                  );
+                  controller.createUser(payload);
+                },
                 text: 'Save',
               ),
             ),
