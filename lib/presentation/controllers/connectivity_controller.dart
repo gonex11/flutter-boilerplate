@@ -8,18 +8,20 @@ class ConnectivityController extends GetxController {
   ConnectivityController(this._networkInfo);
 
   @override
-  void onInit() {
-    checkConnectivity();
+  void onInit() async {
+    await checkConnectivity();
     super.onInit();
   }
 
   final isConnected = false.obs;
 
-  void checkConnectivity() async {
-    _networkInfo.onConnectivityChanged.listen((isConnected) {
-      if (!isConnected && Get.isBottomSheetOpen == false) {
+  Future<void> checkConnectivity() async {
+    _networkInfo.onConnectivityChanged.listen((value) {
+      isConnected.value = value;
+
+      if (!value && Get.isBottomSheetOpen == false) {
         Utils.showNoInternetBottomSheet();
-      } else if (isConnected && Get.isBottomSheetOpen == true) {
+      } else if (value && Get.isBottomSheetOpen == true) {
         Get.back();
       }
     });
