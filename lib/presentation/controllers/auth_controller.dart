@@ -9,7 +9,7 @@ class AuthController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    await authCheck();
+    authCheck();
     super.onInit();
   }
 

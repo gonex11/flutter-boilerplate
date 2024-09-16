@@ -18,7 +18,7 @@ class HomePage extends GetView<HomeController> {
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop && result == true) {
-          controller.getUsers();
+          controller.getUsers(true);
         }
       },
       child: Scaffold(
@@ -78,7 +78,9 @@ class HomePage extends GetView<HomeController> {
               return RefreshIndicator.adaptive(
                 backgroundColor: colorScheme.surfaceBright,
                 color: colorScheme.primary,
-                onRefresh: controller.getUsers,
+                onRefresh: () async {
+                  controller.getUsers(true);
+                },
                 child: ListView.separated(
                   physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),

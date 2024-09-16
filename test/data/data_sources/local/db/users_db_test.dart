@@ -22,7 +22,7 @@ void main() {
       when(mockBox.clear()).thenAnswer((_) async => 1);
       when(mockBox.addAll(testUsers)).thenAnswer((_) async => [1]);
       // Act
-      final result = await db.insertCache(testUsers);
+      final result = await db.insertCacheUsers(testUsers);
       // Assert
       expect(result, true);
     });
@@ -33,7 +33,7 @@ void main() {
       when(mockBox.clear()).thenAnswer((_) async => 0);
       when(mockBox.addAll(testUsers)).thenAnswer((_) async => [1]);
       // Act
-      final result = await db.insertCache(testUsers);
+      final result = await db.insertCacheUsers(testUsers);
       // Assert
       expect(result, false);
     });

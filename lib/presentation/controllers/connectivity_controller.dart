@@ -1,5 +1,4 @@
 import 'package:flutter_boilerplate/core/common/network_info.dart';
-import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:get/get.dart';
 
 class ConnectivityController extends GetxController {
@@ -9,21 +8,15 @@ class ConnectivityController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    checkConnectivity();
+    await checkConnectivity();
     super.onInit();
   }
 
   final isConnected = false.obs;
 
-  void checkConnectivity() {
+  Future<void> checkConnectivity() async {
     _networkInfo.onConnectivityChanged.listen((value) {
       isConnected.value = value;
-
-      if (!value && Get.isBottomSheetOpen == false) {
-        Utils.showNoInternetBottomSheet();
-      } else if (value && Get.isBottomSheetOpen == true) {
-        Get.back();
-      }
     });
   }
 }

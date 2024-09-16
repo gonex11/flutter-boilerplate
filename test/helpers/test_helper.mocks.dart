@@ -53,9 +53,19 @@ import 'package:mockito/src/dummies.dart' as _i27;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeInternalFinalCallback_0<T> extends _i1.SmartFake
+class _FakeRxBool_0 extends _i1.SmartFake implements _i2.RxBool {
+  _FakeRxBool_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeInternalFinalCallback_1<T> extends _i1.SmartFake
     implements _i2.InternalFinalCallback<T> {
-  _FakeInternalFinalCallback_0(
+  _FakeInternalFinalCallback_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -64,8 +74,8 @@ class _FakeInternalFinalCallback_0<T> extends _i1.SmartFake
         );
 }
 
-class _FakeRxStatus_1 extends _i1.SmartFake implements _i2.RxStatus {
-  _FakeRxStatus_1(
+class _FakeRxStatus_2 extends _i1.SmartFake implements _i2.RxStatus {
+  _FakeRxStatus_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -74,8 +84,8 @@ class _FakeRxStatus_1 extends _i1.SmartFake implements _i2.RxStatus {
         );
 }
 
-class _FakeEither_2<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
-  _FakeEither_2(
+class _FakeEither_3<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
+  _FakeEither_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -84,8 +94,8 @@ class _FakeEither_2<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
         );
 }
 
-class _FakeUserModel_3 extends _i1.SmartFake implements _i4.UserModel {
-  _FakeUserModel_3(
+class _FakeUserModel_4 extends _i1.SmartFake implements _i4.UserModel {
+  _FakeUserModel_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -94,8 +104,8 @@ class _FakeUserModel_3 extends _i1.SmartFake implements _i4.UserModel {
         );
 }
 
-class _FakeTokenModel_4 extends _i1.SmartFake implements _i5.TokenModel {
-  _FakeTokenModel_4(
+class _FakeTokenModel_5 extends _i1.SmartFake implements _i5.TokenModel {
+  _FakeTokenModel_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -104,8 +114,8 @@ class _FakeTokenModel_4 extends _i1.SmartFake implements _i5.TokenModel {
         );
 }
 
-class _FakeResponse_5<T> extends _i1.SmartFake implements _i6.Response<T> {
-  _FakeResponse_5(
+class _FakeResponse_6<T> extends _i1.SmartFake implements _i6.Response<T> {
+  _FakeResponse_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -114,8 +124,8 @@ class _FakeResponse_5<T> extends _i1.SmartFake implements _i6.Response<T> {
         );
 }
 
-class _FakeIOSOptions_6 extends _i1.SmartFake implements _i7.IOSOptions {
-  _FakeIOSOptions_6(
+class _FakeIOSOptions_7 extends _i1.SmartFake implements _i7.IOSOptions {
+  _FakeIOSOptions_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -124,9 +134,9 @@ class _FakeIOSOptions_6 extends _i1.SmartFake implements _i7.IOSOptions {
         );
 }
 
-class _FakeAndroidOptions_7 extends _i1.SmartFake
+class _FakeAndroidOptions_8 extends _i1.SmartFake
     implements _i7.AndroidOptions {
-  _FakeAndroidOptions_7(
+  _FakeAndroidOptions_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -135,8 +145,8 @@ class _FakeAndroidOptions_7 extends _i1.SmartFake
         );
 }
 
-class _FakeLinuxOptions_8 extends _i1.SmartFake implements _i7.LinuxOptions {
-  _FakeLinuxOptions_8(
+class _FakeLinuxOptions_9 extends _i1.SmartFake implements _i7.LinuxOptions {
+  _FakeLinuxOptions_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -145,9 +155,9 @@ class _FakeLinuxOptions_8 extends _i1.SmartFake implements _i7.LinuxOptions {
         );
 }
 
-class _FakeWindowsOptions_9 extends _i1.SmartFake
+class _FakeWindowsOptions_10 extends _i1.SmartFake
     implements _i7.WindowsOptions {
-  _FakeWindowsOptions_9(
+  _FakeWindowsOptions_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -156,8 +166,8 @@ class _FakeWindowsOptions_9 extends _i1.SmartFake
         );
 }
 
-class _FakeWebOptions_10 extends _i1.SmartFake implements _i7.WebOptions {
-  _FakeWebOptions_10(
+class _FakeWebOptions_11 extends _i1.SmartFake implements _i7.WebOptions {
+  _FakeWebOptions_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -166,8 +176,8 @@ class _FakeWebOptions_10 extends _i1.SmartFake implements _i7.WebOptions {
         );
 }
 
-class _FakeMacOsOptions_11 extends _i1.SmartFake implements _i7.MacOsOptions {
-  _FakeMacOsOptions_11(
+class _FakeMacOsOptions_12 extends _i1.SmartFake implements _i7.MacOsOptions {
+  _FakeMacOsOptions_12(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -185,9 +195,18 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
   }
 
   @override
+  _i2.RxBool get isLoggedOut => (super.noSuchMethod(
+        Invocation.getter(#isLoggedOut),
+        returnValue: _FakeRxBool_0(
+          this,
+          Invocation.getter(#isLoggedOut),
+        ),
+      ) as _i2.RxBool);
+
+  @override
   _i2.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
         Invocation.getter(#onStart),
-        returnValue: _FakeInternalFinalCallback_0<void>(
+        returnValue: _FakeInternalFinalCallback_1<void>(
           this,
           Invocation.getter(#onStart),
         ),
@@ -196,7 +215,7 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
   @override
   _i2.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
         Invocation.getter(#onDelete),
-        returnValue: _FakeInternalFinalCallback_0<void>(
+        returnValue: _FakeInternalFinalCallback_1<void>(
           this,
           Invocation.getter(#onDelete),
         ),
@@ -229,7 +248,7 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
   @override
   _i2.RxStatus get status => (super.noSuchMethod(
         Invocation.getter(#status),
-        returnValue: _FakeRxStatus_1(
+        returnValue: _FakeRxStatus_2(
           this,
           Invocation.getter(#status),
         ),
@@ -245,18 +264,9 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
       );
 
   @override
-  void onInit() => super.noSuchMethod(
+  _i9.Future<void> onInit() => (super.noSuchMethod(
         Invocation.method(
           #onInit,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  _i9.Future<void> getUsers() => (super.noSuchMethod(
-        Invocation.method(
-          #getUsers,
           [],
         ),
         returnValue: _i9.Future<void>.value(),
@@ -264,10 +274,10 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
       ) as _i9.Future<void>);
 
   @override
-  _i9.Future<void> getCacheUsers() => (super.noSuchMethod(
+  _i9.Future<void> getUsers([bool? refresh = false]) => (super.noSuchMethod(
         Invocation.method(
-          #getCacheUsers,
-          [],
+          #getUsers,
+          [refresh],
         ),
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
@@ -473,7 +483,7 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
           ],
         ),
         returnValue: _i9.Future<_i3.Either<_i13.Failure, _i5.TokenModel>>.value(
-            _FakeEither_2<_i13.Failure, _i5.TokenModel>(
+            _FakeEither_3<_i13.Failure, _i5.TokenModel>(
           this,
           Invocation.method(
             #login,
@@ -493,7 +503,7 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
           [],
         ),
         returnValue: _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>.value(
-            _FakeEither_2<_i13.Failure, _i4.UserModel>(
+            _FakeEither_3<_i13.Failure, _i4.UserModel>(
           this,
           Invocation.method(
             #getLoggedUser,
@@ -529,7 +539,7 @@ class MockUserRepository extends _i1.Mock implements _i14.UserRepository {
         ),
         returnValue:
             _i9.Future<_i3.Either<_i13.Failure, List<_i4.UserModel>>>.value(
-                _FakeEither_2<_i13.Failure, List<_i4.UserModel>>(
+                _FakeEither_3<_i13.Failure, List<_i4.UserModel>>(
           this,
           Invocation.method(
             #getUsers,
@@ -555,7 +565,7 @@ class MockUserRepository extends _i1.Mock implements _i14.UserRepository {
           [id],
         ),
         returnValue: _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>.value(
-            _FakeEither_2<_i13.Failure, _i4.UserModel>(
+            _FakeEither_3<_i13.Failure, _i4.UserModel>(
           this,
           Invocation.method(
             #getUserById,
@@ -573,7 +583,7 @@ class MockUserRepository extends _i1.Mock implements _i14.UserRepository {
           [payload],
         ),
         returnValue: _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>.value(
-            _FakeEither_2<_i13.Failure, _i4.UserModel>(
+            _FakeEither_3<_i13.Failure, _i4.UserModel>(
           this,
           Invocation.method(
             #createUser,
@@ -598,7 +608,7 @@ class MockAuthRemoteDataSource extends _i1.Mock
           #getLoggedUser,
           [],
         ),
-        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_4(
           this,
           Invocation.method(
             #getLoggedUser,
@@ -620,7 +630,7 @@ class MockAuthRemoteDataSource extends _i1.Mock
             password,
           ],
         ),
-        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
+        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_5(
           this,
           Invocation.method(
             #login,
@@ -639,7 +649,7 @@ class MockAuthRemoteDataSource extends _i1.Mock
           #refreshToken,
           [refreshToken],
         ),
-        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
+        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_5(
           this,
           Invocation.method(
             #refreshToken,
@@ -747,7 +757,7 @@ class MockUserRemoteDataSource extends _i1.Mock
           #getUserById,
           [id],
         ),
-        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_4(
           this,
           Invocation.method(
             #getUserById,
@@ -763,7 +773,7 @@ class MockUserRemoteDataSource extends _i1.Mock
           #createUser,
           [payload],
         ),
-        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_4(
           this,
           Invocation.method(
             #createUser,
@@ -811,10 +821,10 @@ class MockUsersDb extends _i1.Mock implements _i20.UsersDb {
   }
 
   @override
-  _i9.Future<bool> insertCache(List<_i21.UserType>? users) =>
+  _i9.Future<bool> insertCacheUsers(List<_i21.UserType>? users) =>
       (super.noSuchMethod(
         Invocation.method(
-          #insertCache,
+          #insertCacheUsers,
           [users],
         ),
         returnValue: _i9.Future<bool>.value(false),
@@ -856,7 +866,7 @@ class MockApiService extends _i1.Mock implements _i22.ApiService {
           },
         ),
         returnValue:
-            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #get,
@@ -890,7 +900,7 @@ class MockApiService extends _i1.Mock implements _i22.ApiService {
           },
         ),
         returnValue:
-            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #post,
@@ -925,7 +935,7 @@ class MockApiService extends _i1.Mock implements _i22.ApiService {
           },
         ),
         returnValue:
-            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #delete,
@@ -960,7 +970,7 @@ class MockApiService extends _i1.Mock implements _i22.ApiService {
           },
         ),
         returnValue:
-            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #patch,
@@ -995,7 +1005,7 @@ class MockApiService extends _i1.Mock implements _i22.ApiService {
           },
         ),
         returnValue:
-            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #put,
@@ -1030,7 +1040,7 @@ class MockApiService extends _i1.Mock implements _i22.ApiService {
           },
         ),
         returnValue:
-            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #postMultipart,
@@ -1065,7 +1075,7 @@ class MockApiService extends _i1.Mock implements _i22.ApiService {
           },
         ),
         returnValue:
-            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #patchMultipart,
@@ -1100,7 +1110,7 @@ class MockApiService extends _i1.Mock implements _i22.ApiService {
           },
         ),
         returnValue:
-            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+            _i9.Future<_i6.Response<dynamic>>.value(_FakeResponse_6<dynamic>(
           this,
           Invocation.method(
             #putMultipart,
@@ -1128,7 +1138,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   _i7.IOSOptions get iOptions => (super.noSuchMethod(
         Invocation.getter(#iOptions),
-        returnValue: _FakeIOSOptions_6(
+        returnValue: _FakeIOSOptions_7(
           this,
           Invocation.getter(#iOptions),
         ),
@@ -1137,7 +1147,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   _i7.AndroidOptions get aOptions => (super.noSuchMethod(
         Invocation.getter(#aOptions),
-        returnValue: _FakeAndroidOptions_7(
+        returnValue: _FakeAndroidOptions_8(
           this,
           Invocation.getter(#aOptions),
         ),
@@ -1146,7 +1156,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   _i7.LinuxOptions get lOptions => (super.noSuchMethod(
         Invocation.getter(#lOptions),
-        returnValue: _FakeLinuxOptions_8(
+        returnValue: _FakeLinuxOptions_9(
           this,
           Invocation.getter(#lOptions),
         ),
@@ -1155,7 +1165,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   _i7.WindowsOptions get wOptions => (super.noSuchMethod(
         Invocation.getter(#wOptions),
-        returnValue: _FakeWindowsOptions_9(
+        returnValue: _FakeWindowsOptions_10(
           this,
           Invocation.getter(#wOptions),
         ),
@@ -1164,7 +1174,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   _i7.WebOptions get webOptions => (super.noSuchMethod(
         Invocation.getter(#webOptions),
-        returnValue: _FakeWebOptions_10(
+        returnValue: _FakeWebOptions_11(
           this,
           Invocation.getter(#webOptions),
         ),
@@ -1173,7 +1183,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   _i7.MacOsOptions get mOptions => (super.noSuchMethod(
         Invocation.getter(#mOptions),
-        returnValue: _FakeMacOsOptions_11(
+        returnValue: _FakeMacOsOptions_12(
           this,
           Invocation.getter(#mOptions),
         ),

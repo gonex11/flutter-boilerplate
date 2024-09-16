@@ -7,7 +7,7 @@ class UserLocalDataSource {
   const UserLocalDataSource(this._userDb);
 
   Future<bool> cacheUsers(List<UserModel> users) async {
-    return _userDb.insertCache(users.map((e) => e.toAdapter()).toList());
+    return _userDb.insertCacheUsers(users.map((e) => e.toAdapter()).toList());
   }
 
   Future<List<UserModel>> getCacheUsers() async {

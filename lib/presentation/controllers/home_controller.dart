@@ -12,33 +12,30 @@ class HomeController extends GetxController with StateMixin<List<UserModel>> {
   HomeController(this._authRepository, this._userRepository);
 
   @override
-  void onInit() {
-    getCacheUsers();
+  Future<void> onInit() async {
+    await getUsers();
     super.onInit();
   }
 
-  Future<void> getUsers() async {
+  final isLoggedOut = false.obs;
+
+  Future<void> getUsers([bool refresh = false]) async {
     change(null, status: RxStatus.loading());
 
-    final result = await _userRepository.getUsers();
-    result.fold((remoteFailure) {
-      final message = Utils.getErrorMessage(remoteFailure.error?.errors);
-      change(null, status: RxStatus.error(message));
-    }, (data) {
-      if (data.isEmpty) {
-        change([], status: RxStatus.empty());
-        return;
-      }
-      change(data, status: RxStatus.success());
-    });
-  }
-
-  Future<void> getCacheUsers() async {
-    change(null, status: RxStatus.loading());
-
-    final cacheResult = await _userRepository.getCacheUsers();
+    final cacheResult =
+        (refresh) ? <UserModel>[] : await _userRepository.getCacheUsers();
     if (cacheResult.isEmpty) {
-      await getUsers();
+      final result = await _userRepository.getUsers();
+      result.fold((remoteFailure) {
+        final message = Utils.getErrorMessage(remoteFailure.error?.errors);
+        change(null, status: RxStatus.error(message));
+      }, (data) {
+        if (data.isEmpty) {
+          change([], status: RxStatus.empty());
+          return;
+        }
+        change(data, status: RxStatus.success());
+      });
       return;
     }
 
@@ -46,7 +43,7 @@ class HomeController extends GetxController with StateMixin<List<UserModel>> {
   }
 
   Future<void> logout() async {
-    final isLoggedOut = await _authRepository.logout();
-    if (isLoggedOut) Get.offAllNamed(AppRoutes.LOGIN);
+    isLoggedOut.value = await _authRepository.logout();
+    if (isLoggedOut.isTrue) Get.offAllNamed(AppRoutes.LOGIN);
   }
 }

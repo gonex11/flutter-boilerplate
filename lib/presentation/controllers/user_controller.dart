@@ -9,14 +9,14 @@ class UserController extends GetxController with StateMixin<UserModel> {
   UserController(this._repository);
 
   @override
-  void onInit() {
-    _getUserById();
+  Future<void> onInit() async {
+    await getUserById();
     super.onInit();
   }
 
-  final id = Get.arguments ?? 0;
+  int id = Get.arguments ?? 0;
 
-  Future<void> _getUserById() async {
+  Future<void> getUserById() async {
     change(null, status: RxStatus.loading());
 
     final result = await _repository.getUserById(id);

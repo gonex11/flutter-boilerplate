@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/common/app_binding.dart';
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/core/common/app_translations.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/styles/app_themes.dart';
+import 'package:flutter_boilerplate/presentation/controllers/connectivity_controller.dart';
 import 'package:get/get.dart';
 
 import 'core/routes/app_pages.dart';
@@ -18,17 +18,30 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Boilerplate',
-      getPages: AppPages.pages,
-      translations: AppTranslations(),
-      locale: Locale(AppConstants.general.enLocale),
-      fallbackLocale: Locale(AppConstants.general.enLocale),
-      initialRoute: AppPages.INITIAL,
-      initialBinding: AppBinding(),
-      themeMode: ThemeMode.system,
-      theme: AppThemes.lightTheme,
-      darkTheme: AppThemes.darkTheme,
+    return GetBuilder<ConnectivityController>(
+      initState: (_) {
+        final isConnected = Get.find<ConnectivityController>().isConnected;
+        ever(isConnected, (value) {
+          if (!value && Get.isBottomSheetOpen == false) {
+            Utils.showNoInternetBottomSheet();
+          } else if (value && Get.isBottomSheetOpen == true) {
+            Get.back();
+          }
+        });
+      },
+      builder: (_) {
+        return GetMaterialApp(
+          title: 'Flutter Boilerplate',
+          getPages: AppPages.pages,
+          translations: AppTranslations(),
+          locale: Locale(AppConstants.general.enLocale),
+          fallbackLocale: Locale(AppConstants.general.enLocale),
+          initialRoute: AppPages.INITIAL,
+          themeMode: ThemeMode.system,
+          theme: AppThemes.lightTheme,
+          darkTheme: AppThemes.darkTheme,
+        );
+      },
     );
   }
 }

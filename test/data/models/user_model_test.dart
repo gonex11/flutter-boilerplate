@@ -15,7 +15,7 @@ void main() {
 
   test('should return a valid model from Adapter', () async {
     // Arrange
-    final userAdapter = tUserAdapter;
+    final userAdapter = tUserType;
     // Act
     final result = UserModel.fromAdapter(userAdapter);
     // Assert
@@ -34,6 +34,6 @@ void main() {
     // Act
     final result = tUserModel.toAdapter();
     // Assert
-    expect(result, tUserAdapter);
+    expect(result, tUserType);
   });
 }

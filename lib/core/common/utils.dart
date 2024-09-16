@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_boilerplate/core/common/app_binding.dart';
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/data/models/error_detail_response.dart';
 import 'package:flutter_boilerplate/data/models/user_type.dart';
@@ -18,6 +19,8 @@ abstract class Utils {
     await Future.any([
       Hive.openBox<UserType>(AppConstants.boxNames.users),
     ]);
+
+    AppBinding()..dependencies();
   }
 
   static void showBottomSheet(Widget child) {

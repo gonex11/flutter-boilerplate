@@ -17,7 +17,7 @@ void main() {
   group('cacheUsers', () {
     test('should return true when cache users is success', () async {
       // Arrange
-      when(mockUsersDb.insertCache(tUserAdapters))
+      when(mockUsersDb.insertCacheUsers(tUserAdapters))
           .thenAnswer((_) async => true);
       // Act
       final result = await dataSource.cacheUsers(tUserModels);
@@ -27,7 +27,7 @@ void main() {
 
     test('should return false when cache users is failed', () async {
       // Arrange
-      when(mockUsersDb.insertCache(tUserAdapters))
+      when(mockUsersDb.insertCacheUsers(tUserAdapters))
           .thenAnswer((_) async => false);
       // Act
       final result = await dataSource.cacheUsers(tUserModels);

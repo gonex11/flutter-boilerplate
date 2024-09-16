@@ -6,7 +6,7 @@ class UsersDb {
 
   const UsersDb(this._box);
 
-  Future<bool> insertCache(List<UserType> users) async {
+  Future<bool> insertCacheUsers(List<UserType> users) async {
     final isCached = await Future.any([
       _box.clear(),
       ...(await _box.addAll(users)).map((e) async => e),

@@ -24,6 +24,7 @@ dependencies:
   json_annotation: ^4.9.0
   jwt_decoder: ^2.0.1
   keyboard_dismisser: ^3.0.0
+  logger: ^2.4.0
   permission_handler: ^11.3.1
   pretty_dio_logger: ^1.4.0
   skeletonizer: ^1.4.2
@@ -34,6 +35,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   hive_generator: ^2.0.1
+  hive_test: ^1.0.1
   json_serializable: ^6.8.0
   mockito: ^5.4.4
 

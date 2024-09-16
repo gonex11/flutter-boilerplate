@@ -58,7 +58,7 @@ class AppBinding extends Bindings {
     Get.put<UserRepository>(UserRepository(Get.find(), Get.find()));
 
     // Controllers
-    Get.put<AuthController>(AuthController(Get.find())..authCheck());
+    Get.put<AuthController>(AuthController(Get.find()));
     Get.put<ConnectivityController>(ConnectivityController(Get.find()));
   }
 }

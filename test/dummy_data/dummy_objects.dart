@@ -56,14 +56,14 @@ final tUserSessionModel = UserModel(
 
 final tUserSessionModels = [tUserSessionModel];
 
-final tUserAdapter = UserType(
+final tUserType = UserType(
   id: 1,
   username: 'username',
   firstName: 'firstName',
   lastName: 'lastName',
 );
 
-final tUserAdapters = [tUserAdapter];
+final tUserAdapters = [tUserType];
 
 const tMetaJson = {
   'page': 1,
