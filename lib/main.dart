@@ -36,7 +36,7 @@ class App extends StatelessWidget {
           translations: AppTranslations(),
           locale: Locale(AppConstants.general.enLocale),
           fallbackLocale: Locale(AppConstants.general.enLocale),
-          initialRoute: AppPages.INITIAL,
+          initialRoute: AppPages.initial,
           themeMode: ThemeMode.system,
           theme: AppThemes.lightTheme,
           darkTheme: AppThemes.darkTheme,

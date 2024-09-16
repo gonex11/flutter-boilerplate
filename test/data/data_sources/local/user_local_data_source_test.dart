@@ -41,7 +41,7 @@ void main() {
       // Arrange
       when(mockUsersDb.getCacheUsers()).thenAnswer((_) => tUserAdapters);
       // Act
-      final result = await dataSource.getCacheUsers();
+      final result = dataSource.getCacheUsers();
       // Assert
       expect(result, tUserModels);
     });

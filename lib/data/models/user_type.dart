@@ -14,7 +14,7 @@ class UserType extends Equatable {
   @HiveField(3)
   final String? lastName;
 
-  UserType({
+  const UserType({
     this.id,
     this.username,
     this.firstName,

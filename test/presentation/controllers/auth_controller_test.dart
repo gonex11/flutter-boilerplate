@@ -26,7 +26,7 @@ void main() {
         () async {
       // Arrange
       when(mockAuthRepository.getLoggedUser())
-          .thenAnswer((_) async => Right(tUserModel));
+          .thenAnswer((_) async => const Right(tUserModel));
       // Act
       await controller.onInit();
       // Assert
@@ -37,12 +37,12 @@ void main() {
     test('isAuthenticated value should return false if user is not logged in',
         () async {
       // Arrange
-      when(mockAuthRepository.getLoggedUser())
-          .thenAnswer((_) async => Left(ServerFailure(tBaseErrorResponse)));
+      when(mockAuthRepository.getLoggedUser()).thenAnswer(
+          (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
       await controller.onInit();
       // Assert
-      final result = await controller.isAuthenticated.value;
+      final result = controller.isAuthenticated.value;
       expect(result, false);
     });
   });

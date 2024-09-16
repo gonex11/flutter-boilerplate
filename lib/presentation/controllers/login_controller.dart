@@ -45,7 +45,7 @@ class LoginController extends GetxController {
     }, (data) {
       isLoading.value = false;
       isLoggedIn.value = true;
-      Get.offAndToNamed(AppRoutes.HOME);
+      Get.offAndToNamed(AppRoutes.home);
     });
   }
 }

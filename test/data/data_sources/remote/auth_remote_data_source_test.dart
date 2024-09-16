@@ -43,8 +43,8 @@ void main() {
   });
 
   group('login', () {
-    final testUsername = 'username';
-    final testPassword = 'password';
+    const testUsername = 'username';
+    const testPassword = 'password';
     final testTokenModel = TokenModel.fromJson(
       jsonDecode(readJson('dummy_data/jsons/token_response.json'))["data"],
     );
@@ -75,7 +75,7 @@ void main() {
   });
 
   group('refreshToken', () {
-    final testRefreshToken = 'refreshToken';
+    const testRefreshToken = 'refreshToken';
     final testTokenModel = TokenModel.fromJson(
       jsonDecode(readJson('dummy_data/jsons/token_response.json'))["data"],
     );

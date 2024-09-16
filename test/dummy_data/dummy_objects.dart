@@ -12,7 +12,7 @@ const tTokenJson = {
   'refreshToken': 'refreshToken',
 };
 
-final tTokenModel = TokenModel(
+const tTokenModel = TokenModel(
   accessToken: 'accessToken',
   refreshToken: 'refreshToken',
 );
@@ -24,7 +24,7 @@ const tUserPayloadJson = {
   'password': 'password',
 };
 
-final tUserPayload = UserPayload(
+const tUserPayload = UserPayload(
   username: 'username',
   firstName: 'firstName',
   lastName: 'lastName',
@@ -38,7 +38,7 @@ const tUserJson = {
   'lastName': 'lastName',
 };
 
-final tUserModel = UserModel(
+const tUserModel = UserModel(
   id: 1,
   username: 'username',
   firstName: 'firstName',
@@ -47,7 +47,7 @@ final tUserModel = UserModel(
 
 final tUserModels = [tUserModel];
 
-final tUserSessionModel = UserModel(
+const tUserSessionModel = UserModel(
   id: 1,
   username: 'username',
   firstName: 'firstName',
@@ -56,7 +56,7 @@ final tUserSessionModel = UserModel(
 
 final tUserSessionModels = [tUserSessionModel];
 
-final tUserType = UserType(
+const tUserType = UserType(
   id: 1,
   username: 'username',
   firstName: 'firstName',
@@ -71,7 +71,7 @@ const tMetaJson = {
   'totalPage': 1,
 };
 
-final tMetaResponse = MetaResponse(
+const tMetaResponse = MetaResponse(
   page: 1,
   totalData: 1,
   totalPage: 1,
@@ -83,7 +83,7 @@ const tErrorDetailJson = {
   'attr': 'attr',
 };
 
-final tErrorDetailResponse = ErrorDetailResponse(
+const tErrorDetailResponse = ErrorDetailResponse(
   code: 'code',
   detail: 'detail',
   attr: 'attr',
@@ -94,7 +94,7 @@ const tBaseErrorJson = {
   'errors': [tErrorDetailJson],
 };
 
-final tBaseErrorResponse = BaseErrorResponse(
+const tBaseErrorResponse = BaseErrorResponse(
   type: 'type',
   errors: [tErrorDetailResponse],
 );
@@ -104,7 +104,7 @@ final tBaseListJson = {
   'data': [tUserJson],
 };
 
-final tBaseListResponse = BaseListResponse<UserModel>(
+const tBaseListResponse = BaseListResponse<UserModel>(
   meta: tMetaResponse,
   data: [tUserModel],
 );

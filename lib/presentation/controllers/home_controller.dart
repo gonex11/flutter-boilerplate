@@ -23,7 +23,7 @@ class HomeController extends GetxController with StateMixin<List<UserModel>> {
     change(null, status: RxStatus.loading());
 
     final cacheResult =
-        (refresh) ? <UserModel>[] : await _userRepository.getCacheUsers();
+        (refresh) ? <UserModel>[] : _userRepository.getCacheUsers();
     if (cacheResult.isEmpty) {
       final result = await _userRepository.getUsers();
       result.fold((remoteFailure) {
@@ -44,6 +44,6 @@ class HomeController extends GetxController with StateMixin<List<UserModel>> {
 
   Future<void> logout() async {
     isLoggedOut.value = await _authRepository.logout();
-    if (isLoggedOut.isTrue) Get.offAllNamed(AppRoutes.LOGIN);
+    if (isLoggedOut.isTrue) Get.offAllNamed(AppRoutes.login);
   }
 }

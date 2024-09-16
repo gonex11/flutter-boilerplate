@@ -6,7 +6,7 @@ import '../../dummy_data/dummy_objects.dart';
 void main() {
   test('should return a valid model froom JSON', () async {
     // Arrange
-    final Map<String, dynamic> jsonMap = tBaseErrorJson;
+    const Map<String, dynamic> jsonMap = tBaseErrorJson;
     // Act
     final result = BaseErrorResponse.fromJson(jsonMap);
     // Assert
@@ -17,7 +17,7 @@ void main() {
     // Act
     final result = tBaseErrorResponse.toJson();
     // Assert
-    final expectedJsonMap = tBaseErrorJson;
+    const expectedJsonMap = tBaseErrorJson;
     expect(result, expectedJsonMap);
   });
 }

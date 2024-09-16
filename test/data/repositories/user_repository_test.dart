@@ -44,14 +44,14 @@ void main() {
         'should return server failure when the call to data source is unsuccessful',
         () async {
       // Arrange
-      when(mockRemoteDataSource.getUsers()).thenThrow(ApiException(
+      when(mockRemoteDataSource.getUsers()).thenThrow(const ApiException(
         statusCode: 500,
         error: tBaseErrorResponse,
       ));
       // Act
       final result = await repository.getUsers();
       // Assert
-      expect(result, Left(ServerFailure(tBaseErrorResponse)));
+      expect(result, const Left(ServerFailure(tBaseErrorResponse)));
     });
   });
 
@@ -59,17 +59,16 @@ void main() {
     test('should return cache data when the call to data source is successful',
         () async {
       // Arrange
-      when(mockLocalDataSource.getCacheUsers())
-          .thenAnswer((_) async => tUserModels);
+      when(mockLocalDataSource.getCacheUsers()).thenAnswer((_) => tUserModels);
       // Act
-      final result = await repository.getCacheUsers();
+      final result = repository.getCacheUsers();
       // Assert
       expect(result, tUserModels);
     });
   });
 
   group('getUserById', () {
-    final testId = 1;
+    const testId = 1;
 
     test(
         'should return a user by given id when the call to data source is successful',
@@ -80,21 +79,22 @@ void main() {
       // Act
       final result = await repository.getUserById(testId);
       // Assert
-      expect(result, Right(tUserModel));
+      expect(result, const Right(tUserModel));
     });
 
     test(
         'should return server failure when the call to data source is unsuccessful',
         () async {
       // Arrange
-      when(mockRemoteDataSource.getUserById(testId)).thenThrow(ApiException(
+      when(mockRemoteDataSource.getUserById(testId))
+          .thenThrow(const ApiException(
         statusCode: 404,
         error: tBaseErrorResponse,
       ));
       // Act
       final result = await repository.getUserById(testId);
       // Assert
-      expect(result, Left(ServerFailure(tBaseErrorResponse)));
+      expect(result, const Left(ServerFailure(tBaseErrorResponse)));
     });
   });
 
@@ -108,7 +108,7 @@ void main() {
       // Act
       final result = await repository.createUser(tUserPayload);
       // Assert
-      expect(result, Right(tUserModel));
+      expect(result, const Right(tUserModel));
     });
 
     test(
@@ -116,14 +116,14 @@ void main() {
         () async {
       // Arrange
       when(mockRemoteDataSource.createUser(tUserPayload))
-          .thenThrow(ApiException(
+          .thenThrow(const ApiException(
         statusCode: 404,
         error: tBaseErrorResponse,
       ));
       // Act
       final result = await repository.createUser(tUserPayload);
       // Assert
-      expect(result, Left(ServerFailure(tBaseErrorResponse)));
+      expect(result, const Left(ServerFailure(tBaseErrorResponse)));
     });
   });
 }

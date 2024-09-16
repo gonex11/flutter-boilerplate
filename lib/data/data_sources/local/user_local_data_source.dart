@@ -10,8 +10,8 @@ class UserLocalDataSource {
     return _userDb.insertCacheUsers(users.map((e) => e.toAdapter()).toList());
   }
 
-  Future<List<UserModel>> getCacheUsers() async {
-    final result = await _userDb.getCacheUsers();
+  List<UserModel> getCacheUsers() {
+    final result = _userDb.getCacheUsers();
     return result.map((e) => UserModel.fromAdapter(e)).toList();
   }
 }

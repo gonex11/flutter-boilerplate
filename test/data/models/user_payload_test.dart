@@ -6,7 +6,7 @@ import '../../dummy_data/dummy_objects.dart';
 void main() {
   test('should return a valid model from JSON', () async {
     // Arrange
-    final Map<String, dynamic> jsonMap = tUserPayloadJson;
+    const Map<String, dynamic> jsonMap = tUserPayloadJson;
     // Act
     final result = UserPayload.fromJson(jsonMap);
     // Assert
@@ -17,7 +17,7 @@ void main() {
     // Act
     final result = tUserPayload.toJson();
     // Assert
-    final expectedJsonMap = tUserPayloadJson;
+    const expectedJsonMap = tUserPayloadJson;
     expect(result, expectedJsonMap);
   });
 }

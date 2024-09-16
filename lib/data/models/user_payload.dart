@@ -10,7 +10,7 @@ class UserPayload extends Equatable {
   final String? lastName;
   final String? password;
 
-  UserPayload({
+  const UserPayload({
     this.username,
     this.firstName,
     this.lastName,

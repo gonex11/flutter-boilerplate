@@ -44,7 +44,7 @@ void main() {
       // Arrange
       when(mockBox.values.toList()).thenAnswer((_) => tUserAdapters);
       // Act
-      final result = await db.getCacheUsers();
+      final result = db.getCacheUsers();
       // Assert
       expect(result, tUserAdapters);
     });

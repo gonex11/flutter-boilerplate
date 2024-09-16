@@ -28,8 +28,7 @@ void main() {
   group('getCacheUsers', () {
     test('state should success when get cache users is successfully', () async {
       // Arrange
-      when(mockUserRepository.getCacheUsers())
-          .thenAnswer((_) async => tUserModels);
+      when(mockUserRepository.getCacheUsers()).thenAnswer((_) => tUserModels);
       // Act
       await controller.onInit();
       // Assert
@@ -42,7 +41,7 @@ void main() {
 
     test('should get users from remote when cache users is empty', () async {
       // Arrange
-      when(mockUserRepository.getCacheUsers()).thenAnswer((_) async => []);
+      when(mockUserRepository.getCacheUsers()).thenAnswer((_) => []);
       when(mockUserRepository.getUsers())
           .thenAnswer((_) async => Right(tUserModels));
       // Act
@@ -58,7 +57,7 @@ void main() {
     test('state should success when get users from remote is successfully',
         () async {
       // Arrange
-      when(mockUserRepository.getCacheUsers()).thenAnswer((_) async => []);
+      when(mockUserRepository.getCacheUsers()).thenAnswer((_) => []);
       when(mockUserRepository.getUsers())
           .thenAnswer((_) async => Right(tUserModels));
       // Act
@@ -75,8 +74,9 @@ void main() {
         'state should empty when get users from remote is successfully but the data is empty',
         () async {
       // Arrange
-      when(mockUserRepository.getCacheUsers()).thenAnswer((_) async => []);
-      when(mockUserRepository.getUsers()).thenAnswer((_) async => Right([]));
+      when(mockUserRepository.getCacheUsers()).thenAnswer((_) => []);
+      when(mockUserRepository.getUsers())
+          .thenAnswer((_) async => const Right([]));
       // Act
       await controller.getUsers();
       // Assert
@@ -90,9 +90,9 @@ void main() {
     test('state should error when get users from remote is unsuccessfully',
         () async {
       // Arrange
-      when(mockUserRepository.getCacheUsers()).thenAnswer((_) async => []);
-      when(mockUserRepository.getUsers())
-          .thenAnswer((_) async => Left(ServerFailure(tBaseErrorResponse)));
+      when(mockUserRepository.getCacheUsers()).thenAnswer((_) => []);
+      when(mockUserRepository.getUsers()).thenAnswer(
+          (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
       await controller.getUsers();
       // Assert

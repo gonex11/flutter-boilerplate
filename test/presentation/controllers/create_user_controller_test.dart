@@ -29,7 +29,7 @@ void main() {
         () async {
       // Arrange
       when(mockUserRepository.createUser(tUserPayload))
-          .thenAnswer((_) async => Right(tUserModel));
+          .thenAnswer((_) async => const Right(tUserModel));
       // Act
       await controller.createUser(tUserPayload);
       // Assert
@@ -44,8 +44,8 @@ void main() {
         'isUserCreated value should return false if create user is unsuccessful',
         () async {
       // Arrange
-      when(mockUserRepository.createUser(tUserPayload))
-          .thenAnswer((_) async => Left(ServerFailure(tBaseErrorResponse)));
+      when(mockUserRepository.createUser(tUserPayload)).thenAnswer(
+          (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
       await controller.createUser(tUserPayload);
       // Assert

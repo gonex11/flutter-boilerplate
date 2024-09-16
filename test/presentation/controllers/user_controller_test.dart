@@ -17,12 +17,12 @@ void main() {
   });
 
   group('getUserById', () {
-    final tUserId = 1;
+    const tUserId = 1;
 
     test('state should success when get user is successful', () async {
       // Arrange
       when(mockUserRepository.getUserById(tUserId))
-          .thenAnswer((_) async => Right(tUserModel));
+          .thenAnswer((_) async => const Right(tUserModel));
       // Act
       controller.id = tUserId;
       await controller.onInit();
@@ -36,8 +36,8 @@ void main() {
 
     test('state should error when get user is unsuccessful', () async {
       // Arrange
-      when(mockUserRepository.getUserById(tUserId))
-          .thenAnswer((_) async => Left(ServerFailure(tBaseErrorResponse)));
+      when(mockUserRepository.getUserById(tUserId)).thenAnswer(
+          (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
       controller.id = tUserId;
       await controller.onInit();

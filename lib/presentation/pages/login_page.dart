@@ -24,7 +24,7 @@ class LoginPage extends GetView<LoginController> {
           top: false,
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: SizedBox(
               height: context.mediaQuerySize.height,
               child: Column(

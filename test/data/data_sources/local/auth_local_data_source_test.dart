@@ -35,7 +35,7 @@ void main() {
       when(mockFlutterSecureStorage.read(key: tAccessTokenKey))
           .thenAnswer((_) async => tAccessToken);
       when(mockTokenManager.isTokenExpired(tAccessToken))
-          .thenAnswer((_) async => true);
+          .thenAnswer((_) => true);
       // Act
       final result = await dataSource.isTokenExpired();
       // Assert
@@ -47,7 +47,7 @@ void main() {
       when(mockFlutterSecureStorage.read(key: tAccessTokenKey))
           .thenAnswer((_) async => null);
       when(mockTokenManager.isTokenExpired(tAccessToken))
-          .thenAnswer((_) async => false);
+          .thenAnswer((_) => false);
       // Act
       final result = await dataSource.isTokenExpired();
       // Assert

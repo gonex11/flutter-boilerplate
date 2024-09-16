@@ -87,7 +87,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
         if (storageStatus.isDenied) {
           storageStatus = await Permission.storage.request();
         } else if (storageStatus.isPermanentlyDenied) {
-          Utils.showDialog(AppPermissionAlert.gallery());
+          Utils.showDialog(const AppPermissionAlert.gallery());
         }
 
         if (storageStatus.isGranted) {
@@ -104,7 +104,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
           videoStatus = permissions[Permission.videos]!;
         } else if (photoStatus.isPermanentlyDenied &&
             videoStatus.isPermanentlyDenied) {
-          Utils.showDialog(AppPermissionAlert.gallery());
+          Utils.showDialog(const AppPermissionAlert.gallery());
         }
 
         if (photoStatus.isGranted && videoStatus.isGranted) {
@@ -119,7 +119,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
       if (status.isDenied) {
         status = await Permission.camera.request();
       } else if (status.isPermanentlyDenied) {
-        Utils.showDialog(AppPermissionAlert.camera());
+        Utils.showDialog(const AppPermissionAlert.camera());
       }
 
       if (status.isGranted) {

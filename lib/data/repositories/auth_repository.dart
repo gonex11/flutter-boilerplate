@@ -33,7 +33,7 @@ class AuthRepository {
 
     if (accessToken == null) {
       await _localDataSource.clearSession();
-      return Left(AuthFailure());
+      return const Left(AuthFailure());
     }
 
     final cachedUserSession = await _localDataSource.getUserSession();
@@ -45,7 +45,7 @@ class AuthRepository {
         return Right(user);
       } catch (e) {
         await _localDataSource.clearSession();
-        return Left(AuthFailure());
+        return const Left(AuthFailure());
       }
     }
 
@@ -59,7 +59,7 @@ class AuthRepository {
 
     if (refreshToken == null) {
       await _localDataSource.clearSession();
-      return Left(AuthFailure());
+      return const Left(AuthFailure());
     }
 
     try {
@@ -72,7 +72,7 @@ class AuthRepository {
       return Right(user);
     } on ApiException catch (_) {
       await _localDataSource.clearSession();
-      return Left(AuthFailure());
+      return const Left(AuthFailure());
     }
   }
 

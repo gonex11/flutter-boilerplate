@@ -46,7 +46,7 @@ void main() {
   });
 
   group('getUserById', () {
-    final testId = 1;
+    const testId = 1;
     final testUserModel = UserModel.fromJson(
       jsonDecode(readJson('dummy_data/jsons/user_response.json'))["data"],
     );

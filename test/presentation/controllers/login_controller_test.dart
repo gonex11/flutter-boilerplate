@@ -25,14 +25,14 @@ void main() {
   });
 
   group('login', () {
-    final tUsername = 'username';
-    final tPassword = 'password';
+    const tUsername = 'username';
+    const tPassword = 'password';
 
     test('isLoggedIn value should return true if login is successful',
         () async {
       // Arrange
       when(mockAuthRepository.login(tUsername, tPassword))
-          .thenAnswer((_) async => Right(tTokenModel));
+          .thenAnswer((_) async => const Right(tTokenModel));
       // Act
       await controller.login(tUsername, tPassword);
       // Assert
@@ -46,8 +46,8 @@ void main() {
     test('isLoggedIn value should return false if login is unsuccessful',
         () async {
       // Arrange
-      when(mockAuthRepository.login(tUsername, tPassword))
-          .thenAnswer((_) async => Left(ServerFailure(tBaseErrorResponse)));
+      when(mockAuthRepository.login(tUsername, tPassword)).thenAnswer(
+          (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
       await controller.login(tUsername, tPassword);
       // Assert

@@ -38,7 +38,7 @@ void main() {
       // Act
       final result = await repository.getLoggedUser();
       // Assert
-      expect(result, Right(tUserSessionModel));
+      expect(result, const Right(tUserSessionModel));
     });
 
     test(
@@ -50,7 +50,7 @@ void main() {
       // Act
       final result = await repository.getLoggedUser();
       // Assert
-      expect(result, Left(AuthFailure()));
+      expect(result, const Left(AuthFailure()));
     });
 
     test(
@@ -67,7 +67,7 @@ void main() {
       // Act
       final result = await repository.getLoggedUser();
       // Assert
-      expect(result, Right(tUserModel));
+      expect(result, const Right(tUserModel));
     });
 
     test(
@@ -77,7 +77,7 @@ void main() {
       when(mockLocalDataSource.getAccessToken())
           .thenAnswer((_) async => tAccessToken);
       when(mockLocalDataSource.getUserSession()).thenAnswer((_) async => null);
-      when(mockRemoteDataSource.getLoggedUser()).thenThrow(ApiException(
+      when(mockRemoteDataSource.getLoggedUser()).thenThrow(const ApiException(
         statusCode: 500,
         error: tBaseErrorResponse,
       ));
@@ -85,7 +85,7 @@ void main() {
       // Act
       final result = await repository.getLoggedUser();
       // Assert
-      expect(result, Left(AuthFailure()));
+      expect(result, const Left(AuthFailure()));
     });
 
     test('should return user session when token is not expired', () async {
@@ -98,7 +98,7 @@ void main() {
       // Act
       final result = await repository.getLoggedUser();
       // Assert
-      expect(result, Right(tUserSessionModel));
+      expect(result, const Right(tUserSessionModel));
     });
 
     test(
@@ -123,7 +123,7 @@ void main() {
       // Act
       final result = await repository.getLoggedUser();
       // Assert
-      expect(result, Right(tUserModel));
+      expect(result, const Right(tUserModel));
     });
 
     test(
@@ -140,7 +140,7 @@ void main() {
       // Act
       final result = await repository.getLoggedUser();
       // Assert
-      expect(result, Left(AuthFailure()));
+      expect(result, const Left(AuthFailure()));
     });
 
     test(
@@ -155,7 +155,7 @@ void main() {
       when(mockLocalDataSource.getRefreshToken())
           .thenAnswer((_) async => tRefreshToken);
       when(mockRemoteDataSource.refreshToken(tRefreshToken))
-          .thenThrow(ApiException(
+          .thenThrow(const ApiException(
         statusCode: 400,
         error: tBaseErrorResponse,
       ));
@@ -163,7 +163,7 @@ void main() {
       // Act
       final result = await repository.getLoggedUser();
       // Assert
-      expect(result, Left(AuthFailure()));
+      expect(result, const Left(AuthFailure()));
     });
 
     test(
@@ -181,7 +181,7 @@ void main() {
           .thenAnswer((_) async => tTokenModel);
       when(mockLocalDataSource.setToken(tTokenModel))
           .thenAnswer((_) async => true);
-      when(mockRemoteDataSource.getLoggedUser()).thenThrow(ApiException(
+      when(mockRemoteDataSource.getLoggedUser()).thenThrow(const ApiException(
         statusCode: 400,
         error: tBaseErrorResponse,
       ));
@@ -189,7 +189,7 @@ void main() {
       // Act
       final result = await repository.getLoggedUser();
       // Assert
-      expect(result, Left(AuthFailure()));
+      expect(result, const Left(AuthFailure()));
     });
   });
 
@@ -208,20 +208,20 @@ void main() {
       // Act
       final result = await repository.login(tUsername!, tPassword!);
       // Assert
-      expect(result, Right(tTokenModel));
+      expect(result, const Right(tTokenModel));
     });
 
     test('should return server failure when login unsuccessfully', () async {
       // Arrange
       when(mockRemoteDataSource.login(tUsername, tPassword))
-          .thenThrow(ApiException(
+          .thenThrow(const ApiException(
         statusCode: 401,
         error: tBaseErrorResponse,
       ));
       // Act
       final result = await repository.login(tUsername!, tPassword!);
       // Assert
-      expect(result, Left(ServerFailure(tBaseErrorResponse)));
+      expect(result, const Left(ServerFailure(tBaseErrorResponse)));
     });
   });
 

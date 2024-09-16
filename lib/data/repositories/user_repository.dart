@@ -22,8 +22,8 @@ class UserRepository {
     }
   }
 
-  Future<List<UserModel>> getCacheUsers() async {
-    final result = await _localDataSource.getCacheUsers();
+  List<UserModel> getCacheUsers() {
+    final result = _localDataSource.getCacheUsers();
     return result;
   }
 

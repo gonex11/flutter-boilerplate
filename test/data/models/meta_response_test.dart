@@ -6,7 +6,7 @@ import '../../dummy_data/dummy_objects.dart';
 void main() {
   test('should return a valid model from JSON', () async {
     // Arrange
-    final Map<String, dynamic> jsonMap = tMetaJson;
+    const Map<String, dynamic> jsonMap = tMetaJson;
     // Act
     final result = MetaResponse.fromJson(jsonMap);
     // Assert
@@ -17,7 +17,7 @@ void main() {
     // Act
     final result = tMetaResponse.toJson();
     // Assert
-    final expectedJsonMap = tMetaJson;
+    const expectedJsonMap = tMetaJson;
     expect(result, expectedJsonMap);
   });
 }

@@ -38,7 +38,7 @@ class HomePage extends GetView<HomeController> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: colorScheme.primary,
           onPressed: () {
-            Get.toNamed(AppRoutes.CREATE_USER);
+            Get.toNamed(AppRoutes.createUser);
           },
           child: Icon(
             Icons.add,
@@ -50,7 +50,7 @@ class HomePage extends GetView<HomeController> {
             onLoading: AppSkeletonizer(
               enabled: true,
               child: ListView.separated(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 itemCount: AppFakes.list.users.length,
                 separatorBuilder: (_, __) {
                   return const SizedBox(height: 16);
@@ -85,7 +85,7 @@ class HomePage extends GetView<HomeController> {
                   physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
-                  padding: EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
                   itemCount: users?.length ?? 0,
                   separatorBuilder: (_, __) {
                     return const SizedBox(height: 16);
@@ -94,7 +94,7 @@ class HomePage extends GetView<HomeController> {
                     final user = users?[index];
                     return UserTile(
                       onTap: () {
-                        Get.toNamed(AppRoutes.USER, arguments: user?.id);
+                        Get.toNamed(AppRoutes.user, arguments: user?.id);
                       },
                       user: user,
                     );

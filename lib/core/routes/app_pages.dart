@@ -13,26 +13,26 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = AppRoutes.HOME;
+  static const initial = AppRoutes.home;
 
   static final pages = [
     GetPage(
-      name: _Paths.LOGIN,
+      name: _Paths.login,
       page: () => const LoginPage(),
       binding: LoginBinding(),
     ),
     GetPage(
-      name: _Paths.HOME,
+      name: _Paths.home,
       page: () => const HomePage(),
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.USER,
+      name: _Paths.user,
       page: () => const UserDetailPage(),
       binding: UserBinding(),
     ),
     GetPage(
-      name: _Paths.CREATE_USER,
+      name: _Paths.createUser,
       page: () => const CreateUserPage(),
       binding: UserBinding(),
     ),

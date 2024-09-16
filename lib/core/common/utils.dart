@@ -14,13 +14,13 @@ abstract class Utils {
     WidgetsFlutterBinding.ensureInitialized();
 
     await Hive.initFlutter();
-    Hive..registerAdapter(UserTypeAdapter());
+    Hive.registerAdapter(UserTypeAdapter());
 
     await Future.any([
       Hive.openBox<UserType>(AppConstants.boxNames.users),
     ]);
 
-    AppBinding()..dependencies();
+    AppBinding().dependencies();
   }
 
   static void showBottomSheet(Widget child) {
@@ -36,7 +36,7 @@ abstract class Utils {
       enableDrag: false,
       isDismissible: false,
       isScrollControlled: true,
-      NoInternetBottomSheet(
+      const NoInternetBottomSheet(
         key: ValueKey('noInternetBottomSheet'),
       ),
     );
@@ -50,7 +50,7 @@ abstract class Utils {
   }
 
   static String? getErrorMessage(List<ErrorDetailResponse>? errors,
-      [String? attr = null]) {
+      [String? attr]) {
     if (errors?.isEmpty == true) {
       return null;
     } else {

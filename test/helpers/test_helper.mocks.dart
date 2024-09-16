@@ -549,13 +549,13 @@ class MockUserRepository extends _i1.Mock implements _i14.UserRepository {
       ) as _i9.Future<_i3.Either<_i13.Failure, List<_i4.UserModel>>>);
 
   @override
-  _i9.Future<List<_i4.UserModel>> getCacheUsers() => (super.noSuchMethod(
+  List<_i4.UserModel> getCacheUsers() => (super.noSuchMethod(
         Invocation.method(
           #getCacheUsers,
           [],
         ),
-        returnValue: _i9.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
-      ) as _i9.Future<List<_i4.UserModel>>);
+        returnValue: <_i4.UserModel>[],
+      ) as List<_i4.UserModel>);
 
   @override
   _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>> getUserById(int? id) =>
@@ -803,13 +803,13 @@ class MockUserLocalDataSource extends _i1.Mock
       ) as _i9.Future<bool>);
 
   @override
-  _i9.Future<List<_i4.UserModel>> getCacheUsers() => (super.noSuchMethod(
+  List<_i4.UserModel> getCacheUsers() => (super.noSuchMethod(
         Invocation.method(
           #getCacheUsers,
           [],
         ),
-        returnValue: _i9.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
-      ) as _i9.Future<List<_i4.UserModel>>);
+        returnValue: <_i4.UserModel>[],
+      ) as List<_i4.UserModel>);
 }
 
 /// A class which mocks [UsersDb].
@@ -1425,13 +1425,13 @@ class MockTokenManager extends _i1.Mock implements _i24.TokenManager {
   }
 
   @override
-  _i9.Future<bool> isTokenExpired(String? token) => (super.noSuchMethod(
+  bool isTokenExpired(String? token) => (super.noSuchMethod(
         Invocation.method(
           #isTokenExpired,
           [token],
         ),
-        returnValue: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: false,
+      ) as bool);
 }
 
 /// A class which mocks [NetworkInfo].

@@ -21,13 +21,13 @@ class UserDetailPage extends GetView<UserController> {
           child: controller.obx(
             (user) {
               return AppSkeletonizer(
-                enabled: controller.status == RxStatus.loading,
+                enabled: controller.status.isLoading,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      (controller.status == RxStatus.loading)
+                      (controller.status.isLoading)
                           ? BoneMock.fullName
                           : user?.username ?? '-',
                       style: AppFonts.lgSemiBold.copyWith(
@@ -36,7 +36,7 @@ class UserDetailPage extends GetView<UserController> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      (controller.status == RxStatus.loading)
+                      (controller.status.isLoading)
                           ? BoneMock.fullName
                           : '${user?.firstName} ${user?.lastName}',
                       style: AppFonts.mdRegular.copyWith(

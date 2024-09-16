@@ -16,15 +16,11 @@ final class AuthFailure extends Failure {
 }
 
 final class ServerFailure extends Failure {
-  final BaseErrorResponse? error;
-
-  const ServerFailure(this.error) : super(error, null);
+  const ServerFailure(BaseErrorResponse? error) : super(error, null);
 }
 
 final class CacheFailure extends Failure {
-  final String? message;
-
-  const CacheFailure(this.message) : super(null, message);
+  const CacheFailure(String? message) : super(null, message);
 }
 
 final class NetworkFailure extends Failure {

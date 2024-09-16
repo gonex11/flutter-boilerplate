@@ -11,7 +11,7 @@ class UserModel extends Equatable {
   final String? firstName;
   final String? lastName;
 
-  UserModel({
+  const UserModel({
     this.id,
     this.username,
     this.firstName,

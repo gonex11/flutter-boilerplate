@@ -3,28 +3,28 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  static Color primary = Color(0xFF49ADE1);
-  static Color transparent = Color(0x00000000);
-  static Color white = Color(0xFFFFFFFF);
-  static Color black = Color(0xFF2E2E2E);
-  static Color grey = Color(0xFF828282);
-  static Color placeholder = Color(0xFFABABAB);
-  static Color blueA20 = Color(0xFFFFFFFF).withOpacity(0.16);
-  static Color red = Color(0xFFDD2419);
-  static Color orange = Color(0xFFFFAB00);
-  static Color green = Color(0xFF70C787);
+  static Color primary = const Color(0xFF49ADE1);
+  static Color transparent = const Color(0x00000000);
+  static Color white = const Color(0xFFFFFFFF);
+  static Color black = const Color(0xFF2E2E2E);
+  static Color grey = const Color(0xFF828282);
+  static Color placeholder = const Color(0xFFABABAB);
+  static Color blueA20 = const Color(0xFFFFFFFF).withOpacity(0.16);
+  static Color red = const Color(0xFFDD2419);
+  static Color orange = const Color(0xFFFFAB00);
+  static Color green = const Color(0xFF70C787);
 
-  static Color lightBackground = Color(0xFFF8F8F8);
+  static Color lightBackground = const Color(0xFFF8F8F8);
   static Color lightText = black;
   static Color lightSurface = white;
-  static Color lightDivider = Color(0xFFE0E0E0);
-  static Color lightDisabled = Color(0x05000000);
+  static Color lightDivider = const Color(0xFFE0E0E0);
+  static Color lightDisabled = const Color(0x05000000);
 
-  static Color darkBackground = Color(0xFF121212);
+  static Color darkBackground = const Color(0xFF121212);
   static Color darkText = white;
   static Color darkSurface = black;
-  static Color darkDivider = Color(0xFF444444);
-  static Color darkDisabled = Color(0x0DFFFFFF);
+  static Color darkDivider = const Color(0xFF444444);
+  static Color darkDisabled = const Color(0x0DFFFFFF);
 
   static final ColorScheme lightScheme = ColorScheme.light(
     primary: AppColors.primary,

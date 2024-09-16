@@ -27,7 +27,7 @@ class AppBinding extends Bindings {
     // Externals
     Get.lazyPut<Dio>(() => Dio());
     Get.lazyPut<AndroidOptions>(
-        () => AndroidOptions(encryptedSharedPreferences: true));
+        () => const AndroidOptions(encryptedSharedPreferences: true));
     Get.lazyPut<FlutterSecureStorage>(
         () => FlutterSecureStorage(aOptions: Get.find()));
     Get.lazyPut<Connectivity>(() => Connectivity());

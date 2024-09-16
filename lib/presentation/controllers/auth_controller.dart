@@ -19,10 +19,10 @@ class AuthController extends GetxController {
     final result = await _repository.getLoggedUser();
     result.fold((_) {
       isAuthenticated.value = false;
-      Get.offAllNamed(AppRoutes.LOGIN);
+      Get.offAllNamed(AppRoutes.login);
     }, (data) {
       isAuthenticated.value = true;
-      Get.offAllNamed(AppRoutes.HOME);
+      Get.offAllNamed(AppRoutes.home);
     });
   }
 }

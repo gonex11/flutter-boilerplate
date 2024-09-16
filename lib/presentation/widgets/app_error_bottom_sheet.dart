@@ -28,7 +28,7 @@ class AppErrorBottomSheet extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 16,
               ),
               child: AppButton(

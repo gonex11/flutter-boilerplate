@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class AppFonts {
   static final AppFontSize _fontSize = AppFontSize._();
-  static final TextStyle _default = TextStyle();
+  static const TextStyle _default = TextStyle();
 
   static TextStyle get xsRegular {
     return _default.copyWith(
