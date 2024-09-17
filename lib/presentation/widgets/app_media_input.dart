@@ -207,7 +207,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.image_rounded,
                       color: AppColors.placeholder,
                       size: 20,
@@ -259,7 +259,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.video_camera_back_rounded,
                       color: AppColors.placeholder,
                       size: 20,

@@ -7,7 +7,7 @@ abstract class AppThemes {
     useMaterial3: true,
     colorScheme: AppColors.lightScheme,
     dividerColor: AppColors.lightDivider,
-    dividerTheme: DividerThemeData(
+    dividerTheme: const DividerThemeData(
       color: AppColors.lightDivider,
     ),
     disabledColor: AppColors.lightDisabled,
@@ -18,7 +18,7 @@ abstract class AppThemes {
       titleTextStyle: AppFonts.lgSemiBold.copyWith(
         color: AppColors.lightScheme.onSurface,
       ),
-      shape: Border(
+      shape: const Border(
         bottom: BorderSide(
           color: AppColors.lightDivider,
           width: 1,
@@ -42,14 +42,14 @@ abstract class AppThemes {
       errorStyle: AppFonts.smRegular,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: AppColors.lightDivider,
           width: 1,
         ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: AppColors.lightDivider,
           width: 1,
         ),
@@ -82,7 +82,7 @@ abstract class AppThemes {
     useMaterial3: true,
     colorScheme: AppColors.darkScheme,
     dividerColor: AppColors.darkDivider,
-    dividerTheme: DividerThemeData(
+    dividerTheme: const DividerThemeData(
       color: AppColors.darkDivider,
     ),
     disabledColor: AppColors.darkDisabled,
@@ -93,7 +93,7 @@ abstract class AppThemes {
       titleTextStyle: AppFonts.lgSemiBold.copyWith(
         color: AppColors.darkScheme.onSurface,
       ),
-      shape: Border(
+      shape: const Border(
         bottom: BorderSide(
           color: AppColors.darkDisabled,
           width: 1,
@@ -117,21 +117,21 @@ abstract class AppThemes {
       errorStyle: AppFonts.smRegular,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: AppColors.darkDivider,
           width: 1,
         ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: AppColors.darkDivider,
           width: 1,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: AppColors.white,
           width: 1,
         ),

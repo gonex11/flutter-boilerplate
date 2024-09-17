@@ -371,7 +371,7 @@ class _AppInputState extends State<AppInput> {
                     });
                   }
                 : null,
-            icon: Icon(
+            icon: const Icon(
               Icons.calendar_today_outlined,
               weight: 20,
               color: AppColors.grey,
@@ -431,7 +431,7 @@ class _AppInputState extends State<AppInput> {
                     });
                   }
                 : null,
-            icon: Icon(
+            icon: const Icon(
               Icons.timer_outlined,
               size: 20,
               color: AppColors.grey,
