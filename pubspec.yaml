@@ -38,7 +38,7 @@ dependencies:
         sdk: flutter
     flutter_native_splash: ^2.4.1
     flutter_secure_storage: ^9.2.2
-    get: 4.6.6
+    get: ^4.6.6
     hive: ^2.2.3
     hive_flutter: ^1.1.0
     image_picker: ^1.1.2
@@ -46,7 +46,6 @@ dependencies:
     json_annotation: ^4.9.0
     jwt_decoder: ^2.0.1
     keyboard_dismisser: ^3.0.0
-    logger: ^2.4.0
     path: ^1.9.0
     permission_handler: ^11.3.1
     pretty_dio_logger: ^1.4.0
