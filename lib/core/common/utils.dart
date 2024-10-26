@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/core/common/app_binding.dart';
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
-import 'package:flutter_boilerplate/data/models/error_detail_response.dart';
-import 'package:flutter_boilerplate/data/models/user_type.dart';
-import 'package:flutter_boilerplate/presentation/widgets/no_internet_bottom_sheet.dart';
+import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
+import 'package:flutter_boilerplate/modules/user/data/models/user_type.dart';
+import 'package:flutter_boilerplate/modules/connectivity/presentation/widgets/no_internet_bottom_sheet.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

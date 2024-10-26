@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_boilerplate/data/models/base_error_response.dart';
+import 'package:flutter_boilerplate/shared/responses/base_error_response.dart';
 
 abstract class Failure extends Equatable {
   final String? message;

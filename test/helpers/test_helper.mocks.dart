@@ -13,25 +13,29 @@ import 'package:flutter_boilerplate/core/common/failures.dart' as _i13;
 import 'package:flutter_boilerplate/core/common/network_info.dart' as _i25;
 import 'package:flutter_boilerplate/core/common/token_manager.dart' as _i24;
 import 'package:flutter_boilerplate/core/services/api_service.dart' as _i22;
-import 'package:flutter_boilerplate/data/data_sources/local/auth_local_data_source.dart'
+import 'package:flutter_boilerplate/modules/auth/data/data_sources/auth_local_data_source.dart'
     as _i17;
-import 'package:flutter_boilerplate/data/data_sources/local/db/users_db.dart'
-    as _i20;
-import 'package:flutter_boilerplate/data/data_sources/local/user_local_data_source.dart'
-    as _i19;
-import 'package:flutter_boilerplate/data/data_sources/remote/auth_remote_data_source.dart'
+import 'package:flutter_boilerplate/modules/auth/data/data_sources/auth_remote_data_source.dart'
     as _i16;
-import 'package:flutter_boilerplate/data/data_sources/remote/user_remote_data_source.dart'
-    as _i18;
-import 'package:flutter_boilerplate/data/models/token_model.dart' as _i5;
-import 'package:flutter_boilerplate/data/models/user_model.dart' as _i4;
-import 'package:flutter_boilerplate/data/models/user_payload.dart' as _i15;
-import 'package:flutter_boilerplate/data/models/user_type.dart' as _i21;
-import 'package:flutter_boilerplate/data/repositories/auth_repository.dart'
+import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart'
+    as _i5;
+import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart'
     as _i12;
-import 'package:flutter_boilerplate/data/repositories/user_repository.dart'
+import 'package:flutter_boilerplate/modules/user/data/data_sources/db/users_db.dart'
+    as _i20;
+import 'package:flutter_boilerplate/modules/user/data/data_sources/user_local_data_source.dart'
+    as _i19;
+import 'package:flutter_boilerplate/modules/user/data/data_sources/user_remote_data_source.dart'
+    as _i18;
+import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart'
+    as _i4;
+import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart'
+    as _i15;
+import 'package:flutter_boilerplate/modules/user/data/models/user_type.dart'
+    as _i21;
+import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart'
     as _i14;
-import 'package:flutter_boilerplate/presentation/controllers/home_controller.dart'
+import 'package:flutter_boilerplate/modules/user/presentation/controllers/home_controller.dart'
     as _i8;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i7;
 import 'package:get/get.dart' as _i2;

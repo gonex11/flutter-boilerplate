@@ -1,12 +1,12 @@
-import 'package:flutter_boilerplate/presentation/bindings/login_binding.dart';
-import 'package:flutter_boilerplate/presentation/bindings/user_binding.dart';
-import 'package:flutter_boilerplate/presentation/pages/create_user_page.dart';
-import 'package:flutter_boilerplate/presentation/pages/login_page.dart';
-import 'package:flutter_boilerplate/presentation/pages/user_detail_page.dart';
+import 'package:flutter_boilerplate/modules/auth/presentation/bindings/auth_binding.dart';
+import 'package:flutter_boilerplate/modules/user/presentation/bindings/user_binding.dart';
+import 'package:flutter_boilerplate/modules/user/presentation/pages/create_user_page.dart';
+import 'package:flutter_boilerplate/modules/auth/presentation/pages/login_page.dart';
+import 'package:flutter_boilerplate/modules/user/presentation/pages/user_detail_page.dart';
 import 'package:get/get.dart';
 
-import '../../presentation/bindings/home_binding.dart';
-import '../../presentation/pages/home_page.dart';
+import '../../modules/user/presentation/bindings/home_binding.dart';
+import '../../modules/user/presentation/pages/home_page.dart';
 
 part 'app_routes.dart';
 
@@ -19,7 +19,7 @@ class AppPages {
     GetPage(
       name: _Paths.login,
       page: () => const LoginPage(),
-      binding: LoginBinding(),
+      binding: AuthBinding(),
     ),
     GetPage(
       name: _Paths.home,

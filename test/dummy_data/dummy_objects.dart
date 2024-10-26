@@ -1,11 +1,11 @@
-import 'package:flutter_boilerplate/data/models/base_error_response.dart';
-import 'package:flutter_boilerplate/data/models/base_list_response.dart';
-import 'package:flutter_boilerplate/data/models/error_detail_response.dart';
-import 'package:flutter_boilerplate/data/models/meta_response.dart';
-import 'package:flutter_boilerplate/data/models/token_model.dart';
-import 'package:flutter_boilerplate/data/models/user_model.dart';
-import 'package:flutter_boilerplate/data/models/user_payload.dart';
-import 'package:flutter_boilerplate/data/models/user_type.dart';
+import 'package:flutter_boilerplate/shared/responses/base_error_response.dart';
+import 'package:flutter_boilerplate/shared/responses/base_list_response.dart';
+import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
+import 'package:flutter_boilerplate/shared/responses/meta_response.dart';
+import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
+import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
+import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart';
+import 'package:flutter_boilerplate/modules/user/data/models/user_type.dart';
 
 const tTokenJson = {
   'accessToken': 'accessToken',

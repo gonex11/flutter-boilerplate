@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/core/common/app_translations.dart';
 import 'package:flutter_boilerplate/core/common/utils.dart';
-import 'package:flutter_boilerplate/core/styles/app_themes.dart';
-import 'package:flutter_boilerplate/presentation/controllers/connectivity_controller.dart';
+import 'package:flutter_boilerplate/shared/styles/app_themes.dart';
+import 'package:flutter_boilerplate/modules/connectivity/presentation/controllers/connectivity_controller.dart';
 import 'package:get/get.dart';
 
 import 'core/routes/app_pages.dart';

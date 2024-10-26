@@ -1,4 +1,4 @@
-import 'package:flutter_boilerplate/data/models/base_error_response.dart';
+import 'package:flutter_boilerplate/shared/responses/base_error_response.dart';
 
 final class ApiException implements Exception {
   final int? statusCode;
