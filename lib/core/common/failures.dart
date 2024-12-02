@@ -22,7 +22,3 @@ final class ServerFailure extends Failure {
 final class CacheFailure extends Failure {
   const CacheFailure(String? message) : super(null, message);
 }
-
-final class NetworkFailure extends Failure {
-  const NetworkFailure() : super(null, null);
-}

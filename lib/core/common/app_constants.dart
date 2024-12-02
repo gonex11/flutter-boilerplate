@@ -7,8 +7,8 @@ abstract class AppConstants {
   static final Messages _messages = Messages._();
   static Messages get messages => _messages;
 
-  static final BoxNames _boxNames = BoxNames._();
-  static BoxNames get boxNames => _boxNames;
+  static final DatabaseName _databaseName = DatabaseName._();
+  static DatabaseName get databaseName => _databaseName;
 
   static final SecureStorageKeys _secureStorageKeys = SecureStorageKeys._();
   static SecureStorageKeys get secureStorageKeys => _secureStorageKeys;
@@ -31,10 +31,10 @@ class Messages {
       'Please check your internet connection and try again.';
 }
 
-class BoxNames {
-  BoxNames._();
+class DatabaseName {
+  DatabaseName._();
 
-  String get users => 'users_box';
+  String get usersDb => 'users_db.db';
 }
 
 class SecureStorageKeys {

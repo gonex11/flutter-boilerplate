@@ -13,11 +13,11 @@ void main() {
     expect(result, tUserModel);
   });
 
-  test('should return a valid model from Adapter', () async {
+  test('should return a valid model from Entity', () async {
     // Arrange
-    const userAdapter = tUserType;
+    const userEntity = tUserEntity;
     // Act
-    final result = UserModel.fromAdapter(userAdapter);
+    final result = UserModel.fromEntity(userEntity);
     // Assert
     expect(result, tUserModel);
   });
@@ -30,10 +30,10 @@ void main() {
     expect(result, expectedJsonMap);
   });
 
-  test('should return a Adapter containing proper data', () async {
+  test('should return a Entity containing proper data', () async {
     // Act
-    final result = tUserModel.toAdapter();
+    final result = tUserModel.toEntity();
     // Assert
-    expect(result, tUserType);
+    expect(result, tUserEntity);
   });
 }

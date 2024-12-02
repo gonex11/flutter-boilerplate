@@ -1,25 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/core/common/app_binding.dart';
-import 'package:flutter_boilerplate/core/common/app_constants.dart';
-import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
-import 'package:flutter_boilerplate/modules/user/data/models/user_type.dart';
 import 'package:flutter_boilerplate/modules/connectivity/presentation/widgets/no_internet_bottom_sheet.dart';
+import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class Utils {
   Utils._();
 
   static Future<void> initProject() async {
     WidgetsFlutterBinding.ensureInitialized();
-
-    await Hive.initFlutter();
-    Hive.registerAdapter(UserTypeAdapter());
-
-    await Future.any([
-      Hive.openBox<UserType>(AppConstants.boxNames.users),
-    ]);
-
     AppBinding().dependencies();
   }
 

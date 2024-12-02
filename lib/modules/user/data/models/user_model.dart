@@ -1,46 +1,38 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter_boilerplate/modules/user/data/models/user_type.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entities/user_entity.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'generated/user_model.freezed.dart';
 part 'generated/user_model.g.dart';
 
-@JsonSerializable()
-class UserModel extends Equatable {
-  final int? id;
-  final String? username;
-  final String? firstName;
-  final String? lastName;
-
-  const UserModel({
-    this.id,
-    this.username,
-    this.firstName,
-    this.lastName,
-  });
+@Freezed()
+class UserModel with _$UserModel {
+  const factory UserModel({
+    final int? id,
+    final String? username,
+    final String? firstName,
+    final String? lastName,
+  }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 
-  factory UserModel.fromAdapter(UserType user) {
+  factory UserModel.fromEntity(UserEntity entity) {
     return UserModel(
-      id: user.id,
-      username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      id: entity.id,
+      username: entity.username,
+      firstName: entity.firstName,
+      lastName: entity.lastName,
     );
   }
+}
 
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
-
-  UserType toAdapter() {
-    return UserType(
+extension UserModelExt on UserModel {
+  UserEntity toEntity() {
+    return UserEntity(
       id: id,
       username: username,
       firstName: firstName,
       lastName: lastName,
     );
   }
-
-  @override
-  List<Object?> get props => [id, username, firstName, lastName];
 }

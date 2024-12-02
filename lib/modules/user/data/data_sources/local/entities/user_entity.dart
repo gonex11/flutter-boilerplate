@@ -1,20 +1,15 @@
 import 'package:equatable/equatable.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:floor/floor.dart';
 
-part 'generated/user_type.g.dart';
-
-@HiveType(typeId: 1)
-class UserType extends Equatable {
-  @HiveField(0)
+@Entity(tableName: 'users')
+class UserEntity extends Equatable {
+  @primaryKey
   final int? id;
-  @HiveField(1)
   final String? username;
-  @HiveField(2)
   final String? firstName;
-  @HiveField(3)
   final String? lastName;
 
-  const UserType({
+  const UserEntity({
     this.id,
     this.username,
     this.firstName,

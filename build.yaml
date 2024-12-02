@@ -10,5 +10,13 @@ targets:
             source_gen:combining_builder:
                 options:
                     build_extensions:
+                        '^lib/modules/{{dir}}/data/data_sources/local/db/{{file}}.dart': 'lib/modules/{{dir}}/data/data_sources/local/db/generated/{{file}}.g.dart'
                         '^lib/modules/{{dir}}/data/models/{{file}}.dart': 'lib/modules/{{dir}}/data/models/generated/{{file}}.g.dart'
                         '^lib/shared/responses/{{file}}.dart': 'lib/shared/responses/generated/{{file}}.g.dart'
+            freezed:
+                options:
+                    generic_argument_factories: true
+                    build_extensions:
+                        '^lib/modules/{{dir}}/data/models/{{file}}.dart': 'lib/modules/{{dir}}/data/models/generated/{{file}}.freezed.dart'
+                        '^lib/shared/responses/{{file}}.dart': 'lib/shared/responses/generated/{{file}}.freezed.dart'
+                        '^lib/shared/utils/{{file}}.dart': 'lib/shared/utils/generated/{{file}}.freezed.dart'

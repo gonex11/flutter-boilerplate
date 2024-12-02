@@ -12,58 +12,83 @@ void main() {
   late UserRepository repository;
   late MockUserRemoteDataSource mockRemoteDataSource;
   late MockUserLocalDataSource mockLocalDataSource;
+  late MockNetworkInfo mockNetworkInfo;
 
   setUp(() {
     mockRemoteDataSource = MockUserRemoteDataSource();
     mockLocalDataSource = MockUserLocalDataSource();
+    mockNetworkInfo = MockNetworkInfo();
     repository = UserRepository(
       mockRemoteDataSource,
       mockLocalDataSource,
+      mockNetworkInfo,
     );
   });
 
   group('getUsers', () {
-    test(
-        'should return data and cache data locally when the call to data source is successful',
-        () async {
-      // Arrange
-      when(mockRemoteDataSource.getUsers())
-          .thenAnswer((_) async => tUserModels);
-      when(mockLocalDataSource.cacheUsers(tUserModels))
-          .thenAnswer((_) async => true);
-      // Act
-      final result = await repository.getUsers();
-      // Assert
-      final resultList = result.getOrElse(() => []);
-      verify(mockRemoteDataSource.getUsers());
-      verify(mockLocalDataSource.cacheUsers(tUserModels));
-      expect(resultList, tUserModels);
+    group('when the device is online', () {
+      setUp(() {
+        when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      });
+
+      test(
+          'should return data and cache data locally when the call to remote data source is successful',
+          () async {
+        // Arrange
+        when(mockLocalDataSource.cacheUsers(tUserModels))
+            .thenAnswer((_) async => true);
+        when(mockRemoteDataSource.getUsers())
+            .thenAnswer((_) async => tUserModels);
+        // Act
+        final result = await repository.getUsers();
+        // Assert
+        verify(mockRemoteDataSource.getUsers());
+        verify(mockLocalDataSource.cacheUsers(tUserModels));
+        final resultList = result.getOrElse(() => []);
+        expect(resultList, tUserModels);
+      });
+
+      test(
+          'should return server failure when the call to data source is unsuccessful',
+          () async {
+        // Arrange
+        when(mockRemoteDataSource.getUsers()).thenThrow(const ApiException(
+          statusCode: 500,
+          error: tBaseErrorResponse,
+        ));
+        // Act
+        final result = await repository.getUsers();
+        // Assert
+        expect(result, const Left(ServerFailure(tBaseErrorResponse)));
+      });
     });
 
-    test(
-        'should return server failure when the call to data source is unsuccessful',
-        () async {
-      // Arrange
-      when(mockRemoteDataSource.getUsers()).thenThrow(const ApiException(
-        statusCode: 500,
-        error: tBaseErrorResponse,
-      ));
-      // Act
-      final result = await repository.getUsers();
-      // Assert
-      expect(result, const Left(ServerFailure(tBaseErrorResponse)));
-    });
-  });
+    group('when the device is offline', () {
+      setUp(() {
+        when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+      });
 
-  group('getCacheUsers', () {
-    test('should return cache data when the call to data source is successful',
-        () async {
-      // Arrange
-      when(mockLocalDataSource.getCacheUsers()).thenAnswer((_) => tUserModels);
-      // Act
-      final result = repository.getCacheUsers();
-      // Assert
-      expect(result, tUserModels);
+      test('should return cached data when device is offline', () async {
+        // Arrange
+        when(mockLocalDataSource.getCachedUsers())
+            .thenAnswer((_) async => tUserModels);
+        // Act
+        final result = await repository.getUsers();
+        // Assert
+        final resultList = result.getOrElse(() => []);
+        expect(resultList, tUserModels);
+      });
+
+      test('should return CacheFailure when app has no cache', () async {
+        // arrange
+        when(mockLocalDataSource.getCachedUsers())
+            .thenThrow(const DatabaseException('No Cache'));
+        // act
+        final result = await repository.getUsers();
+        // assert
+        verify(mockLocalDataSource.getCachedUsers());
+        expect(result, const Left(CacheFailure('No Cache')));
+      });
     });
   });
 

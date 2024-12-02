@@ -1,28 +1,19 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_boilerplate/shared/responses/meta_response.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'generated/base_list_response.freezed.dart';
 part 'generated/base_list_response.g.dart';
 
-@JsonSerializable()
-class BaseListResponse<T> extends Equatable {
-  final MetaResponse meta;
-  final List<T> data;
-
-  const BaseListResponse({
-    required this.meta,
-    required this.data,
-  });
+@Freezed(genericArgumentFactories: true)
+class BaseListResponse<T> with _$BaseListResponse<T> {
+  const factory BaseListResponse({
+    MetaResponse? meta,
+    required List<T> data,
+  }) = _BaseListResponse;
 
   factory BaseListResponse.fromJson(
     Map<String, dynamic> json,
-    T Function(Object? json) fromJsonT,
+    T Function(Object?) fromJsonT,
   ) =>
-      _$BaseListResponseFromJson(json, fromJsonT);
-
-  Map<String, dynamic> toJson(Object Function(T value) toJsonT) =>
-      _$BaseListResponseToJson(this, toJsonT);
-
-  @override
-  List<Object?> get props => [meta, data];
+      _$BaseListResponseFromJson<T>(json, fromJsonT);
 }

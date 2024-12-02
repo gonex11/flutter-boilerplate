@@ -6,20 +6,22 @@ part of '../base_list_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BaseListResponse<T> _$BaseListResponseFromJson<T>(
+_$BaseListResponseImpl<T> _$$BaseListResponseImplFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
 ) =>
-    BaseListResponse<T>(
-      meta: MetaResponse.fromJson(json['meta'] as Map<String, dynamic>),
+    _$BaseListResponseImpl<T>(
+      meta: json['meta'] == null
+          ? null
+          : MetaResponse.fromJson(json['meta'] as Map<String, dynamic>),
       data: (json['data'] as List<dynamic>).map(fromJsonT).toList(),
     );
 
-Map<String, dynamic> _$BaseListResponseToJson<T>(
-  BaseListResponse<T> instance,
+Map<String, dynamic> _$$BaseListResponseImplToJson<T>(
+  _$BaseListResponseImpl<T> instance,
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
-      'meta': instance.meta.toJson(),
+      'meta': instance.meta?.toJson(),
       'data': instance.data.map(toJsonT).toList(),
     };

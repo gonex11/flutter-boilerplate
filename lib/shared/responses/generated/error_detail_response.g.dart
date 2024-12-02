@@ -6,15 +6,16 @@ part of '../error_detail_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ErrorDetailResponse _$ErrorDetailResponseFromJson(Map<String, dynamic> json) =>
-    ErrorDetailResponse(
+_$ErrorDetailResponseImpl _$$ErrorDetailResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ErrorDetailResponseImpl(
       code: json['code'] as String,
       detail: json['detail'] as String,
       attr: json['attr'] as String?,
     );
 
-Map<String, dynamic> _$ErrorDetailResponseToJson(
-        ErrorDetailResponse instance) =>
+Map<String, dynamic> _$$ErrorDetailResponseImplToJson(
+        _$ErrorDetailResponseImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'detail': instance.detail,

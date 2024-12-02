@@ -1,24 +1,16 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'generated/base_error_response.freezed.dart';
 part 'generated/base_error_response.g.dart';
 
-@JsonSerializable()
-class BaseErrorResponse extends Equatable {
-  final String? type;
-  final List<ErrorDetailResponse>? errors;
-
-  const BaseErrorResponse({
-    required this.type,
-    required this.errors,
-  });
+@Freezed()
+class BaseErrorResponse with _$BaseErrorResponse {
+  const factory BaseErrorResponse({
+    String? type,
+    List<ErrorDetailResponse>? errors,
+  }) = _BaseErrorResponse;
 
   factory BaseErrorResponse.fromJson(Map<String, dynamic> json) =>
       _$BaseErrorResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$BaseErrorResponseToJson(this);
-
-  @override
-  List<Object?> get props => [type, errors];
 }

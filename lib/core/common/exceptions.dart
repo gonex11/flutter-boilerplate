@@ -10,8 +10,8 @@ final class ApiException implements Exception {
   });
 }
 
-final class CacheException implements Exception {
+final class DatabaseException implements Exception {
   final String message;
 
-  const CacheException(this.message);
+  const DatabaseException(this.message);
 }

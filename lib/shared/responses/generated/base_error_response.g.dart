@@ -6,15 +6,17 @@ part of '../base_error_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BaseErrorResponse _$BaseErrorResponseFromJson(Map<String, dynamic> json) =>
-    BaseErrorResponse(
+_$BaseErrorResponseImpl _$$BaseErrorResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BaseErrorResponseImpl(
       type: json['type'] as String?,
       errors: (json['errors'] as List<dynamic>?)
           ?.map((e) => ErrorDetailResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$BaseErrorResponseToJson(BaseErrorResponse instance) =>
+Map<String, dynamic> _$$BaseErrorResponseImplToJson(
+        _$BaseErrorResponseImpl instance) =>
     <String, dynamic>{
       'type': instance.type,
       'errors': instance.errors?.map((e) => e.toJson()).toList(),

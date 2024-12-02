@@ -25,39 +25,9 @@ void main() {
     );
   });
 
-  group('getCacheUsers', () {
-    test('state should success when get cache users is successfully', () async {
+  group('getUsers', () {
+    test('state should success when get users is successfully', () async {
       // Arrange
-      when(mockUserRepository.getCacheUsers()).thenAnswer((_) => tUserModels);
-      // Act
-      await controller.onInit();
-      // Assert
-      final users = controller.state;
-      final status = controller.status.isSuccess;
-
-      expect(users, tUserModels);
-      expect(status, true);
-    });
-
-    test('should get users from remote when cache users is empty', () async {
-      // Arrange
-      when(mockUserRepository.getCacheUsers()).thenAnswer((_) => []);
-      when(mockUserRepository.getUsers())
-          .thenAnswer((_) async => Right(tUserModels));
-      // Act
-      await controller.getUsers();
-      // Assert
-      final users = controller.state;
-      final status = controller.status.isSuccess;
-
-      expect(users, tUserModels);
-      expect(status, true);
-    });
-
-    test('state should success when get users from remote is successfully',
-        () async {
-      // Arrange
-      when(mockUserRepository.getCacheUsers()).thenAnswer((_) => []);
       when(mockUserRepository.getUsers())
           .thenAnswer((_) async => Right(tUserModels));
       // Act
@@ -71,10 +41,9 @@ void main() {
     });
 
     test(
-        'state should empty when get users from remote is successfully but the data is empty',
+        'state should empty when get usersis successfully but the data is empty',
         () async {
       // Arrange
-      when(mockUserRepository.getCacheUsers()).thenAnswer((_) => []);
       when(mockUserRepository.getUsers())
           .thenAnswer((_) async => const Right([]));
       // Act
@@ -87,10 +56,8 @@ void main() {
       expect(status, true);
     });
 
-    test('state should error when get users from remote is unsuccessfully',
-        () async {
+    test('state should error when get users is unsuccessfully', () async {
       // Arrange
-      when(mockUserRepository.getCacheUsers()).thenAnswer((_) => []);
       when(mockUserRepository.getUsers()).thenAnswer(
           (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act

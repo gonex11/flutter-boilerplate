@@ -7,8 +7,8 @@ import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../helpers/test_helper.mocks.dart';
-import '../../../../json_reader.dart';
+import '../../../../../helpers/test_helper.mocks.dart';
+import '../../../../../json_reader.dart';
 
 void main() {
   late AuthRemoteDataSource dataSource;

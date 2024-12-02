@@ -1,23 +1,15 @@
-import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'generated/token_model.freezed.dart';
 part 'generated/token_model.g.dart';
 
-@JsonSerializable()
-class TokenModel extends Equatable {
-  final String accessToken;
-  final String refreshToken;
-
-  const TokenModel({
-    required this.accessToken,
-    required this.refreshToken,
-  });
+@Freezed()
+class TokenModel with _$TokenModel {
+  const factory TokenModel({
+    required String accessToken,
+    required String refreshToken,
+  }) = _TokenModel;
 
   factory TokenModel.fromJson(Map<String, dynamic> json) =>
       _$TokenModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$TokenModelToJson(this);
-
-  @override
-  List<Object?> get props => [accessToken, refreshToken];
 }
