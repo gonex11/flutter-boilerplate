@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/common/app_localizations.dart';
-import 'package:flutter_boilerplate/core/common/utils.dart';
+import 'package:flutter_boilerplate/modules/auth/presentation/controllers/login_controller.dart';
 import 'package:flutter_boilerplate/shared/styles/app_colors.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
-import 'package:flutter_boilerplate/modules/auth/presentation/controllers/login_controller.dart';
-import 'package:flutter_boilerplate/shared/components/app_button.dart';
-import 'package:flutter_boilerplate/shared/components/app_input.dart';
+import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
+import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_button.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_input.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
@@ -73,7 +73,7 @@ class LoginPage extends GetView<LoginController> {
                                       controller: controller.unameController,
                                       hintText:
                                           AppLocalizations.usernamePlaceholder,
-                                      error: Utils.getErrorMessage(
+                                      error: AppUtils.getErrorMessage(
                                         controller.validationErrors,
                                         'username',
                                       ),
@@ -97,7 +97,7 @@ class LoginPage extends GetView<LoginController> {
                                       controller: controller.passController,
                                       hintText:
                                           AppLocalizations.passwordPlaceholder,
-                                      error: Utils.getErrorMessage(
+                                      error: AppUtils.getErrorMessage(
                                         controller.validationErrors,
                                         'password',
                                       ),

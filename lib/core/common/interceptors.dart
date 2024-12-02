@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_boilerplate/core/common/app_constants.dart';
+import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class HeaderInterceptor extends Interceptor {

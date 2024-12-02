@@ -30,6 +30,7 @@ class AppTranslations extends Translations {
         'login': 'Login',
         'loginSubtitle':
             'Make sure your account is registered in the application',
+        'save': 'Save'
       },
       'id': {
         'selectFromGallery': 'Pilih dari Galeri',
@@ -57,6 +58,8 @@ class AppTranslations extends Translations {
         'passwordPlaceholder': 'Masukkan password anda',
         'login': 'Masuk',
         'loginSubtitle': 'Pastikan akun anda telah terdaftar dalam aplikasi',
+        'save': 'Simpan',
+        'addUser': 'Tambah User'
       },
     };
   }

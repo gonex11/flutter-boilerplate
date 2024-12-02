@@ -9,7 +9,7 @@ class BaseListResponse<T> with _$BaseListResponse<T> {
   const factory BaseListResponse({
     MetaResponse? meta,
     required List<T> data,
-  }) = _BaseListResponse;
+  }) = _BaseListResponse<T>;
 
   factory BaseListResponse.fromJson(
     Map<String, dynamic> json,

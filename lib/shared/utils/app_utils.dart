@@ -4,8 +4,8 @@ import 'package:flutter_boilerplate/modules/connectivity/presentation/widgets/no
 import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
 import 'package:get/get.dart';
 
-abstract class Utils {
-  Utils._();
+abstract class AppUtils {
+  AppUtils._();
 
   static Future<void> initProject() async {
     WidgetsFlutterBinding.ensureInitialized();

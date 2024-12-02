@@ -1,12 +1,12 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/common/app_enums.dart';
-import 'package:flutter_boilerplate/core/common/app_localizations.dart';
-import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/shared/styles/app_colors.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
-import 'package:flutter_boilerplate/shared/components/app_bottom_sheet.dart';
-import 'package:flutter_boilerplate/shared/components/app_permission_alert.dart';
+import 'package:flutter_boilerplate/shared/utils/app_enums.dart';
+import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
+import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_bottom_sheet.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_permission_alert.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -87,7 +87,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
         if (storageStatus.isDenied) {
           storageStatus = await Permission.storage.request();
         } else if (storageStatus.isPermanentlyDenied) {
-          Utils.showDialog(const AppPermissionAlert.gallery());
+          AppUtils.showDialog(const AppPermissionAlert.gallery());
         }
 
         if (storageStatus.isGranted) {
@@ -104,7 +104,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
           videoStatus = permissions[Permission.videos]!;
         } else if (photoStatus.isPermanentlyDenied &&
             videoStatus.isPermanentlyDenied) {
-          Utils.showDialog(const AppPermissionAlert.gallery());
+          AppUtils.showDialog(const AppPermissionAlert.gallery());
         }
 
         if (photoStatus.isGranted && videoStatus.isGranted) {
@@ -119,7 +119,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
       if (status.isDenied) {
         status = await Permission.camera.request();
       } else if (status.isPermanentlyDenied) {
-        Utils.showDialog(const AppPermissionAlert.camera());
+        AppUtils.showDialog(const AppPermissionAlert.camera());
       }
 
       if (status.isGranted) {

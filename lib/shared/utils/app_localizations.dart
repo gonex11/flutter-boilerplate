@@ -12,11 +12,6 @@ abstract class AppLocalizations {
   static String microphone = 'microphone'.tr;
   static String cancel = 'cancel'.tr;
   static String openSetting = 'openSetting'.tr;
-  static String requestPermissionTitle(String appName, String permissionType) =>
-      'permissionMessage'.trParams({
-        'appName': appName,
-        'permissionType': permissionType,
-      });
   static String permissionMessage = 'permissionMessage'.tr;
   static String usersTitle = 'usersTitle'.tr;
   static String userDetail = 'userDetail'.tr;
@@ -30,4 +25,12 @@ abstract class AppLocalizations {
   static String passwordPlaceholder = 'passwordPlaceholder'.tr;
   static String login = 'login'.tr;
   static String loginSubtitle = 'loginSubtitle'.tr;
+  static String save = 'save'.tr;
+  static String addUser = 'addUser'.tr;
+
+  static String requestPermissionTitle(String appName, String permissionType) =>
+      'permissionMessage'.trParams({
+        'appName': appName,
+        'permissionType': permissionType,
+      });
 }

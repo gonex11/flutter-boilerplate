@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/common/app_enums.dart';
 import 'package:flutter_boilerplate/core/extensions/date_time_ext.dart';
 import 'package:flutter_boilerplate/shared/styles/app_colors.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
+import 'package:flutter_boilerplate/shared/utils/app_enums.dart';
 import 'package:get/get.dart';
 
 class AppInput extends StatefulWidget {

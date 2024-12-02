@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart';
-import 'package:flutter_boilerplate/shared/components/app_error_bottom_sheet.dart';
 import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
+import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
@@ -37,9 +37,9 @@ class LoginController extends GetxController {
       if (error?.type == 'validation_error') {
         validationErrors.value = failure.error?.errors ?? [];
       } else {
-        final message = Utils.getErrorMessage(error?.errors) ?? '';
+        final message = AppUtils.getErrorMessage(error?.errors) ?? '';
         if (Get.isBottomSheetOpen == false) {
-          Utils.showBottomSheet(AppErrorBottomSheet(message: message));
+          AppUtils.showBottomSheet(AppErrorBottomSheet(message: message));
         }
       }
     }, (data) {

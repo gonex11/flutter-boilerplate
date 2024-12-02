@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/common/app_constants.dart';
-import 'package:flutter_boilerplate/core/common/app_enums.dart';
-import 'package:flutter_boilerplate/core/common/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
-import 'package:flutter_boilerplate/shared/components/app_button.dart';
+import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
+import 'package:flutter_boilerplate/shared/utils/app_enums.dart';
+import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_button.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 

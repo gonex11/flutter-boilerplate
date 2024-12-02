@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/core/common/token_manager.dart';
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
+import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthLocalDataSource {

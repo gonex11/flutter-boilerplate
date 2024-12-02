@@ -1,11 +1,11 @@
-import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController with StateMixin<List<UserModel>> {
+class HomeController extends GetxController {
   final AuthRepository _authRepository;
   final UserRepository _userRepository;
 
@@ -17,26 +17,32 @@ class HomeController extends GetxController with StateMixin<List<UserModel>> {
     super.onInit();
   }
 
-  final isLoggedOut = false.obs;
+  final usersState =
+      Rx<ResultState<List<UserModel>>>(const ResultState.initial());
+  final logoutState = Rx<ResultState<bool>>(const ResultState.initial());
 
   Future<void> getUsers([bool refresh = false]) async {
-    change(null, status: RxStatus.loading());
+    usersState.value = const ResultState.loading();
 
     final result = await _userRepository.getUsers();
-    result.fold((remoteFailure) {
-      final message = Utils.getErrorMessage(remoteFailure.error?.errors);
-      change(null, status: RxStatus.error(message));
+    result.fold((failure) {
+      usersState.value = ResultState.failed(failure.error);
     }, (data) {
       if (data.isEmpty) {
-        change([], status: RxStatus.empty());
+        usersState.value = const ResultState.initial();
         return;
       }
-      change(data, status: RxStatus.success());
+      usersState.value = ResultState.success(data);
     });
   }
 
   Future<void> logout() async {
-    isLoggedOut.value = await _authRepository.logout();
-    if (isLoggedOut.isTrue) Get.offAllNamed(AppRoutes.login);
+    logoutState.value = const ResultState.loading();
+
+    final isLoggedOut = await _authRepository.logout();
+    if (isLoggedOut) {
+      logoutState.value = ResultState.success(isLoggedOut);
+      Get.offAllNamed(AppRoutes.login);
+    }
   }
 }

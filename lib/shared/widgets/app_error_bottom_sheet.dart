@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/shared/components/app_bottom_sheet.dart';
-import 'package:flutter_boilerplate/shared/components/app_button.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_bottom_sheet.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_button.dart';
 import 'package:get/get.dart';
 
 class AppErrorBottomSheet extends StatelessWidget {

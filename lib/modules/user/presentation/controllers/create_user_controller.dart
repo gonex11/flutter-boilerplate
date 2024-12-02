@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/common/utils.dart';
-import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
+import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart';
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart';
-import 'package:flutter_boilerplate/shared/components/app_error_bottom_sheet.dart';
+import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';
 
 class CreateUserController extends GetxController {
@@ -20,35 +21,36 @@ class CreateUserController extends GetxController {
     super.dispose();
   }
 
-  final TextEditingController unameController = TextEditingController();
-  final TextEditingController fNameController = TextEditingController();
-  final TextEditingController lNameController = TextEditingController();
-  final TextEditingController passController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
-  final isLoading = false.obs;
-  final isUserCreated = false.obs;
-  final validationErrors = RxList<ErrorDetailResponse>([]);
+  final unameController = TextEditingController();
+  final fNameController = TextEditingController();
+  final lNameController = TextEditingController();
+  final passController = TextEditingController();
 
-  Future<void> createUser(UserPayload payload) async {
-    isLoading.value = true;
+  final createState = Rx<ResultState<UserModel>>(const ResultState.initial());
+
+  Future<void> createUser() async {
+    if (formKey.currentState?.validate() == false) return;
+    createState.value = const ResultState.loading();
+
+    final payload = UserPayload(
+      username: unameController.text.trim(),
+      firstName: fNameController.text.trim(),
+      lastName: lNameController.text.trim(),
+      password: passController.text.trim(),
+    );
 
     final result = await _repository.createUser(payload);
     result.fold((failure) {
-      isLoading.value = false;
-      isUserCreated.value = false;
+      createState.value = const ResultState.failed();
 
-      final error = failure.error;
-      if (error?.type == 'validation_error') {
-        validationErrors.value = failure.error?.errors ?? [];
-      } else {
-        final message = Utils.getErrorMessage(error?.errors) ?? '';
-        if (Get.isBottomSheetOpen == false) {
-          Utils.showBottomSheet(AppErrorBottomSheet(message: message));
-        }
+      final message = AppUtils.getErrorMessage(failure.error?.errors) ?? '';
+      if (Get.isBottomSheetOpen == false) {
+        AppUtils.showBottomSheet(AppErrorBottomSheet(message: message));
       }
     }, (data) async {
-      isLoading.value = false;
-      isUserCreated.value = true;
+      createState.value = ResultState.success(data);
       Get.back(result: true);
     });
   }

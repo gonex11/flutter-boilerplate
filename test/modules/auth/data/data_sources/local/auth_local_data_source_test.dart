@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/auth_local_data_source.dart';
+import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

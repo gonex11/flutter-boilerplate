@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_boilerplate/core/common/failures.dart';
+import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/controllers/home_controller.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
@@ -26,22 +28,7 @@ void main() {
   });
 
   group('getUsers', () {
-    test('state should success when get users is successfully', () async {
-      // Arrange
-      when(mockUserRepository.getUsers())
-          .thenAnswer((_) async => Right(tUserModels));
-      // Act
-      await controller.getUsers();
-      // Assert
-      final users = controller.state;
-      final status = controller.status.isSuccess;
-
-      expect(users, tUserModels);
-      expect(status, true);
-    });
-
-    test(
-        'state should empty when get usersis successfully but the data is empty',
+    test('state should initial when get users is successfully but no data',
         () async {
       // Arrange
       when(mockUserRepository.getUsers())
@@ -49,49 +36,47 @@ void main() {
       // Act
       await controller.getUsers();
       // Assert
-      final users = controller.state;
-      final status = controller.status.isEmpty;
-
-      expect(users, []);
-      expect(status, true);
+      final state = controller.usersState.value;
+      expect(state, isA<ResultInitial>());
     });
 
-    test('state should error when get users is unsuccessfully', () async {
+    test('state should success when get users is successfully', () async {
+      // Arrange
+      when(mockUserRepository.getUsers())
+          .thenAnswer((_) async => Right(tUserModels));
+      // Act
+      await controller.getUsers();
+      // Assert
+      final state = controller.usersState.value;
+      expect(state, isA<ResultSuccess<List<UserModel>>>());
+    });
+
+    test('state should failed when get users is unsuccessfully', () async {
       // Arrange
       when(mockUserRepository.getUsers()).thenAnswer(
           (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
       await controller.getUsers();
       // Assert
-      final users = controller.state;
-      final status = controller.status.isError;
-
-      expect(users, null);
-      expect(status, true);
+      final state = controller.usersState.value;
+      expect(state, isA<ResultFailed>());
     });
   });
 
   group('logout', () {
-    test('isLoggedOut value should be true when logout is successful',
-        () async {
+    test('state should initial', () async {
+      // Assert
+      final state = controller.logoutState.value;
+      expect(state, isA<ResultInitial>());
+    });
+    test('state should success when logout is successful', () async {
       // Arrange
       when(mockAuthRepository.logout()).thenAnswer((_) async => true);
       // Act
       await controller.logout();
       // Assert
-      final result = controller.isLoggedOut.value;
-      expect(result, true);
-    });
-
-    test('isLoggedOut value should be false when logout is successful',
-        () async {
-      // Arrange
-      when(mockAuthRepository.logout()).thenAnswer((_) async => false);
-      // Act
-      await controller.logout();
-      // Assert
-      final result = controller.isLoggedOut.value;
-      expect(result, false);
+      final state = controller.logoutState.value;
+      expect(state, isA<ResultSuccess<bool>>());
     });
   });
 }

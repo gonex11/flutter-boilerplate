@@ -1,9 +1,9 @@
-import 'package:flutter_boilerplate/core/common/utils.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state.dart';
 import 'package:get/get.dart';
 
-class UserController extends GetxController with StateMixin<UserModel> {
+class UserController extends GetxController {
   final UserRepository _repository;
 
   UserController(this._repository);
@@ -16,16 +16,16 @@ class UserController extends GetxController with StateMixin<UserModel> {
 
   int id = Get.arguments ?? 0;
 
+  final userState = Rx<ResultState<UserModel>>(const ResultState.initial());
+
   Future<void> getUserById() async {
-    change(null, status: RxStatus.loading());
+    userState.value = const ResultState.loading();
 
     final result = await _repository.getUserById(id);
     result.fold((failure) {
-      final error = failure.error;
-      final message = Utils.getErrorMessage(error?.errors) ?? '';
-      change(null, status: RxStatus.error(message));
+      userState.value = ResultState.failed(failure.error);
     }, (data) {
-      change(data, status: RxStatus.success());
+      userState.value = ResultState.success(data);
     });
   }
 }

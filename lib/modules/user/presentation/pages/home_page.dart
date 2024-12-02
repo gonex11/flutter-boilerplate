@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/core/common/app_fakes.dart';
-import 'package:flutter_boilerplate/core/common/app_localizations.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
-import 'package:flutter_boilerplate/shared/components/app_refresh_layout.dart';
-import 'package:flutter_boilerplate/shared/components/app_skeletonizer.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/widgets/user_tile.dart';
+import 'package:flutter_boilerplate/shared/utils/app_fakes.dart';
+import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
+import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_refresh_layout.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_skeletonizer.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
@@ -46,35 +47,27 @@ class HomePage extends GetView<HomeController> {
           ),
         ),
         body: SafeArea(
-          child: controller.obx(
-            onLoading: AppSkeletonizer(
-              enabled: true,
-              child: ListView.separated(
-                padding: const EdgeInsets.all(16),
-                itemCount: AppFakes.list.users.length,
-                separatorBuilder: (_, __) {
-                  return const SizedBox(height: 16);
-                },
-                itemBuilder: (context, index) {
-                  final user = AppFakes.list.users[index];
-                  return UserTile(
-                    onTap: null,
-                    user: user,
-                  );
-                },
-              ),
-            ),
-            onEmpty: AppRefreshLayout(
-              onRefresh: controller.getUsers,
-              child: const Text('There is no Users yet.'),
-            ),
-            onError: (error) {
-              return AppRefreshLayout(
-                onRefresh: controller.getUsers,
-                child: Text(error ?? ''),
+          child: controller.usersState.value.when(
+            loading: () {
+              return AppSkeletonizer(
+                enabled: true,
+                child: ListView.separated(
+                  padding: const EdgeInsets.all(16),
+                  itemCount: AppFakes.list.users.length,
+                  separatorBuilder: (_, __) {
+                    return const SizedBox(height: 16);
+                  },
+                  itemBuilder: (context, index) {
+                    final user = AppFakes.list.users[index];
+                    return UserTile(
+                      onTap: null,
+                      user: user,
+                    );
+                  },
+                ),
               );
             },
-            (users) {
+            success: (data) {
               return RefreshIndicator.adaptive(
                 backgroundColor: colorScheme.surfaceBright,
                 color: colorScheme.primary,
@@ -86,20 +79,34 @@ class HomePage extends GetView<HomeController> {
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
                   padding: const EdgeInsets.all(16),
-                  itemCount: users?.length ?? 0,
+                  itemCount: data.length,
                   separatorBuilder: (_, __) {
                     return const SizedBox(height: 16);
                   },
                   itemBuilder: (context, index) {
-                    final user = users?[index];
+                    final user = data[index];
                     return UserTile(
-                      onTap: () {
-                        Get.toNamed(AppRoutes.user, arguments: user?.id);
-                      },
+                      onTap: () => Get.toNamed(
+                        AppRoutes.user,
+                        arguments: user.id,
+                      ),
                       user: user,
                     );
                   },
                 ),
+              );
+            },
+            failed: (error) {
+              final message = AppUtils.getErrorMessage(error?.errors) ?? '';
+              return AppRefreshLayout(
+                onRefresh: controller.getUsers,
+                child: Text(message),
+              );
+            },
+            initial: () {
+              return AppRefreshLayout(
+                onRefresh: controller.getUsers,
+                child: const Text('There is no Users yet.'),
               );
             },
           ),

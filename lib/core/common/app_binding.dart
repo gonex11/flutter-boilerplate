@@ -1,7 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_boilerplate/core/common/app_constants.dart';
 import 'package:flutter_boilerplate/core/common/interceptors.dart';
 import 'package:flutter_boilerplate/core/common/network_info.dart';
 import 'package:flutter_boilerplate/core/common/token_manager.dart';
@@ -16,6 +15,7 @@ import 'package:flutter_boilerplate/modules/user/data/data_sources/local/db/user
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/user_local_data_source.dart';
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart';
+import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
