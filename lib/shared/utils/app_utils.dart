@@ -2,6 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/core/common/app_binding.dart';
 import 'package:flutter_boilerplate/modules/connectivity/presentation/widgets/no_internet_bottom_sheet.dart';
 import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
+import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
 abstract class AppUtils {
@@ -46,5 +48,34 @@ abstract class AppUtils {
       final message = errors?.where((e) => e.attr == attr).firstOrNull?.detail;
       return message?.capitalize;
     }
+  }
+
+  static FormFieldValidator<String?> passwordValidator(
+    String? text, [
+    int min = 8,
+  ]) {
+    return FormBuilderValidators.compose([
+      FormBuilderValidators.required(
+        errorText: AppLocalizations.passwordRequiredMessage,
+      ),
+      FormBuilderValidators.minLength(
+        min,
+        errorText: AppLocalizations.passwordMinCharacterMessage(min),
+      ),
+      FormBuilderValidators.hasUppercaseChars(
+        errorText: AppLocalizations.passwordUpperCaseMessage,
+      ),
+      FormBuilderValidators.hasLowercaseChars(
+        errorText: AppLocalizations.passwordLowerCaseMessage,
+      ),
+      FormBuilderValidators.hasNumericChars(
+        errorText: AppLocalizations.passwordNumberMessage,
+      ),
+      FormBuilderValidators.hasSpecialChars(
+        errorText: AppLocalizations.passwordSpecialCharacterMessage,
+      ),
+      (value) =>
+          value == text ? null : AppLocalizations.passwordNotMatchMessage,
+    ]);
   }
 }

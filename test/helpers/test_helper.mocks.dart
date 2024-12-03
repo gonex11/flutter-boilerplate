@@ -13,9 +13,9 @@ import 'package:flutter_boilerplate/core/common/failures.dart' as _i14;
 import 'package:flutter_boilerplate/core/common/network_info.dart' as _i26;
 import 'package:flutter_boilerplate/core/common/token_manager.dart' as _i25;
 import 'package:flutter_boilerplate/core/services/api_service.dart' as _i23;
-import 'package:flutter_boilerplate/modules/auth/data/data_sources/auth_local_data_source.dart'
+import 'package:flutter_boilerplate/modules/auth/data/data_sources/local/auth_local_data_source.dart'
     as _i18;
-import 'package:flutter_boilerplate/modules/auth/data/data_sources/auth_remote_data_source.dart'
+import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/auth_remote_data_source.dart'
     as _i17;
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart'
     as _i5;

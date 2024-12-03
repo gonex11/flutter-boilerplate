@@ -30,7 +30,18 @@ class AppTranslations extends Translations {
         'login': 'Login',
         'loginSubtitle':
             'Make sure your account is registered in the application',
-        'save': 'Save'
+        'save': 'Save',
+        'passwordRequiredMessage': 'Password is required',
+        'passwordMinCharacterMessage':
+            'Password must be at least @min characters long',
+        'passwordUpperCaseMessage':
+            'Password must contain at least one uppercase letter',
+        'passwordLowerCaseMessage':
+            'Password must contain at least one lowercase letter',
+        'passwordNumberMessage': 'Password must contain at least one number',
+        'passwordSpecialCharacterMessage':
+            'Password must contain at least one special character',
+        'passwordNotMatchMessage': 'Password not match',
       },
       'id': {
         'selectFromGallery': 'Pilih dari Galeri',
@@ -59,7 +70,19 @@ class AppTranslations extends Translations {
         'login': 'Masuk',
         'loginSubtitle': 'Pastikan akun anda telah terdaftar dalam aplikasi',
         'save': 'Simpan',
-        'addUser': 'Tambah User'
+        'addUser': 'Tambah User',
+        'passwordRequiredMessage': 'Password wajib diisi',
+        'passwordMinCharacterMessage':
+            'Password harus memiliki minimal @min karakter',
+        'passwordUpperCaseMessage':
+            'Password harus mengandung setidaknya satu huruf besar',
+        'passwordLowerCaseMessage':
+            'Password harus mengandung setidaknya satu huruf kecil',
+        'passwordNumberMessage':
+            'Password harus mengandung setidaknya satu angka',
+        'passwordSpecialCharacterMessage':
+            'Password harus mengandung setidaknya satu karakter khusus',
+        'passwordNotMatchMessage': 'Password tidak cocok',
       },
     };
   }

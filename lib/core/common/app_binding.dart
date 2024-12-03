@@ -6,8 +6,8 @@ import 'package:flutter_boilerplate/core/common/network_info.dart';
 import 'package:flutter_boilerplate/core/common/token_manager.dart';
 import 'package:flutter_boilerplate/core/services/api_service.dart';
 import 'package:flutter_boilerplate/core/services/app_database.dart';
-import 'package:flutter_boilerplate/modules/auth/data/data_sources/auth_local_data_source.dart';
-import 'package:flutter_boilerplate/modules/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:flutter_boilerplate/modules/auth/data/data_sources/local/auth_local_data_source.dart';
+import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart';
 import 'package:flutter_boilerplate/modules/auth/presentation/controllers/auth_controller.dart';
 import 'package:flutter_boilerplate/modules/connectivity/presentation/controllers/connectivity_controller.dart';
@@ -23,36 +23,33 @@ import 'package:image_picker/image_picker.dart';
 class AppBinding extends Bindings {
   @override
   Future<void> dependencies() async {
+    final appDatabase = await $FloorAppDatabase
+        .databaseBuilder(AppConstants.general.appDatabase)
+        .build();
+
     // Externals
-    Get.lazyPut<Dio>(() => Dio());
-    Get.lazyPut<AndroidOptions>(
-        () => const AndroidOptions(encryptedSharedPreferences: true));
-    Get.lazyPut<FlutterSecureStorage>(
-        () => FlutterSecureStorage(aOptions: Get.find()));
-    Get.lazyPut<Connectivity>(() => Connectivity());
-    Get.lazyPut<ImagePicker>(() => ImagePicker());
-    Get.lazyPut<DeviceInfoPlugin>(() => DeviceInfoPlugin());
+    Get.put<Dio>(Dio());
+    Get.put<AndroidOptions>(
+        const AndroidOptions(encryptedSharedPreferences: true));
+    Get.put<FlutterSecureStorage>(FlutterSecureStorage(aOptions: Get.find()));
+    Get.put<Connectivity>(Connectivity());
+    Get.put<ImagePicker>(ImagePicker());
+    Get.put<DeviceInfoPlugin>(DeviceInfoPlugin());
 
     // Helpers
-    Get.lazyPut<NetworkInfo>(() => NetworkInfo(Get.find()));
-    Get.lazyPut<ApiService>(() => ApiService(Get.find()));
-    Get.lazyPut<HeaderInterceptor>(() => HeaderInterceptor(Get.find()));
-    Get.lazyPut<TokenManager>(() => TokenManager());
-
-    // Databases
-    Get.putAsync<AppDatabase>(() async => await $FloorAppDatabase
-        .databaseBuilder(AppConstants.general.appDatabase)
-        .build());
+    Get.put<NetworkInfo>(NetworkInfo(Get.find()));
+    Get.put<ApiService>(ApiService(Get.find()));
+    Get.put<HeaderInterceptor>(HeaderInterceptor(Get.find()));
+    Get.put<TokenManager>(TokenManager());
 
     // Dao's
-    Get.lazyPut<UserDao>(() => Get.find<AppDatabase>().userDao);
+    Get.put<UserDao>(appDatabase.userDao);
 
     // Data Sources
-    Get.lazyPut<AuthRemoteDataSource>(() => AuthRemoteDataSource(Get.find()));
-    Get.lazyPut<AuthLocalDataSource>(
-        () => AuthLocalDataSource(Get.find(), Get.find()));
-    Get.lazyPut<UserRemoteDataSource>(() => UserRemoteDataSource(Get.find()));
-    Get.lazyPut<UserLocalDataSource>(() => UserLocalDataSource(Get.find()));
+    Get.put<AuthRemoteDataSource>(AuthRemoteDataSource(Get.find()));
+    Get.put<AuthLocalDataSource>(AuthLocalDataSource(Get.find(), Get.find()));
+    Get.put<UserRemoteDataSource>(UserRemoteDataSource(Get.find()));
+    Get.put<UserLocalDataSource>(UserLocalDataSource(Get.find()));
 
     // Repositories
     Get.put<AuthRepository>(AuthRepository(Get.find(), Get.find()));

@@ -68,14 +68,7 @@ class AuthLocalDataSource {
 
   Future<bool> clearSession() async {
     try {
-      final accessTokenKey = AppConstants.secureStorageKeys.accessToken;
-      final refreshTokenKey = AppConstants.secureStorageKeys.refreshToken;
-      final userSessionKey = AppConstants.secureStorageKeys.userSession;
-
-      await _secureStorage.delete(key: accessTokenKey);
-      await _secureStorage.delete(key: refreshTokenKey);
-      await _secureStorage.delete(key: userSessionKey);
-
+      await _secureStorage.deleteAll();
       return true;
     } catch (_) {
       return false;

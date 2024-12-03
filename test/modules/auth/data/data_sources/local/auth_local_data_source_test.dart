@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_boilerplate/modules/auth/data/data_sources/auth_local_data_source.dart';
+import 'package:flutter_boilerplate/modules/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -182,12 +182,7 @@ void main() {
   group('clearSession', () {
     test('should return true when clear session is success', () async {
       // Arrange
-      when(mockFlutterSecureStorage.delete(key: tAccessTokenKey))
-          .thenAnswer((_) async => true);
-      when(mockFlutterSecureStorage.delete(key: tRefreshTokenKey))
-          .thenAnswer((_) async => true);
-      when(mockFlutterSecureStorage.delete(key: tUserSessionKey))
-          .thenAnswer((_) async => true);
+      when(mockFlutterSecureStorage.deleteAll()).thenAnswer((_) async => true);
       // Act
       final result = await dataSource.clearSession();
       // Assert
@@ -196,12 +191,7 @@ void main() {
 
     test('should return false when clear session is failed', () async {
       // Arrange
-      when(mockFlutterSecureStorage.delete(key: tAccessTokenKey))
-          .thenThrow(Exception());
-      when(mockFlutterSecureStorage.delete(key: tRefreshTokenKey))
-          .thenAnswer((_) async => true);
-      when(mockFlutterSecureStorage.delete(key: tUserSessionKey))
-          .thenAnswer((_) async => true);
+      when(mockFlutterSecureStorage.deleteAll()).thenThrow(Exception());
       // Act
       final result = await dataSource.clearSession();
       // Assert

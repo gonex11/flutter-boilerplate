@@ -1,8 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
+import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart';
-import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';
 
@@ -18,33 +19,30 @@ class LoginController extends GetxController {
     super.dispose();
   }
 
-  final TextEditingController unameController = TextEditingController();
-  final TextEditingController passController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
-  final isLoading = false.obs;
-  final isLoggedIn = false.obs;
-  final validationErrors = RxList<ErrorDetailResponse>([]);
+  final unameController = TextEditingController();
+  final passController = TextEditingController();
 
-  Future<void> login(String username, String password) async {
-    isLoading.value = true;
+  final loginState = Rx<ResultState<TokenModel>>(const ResultState.initial());
+
+  Future<void> login() async {
+    if (formKey.currentState?.validate() == false) return;
+    loginState.value = const ResultState.loading();
+
+    final username = unameController.text.trim();
+    final password = passController.text.trim();
 
     final result = await _repository.login(username, password);
     result.fold((failure) {
-      isLoading.value = false;
-      isLoggedIn.value = false;
+      loginState.value = const ResultState.failed();
 
-      final error = failure.error;
-      if (error?.type == 'validation_error') {
-        validationErrors.value = failure.error?.errors ?? [];
-      } else {
-        final message = AppUtils.getErrorMessage(error?.errors) ?? '';
-        if (Get.isBottomSheetOpen == false) {
-          AppUtils.showBottomSheet(AppErrorBottomSheet(message: message));
-        }
+      final message = AppUtils.getErrorMessage(failure.error?.errors) ?? '';
+      if (Get.isBottomSheetOpen == false) {
+        AppUtils.showBottomSheet(AppErrorBottomSheet(message: message));
       }
     }, (data) {
-      isLoading.value = false;
-      isLoggedIn.value = true;
+      loginState.value = ResultState.success(data);
       Get.offAndToNamed(AppRoutes.home);
     });
   }

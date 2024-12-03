@@ -27,7 +27,18 @@ abstract class AppLocalizations {
   static String loginSubtitle = 'loginSubtitle'.tr;
   static String save = 'save'.tr;
   static String addUser = 'addUser'.tr;
+  static String passwordRequiredMessage = 'passwordRequiredMessage'.tr;
+  static String passwordUpperCaseMessage = 'passwordUpperCaseMessage'.tr;
+  static String passwordLowerCaseMessage = 'passwordLowerCaseMessage'.tr;
+  static String passwordNumberMessage = 'passwordNumberMessage'.tr;
+  static String passwordSpecialCharacterMessage =
+      'passwordSpecialCharacterMessage'.tr;
+  static String passwordNotMatchMessage = 'passwordNotMatchMessage'.tr;
 
+  static String passwordMinCharacterMessage(int min) =>
+      'passwordMinCharacterMessage'.trParams({
+        'min': min.toString(),
+      });
   static String requestPermissionTitle(String appName, String permissionType) =>
       'permissionMessage'.trParams({
         'appName': appName,

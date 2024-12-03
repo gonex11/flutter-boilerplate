@@ -21,34 +21,37 @@ class UserDetailPage extends GetView<UserController> {
       ),
       body: SafeArea(
         child: Center(
-          child: controller.userState.value.whenOrNull(
-            success: (data) {
-              final isLoading = controller.userState.value is ResultLoading;
-              return AppSkeletonizer(
-                enabled: isLoading,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      (isLoading) ? BoneMock.fullName : data.username ?? '-',
-                      style: AppFonts.lgSemiBold.copyWith(
-                        color: colorScheme.onSurface,
+          child: Obx(
+            () => controller.userState.value.maybeWhen(
+              orElse: () => const SizedBox.shrink(),
+              success: (data) {
+                final isLoading = controller.userState.value is ResultLoading;
+                return AppSkeletonizer(
+                  enabled: isLoading,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        (isLoading) ? BoneMock.fullName : data.username ?? '-',
+                        style: AppFonts.lgSemiBold.copyWith(
+                          color: colorScheme.onSurface,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      (isLoading)
-                          ? BoneMock.fullName
-                          : '${data.firstName} ${data.lastName}',
-                      style: AppFonts.mdRegular.copyWith(
-                        color: colorScheme.onSurface,
+                      const SizedBox(height: 4),
+                      Text(
+                        (isLoading)
+                            ? BoneMock.fullName
+                            : '${data.firstName} ${data.lastName}',
+                        style: AppFonts.mdRegular.copyWith(
+                          color: colorScheme.onSurface,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),

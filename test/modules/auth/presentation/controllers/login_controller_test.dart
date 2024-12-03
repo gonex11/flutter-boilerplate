@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_boilerplate/core/common/failures.dart';
+import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
 import 'package:flutter_boilerplate/modules/auth/presentation/controllers/login_controller.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
@@ -28,34 +30,38 @@ void main() {
     const tUsername = 'username';
     const tPassword = 'password';
 
-    test('isLoggedIn value should return true if login is successful',
-        () async {
+    test('state should initial', () async {
+      // Assert
+      final state = controller.loginState.value;
+      expect(state, isA<ResultInitial>());
+    });
+
+    test('state should success if login is successful', () async {
       // Arrange
       when(mockAuthRepository.login(tUsername, tPassword))
           .thenAnswer((_) async => const Right(tTokenModel));
       // Act
-      await controller.login(tUsername, tPassword);
-      // Assert
-      final isLoading = controller.isLoading.value;
-      final isLoggedIn = controller.isLoggedIn.value;
+      controller.unameController.text = tUsername;
+      controller.passController.text = tPassword;
 
-      expect(isLoading, false);
-      expect(isLoggedIn, true);
+      await controller.login();
+      // Assert
+      final state = controller.loginState.value;
+      expect(state, isA<ResultSuccess<TokenModel>>());
     });
 
-    test('isLoggedIn value should return false if login is unsuccessful',
-        () async {
+    test('state should failed if login is unsuccessful', () async {
       // Arrange
       when(mockAuthRepository.login(tUsername, tPassword)).thenAnswer(
           (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
-      await controller.login(tUsername, tPassword);
-      // Assert
-      final isLoading = controller.isLoading.value;
-      final isLoggedIn = controller.isLoggedIn.value;
+      controller.unameController.text = tUsername;
+      controller.passController.text = tPassword;
 
-      expect(isLoading, false);
-      expect(isLoggedIn, false);
+      await controller.login();
+      // Assert
+      final state = controller.loginState.value;
+      expect(state, isA<ResultFailed>());
     });
   });
 }

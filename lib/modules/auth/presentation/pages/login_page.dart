@@ -4,8 +4,10 @@ import 'package:flutter_boilerplate/shared/styles/app_colors.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_button.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_input.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
@@ -27,104 +29,94 @@ class LoginPage extends GetView<LoginController> {
             padding: const EdgeInsets.all(16),
             child: SizedBox(
               height: context.mediaQuerySize.height,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(
-                      AppLocalizations.login,
-                      style: AppFonts.xlBold.copyWith(
-                        fontSize: 32,
-                        color: colorScheme.onPrimary,
+              child: Form(
+                key: controller.formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Text(
+                        AppLocalizations.login,
+                        style: AppFonts.xlBold.copyWith(
+                          fontSize: 32,
+                          color: colorScheme.onPrimary,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: colorScheme.surfaceBright,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            AppLocalizations.loginSubtitle,
-                            style: AppFonts.smRegular.copyWith(
-                              color: AppColors.grey,
+                    const SizedBox(height: 20),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: colorScheme.surfaceBright,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              AppLocalizations.loginSubtitle,
+                              style: AppFonts.smRegular.copyWith(
+                                color: AppColors.grey,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 20),
-                          Column(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    AppLocalizations.username,
-                                    style: AppFonts.mdSemiBold,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Obx(
-                                    () => AppInput(
+                            const SizedBox(height: 20),
+                            Column(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.username,
+                                      style: AppFonts.mdSemiBold,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    AppInput(
                                       controller: controller.unameController,
                                       hintText:
                                           AppLocalizations.usernamePlaceholder,
-                                      error: AppUtils.getErrorMessage(
-                                        controller.validationErrors,
-                                        'username',
-                                      ),
+                                      validator:
+                                          FormBuilderValidators.required(),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 16),
-                                  Text(
-                                    AppLocalizations.password,
-                                    style: AppFonts.mdSemiBold,
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Obx(
-                                    () => AppInput.password(
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 16),
+                                    Text(
+                                      AppLocalizations.password,
+                                      style: AppFonts.mdSemiBold,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    AppInput.password(
                                       controller: controller.passController,
                                       hintText:
                                           AppLocalizations.passwordPlaceholder,
-                                      error: AppUtils.getErrorMessage(
-                                        controller.validationErrors,
-                                        'password',
+                                      validator: AppUtils.passwordValidator(
+                                        controller.passController.text,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 20),
-                              Obx(
-                                () => AppButton(
-                                  isLoading: controller.isLoading.isTrue,
-                                  onPressed: () async {
-                                    await controller.login(
-                                      controller.unameController.text,
-                                      controller.passController.text,
-                                    );
-                                  },
-                                  text: AppLocalizations.login,
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                                const SizedBox(height: 20),
+                                Obx(
+                                  () => AppButton(
+                                    isLoading: controller.loginState.value
+                                        is ResultLoading,
+                                    onPressed: controller.login,
+                                    text: AppLocalizations.login,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
