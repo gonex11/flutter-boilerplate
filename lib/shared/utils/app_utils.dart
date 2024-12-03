@@ -9,7 +9,7 @@ abstract class AppUtils {
 
   static Future<void> initProject() async {
     WidgetsFlutterBinding.ensureInitialized();
-    AppBinding().dependencies();
+    await AppBinding().dependencies();
   }
 
   static void showBottomSheet(Widget child) {

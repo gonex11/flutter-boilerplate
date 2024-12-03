@@ -47,5 +47,5 @@ app.*.map.json
 models.jsonc
 
 .vscode/
-*/generated/*.g.dart
-*/generated/*.freezed.dart
+**/generated/
+**/generated/

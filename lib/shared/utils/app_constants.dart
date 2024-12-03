@@ -7,9 +7,6 @@ abstract class AppConstants {
   static final Messages _messages = Messages._();
   static Messages get messages => _messages;
 
-  static final DatabaseName _databaseName = DatabaseName._();
-  static DatabaseName get databaseName => _databaseName;
-
   static final SecureStorageKeys _secureStorageKeys = SecureStorageKeys._();
   static SecureStorageKeys get secureStorageKeys => _secureStorageKeys;
 }
@@ -20,6 +17,7 @@ class General {
   String get appName => 'Flutter Boilerplate';
   String get idLocale => 'id';
   String get enLocale => 'en';
+  String get appDatabase => 'app_database.db';
 }
 
 class Messages {
@@ -29,12 +27,6 @@ class Messages {
   String get networkErrorTitle => 'No internet connection...';
   String get networkErrorMessage =>
       'Please check your internet connection and try again.';
-}
-
-class DatabaseName {
-  DatabaseName._();
-
-  String get usersDb => 'users_db.db';
 }
 
 class SecureStorageKeys {

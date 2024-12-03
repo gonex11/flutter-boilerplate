@@ -5,9 +5,9 @@ import 'package:flutter_boilerplate/modules/user/data/data_sources/local/db/user
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entities/user_entity.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
-part 'generated/user_db.g.dart';
+part 'generated/app_database.g.dart';
 
 @Database(version: 1, entities: [UserEntity])
-abstract class UserDb extends FloorDatabase {
+abstract class AppDatabase extends FloorDatabase {
   UserDao get userDao;
 }

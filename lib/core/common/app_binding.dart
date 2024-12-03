@@ -5,13 +5,13 @@ import 'package:flutter_boilerplate/core/common/interceptors.dart';
 import 'package:flutter_boilerplate/core/common/network_info.dart';
 import 'package:flutter_boilerplate/core/common/token_manager.dart';
 import 'package:flutter_boilerplate/core/services/api_service.dart';
+import 'package:flutter_boilerplate/core/services/app_database.dart';
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart';
 import 'package:flutter_boilerplate/modules/auth/presentation/controllers/auth_controller.dart';
 import 'package:flutter_boilerplate/modules/connectivity/presentation/controllers/connectivity_controller.dart';
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/db/user_dao.dart';
-import 'package:flutter_boilerplate/modules/user/data/data_sources/local/db/user_db.dart';
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/user_local_data_source.dart';
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart';
@@ -22,7 +22,7 @@ import 'package:image_picker/image_picker.dart';
 
 class AppBinding extends Bindings {
   @override
-  void dependencies() {
+  Future<void> dependencies() async {
     // Externals
     Get.lazyPut<Dio>(() => Dio());
     Get.lazyPut<AndroidOptions>(
@@ -40,12 +40,12 @@ class AppBinding extends Bindings {
     Get.lazyPut<TokenManager>(() => TokenManager());
 
     // Databases
-    Get.putAsync<UserDb>(() => $FloorUserDb
-        .databaseBuilder(AppConstants.databaseName.usersDb)
+    Get.putAsync<AppDatabase>(() async => await $FloorAppDatabase
+        .databaseBuilder(AppConstants.general.appDatabase)
         .build());
 
     // Dao's
-    Get.lazyPut<UserDao>(() => Get.find<UserDb>().userDao);
+    Get.lazyPut<UserDao>(() => Get.find<AppDatabase>().userDao);
 
     // Data Sources
     Get.lazyPut<AuthRemoteDataSource>(() => AuthRemoteDataSource(Get.find()));
