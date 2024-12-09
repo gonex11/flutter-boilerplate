@@ -25,8 +25,8 @@ void main() {
         'isAuthenticated value should return true if user is already logged in',
         () async {
       // Arrange
-      when(mockAuthRepository.getLoggedUser())
-          .thenAnswer((_) async => const Right(tUserModel));
+      when(mockAuthRepository.validateAuth())
+          .thenAnswer((_) async => const Right(tAuthValidateModel));
       // Act
       await controller.onInit();
       // Assert
@@ -37,7 +37,7 @@ void main() {
     test('isAuthenticated value should return false if user is not logged in',
         () async {
       // Arrange
-      when(mockAuthRepository.getLoggedUser()).thenAnswer(
+      when(mockAuthRepository.validateAuth()).thenAnswer(
           (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
       await controller.onInit();

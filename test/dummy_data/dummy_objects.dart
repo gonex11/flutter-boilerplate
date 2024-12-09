@@ -1,3 +1,4 @@
+import 'package:flutter_boilerplate/modules/auth/data/models/auth_validate_model.dart';
 import 'package:flutter_boilerplate/modules/auth/data/models/login_payload.dart';
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entities/user_entity.dart';
@@ -58,14 +59,14 @@ const tUserModel = UserModel(
 
 final tUserModels = [tUserModel];
 
-const tUserSessionModel = UserModel(
-  id: 1,
-  username: 'username',
-  firstName: 'firstName',
-  lastName: 'lastName',
-);
+// const tUserSessionModel = UserModel(
+//   id: 1,
+//   username: 'username',
+//   firstName: 'firstName',
+//   lastName: 'lastName',
+// );
 
-final tUserSessionModels = [tUserSessionModel];
+// final tUserSessionModels = [tUserSessionModel];
 
 const tUserEntity = UserEntity(
   id: 1,
@@ -118,4 +119,18 @@ final tBaseListJson = {
 const tBaseListResponse = BaseListResponse<UserModel>(
   meta: tMetaResponse,
   data: [tUserModel],
+);
+
+const tAuthValidateJson = {
+  'id': 1,
+  'username': 'username',
+  'hasGroups': [],
+  'hasPermissions': [],
+};
+
+const tAuthValidateModel = AuthValidateModel(
+  id: 1,
+  username: 'username',
+  hasGroups: [],
+  hasPermissions: [],
 );

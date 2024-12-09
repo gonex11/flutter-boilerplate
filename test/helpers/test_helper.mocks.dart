@@ -7,16 +7,18 @@ import 'dart:async' as _i9;
 import 'dart:ui' as _i11;
 
 import 'package:dartz/dartz.dart' as _i3;
-import 'package:flutter/widgets.dart' as _i25;
+import 'package:flutter/widgets.dart' as _i26;
 import 'package:flutter_boilerplate/core/common/failures.dart' as _i13;
-import 'package:flutter_boilerplate/core/common/network_info.dart' as _i27;
-import 'package:flutter_boilerplate/core/common/token_manager.dart' as _i26;
+import 'package:flutter_boilerplate/core/common/network_info.dart' as _i28;
+import 'package:flutter_boilerplate/core/common/token_manager.dart' as _i27;
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/local/auth_local_data_source.dart'
-    as _i18;
+    as _i19;
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/auth_remote_data_source.dart'
-    as _i17;
+    as _i18;
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/services/auth_service.dart'
-    as _i23;
+    as _i24;
+import 'package:flutter_boilerplate/modules/auth/data/models/auth_validate_model.dart'
+    as _i15;
 import 'package:flutter_boilerplate/modules/auth/data/models/login_payload.dart'
     as _i14;
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart'
@@ -24,21 +26,21 @@ import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart'
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart'
     as _i12;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/db/user_dao.dart'
-    as _i21;
-import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entities/user_entity.dart'
     as _i22;
+import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entities/user_entity.dart'
+    as _i23;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/user_local_data_source.dart'
-    as _i20;
+    as _i21;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/services/user_service.dart'
-    as _i24;
+    as _i25;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/user_remote_data_source.dart'
-    as _i19;
+    as _i20;
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart'
     as _i4;
 import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart'
-    as _i16;
+    as _i17;
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart'
-    as _i15;
+    as _i16;
 import 'package:flutter_boilerplate/modules/user/presentation/controllers/home_controller.dart'
     as _i7;
 import 'package:flutter_boilerplate/shared/utils/result_state.dart' as _i8;
@@ -439,21 +441,22 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
       ) as _i9.Future<_i3.Either<_i13.Failure, _i5.TokenModel>>);
 
   @override
-  _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>> getLoggedUser() =>
+  _i9.Future<_i3.Either<_i13.Failure, _i15.AuthValidateModel>> validateAuth() =>
       (super.noSuchMethod(
         Invocation.method(
-          #getLoggedUser,
+          #validateAuth,
           [],
         ),
-        returnValue: _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>.value(
-            _FakeEither_2<_i13.Failure, _i4.UserModel>(
+        returnValue:
+            _i9.Future<_i3.Either<_i13.Failure, _i15.AuthValidateModel>>.value(
+                _FakeEither_2<_i13.Failure, _i15.AuthValidateModel>(
           this,
           Invocation.method(
-            #getLoggedUser,
+            #validateAuth,
             [],
           ),
         )),
-      ) as _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, _i15.AuthValidateModel>>);
 
   @override
   _i9.Future<bool> logout() => (super.noSuchMethod(
@@ -468,7 +471,7 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
 /// A class which mocks [UserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserRepository extends _i1.Mock implements _i15.UserRepository {
+class MockUserRepository extends _i1.Mock implements _i16.UserRepository {
   MockUserRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -510,7 +513,7 @@ class MockUserRepository extends _i1.Mock implements _i15.UserRepository {
 
   @override
   _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>> addUser(
-          _i16.UserPayload? payload) =>
+          _i17.UserPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #addUser,
@@ -531,7 +534,7 @@ class MockUserRepository extends _i1.Mock implements _i15.UserRepository {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthRemoteDataSource extends _i1.Mock
-    implements _i17.AuthRemoteDataSource {
+    implements _i18.AuthRemoteDataSource {
   MockAuthRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -566,59 +569,16 @@ class MockAuthRemoteDataSource extends _i1.Mock
           ),
         )),
       ) as _i9.Future<_i5.TokenModel>);
-
-  @override
-  _i9.Future<_i5.TokenModel> refreshToken(String? refreshToken) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #refreshToken,
-          [refreshToken],
-        ),
-        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
-          this,
-          Invocation.method(
-            #refreshToken,
-            [refreshToken],
-          ),
-        )),
-      ) as _i9.Future<_i5.TokenModel>);
 }
 
 /// A class which mocks [AuthLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthLocalDataSource extends _i1.Mock
-    implements _i18.AuthLocalDataSource {
+    implements _i19.AuthLocalDataSource {
   MockAuthLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
-
-  @override
-  _i9.Future<bool> isTokenExpired() => (super.noSuchMethod(
-        Invocation.method(
-          #isTokenExpired,
-          [],
-        ),
-        returnValue: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
-
-  @override
-  _i9.Future<bool> setUserSession(_i4.UserModel? user) => (super.noSuchMethod(
-        Invocation.method(
-          #setUserSession,
-          [user],
-        ),
-        returnValue: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
-
-  @override
-  _i9.Future<_i4.UserModel?> getUserSession() => (super.noSuchMethod(
-        Invocation.method(
-          #getUserSession,
-          [],
-        ),
-        returnValue: _i9.Future<_i4.UserModel?>.value(),
-      ) as _i9.Future<_i4.UserModel?>);
 
   @override
   _i9.Future<bool> setToken(_i5.TokenModel? tokenResponse) =>
@@ -662,7 +622,7 @@ class MockAuthLocalDataSource extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserRemoteDataSource extends _i1.Mock
-    implements _i19.UserRemoteDataSource {
+    implements _i20.UserRemoteDataSource {
   MockUserRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -692,7 +652,7 @@ class MockUserRemoteDataSource extends _i1.Mock
       ) as _i9.Future<_i4.UserModel>);
 
   @override
-  _i9.Future<_i4.UserModel> addUser(_i16.UserPayload? payload) =>
+  _i9.Future<_i4.UserModel> addUser(_i17.UserPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #addUser,
@@ -712,7 +672,7 @@ class MockUserRemoteDataSource extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserLocalDataSource extends _i1.Mock
-    implements _i20.UserLocalDataSource {
+    implements _i21.UserLocalDataSource {
   MockUserLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
@@ -740,23 +700,23 @@ class MockUserLocalDataSource extends _i1.Mock
 /// A class which mocks [UserDao].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserDao extends _i1.Mock implements _i21.UserDao {
+class MockUserDao extends _i1.Mock implements _i22.UserDao {
   MockUserDao() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<List<_i22.UserEntity>> getAll() => (super.noSuchMethod(
+  _i9.Future<List<_i23.UserEntity>> getAll() => (super.noSuchMethod(
         Invocation.method(
           #getAll,
           [],
         ),
         returnValue:
-            _i9.Future<List<_i22.UserEntity>>.value(<_i22.UserEntity>[]),
-      ) as _i9.Future<List<_i22.UserEntity>>);
+            _i9.Future<List<_i23.UserEntity>>.value(<_i23.UserEntity>[]),
+      ) as _i9.Future<List<_i23.UserEntity>>);
 
   @override
-  _i9.Future<void> insertAll(List<_i22.UserEntity>? users) =>
+  _i9.Future<void> insertAll(List<_i23.UserEntity>? users) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertAll,
@@ -770,7 +730,7 @@ class MockUserDao extends _i1.Mock implements _i21.UserDao {
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i23.AuthService {
+class MockAuthService extends _i1.Mock implements _i24.AuthService {
   MockAuthService() {
     _i1.throwOnMissingStub(this);
   }
@@ -805,27 +765,12 @@ class MockAuthService extends _i1.Mock implements _i23.AuthService {
           ),
         )),
       ) as _i9.Future<_i5.TokenModel>);
-
-  @override
-  _i9.Future<_i5.TokenModel> refreshToken(String? token) => (super.noSuchMethod(
-        Invocation.method(
-          #refreshToken,
-          [token],
-        ),
-        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
-          this,
-          Invocation.method(
-            #refreshToken,
-            [token],
-          ),
-        )),
-      ) as _i9.Future<_i5.TokenModel>);
 }
 
 /// A class which mocks [UserService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserService extends _i1.Mock implements _i24.UserService {
+class MockUserService extends _i1.Mock implements _i25.UserService {
   MockUserService() {
     _i1.throwOnMissingStub(this);
   }
@@ -855,7 +800,7 @@ class MockUserService extends _i1.Mock implements _i24.UserService {
       ) as _i9.Future<_i4.UserModel>);
 
   @override
-  _i9.Future<_i4.UserModel> addUser(_i16.UserPayload? payload) =>
+  _i9.Future<_i4.UserModel> addUser(_i17.UserPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #addUser,
@@ -937,7 +882,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   void registerListener({
     required String? key,
-    required _i25.ValueChanged<String?>? listener,
+    required _i26.ValueChanged<String?>? listener,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -954,7 +899,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   void unregisterListener({
     required String? key,
-    required _i25.ValueChanged<String?>? listener,
+    required _i26.ValueChanged<String?>? listener,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -1164,7 +1109,7 @@ class MockFlutterSecureStorage extends _i1.Mock
 /// A class which mocks [TokenManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTokenManager extends _i1.Mock implements _i26.TokenManager {
+class MockTokenManager extends _i1.Mock implements _i27.TokenManager {
   MockTokenManager() {
     _i1.throwOnMissingStub(this);
   }
@@ -1177,12 +1122,21 @@ class MockTokenManager extends _i1.Mock implements _i26.TokenManager {
         ),
         returnValue: false,
       ) as bool);
+
+  @override
+  Map<String, dynamic> decodeToken(String? token) => (super.noSuchMethod(
+        Invocation.method(
+          #decodeToken,
+          [token],
+        ),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
 }
 
 /// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i27.NetworkInfo {
+class MockNetworkInfo extends _i1.Mock implements _i28.NetworkInfo {
   MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }

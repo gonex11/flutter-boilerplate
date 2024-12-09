@@ -17,7 +17,4 @@ abstract class AuthService {
   Future<TokenModel> login(
     @Body() LoginPayload payload,
   );
-
-  @POST('/auth/refresh')
-  Future<TokenModel> refreshToken(@Field('refreshToken') String token);
 }

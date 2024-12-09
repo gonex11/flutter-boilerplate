@@ -45,12 +45,12 @@ class AppBinding extends Bindings {
 
     // Data Sources
     Get.put<AuthRemoteDataSource>(AuthRemoteDataSource(Get.find()));
-    Get.put<AuthLocalDataSource>(AuthLocalDataSource(Get.find(), Get.find()));
+    Get.put<AuthLocalDataSource>(AuthLocalDataSource(Get.find()));
     Get.put<UserRemoteDataSource>(UserRemoteDataSource(Get.find()));
     Get.put<UserLocalDataSource>(UserLocalDataSource(Get.find()));
 
     // Repositories
-    Get.put<AuthRepository>(AuthRepository(Get.find(), Get.find()));
+    Get.put<AuthRepository>(AuthRepository(Get.find(), Get.find(), Get.find()));
     Get.put<UserRepository>(UserRepository(Get.find(), Get.find(), Get.find()));
 
     // Controllers

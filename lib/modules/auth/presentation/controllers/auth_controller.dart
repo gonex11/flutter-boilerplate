@@ -16,7 +16,7 @@ class AuthController extends GetxController {
   final isAuthenticated = false.obs;
 
   Future<void> authCheck() async {
-    final result = await _repository.getLoggedUser();
+    final result = await _repository.validateAuth();
     result.fold((_) {
       isAuthenticated.value = false;
       Get.offAllNamed(AppRoutes.login);

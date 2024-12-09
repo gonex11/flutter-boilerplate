@@ -34,6 +34,4 @@ class SecureStorageKeys {
 
   String get accessToken => 'access_token';
   String get refreshToken => 'refresh_token';
-
-  String get userSession => 'user_session';
 }

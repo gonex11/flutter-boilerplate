@@ -52,22 +52,4 @@ void main() {
       expect(result, testTokenModel);
     });
   });
-
-  group('refreshToken', () {
-    const testRefreshToken = 'refreshToken';
-    final testTokenModel = TokenModel.fromJson(
-      jsonDecode(readJson('dummy_data/jsons/token_response.json'))["data"],
-    );
-
-    test('should return access token and refresh token when success', () async {
-      // Arrange
-      when(mockAuthService.refreshToken(testRefreshToken)).thenAnswer(
-        (_) async => testTokenModel,
-      );
-      // Act
-      final result = await dataSource.refreshToken(testRefreshToken);
-      // Assert
-      expect(result, testTokenModel);
-    });
-  });
 }

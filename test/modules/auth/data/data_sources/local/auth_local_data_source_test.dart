@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,95 +9,19 @@ import '../../../../../helpers/test_helper.mocks.dart';
 void main() {
   late AuthLocalDataSource dataSource;
   late MockFlutterSecureStorage mockFlutterSecureStorage;
-  late MockTokenManager mockTokenManager;
 
   setUp(() {
     mockFlutterSecureStorage = MockFlutterSecureStorage();
-    mockTokenManager = MockTokenManager();
     dataSource = AuthLocalDataSource(
       mockFlutterSecureStorage,
-      mockTokenManager,
     );
   });
 
   final tRefreshTokenKey = AppConstants.secureStorageKeys.refreshToken;
   final tAccessTokenKey = AppConstants.secureStorageKeys.accessToken;
-  final tUserSessionKey = AppConstants.secureStorageKeys.userSession;
 
   final tRefreshToken = tTokenModel.refreshToken;
   final tAccessToken = tTokenModel.accessToken;
-
-  group('isTokenExpired', () {
-    test('should return true when token is expired', () async {
-      // Arrange
-      when(mockFlutterSecureStorage.read(key: tAccessTokenKey))
-          .thenAnswer((_) async => tAccessToken);
-      when(mockTokenManager.isTokenExpired(tAccessToken))
-          .thenAnswer((_) => true);
-      // Act
-      final result = await dataSource.isTokenExpired();
-      // Assert
-      expect(result, true);
-    });
-
-    test('should return false when token is null', () async {
-      // Arrange
-      when(mockFlutterSecureStorage.read(key: tAccessTokenKey))
-          .thenAnswer((_) async => null);
-      when(mockTokenManager.isTokenExpired(tAccessToken))
-          .thenAnswer((_) => false);
-      // Act
-      final result = await dataSource.isTokenExpired();
-      // Assert
-      expect(result, false);
-    });
-  });
-
-  group('setUserSession', () {
-    test('should return true when set user session is success', () async {
-      // Arrange
-      when(mockFlutterSecureStorage.write(
-              key: tUserSessionKey, value: jsonEncode(tUserModel.toJson())))
-          .thenAnswer((_) async => true);
-      // Act
-      final result = await dataSource.setUserSession(tUserModel);
-      // Assert
-      expect(result, true);
-    });
-
-    test('should return false when set user session is success', () async {
-      // Arrange
-      when(mockFlutterSecureStorage.write(
-              key: tUserSessionKey, value: jsonEncode(tUserModel.toJson())))
-          .thenThrow(Exception());
-      // Act
-      final result = await dataSource.setUserSession(tUserModel);
-      // Assert
-      expect(result, false);
-    });
-  });
-
-  group('getUserSession', () {
-    test('should return user when get data is success', () async {
-      // Arrange
-      when(mockFlutterSecureStorage.read(key: tUserSessionKey))
-          .thenAnswer((_) async => jsonEncode(tUserModel.toJson()));
-      // Act
-      final result = await dataSource.getUserSession();
-      // Assert
-      expect(result, tUserModel);
-    });
-
-    test('should return null when get data is failed', () async {
-      // Arrange
-      when(mockFlutterSecureStorage.read(key: tUserSessionKey))
-          .thenAnswer((_) async => null);
-      // Act
-      final result = await dataSource.getUserSession();
-      // Assert
-      expect(result, null);
-    });
-  });
 
   group('setToken', () {
     test('should return true when set token is success', () async {

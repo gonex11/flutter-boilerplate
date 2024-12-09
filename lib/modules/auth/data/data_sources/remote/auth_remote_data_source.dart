@@ -11,7 +11,4 @@ class AuthRemoteDataSource {
   Future<UserModel> getLoggedUser() => _authService.getLoggedUser();
 
   Future<TokenModel> login(LoginPayload payload) => _authService.login(payload);
-
-  Future<TokenModel> refreshToken(String refreshToken) =>
-      _authService.refreshToken(refreshToken);
 }
