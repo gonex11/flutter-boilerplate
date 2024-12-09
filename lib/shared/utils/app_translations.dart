@@ -31,6 +31,7 @@ class AppTranslations extends Translations {
         'loginSubtitle':
             'Make sure your account is registered in the application',
         'save': 'Save',
+        'addUser': 'Add User',
         'passwordRequiredMessage': 'Password is required',
         'passwordMinCharacterMessage':
             'Password must be at least @min characters long',

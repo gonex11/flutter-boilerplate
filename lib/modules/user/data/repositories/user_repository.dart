@@ -18,10 +18,10 @@ class UserRepository {
     this._networkInfo,
   );
 
-  Future<Either<Failure, List<UserModel>>> getUsers() async {
+  Future<Either<Failure, List<UserModel>>> fetchUsers() async {
     if (await _networkInfo.isConnected) {
       try {
-        final result = await _remoteDataSource.getUsers();
+        final result = await _remoteDataSource.fetchUsers();
         _localDataSource.cacheUsers(result);
         return Right(result);
       } on ApiException catch (e) {
@@ -46,9 +46,9 @@ class UserRepository {
     }
   }
 
-  Future<Either<Failure, UserModel>> createUser(UserPayload payload) async {
+  Future<Either<Failure, UserModel>> addUser(UserPayload payload) async {
     try {
-      final result = await _remoteDataSource.createUser(payload);
+      final result = await _remoteDataSource.addUser(payload);
       return Right(result);
     } on ApiException catch (e) {
       return Left(ServerFailure(e.error));

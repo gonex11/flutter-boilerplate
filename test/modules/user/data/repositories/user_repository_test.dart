@@ -25,7 +25,7 @@ void main() {
     );
   });
 
-  group('getUsers', () {
+  group('fetchUsers', () {
     group('when the device is online', () {
       setUp(() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
@@ -37,12 +37,12 @@ void main() {
         // Arrange
         when(mockLocalDataSource.cacheUsers(tUserModels))
             .thenAnswer((_) async => true);
-        when(mockRemoteDataSource.getUsers())
+        when(mockRemoteDataSource.fetchUsers())
             .thenAnswer((_) async => tUserModels);
         // Act
-        final result = await repository.getUsers();
+        final result = await repository.fetchUsers();
         // Assert
-        verify(mockRemoteDataSource.getUsers());
+        verify(mockRemoteDataSource.fetchUsers());
         verify(mockLocalDataSource.cacheUsers(tUserModels));
         final resultList = result.getOrElse(() => []);
         expect(resultList, tUserModels);
@@ -52,12 +52,12 @@ void main() {
           'should return server failure when the call to data source is unsuccessful',
           () async {
         // Arrange
-        when(mockRemoteDataSource.getUsers()).thenThrow(const ApiException(
+        when(mockRemoteDataSource.fetchUsers()).thenThrow(const ApiException(
           statusCode: 500,
           error: tBaseErrorResponse,
         ));
         // Act
-        final result = await repository.getUsers();
+        final result = await repository.fetchUsers();
         // Assert
         expect(result, const Left(ServerFailure(tBaseErrorResponse)));
       });
@@ -73,7 +73,7 @@ void main() {
         when(mockLocalDataSource.getCachedUsers())
             .thenAnswer((_) async => tUserModels);
         // Act
-        final result = await repository.getUsers();
+        final result = await repository.fetchUsers();
         // Assert
         final resultList = result.getOrElse(() => []);
         expect(resultList, tUserModels);
@@ -84,7 +84,7 @@ void main() {
         when(mockLocalDataSource.getCachedUsers())
             .thenThrow(const DatabaseException('No Cache'));
         // act
-        final result = await repository.getUsers();
+        final result = await repository.fetchUsers();
         // assert
         verify(mockLocalDataSource.getCachedUsers());
         expect(result, const Left(CacheFailure('No Cache')));
@@ -123,15 +123,15 @@ void main() {
     });
   });
 
-  group('createUser', () {
+  group('addUser', () {
     test(
         'should return created user when the call to data source is successful',
         () async {
       // Arrange
-      when(mockRemoteDataSource.createUser(tUserPayload))
+      when(mockRemoteDataSource.addUser(tUserPayload))
           .thenAnswer((_) async => tUserModel);
       // Act
-      final result = await repository.createUser(tUserPayload);
+      final result = await repository.addUser(tUserPayload);
       // Assert
       expect(result, const Right(tUserModel));
     });
@@ -140,13 +140,13 @@ void main() {
         'should return server failure when the call to data source is unsuccessful',
         () async {
       // Arrange
-      when(mockRemoteDataSource.createUser(tUserPayload))
+      when(mockRemoteDataSource.addUser(tUserPayload))
           .thenThrow(const ApiException(
         statusCode: 404,
         error: tBaseErrorResponse,
       ));
       // Act
-      final result = await repository.createUser(tUserPayload);
+      final result = await repository.addUser(tUserPayload);
       // Assert
       expect(result, const Left(ServerFailure(tBaseErrorResponse)));
     });

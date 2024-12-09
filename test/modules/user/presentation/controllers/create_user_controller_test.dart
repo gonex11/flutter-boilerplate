@@ -26,7 +26,7 @@ void main() {
     controller.dispose();
   });
 
-  group('createUser', () {
+  group('addUser', () {
     test('state should success when create user is successful', () async {
       // Assert
       final state = controller.createState.value;
@@ -35,7 +35,7 @@ void main() {
 
     test('state should success when create user is successful', () async {
       // Arrange
-      when(mockUserRepository.createUser(tUserPayload))
+      when(mockUserRepository.addUser(tUserPayload))
           .thenAnswer((_) async => const Right(tUserModel));
       // Act
       controller.fNameController.text = tUserPayload.firstName ?? '';
@@ -43,7 +43,7 @@ void main() {
       controller.unameController.text = tUserPayload.username ?? '';
       controller.passController.text = tUserPayload.password ?? '';
 
-      await controller.createUser();
+      await controller.addUser();
       // Assert
       final state = controller.createState.value;
       expect(state, isA<ResultSuccess<UserModel>>());
@@ -51,7 +51,7 @@ void main() {
 
     test('state should failed when create user is unsuccessful', () async {
       // Arrange
-      when(mockUserRepository.createUser(tUserPayload)).thenAnswer(
+      when(mockUserRepository.addUser(tUserPayload)).thenAnswer(
           (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
       controller.fNameController.text = tUserPayload.firstName ?? '';
@@ -59,7 +59,7 @@ void main() {
       controller.unameController.text = tUserPayload.username ?? '';
       controller.passController.text = tUserPayload.password ?? '';
 
-      await controller.createUser();
+      await controller.addUser();
       // Assert
       final state = controller.createState.value;
       expect(state, isA<ResultFailed>());

@@ -194,32 +194,29 @@ void main() {
   });
 
   group('login', () {
-    final tUsername = tUserPayload.username;
-    final tPassword = tUserPayload.password;
-
     test(
         'should return logged user and save token to local when login successfully',
         () async {
       // Arrange
-      when(mockRemoteDataSource.login(tUsername, tPassword))
+      when(mockRemoteDataSource.login(tLoginPayload))
           .thenAnswer((_) async => tTokenModel);
       when(mockLocalDataSource.setToken(tTokenModel))
           .thenAnswer((_) async => true);
       // Act
-      final result = await repository.login(tUsername!, tPassword!);
+      final result = await repository.login(tLoginPayload);
       // Assert
       expect(result, const Right(tTokenModel));
     });
 
     test('should return server failure when login unsuccessfully', () async {
       // Arrange
-      when(mockRemoteDataSource.login(tUsername, tPassword))
+      when(mockRemoteDataSource.login(tLoginPayload))
           .thenThrow(const ApiException(
         statusCode: 401,
         error: tBaseErrorResponse,
       ));
       // Act
-      final result = await repository.login(tUsername!, tPassword!);
+      final result = await repository.login(tLoginPayload);
       // Assert
       expect(result, const Left(ServerFailure(tBaseErrorResponse)));
     });

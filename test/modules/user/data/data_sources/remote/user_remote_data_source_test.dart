@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
-import 'package:flutter_boilerplate/core/services/api_service.dart';
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_boilerplate/shared/responses/base_list_response.dart';
@@ -14,11 +12,11 @@ import '../../../../../json_reader.dart';
 
 void main() {
   late UserRemoteDataSource dataSource;
-  late ApiService mockApiService;
+  late MockUserService mockUserService;
 
   setUp(() {
-    mockApiService = MockApiService();
-    dataSource = UserRemoteDataSource(mockApiService);
+    mockUserService = MockUserService();
+    dataSource = UserRemoteDataSource(mockUserService);
   });
 
   group('getUsers', () {
@@ -29,17 +27,11 @@ void main() {
 
     test('should return a list of users when success', () async {
       // Arrange
-      when(mockApiService.get('http://10.0.2.2:3000/users')).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(),
-          statusCode: 200,
-          data: jsonDecode(
-            readJson('dummy_data/jsons/list_user_response.json'),
-          ),
-        ),
+      when(mockUserService.fetchUsers()).thenAnswer(
+        (_) async => testUserModels,
       );
       // Act
-      final result = await dataSource.getUsers();
+      final result = await dataSource.fetchUsers();
       // Assert
       expect(result, testUserModels);
     });
@@ -53,14 +45,8 @@ void main() {
 
     test('should return a users by given id when success', () async {
       // Arrange
-      when(mockApiService.get('http://10.0.2.2:3000/users/$testId')).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(),
-          statusCode: 200,
-          data: jsonDecode(
-            readJson('dummy_data/jsons/user_response.json'),
-          ),
-        ),
+      when(mockUserService.getUserById(testId)).thenAnswer(
+        (_) async => testUserModel,
       );
       // Act
       final result = await dataSource.getUserById(testId);
@@ -69,27 +55,18 @@ void main() {
     });
   });
 
-  group('createUser', () {
+  group('addUser', () {
     final testUserModel = UserModel.fromJson(
       jsonDecode(readJson('dummy_data/jsons/user_response.json'))["data"],
     );
 
     test('should create user when success', () async {
       // Arrange
-      when(mockApiService.post(
-        'http://10.0.2.2:3000/users',
-        data: tUserPayload.toJson(),
-      )).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(),
-          statusCode: 201,
-          data: jsonDecode(
-            readJson('dummy_data/jsons/user_response.json'),
-          ),
-        ),
+      when(mockUserService.addUser(tUserPayload)).thenAnswer(
+        (_) async => testUserModel,
       );
       // Act
-      final result = await dataSource.createUser(tUserPayload);
+      final result = await dataSource.addUser(tUserPayload);
       // Assert
       expect(result, testUserModel);
     });

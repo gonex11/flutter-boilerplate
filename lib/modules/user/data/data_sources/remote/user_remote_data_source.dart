@@ -1,34 +1,16 @@
-import 'package:flutter_boilerplate/core/services/api_service.dart';
-import 'package:flutter_boilerplate/shared/responses/base_list_response.dart';
+import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/services/user_service.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart';
 
 class UserRemoteDataSource {
-  final ApiService _apiService;
+  final UserService _userService;
 
-  const UserRemoteDataSource(this._apiService);
+  const UserRemoteDataSource(this._userService);
 
-  Future<List<UserModel>> getUsers() async {
-    final response = await _apiService.get('http://10.0.2.2:3000/users');
-    final result = BaseListResponse.fromJson(
-      response.data,
-      (json) => UserModel.fromJson((json as Map<String, dynamic>)),
-    );
-    return result.data;
-  }
+  Future<List<UserModel>> fetchUsers() => _userService.fetchUsers();
 
-  Future<UserModel> getUserById(int id) async {
-    final response = await _apiService.get('http://10.0.2.2:3000/users/$id');
-    final result = UserModel.fromJson(response.data['data']);
-    return result;
-  }
+  Future<UserModel> getUserById(int id) => _userService.getUserById(id);
 
-  Future<UserModel> createUser(UserPayload payload) async {
-    final response = await _apiService.post(
-      'http://10.0.2.2:3000/users',
-      data: payload.toJson(),
-    );
-    final result = UserModel.fromJson(response.data['data']);
-    return result;
-  }
+  Future<UserModel> addUser(UserPayload payload) =>
+      _userService.addUser(payload);
 }

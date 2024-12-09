@@ -94,9 +94,7 @@ class LoginPage extends GetView<LoginController> {
                                       controller: controller.passController,
                                       hintText:
                                           AppLocalizations.passwordPlaceholder,
-                                      validator: AppUtils.passwordValidator(
-                                        controller.passController.text,
-                                      ),
+                                      validator: AppUtils.passwordValidator(),
                                     ),
                                   ],
                                 ),

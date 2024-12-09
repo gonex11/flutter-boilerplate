@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/controllers/create_user_controller.dart';
+import 'package:flutter_boilerplate/modules/user/presentation/controllers/home_controller.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
@@ -18,87 +19,93 @@ class CreateUserPage extends GetView<CreateUserController> {
     final theme = context.theme;
     final colorScheme = theme.colorScheme;
 
-    return KeyboardDismisser(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.addUser),
-        ),
-        persistentFooterButtons: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Obx(
-              () => AppButton(
-                isLoading: controller.createState.value is ResultLoading,
-                onPressed: controller.createUser,
-                text: AppLocalizations.save,
+    return PopScope(
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop && result == true) {
+          final homeController = Get.find<HomeController>();
+          homeController.fetchUsers(true);
+        }
+      },
+      child: KeyboardDismisser(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(AppLocalizations.addUser),
+          ),
+          persistentFooterButtons: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Obx(
+                () => AppButton(
+                  isLoading: controller.createState.value is ResultLoading,
+                  onPressed: controller.addUser,
+                  text: AppLocalizations.save,
+                ),
               ),
             ),
-          ),
-        ],
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Form(
-                  key: controller.formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppLocalizations.username,
-                        style: AppFonts.mdRegular.copyWith(
-                          color: colorScheme.onSurface,
+          ],
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Form(
+                    key: controller.formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          AppLocalizations.username,
+                          style: AppFonts.mdRegular.copyWith(
+                            color: colorScheme.onSurface,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 6),
-                      AppInput(
-                        controller: controller.unameController,
-                        hintText: AppLocalizations.usernamePlaceholder,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        AppLocalizations.firstName,
-                        style: AppFonts.mdRegular.copyWith(
-                          color: colorScheme.onSurface,
+                        const SizedBox(height: 6),
+                        AppInput(
+                          controller: controller.unameController,
+                          hintText: AppLocalizations.usernamePlaceholder,
+                          validator: FormBuilderValidators.required(),
                         ),
-                      ),
-                      const SizedBox(height: 6),
-                      AppInput(
-                        controller: controller.fNameController,
-                        hintText: AppLocalizations.firstNamePlaceholder,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        AppLocalizations.lastName,
-                        style: AppFonts.mdRegular.copyWith(
-                          color: colorScheme.onSurface,
+                        const SizedBox(height: 16),
+                        Text(
+                          AppLocalizations.firstName,
+                          style: AppFonts.mdRegular.copyWith(
+                            color: colorScheme.onSurface,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 6),
-                      AppInput(
-                        controller: controller.lNameController,
-                        hintText: AppLocalizations.lastNamePlaceholder,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        AppLocalizations.password,
-                        style: AppFonts.mdRegular.copyWith(
-                          color: colorScheme.onSurface,
+                        const SizedBox(height: 6),
+                        AppInput(
+                          controller: controller.fNameController,
+                          hintText: AppLocalizations.firstNamePlaceholder,
+                          validator: FormBuilderValidators.required(),
                         ),
-                      ),
-                      const SizedBox(height: 6),
-                      AppInput.password(
-                        controller: controller.passController,
-                        hintText: AppLocalizations.passwordPlaceholder,
-                        validator: AppUtils.passwordValidator(
-                          controller.passController.text,
+                        const SizedBox(height: 16),
+                        Text(
+                          AppLocalizations.lastName,
+                          style: AppFonts.mdRegular.copyWith(
+                            color: colorScheme.onSurface,
+                          ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 6),
+                        AppInput(
+                          controller: controller.lNameController,
+                          hintText: AppLocalizations.lastNamePlaceholder,
+                          validator: FormBuilderValidators.required(),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          AppLocalizations.password,
+                          style: AppFonts.mdRegular.copyWith(
+                            color: colorScheme.onSurface,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        AppInput.password(
+                          controller: controller.passController,
+                          hintText: AppLocalizations.passwordPlaceholder,
+                          validator: AppUtils.passwordValidator(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

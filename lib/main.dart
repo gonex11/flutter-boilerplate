@@ -35,7 +35,7 @@ class App extends StatelessWidget {
           title: 'Flutter Boilerplate',
           getPages: AppPages.pages,
           translations: AppTranslations(),
-          locale: Locale(AppConstants.general.enLocale),
+          locale: Get.deviceLocale,
           fallbackLocale: Locale(AppConstants.general.enLocale),
           localizationsDelegates: const [
             FormBuilderLocalizations.delegate,

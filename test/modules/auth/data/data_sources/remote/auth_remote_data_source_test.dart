@@ -1,22 +1,22 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/auth_remote_data_source.dart';
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../../dummy_data/dummy_objects.dart';
 import '../../../../../helpers/test_helper.mocks.dart';
 import '../../../../../json_reader.dart';
 
 void main() {
   late AuthRemoteDataSource dataSource;
-  late MockApiService mockApiService;
+  late MockAuthService mockAuthService;
 
   setUp(() {
-    mockApiService = MockApiService();
-    dataSource = AuthRemoteDataSource(mockApiService);
+    mockAuthService = MockAuthService();
+    dataSource = AuthRemoteDataSource(mockAuthService);
   });
 
   group('getLoggedUser', () {
@@ -26,14 +26,8 @@ void main() {
 
     test('should return a logged user when success', () async {
       // Arrange
-      when(mockApiService.get('http://10.0.2.2:3000/auth/me')).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(),
-          statusCode: 200,
-          data: jsonDecode(
-            readJson('dummy_data/jsons/user_response.json'),
-          ),
-        ),
+      when(mockAuthService.getLoggedUser()).thenAnswer(
+        (_) async => testUserModel,
       );
       // Act
       final result = await dataSource.getLoggedUser();
@@ -43,32 +37,17 @@ void main() {
   });
 
   group('login', () {
-    const testUsername = 'username';
-    const testPassword = 'password';
     final testTokenModel = TokenModel.fromJson(
       jsonDecode(readJson('dummy_data/jsons/token_response.json'))["data"],
     );
 
     test('should return access token and refresh token when success', () async {
       // Arrange
-      when(mockApiService.post(
-        'http://10.0.2.2:3000/auth/login',
-        data: {
-          'username': testUsername,
-          'password': testPassword,
-        },
-        authorized: false,
-      )).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(),
-          statusCode: 200,
-          data: jsonDecode(
-            readJson('dummy_data/jsons/token_response.json'),
-          ),
-        ),
+      when(mockAuthService.login(tLoginPayload)).thenAnswer(
+        (_) async => testTokenModel,
       );
       // Act
-      final result = await dataSource.login(testUsername, testPassword);
+      final result = await dataSource.login(tLoginPayload);
       // Assert
       expect(result, testTokenModel);
     });
@@ -82,18 +61,8 @@ void main() {
 
     test('should return access token and refresh token when success', () async {
       // Arrange
-      when(mockApiService.post(
-        'http://10.0.2.2:3000/auth/refresh',
-        data: {'refresh_token': testRefreshToken},
-        authorized: false,
-      )).thenAnswer(
-        (_) async => Response(
-          requestOptions: RequestOptions(),
-          statusCode: 200,
-          data: jsonDecode(
-            readJson('dummy_data/jsons/token_response.json'),
-          ),
-        ),
+      when(mockAuthService.refreshToken(testRefreshToken)).thenAnswer(
+        (_) async => testTokenModel,
       );
       // Act
       final result = await dataSource.refreshToken(testRefreshToken);

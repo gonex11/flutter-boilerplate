@@ -3,30 +3,34 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i10;
-import 'dart:ui' as _i12;
+import 'dart:async' as _i9;
+import 'dart:ui' as _i11;
 
 import 'package:dartz/dartz.dart' as _i3;
-import 'package:dio/dio.dart' as _i6;
-import 'package:flutter/widgets.dart' as _i24;
-import 'package:flutter_boilerplate/core/common/failures.dart' as _i14;
-import 'package:flutter_boilerplate/core/common/network_info.dart' as _i26;
-import 'package:flutter_boilerplate/core/common/token_manager.dart' as _i25;
-import 'package:flutter_boilerplate/core/services/api_service.dart' as _i23;
+import 'package:flutter/widgets.dart' as _i25;
+import 'package:flutter_boilerplate/core/common/failures.dart' as _i13;
+import 'package:flutter_boilerplate/core/common/network_info.dart' as _i27;
+import 'package:flutter_boilerplate/core/common/token_manager.dart' as _i26;
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/local/auth_local_data_source.dart'
     as _i18;
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/auth_remote_data_source.dart'
     as _i17;
+import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/services/auth_service.dart'
+    as _i23;
+import 'package:flutter_boilerplate/modules/auth/data/models/login_payload.dart'
+    as _i14;
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart'
     as _i5;
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart'
-    as _i13;
+    as _i12;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/db/user_dao.dart'
     as _i21;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entities/user_entity.dart'
     as _i22;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/user_local_data_source.dart'
     as _i20;
+import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/services/user_service.dart'
+    as _i24;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/user_remote_data_source.dart'
     as _i19;
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart'
@@ -36,11 +40,11 @@ import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart'
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart'
     as _i15;
 import 'package:flutter_boilerplate/modules/user/presentation/controllers/home_controller.dart'
-    as _i8;
-import 'package:flutter_boilerplate/shared/utils/result_state.dart' as _i9;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i7;
+    as _i7;
+import 'package:flutter_boilerplate/shared/utils/result_state.dart' as _i8;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i6;
 import 'package:get/get.dart' as _i2;
-import 'package:get/get_state_manager/src/simple/list_notifier.dart' as _i11;
+import 'package:get/get_state_manager/src/simple/list_notifier.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -107,8 +111,8 @@ class _FakeTokenModel_4 extends _i1.SmartFake implements _i5.TokenModel {
         );
 }
 
-class _FakeResponse_5<T> extends _i1.SmartFake implements _i6.Response<T> {
-  _FakeResponse_5(
+class _FakeIOSOptions_5 extends _i1.SmartFake implements _i6.IOSOptions {
+  _FakeIOSOptions_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -117,8 +121,9 @@ class _FakeResponse_5<T> extends _i1.SmartFake implements _i6.Response<T> {
         );
 }
 
-class _FakeIOSOptions_6 extends _i1.SmartFake implements _i7.IOSOptions {
-  _FakeIOSOptions_6(
+class _FakeAndroidOptions_6 extends _i1.SmartFake
+    implements _i6.AndroidOptions {
+  _FakeAndroidOptions_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -127,9 +132,8 @@ class _FakeIOSOptions_6 extends _i1.SmartFake implements _i7.IOSOptions {
         );
 }
 
-class _FakeAndroidOptions_7 extends _i1.SmartFake
-    implements _i7.AndroidOptions {
-  _FakeAndroidOptions_7(
+class _FakeLinuxOptions_7 extends _i1.SmartFake implements _i6.LinuxOptions {
+  _FakeLinuxOptions_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -138,8 +142,9 @@ class _FakeAndroidOptions_7 extends _i1.SmartFake
         );
 }
 
-class _FakeLinuxOptions_8 extends _i1.SmartFake implements _i7.LinuxOptions {
-  _FakeLinuxOptions_8(
+class _FakeWindowsOptions_8 extends _i1.SmartFake
+    implements _i6.WindowsOptions {
+  _FakeWindowsOptions_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -148,9 +153,8 @@ class _FakeLinuxOptions_8 extends _i1.SmartFake implements _i7.LinuxOptions {
         );
 }
 
-class _FakeWindowsOptions_9 extends _i1.SmartFake
-    implements _i7.WindowsOptions {
-  _FakeWindowsOptions_9(
+class _FakeWebOptions_9 extends _i1.SmartFake implements _i6.WebOptions {
+  _FakeWebOptions_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -159,18 +163,8 @@ class _FakeWindowsOptions_9 extends _i1.SmartFake
         );
 }
 
-class _FakeWebOptions_10 extends _i1.SmartFake implements _i7.WebOptions {
-  _FakeWebOptions_10(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeMacOsOptions_11 extends _i1.SmartFake implements _i7.MacOsOptions {
-  _FakeMacOsOptions_11(
+class _FakeMacOsOptions_10 extends _i1.SmartFake implements _i6.MacOsOptions {
+  _FakeMacOsOptions_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -182,29 +176,29 @@ class _FakeMacOsOptions_11 extends _i1.SmartFake implements _i7.MacOsOptions {
 /// A class which mocks [HomeController].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeController extends _i1.Mock implements _i8.HomeController {
+class MockHomeController extends _i1.Mock implements _i7.HomeController {
   MockHomeController() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.Rx<_i9.ResultState<List<_i4.UserModel>>> get usersState =>
+  _i2.Rx<_i8.ResultState<List<_i4.UserModel>>> get usersState =>
       (super.noSuchMethod(
         Invocation.getter(#usersState),
-        returnValue: _FakeRx_0<_i9.ResultState<List<_i4.UserModel>>>(
+        returnValue: _FakeRx_0<_i8.ResultState<List<_i4.UserModel>>>(
           this,
           Invocation.getter(#usersState),
         ),
-      ) as _i2.Rx<_i9.ResultState<List<_i4.UserModel>>>);
+      ) as _i2.Rx<_i8.ResultState<List<_i4.UserModel>>>);
 
   @override
-  _i2.Rx<_i9.ResultState<bool>> get logoutState => (super.noSuchMethod(
+  _i2.Rx<_i8.ResultState<bool>> get logoutState => (super.noSuchMethod(
         Invocation.getter(#logoutState),
-        returnValue: _FakeRx_0<_i9.ResultState<bool>>(
+        returnValue: _FakeRx_0<_i8.ResultState<bool>>(
           this,
           Invocation.getter(#logoutState),
         ),
-      ) as _i2.Rx<_i9.ResultState<bool>>);
+      ) as _i2.Rx<_i8.ResultState<bool>>);
 
   @override
   _i2.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
@@ -249,34 +243,34 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
       ) as int);
 
   @override
-  _i10.Future<void> onInit() => (super.noSuchMethod(
+  _i9.Future<void> onInit() => (super.noSuchMethod(
         Invocation.method(
           #onInit,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 
   @override
-  _i10.Future<void> getUsers([bool? refresh = false]) => (super.noSuchMethod(
+  _i9.Future<void> fetchUsers([bool? refresh = false]) => (super.noSuchMethod(
         Invocation.method(
-          #getUsers,
+          #fetchUsers,
           [refresh],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 
   @override
-  _i10.Future<void> logout() => (super.noSuchMethod(
+  _i9.Future<void> logout() => (super.noSuchMethod(
         Invocation.method(
           #logout,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 
   @override
   void update([
@@ -322,17 +316,17 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
       );
 
   @override
-  _i11.Disposer addListener(_i11.GetStateUpdate? listener) =>
+  _i10.Disposer addListener(_i10.GetStateUpdate? listener) =>
       (super.noSuchMethod(
         Invocation.method(
           #addListener,
           [listener],
         ),
         returnValue: () {},
-      ) as _i11.Disposer);
+      ) as _i10.Disposer);
 
   @override
-  void removeListener(_i12.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i11.VoidCallback? listener) => super.noSuchMethod(
         Invocation.method(
           #removeListener,
           [listener],
@@ -370,7 +364,7 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
   @override
   void removeListenerId(
     Object? id,
-    _i12.VoidCallback? listener,
+    _i11.VoidCallback? listener,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -393,9 +387,9 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
       );
 
   @override
-  _i11.Disposer addListenerId(
+  _i10.Disposer addListenerId(
     Object? key,
-    _i11.GetStateUpdate? listener,
+    _i10.GetStateUpdate? listener,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -406,7 +400,7 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
           ],
         ),
         returnValue: () {},
-      ) as _i11.Disposer);
+      ) as _i10.Disposer);
 
   @override
   void disposeId(Object? id) => super.noSuchMethod(
@@ -421,63 +415,54 @@ class MockHomeController extends _i1.Mock implements _i8.HomeController {
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepository extends _i1.Mock implements _i13.AuthRepository {
+class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
   MockAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i10.Future<_i3.Either<_i14.Failure, _i5.TokenModel>> login(
-    String? username,
-    String? password,
-  ) =>
+  _i9.Future<_i3.Either<_i13.Failure, _i5.TokenModel>> login(
+          _i14.LoginPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
-          [
-            username,
-            password,
-          ],
+          [payload],
         ),
-        returnValue:
-            _i10.Future<_i3.Either<_i14.Failure, _i5.TokenModel>>.value(
-                _FakeEither_2<_i14.Failure, _i5.TokenModel>(
+        returnValue: _i9.Future<_i3.Either<_i13.Failure, _i5.TokenModel>>.value(
+            _FakeEither_2<_i13.Failure, _i5.TokenModel>(
           this,
           Invocation.method(
             #login,
-            [
-              username,
-              password,
-            ],
+            [payload],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i14.Failure, _i5.TokenModel>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, _i5.TokenModel>>);
 
   @override
-  _i10.Future<_i3.Either<_i14.Failure, _i4.UserModel>> getLoggedUser() =>
+  _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>> getLoggedUser() =>
       (super.noSuchMethod(
         Invocation.method(
           #getLoggedUser,
           [],
         ),
-        returnValue: _i10.Future<_i3.Either<_i14.Failure, _i4.UserModel>>.value(
-            _FakeEither_2<_i14.Failure, _i4.UserModel>(
+        returnValue: _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>.value(
+            _FakeEither_2<_i13.Failure, _i4.UserModel>(
           this,
           Invocation.method(
             #getLoggedUser,
             [],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i14.Failure, _i4.UserModel>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>);
 
   @override
-  _i10.Future<bool> logout() => (super.noSuchMethod(
+  _i9.Future<bool> logout() => (super.noSuchMethod(
         Invocation.method(
           #logout,
           [],
         ),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 }
 
 /// A class which mocks [UserRepository].
@@ -489,57 +474,57 @@ class MockUserRepository extends _i1.Mock implements _i15.UserRepository {
   }
 
   @override
-  _i10.Future<_i3.Either<_i14.Failure, List<_i4.UserModel>>> getUsers() =>
+  _i9.Future<_i3.Either<_i13.Failure, List<_i4.UserModel>>> fetchUsers() =>
       (super.noSuchMethod(
         Invocation.method(
-          #getUsers,
+          #fetchUsers,
           [],
         ),
         returnValue:
-            _i10.Future<_i3.Either<_i14.Failure, List<_i4.UserModel>>>.value(
-                _FakeEither_2<_i14.Failure, List<_i4.UserModel>>(
+            _i9.Future<_i3.Either<_i13.Failure, List<_i4.UserModel>>>.value(
+                _FakeEither_2<_i13.Failure, List<_i4.UserModel>>(
           this,
           Invocation.method(
-            #getUsers,
+            #fetchUsers,
             [],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i14.Failure, List<_i4.UserModel>>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, List<_i4.UserModel>>>);
 
   @override
-  _i10.Future<_i3.Either<_i14.Failure, _i4.UserModel>> getUserById(int? id) =>
+  _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>> getUserById(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserById,
           [id],
         ),
-        returnValue: _i10.Future<_i3.Either<_i14.Failure, _i4.UserModel>>.value(
-            _FakeEither_2<_i14.Failure, _i4.UserModel>(
+        returnValue: _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>.value(
+            _FakeEither_2<_i13.Failure, _i4.UserModel>(
           this,
           Invocation.method(
             #getUserById,
             [id],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i14.Failure, _i4.UserModel>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>);
 
   @override
-  _i10.Future<_i3.Either<_i14.Failure, _i4.UserModel>> createUser(
+  _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>> addUser(
           _i16.UserPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
-          #createUser,
+          #addUser,
           [payload],
         ),
-        returnValue: _i10.Future<_i3.Either<_i14.Failure, _i4.UserModel>>.value(
-            _FakeEither_2<_i14.Failure, _i4.UserModel>(
+        returnValue: _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>.value(
+            _FakeEither_2<_i13.Failure, _i4.UserModel>(
           this,
           Invocation.method(
-            #createUser,
+            #addUser,
             [payload],
           ),
         )),
-      ) as _i10.Future<_i3.Either<_i14.Failure, _i4.UserModel>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>);
 }
 
 /// A class which mocks [AuthRemoteDataSource].
@@ -552,60 +537,51 @@ class MockAuthRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i10.Future<_i4.UserModel> getLoggedUser() => (super.noSuchMethod(
+  _i9.Future<_i4.UserModel> getLoggedUser() => (super.noSuchMethod(
         Invocation.method(
           #getLoggedUser,
           [],
         ),
-        returnValue: _i10.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
           this,
           Invocation.method(
             #getLoggedUser,
             [],
           ),
         )),
-      ) as _i10.Future<_i4.UserModel>);
+      ) as _i9.Future<_i4.UserModel>);
 
   @override
-  _i10.Future<_i5.TokenModel> login(
-    String? username,
-    String? password,
-  ) =>
+  _i9.Future<_i5.TokenModel> login(_i14.LoginPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
-          [
-            username,
-            password,
-          ],
+          [payload],
         ),
-        returnValue: _i10.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
+        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
           this,
           Invocation.method(
             #login,
-            [
-              username,
-              password,
-            ],
+            [payload],
           ),
         )),
-      ) as _i10.Future<_i5.TokenModel>);
+      ) as _i9.Future<_i5.TokenModel>);
 
   @override
-  _i10.Future<_i5.TokenModel> refreshToken(String? refreshToken) =>
+  _i9.Future<_i5.TokenModel> refreshToken(String? refreshToken) =>
       (super.noSuchMethod(
         Invocation.method(
           #refreshToken,
           [refreshToken],
         ),
-        returnValue: _i10.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
+        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
           this,
           Invocation.method(
             #refreshToken,
             [refreshToken],
           ),
         )),
-      ) as _i10.Future<_i5.TokenModel>);
+      ) as _i9.Future<_i5.TokenModel>);
 }
 
 /// A class which mocks [AuthLocalDataSource].
@@ -618,68 +594,68 @@ class MockAuthLocalDataSource extends _i1.Mock
   }
 
   @override
-  _i10.Future<bool> isTokenExpired() => (super.noSuchMethod(
+  _i9.Future<bool> isTokenExpired() => (super.noSuchMethod(
         Invocation.method(
           #isTokenExpired,
           [],
         ),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 
   @override
-  _i10.Future<bool> setUserSession(_i4.UserModel? user) => (super.noSuchMethod(
+  _i9.Future<bool> setUserSession(_i4.UserModel? user) => (super.noSuchMethod(
         Invocation.method(
           #setUserSession,
           [user],
         ),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 
   @override
-  _i10.Future<_i4.UserModel?> getUserSession() => (super.noSuchMethod(
+  _i9.Future<_i4.UserModel?> getUserSession() => (super.noSuchMethod(
         Invocation.method(
           #getUserSession,
           [],
         ),
-        returnValue: _i10.Future<_i4.UserModel?>.value(),
-      ) as _i10.Future<_i4.UserModel?>);
+        returnValue: _i9.Future<_i4.UserModel?>.value(),
+      ) as _i9.Future<_i4.UserModel?>);
 
   @override
-  _i10.Future<bool> setToken(_i5.TokenModel? tokenResponse) =>
+  _i9.Future<bool> setToken(_i5.TokenModel? tokenResponse) =>
       (super.noSuchMethod(
         Invocation.method(
           #setToken,
           [tokenResponse],
         ),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 
   @override
-  _i10.Future<String?> getAccessToken() => (super.noSuchMethod(
+  _i9.Future<String?> getAccessToken() => (super.noSuchMethod(
         Invocation.method(
           #getAccessToken,
           [],
         ),
-        returnValue: _i10.Future<String?>.value(),
-      ) as _i10.Future<String?>);
+        returnValue: _i9.Future<String?>.value(),
+      ) as _i9.Future<String?>);
 
   @override
-  _i10.Future<String?> getRefreshToken() => (super.noSuchMethod(
+  _i9.Future<String?> getRefreshToken() => (super.noSuchMethod(
         Invocation.method(
           #getRefreshToken,
           [],
         ),
-        returnValue: _i10.Future<String?>.value(),
-      ) as _i10.Future<String?>);
+        returnValue: _i9.Future<String?>.value(),
+      ) as _i9.Future<String?>);
 
   @override
-  _i10.Future<bool> clearSession() => (super.noSuchMethod(
+  _i9.Future<bool> clearSession() => (super.noSuchMethod(
         Invocation.method(
           #clearSession,
           [],
         ),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 }
 
 /// A class which mocks [UserRemoteDataSource].
@@ -692,44 +668,44 @@ class MockUserRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i10.Future<List<_i4.UserModel>> getUsers() => (super.noSuchMethod(
+  _i9.Future<List<_i4.UserModel>> fetchUsers() => (super.noSuchMethod(
         Invocation.method(
-          #getUsers,
+          #fetchUsers,
           [],
         ),
-        returnValue: _i10.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
-      ) as _i10.Future<List<_i4.UserModel>>);
+        returnValue: _i9.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
+      ) as _i9.Future<List<_i4.UserModel>>);
 
   @override
-  _i10.Future<_i4.UserModel> getUserById(int? id) => (super.noSuchMethod(
+  _i9.Future<_i4.UserModel> getUserById(int? id) => (super.noSuchMethod(
         Invocation.method(
           #getUserById,
           [id],
         ),
-        returnValue: _i10.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
           this,
           Invocation.method(
             #getUserById,
             [id],
           ),
         )),
-      ) as _i10.Future<_i4.UserModel>);
+      ) as _i9.Future<_i4.UserModel>);
 
   @override
-  _i10.Future<_i4.UserModel> createUser(_i16.UserPayload? payload) =>
+  _i9.Future<_i4.UserModel> addUser(_i16.UserPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
-          #createUser,
+          #addUser,
           [payload],
         ),
-        returnValue: _i10.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
           this,
           Invocation.method(
-            #createUser,
+            #addUser,
             [payload],
           ),
         )),
-      ) as _i10.Future<_i4.UserModel>);
+      ) as _i9.Future<_i4.UserModel>);
 }
 
 /// A class which mocks [UserLocalDataSource].
@@ -742,23 +718,23 @@ class MockUserLocalDataSource extends _i1.Mock
   }
 
   @override
-  _i10.Future<List<_i4.UserModel>> getCachedUsers() => (super.noSuchMethod(
+  _i9.Future<List<_i4.UserModel>> getCachedUsers() => (super.noSuchMethod(
         Invocation.method(
           #getCachedUsers,
           [],
         ),
-        returnValue: _i10.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
-      ) as _i10.Future<List<_i4.UserModel>>);
+        returnValue: _i9.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
+      ) as _i9.Future<List<_i4.UserModel>>);
 
   @override
-  _i10.Future<bool> cacheUsers(List<_i4.UserModel>? users) =>
+  _i9.Future<bool> cacheUsers(List<_i4.UserModel>? users) =>
       (super.noSuchMethod(
         Invocation.method(
           #cacheUsers,
           [users],
         ),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 }
 
 /// A class which mocks [UserDao].
@@ -770,380 +746,198 @@ class MockUserDao extends _i1.Mock implements _i21.UserDao {
   }
 
   @override
-  _i10.Future<List<_i22.UserEntity>> getAll() => (super.noSuchMethod(
+  _i9.Future<List<_i22.UserEntity>> getAll() => (super.noSuchMethod(
         Invocation.method(
           #getAll,
           [],
         ),
         returnValue:
-            _i10.Future<List<_i22.UserEntity>>.value(<_i22.UserEntity>[]),
-      ) as _i10.Future<List<_i22.UserEntity>>);
+            _i9.Future<List<_i22.UserEntity>>.value(<_i22.UserEntity>[]),
+      ) as _i9.Future<List<_i22.UserEntity>>);
 
   @override
-  _i10.Future<void> insertAll(List<_i22.UserEntity>? users) =>
+  _i9.Future<void> insertAll(List<_i22.UserEntity>? users) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertAll,
           [users],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 }
 
-/// A class which mocks [ApiService].
+/// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiService extends _i1.Mock implements _i23.ApiService {
-  MockApiService() {
+class MockAuthService extends _i1.Mock implements _i23.AuthService {
+  MockAuthService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i10.Future<_i6.Response<dynamic>> get(
-    String? endpoint, {
-    Map<String, String>? customHeaders,
-    Map<String, dynamic>? queryParams,
-    bool? authorized = true,
-  }) =>
-      (super.noSuchMethod(
+  _i9.Future<_i4.UserModel> getLoggedUser() => (super.noSuchMethod(
         Invocation.method(
-          #get,
-          [endpoint],
-          {
-            #customHeaders: customHeaders,
-            #queryParams: queryParams,
-            #authorized: authorized,
-          },
+          #getLoggedUser,
+          [],
         ),
-        returnValue:
-            _i10.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
           this,
           Invocation.method(
-            #get,
-            [endpoint],
-            {
-              #customHeaders: customHeaders,
-              #queryParams: queryParams,
-              #authorized: authorized,
-            },
+            #getLoggedUser,
+            [],
           ),
         )),
-      ) as _i10.Future<_i6.Response<dynamic>>);
+      ) as _i9.Future<_i4.UserModel>);
 
   @override
-  _i10.Future<_i6.Response<dynamic>> post(
-    String? endpoint, {
-    required Object? data,
-    Map<String, String>? customHeaders,
-    Map<String, dynamic>? queryParams,
-    bool? authorized = true,
-  }) =>
+  _i9.Future<_i5.TokenModel> login(_i14.LoginPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
-          #post,
-          [endpoint],
-          {
-            #data: data,
-            #customHeaders: customHeaders,
-            #queryParams: queryParams,
-            #authorized: authorized,
-          },
+          #login,
+          [payload],
         ),
-        returnValue:
-            _i10.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
           this,
           Invocation.method(
-            #post,
-            [endpoint],
-            {
-              #data: data,
-              #customHeaders: customHeaders,
-              #queryParams: queryParams,
-              #authorized: authorized,
-            },
+            #login,
+            [payload],
           ),
         )),
-      ) as _i10.Future<_i6.Response<dynamic>>);
+      ) as _i9.Future<_i5.TokenModel>);
 
   @override
-  _i10.Future<_i6.Response<dynamic>> delete(
-    String? endpoint, {
-    required Object? data,
-    Map<String, String>? customHeaders,
-    Map<String, dynamic>? queryParams,
-    bool? authorized = true,
-  }) =>
-      (super.noSuchMethod(
+  _i9.Future<_i5.TokenModel> refreshToken(String? token) => (super.noSuchMethod(
         Invocation.method(
-          #delete,
-          [endpoint],
-          {
-            #data: data,
-            #customHeaders: customHeaders,
-            #queryParams: queryParams,
-            #authorized: authorized,
-          },
+          #refreshToken,
+          [token],
         ),
-        returnValue:
-            _i10.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
           this,
           Invocation.method(
-            #delete,
-            [endpoint],
-            {
-              #data: data,
-              #customHeaders: customHeaders,
-              #queryParams: queryParams,
-              #authorized: authorized,
-            },
+            #refreshToken,
+            [token],
           ),
         )),
-      ) as _i10.Future<_i6.Response<dynamic>>);
+      ) as _i9.Future<_i5.TokenModel>);
+}
+
+/// A class which mocks [UserService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserService extends _i1.Mock implements _i24.UserService {
+  MockUserService() {
+    _i1.throwOnMissingStub(this);
+  }
 
   @override
-  _i10.Future<_i6.Response<dynamic>> patch(
-    String? endpoint, {
-    required Object? data,
-    Map<String, String>? customHeaders,
-    Map<String, dynamic>? queryParams,
-    bool? authorized = true,
-  }) =>
-      (super.noSuchMethod(
+  _i9.Future<List<_i4.UserModel>> fetchUsers() => (super.noSuchMethod(
         Invocation.method(
-          #patch,
-          [endpoint],
-          {
-            #data: data,
-            #customHeaders: customHeaders,
-            #queryParams: queryParams,
-            #authorized: authorized,
-          },
+          #fetchUsers,
+          [],
         ),
-        returnValue:
-            _i10.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
-          this,
-          Invocation.method(
-            #patch,
-            [endpoint],
-            {
-              #data: data,
-              #customHeaders: customHeaders,
-              #queryParams: queryParams,
-              #authorized: authorized,
-            },
-          ),
-        )),
-      ) as _i10.Future<_i6.Response<dynamic>>);
+        returnValue: _i9.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
+      ) as _i9.Future<List<_i4.UserModel>>);
 
   @override
-  _i10.Future<_i6.Response<dynamic>> put(
-    String? endpoint, {
-    required Object? data,
-    Map<String, String>? customHeaders,
-    Map<String, dynamic>? queryParams,
-    bool? authorized = true,
-  }) =>
-      (super.noSuchMethod(
+  _i9.Future<_i4.UserModel> getUserById(int? id) => (super.noSuchMethod(
         Invocation.method(
-          #put,
-          [endpoint],
-          {
-            #data: data,
-            #customHeaders: customHeaders,
-            #queryParams: queryParams,
-            #authorized: authorized,
-          },
+          #getUserById,
+          [id],
         ),
-        returnValue:
-            _i10.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
           this,
           Invocation.method(
-            #put,
-            [endpoint],
-            {
-              #data: data,
-              #customHeaders: customHeaders,
-              #queryParams: queryParams,
-              #authorized: authorized,
-            },
+            #getUserById,
+            [id],
           ),
         )),
-      ) as _i10.Future<_i6.Response<dynamic>>);
+      ) as _i9.Future<_i4.UserModel>);
 
   @override
-  _i10.Future<_i6.Response<dynamic>> postMultipart(
-    String? endpoint, {
-    required _i6.FormData? formData,
-    Map<String, String>? customHeaders,
-    Map<String, dynamic>? queryParams,
-    bool? authorized = true,
-  }) =>
+  _i9.Future<_i4.UserModel> addUser(_i16.UserPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
-          #postMultipart,
-          [endpoint],
-          {
-            #formData: formData,
-            #customHeaders: customHeaders,
-            #queryParams: queryParams,
-            #authorized: authorized,
-          },
+          #addUser,
+          [payload],
         ),
-        returnValue:
-            _i10.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
+        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
           this,
           Invocation.method(
-            #postMultipart,
-            [endpoint],
-            {
-              #formData: formData,
-              #customHeaders: customHeaders,
-              #queryParams: queryParams,
-              #authorized: authorized,
-            },
+            #addUser,
+            [payload],
           ),
         )),
-      ) as _i10.Future<_i6.Response<dynamic>>);
-
-  @override
-  _i10.Future<_i6.Response<dynamic>> patchMultipart(
-    String? endpoint, {
-    required _i6.FormData? formData,
-    Map<String, String>? customHeaders,
-    Map<String, dynamic>? queryParams,
-    bool? authorized = true,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #patchMultipart,
-          [endpoint],
-          {
-            #formData: formData,
-            #customHeaders: customHeaders,
-            #queryParams: queryParams,
-            #authorized: authorized,
-          },
-        ),
-        returnValue:
-            _i10.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
-          this,
-          Invocation.method(
-            #patchMultipart,
-            [endpoint],
-            {
-              #formData: formData,
-              #customHeaders: customHeaders,
-              #queryParams: queryParams,
-              #authorized: authorized,
-            },
-          ),
-        )),
-      ) as _i10.Future<_i6.Response<dynamic>>);
-
-  @override
-  _i10.Future<_i6.Response<dynamic>> putMultipart(
-    String? endpoint, {
-    required _i6.FormData? formData,
-    Map<String, String>? customHeaders,
-    Map<String, dynamic>? queryParams,
-    bool? authorized = true,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #putMultipart,
-          [endpoint],
-          {
-            #formData: formData,
-            #customHeaders: customHeaders,
-            #queryParams: queryParams,
-            #authorized: authorized,
-          },
-        ),
-        returnValue:
-            _i10.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
-          this,
-          Invocation.method(
-            #putMultipart,
-            [endpoint],
-            {
-              #formData: formData,
-              #customHeaders: customHeaders,
-              #queryParams: queryParams,
-              #authorized: authorized,
-            },
-          ),
-        )),
-      ) as _i10.Future<_i6.Response<dynamic>>);
+      ) as _i9.Future<_i4.UserModel>);
 }
 
 /// A class which mocks [FlutterSecureStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFlutterSecureStorage extends _i1.Mock
-    implements _i7.FlutterSecureStorage {
+    implements _i6.FlutterSecureStorage {
   MockFlutterSecureStorage() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i7.IOSOptions get iOptions => (super.noSuchMethod(
+  _i6.IOSOptions get iOptions => (super.noSuchMethod(
         Invocation.getter(#iOptions),
-        returnValue: _FakeIOSOptions_6(
+        returnValue: _FakeIOSOptions_5(
           this,
           Invocation.getter(#iOptions),
         ),
-      ) as _i7.IOSOptions);
+      ) as _i6.IOSOptions);
 
   @override
-  _i7.AndroidOptions get aOptions => (super.noSuchMethod(
+  _i6.AndroidOptions get aOptions => (super.noSuchMethod(
         Invocation.getter(#aOptions),
-        returnValue: _FakeAndroidOptions_7(
+        returnValue: _FakeAndroidOptions_6(
           this,
           Invocation.getter(#aOptions),
         ),
-      ) as _i7.AndroidOptions);
+      ) as _i6.AndroidOptions);
 
   @override
-  _i7.LinuxOptions get lOptions => (super.noSuchMethod(
+  _i6.LinuxOptions get lOptions => (super.noSuchMethod(
         Invocation.getter(#lOptions),
-        returnValue: _FakeLinuxOptions_8(
+        returnValue: _FakeLinuxOptions_7(
           this,
           Invocation.getter(#lOptions),
         ),
-      ) as _i7.LinuxOptions);
+      ) as _i6.LinuxOptions);
 
   @override
-  _i7.WindowsOptions get wOptions => (super.noSuchMethod(
+  _i6.WindowsOptions get wOptions => (super.noSuchMethod(
         Invocation.getter(#wOptions),
-        returnValue: _FakeWindowsOptions_9(
+        returnValue: _FakeWindowsOptions_8(
           this,
           Invocation.getter(#wOptions),
         ),
-      ) as _i7.WindowsOptions);
+      ) as _i6.WindowsOptions);
 
   @override
-  _i7.WebOptions get webOptions => (super.noSuchMethod(
+  _i6.WebOptions get webOptions => (super.noSuchMethod(
         Invocation.getter(#webOptions),
-        returnValue: _FakeWebOptions_10(
+        returnValue: _FakeWebOptions_9(
           this,
           Invocation.getter(#webOptions),
         ),
-      ) as _i7.WebOptions);
+      ) as _i6.WebOptions);
 
   @override
-  _i7.MacOsOptions get mOptions => (super.noSuchMethod(
+  _i6.MacOsOptions get mOptions => (super.noSuchMethod(
         Invocation.getter(#mOptions),
-        returnValue: _FakeMacOsOptions_11(
+        returnValue: _FakeMacOsOptions_10(
           this,
           Invocation.getter(#mOptions),
         ),
-      ) as _i7.MacOsOptions);
+      ) as _i6.MacOsOptions);
 
   @override
   void registerListener({
     required String? key,
-    required _i24.ValueChanged<String?>? listener,
+    required _i25.ValueChanged<String?>? listener,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -1160,7 +954,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   void unregisterListener({
     required String? key,
-    required _i24.ValueChanged<String?>? listener,
+    required _i25.ValueChanged<String?>? listener,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -1195,15 +989,15 @@ class MockFlutterSecureStorage extends _i1.Mock
       );
 
   @override
-  _i10.Future<void> write({
+  _i9.Future<void> write({
     required String? key,
     required String? value,
-    _i7.IOSOptions? iOptions,
-    _i7.AndroidOptions? aOptions,
-    _i7.LinuxOptions? lOptions,
-    _i7.WebOptions? webOptions,
-    _i7.MacOsOptions? mOptions,
-    _i7.WindowsOptions? wOptions,
+    _i6.IOSOptions? iOptions,
+    _i6.AndroidOptions? aOptions,
+    _i6.LinuxOptions? lOptions,
+    _i6.WebOptions? webOptions,
+    _i6.MacOsOptions? mOptions,
+    _i6.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1220,19 +1014,19 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 
   @override
-  _i10.Future<String?> read({
+  _i9.Future<String?> read({
     required String? key,
-    _i7.IOSOptions? iOptions,
-    _i7.AndroidOptions? aOptions,
-    _i7.LinuxOptions? lOptions,
-    _i7.WebOptions? webOptions,
-    _i7.MacOsOptions? mOptions,
-    _i7.WindowsOptions? wOptions,
+    _i6.IOSOptions? iOptions,
+    _i6.AndroidOptions? aOptions,
+    _i6.LinuxOptions? lOptions,
+    _i6.WebOptions? webOptions,
+    _i6.MacOsOptions? mOptions,
+    _i6.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1248,18 +1042,18 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i10.Future<String?>.value(),
-      ) as _i10.Future<String?>);
+        returnValue: _i9.Future<String?>.value(),
+      ) as _i9.Future<String?>);
 
   @override
-  _i10.Future<bool> containsKey({
+  _i9.Future<bool> containsKey({
     required String? key,
-    _i7.IOSOptions? iOptions,
-    _i7.AndroidOptions? aOptions,
-    _i7.LinuxOptions? lOptions,
-    _i7.WebOptions? webOptions,
-    _i7.MacOsOptions? mOptions,
-    _i7.WindowsOptions? wOptions,
+    _i6.IOSOptions? iOptions,
+    _i6.AndroidOptions? aOptions,
+    _i6.LinuxOptions? lOptions,
+    _i6.WebOptions? webOptions,
+    _i6.MacOsOptions? mOptions,
+    _i6.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1275,18 +1069,18 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 
   @override
-  _i10.Future<void> delete({
+  _i9.Future<void> delete({
     required String? key,
-    _i7.IOSOptions? iOptions,
-    _i7.AndroidOptions? aOptions,
-    _i7.LinuxOptions? lOptions,
-    _i7.WebOptions? webOptions,
-    _i7.MacOsOptions? mOptions,
-    _i7.WindowsOptions? wOptions,
+    _i6.IOSOptions? iOptions,
+    _i6.AndroidOptions? aOptions,
+    _i6.LinuxOptions? lOptions,
+    _i6.WebOptions? webOptions,
+    _i6.MacOsOptions? mOptions,
+    _i6.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1302,18 +1096,18 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 
   @override
-  _i10.Future<Map<String, String>> readAll({
-    _i7.IOSOptions? iOptions,
-    _i7.AndroidOptions? aOptions,
-    _i7.LinuxOptions? lOptions,
-    _i7.WebOptions? webOptions,
-    _i7.MacOsOptions? mOptions,
-    _i7.WindowsOptions? wOptions,
+  _i9.Future<Map<String, String>> readAll({
+    _i6.IOSOptions? iOptions,
+    _i6.AndroidOptions? aOptions,
+    _i6.LinuxOptions? lOptions,
+    _i6.WebOptions? webOptions,
+    _i6.MacOsOptions? mOptions,
+    _i6.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1328,17 +1122,17 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i10.Future<Map<String, String>>.value(<String, String>{}),
-      ) as _i10.Future<Map<String, String>>);
+        returnValue: _i9.Future<Map<String, String>>.value(<String, String>{}),
+      ) as _i9.Future<Map<String, String>>);
 
   @override
-  _i10.Future<void> deleteAll({
-    _i7.IOSOptions? iOptions,
-    _i7.AndroidOptions? aOptions,
-    _i7.LinuxOptions? lOptions,
-    _i7.WebOptions? webOptions,
-    _i7.MacOsOptions? mOptions,
-    _i7.WindowsOptions? wOptions,
+  _i9.Future<void> deleteAll({
+    _i6.IOSOptions? iOptions,
+    _i6.AndroidOptions? aOptions,
+    _i6.LinuxOptions? lOptions,
+    _i6.WebOptions? webOptions,
+    _i6.MacOsOptions? mOptions,
+    _i6.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1353,24 +1147,24 @@ class MockFlutterSecureStorage extends _i1.Mock
             #wOptions: wOptions,
           },
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 
   @override
-  _i10.Future<bool?> isCupertinoProtectedDataAvailable() => (super.noSuchMethod(
+  _i9.Future<bool?> isCupertinoProtectedDataAvailable() => (super.noSuchMethod(
         Invocation.method(
           #isCupertinoProtectedDataAvailable,
           [],
         ),
-        returnValue: _i10.Future<bool?>.value(),
-      ) as _i10.Future<bool?>);
+        returnValue: _i9.Future<bool?>.value(),
+      ) as _i9.Future<bool?>);
 }
 
 /// A class which mocks [TokenManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTokenManager extends _i1.Mock implements _i25.TokenManager {
+class MockTokenManager extends _i1.Mock implements _i26.TokenManager {
   MockTokenManager() {
     _i1.throwOnMissingStub(this);
   }
@@ -1388,20 +1182,20 @@ class MockTokenManager extends _i1.Mock implements _i25.TokenManager {
 /// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i26.NetworkInfo {
+class MockNetworkInfo extends _i1.Mock implements _i27.NetworkInfo {
   MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i10.Future<bool> get isConnected => (super.noSuchMethod(
+  _i9.Future<bool> get isConnected => (super.noSuchMethod(
         Invocation.getter(#isConnected),
-        returnValue: _i10.Future<bool>.value(false),
-      ) as _i10.Future<bool>);
+        returnValue: _i9.Future<bool>.value(false),
+      ) as _i9.Future<bool>);
 
   @override
-  _i10.Stream<bool> get onConnectivityChanged => (super.noSuchMethod(
+  _i9.Stream<bool> get onConnectivityChanged => (super.noSuchMethod(
         Invocation.getter(#onConnectivityChanged),
-        returnValue: _i10.Stream<bool>.empty(),
-      ) as _i10.Stream<bool>);
+        returnValue: _i9.Stream<bool>.empty(),
+      ) as _i9.Stream<bool>);
 }

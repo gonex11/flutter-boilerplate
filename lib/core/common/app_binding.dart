@@ -1,10 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_boilerplate/core/common/interceptors.dart';
 import 'package:flutter_boilerplate/core/common/network_info.dart';
 import 'package:flutter_boilerplate/core/common/token_manager.dart';
-import 'package:flutter_boilerplate/core/services/api_service.dart';
+import 'package:flutter_boilerplate/core/services/api_client.dart';
 import 'package:flutter_boilerplate/core/services/app_database.dart';
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/local/auth_local_data_source.dart';
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/auth_remote_data_source.dart';
@@ -28,7 +27,7 @@ class AppBinding extends Bindings {
         .build();
 
     // Externals
-    Get.put<Dio>(Dio());
+    Get.put<Dio>(Dio(BaseOptions(baseUrl: 'http://10.0.2.2:3000')));
     Get.put<AndroidOptions>(
         const AndroidOptions(encryptedSharedPreferences: true));
     Get.put<FlutterSecureStorage>(FlutterSecureStorage(aOptions: Get.find()));
@@ -38,8 +37,7 @@ class AppBinding extends Bindings {
 
     // Helpers
     Get.put<NetworkInfo>(NetworkInfo(Get.find()));
-    Get.put<ApiService>(ApiService(Get.find()));
-    Get.put<HeaderInterceptor>(HeaderInterceptor(Get.find()));
+    Get.put<ApiConfig>(ApiConfig(Get.find()));
     Get.put<TokenManager>(TokenManager());
 
     // Dao's

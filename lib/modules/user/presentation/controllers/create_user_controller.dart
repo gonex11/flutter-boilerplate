@@ -30,7 +30,7 @@ class CreateUserController extends GetxController {
 
   final createState = Rx<ResultState<UserModel>>(const ResultState.initial());
 
-  Future<void> createUser() async {
+  Future<void> addUser() async {
     if (formKey.currentState?.validate() == false) return;
     createState.value = const ResultState.loading();
 
@@ -41,7 +41,7 @@ class CreateUserController extends GetxController {
       password: passController.text.trim(),
     );
 
-    final result = await _repository.createUser(payload);
+    final result = await _repository.addUser(payload);
     result.fold((failure) {
       createState.value = const ResultState.failed();
 

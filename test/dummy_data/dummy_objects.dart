@@ -1,3 +1,4 @@
+import 'package:flutter_boilerplate/modules/auth/data/models/login_payload.dart';
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entities/user_entity.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
@@ -28,6 +29,16 @@ const tUserPayload = UserPayload(
   username: 'username',
   firstName: 'firstName',
   lastName: 'lastName',
+  password: 'password',
+);
+
+const tLoginPayloadJson = {
+  'username': 'username',
+  'password': 'password',
+};
+
+const tLoginPayload = LoginPayload(
+  username: 'username',
   password: 'password',
 );
 

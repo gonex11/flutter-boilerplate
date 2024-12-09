@@ -13,7 +13,7 @@ class HomeController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    await getUsers();
+    await fetchUsers();
     super.onInit();
   }
 
@@ -21,10 +21,10 @@ class HomeController extends GetxController {
       Rx<ResultState<List<UserModel>>>(const ResultState.initial());
   final logoutState = Rx<ResultState<bool>>(const ResultState.initial());
 
-  Future<void> getUsers([bool refresh = false]) async {
+  Future<void> fetchUsers([bool refresh = false]) async {
     usersState.value = const ResultState.loading();
 
-    final result = await _userRepository.getUsers();
+    final result = await _userRepository.fetchUsers();
     result.fold((failure) {
       usersState.value = ResultState.failed(failure.error);
     }, (data) {

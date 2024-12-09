@@ -27,14 +27,14 @@ void main() {
     );
   });
 
-  group('getUsers', () {
+  group('fetchUsers', () {
     test('state should initial when get users is successfully but no data',
         () async {
       // Arrange
-      when(mockUserRepository.getUsers())
+      when(mockUserRepository.fetchUsers())
           .thenAnswer((_) async => const Right([]));
       // Act
-      await controller.getUsers();
+      await controller.fetchUsers();
       // Assert
       final state = controller.usersState.value;
       expect(state, isA<ResultInitial>());
@@ -42,10 +42,10 @@ void main() {
 
     test('state should success when get users is successfully', () async {
       // Arrange
-      when(mockUserRepository.getUsers())
+      when(mockUserRepository.fetchUsers())
           .thenAnswer((_) async => Right(tUserModels));
       // Act
-      await controller.getUsers();
+      await controller.fetchUsers();
       // Assert
       final state = controller.usersState.value;
       expect(state, isA<ResultSuccess<List<UserModel>>>());
@@ -53,10 +53,10 @@ void main() {
 
     test('state should failed when get users is unsuccessfully', () async {
       // Arrange
-      when(mockUserRepository.getUsers()).thenAnswer(
+      when(mockUserRepository.fetchUsers()).thenAnswer(
           (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
-      await controller.getUsers();
+      await controller.fetchUsers();
       // Assert
       final state = controller.usersState.value;
       expect(state, isA<ResultFailed>());

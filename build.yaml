@@ -12,6 +12,7 @@ targets:
                     build_extensions:
                         '^lib/core/services/{{file}}.dart': 'lib/core/services/generated/{{file}}.g.dart'
                         '^lib/modules/{{dir}}/data/models/{{file}}.dart': 'lib/modules/{{dir}}/data/models/generated/{{file}}.g.dart'
+                        '^lib/modules/{{dir}}/data/data_sources/remote/services/{{file}}.dart': 'lib/modules/{{dir}}/data/data_sources/remote/services/generated/{{file}}.g.dart'
                         '^lib/shared/responses/{{file}}.dart': 'lib/shared/responses/generated/{{file}}.g.dart'
             freezed:
                 options:

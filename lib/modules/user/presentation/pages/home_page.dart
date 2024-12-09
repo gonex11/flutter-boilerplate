@@ -19,7 +19,7 @@ class HomePage extends GetView<HomeController> {
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop && result == true) {
-          controller.getUsers(true);
+          controller.fetchUsers(true);
         }
       },
       child: Scaffold(
@@ -73,7 +73,7 @@ class HomePage extends GetView<HomeController> {
                   backgroundColor: colorScheme.surfaceBright,
                   color: colorScheme.primary,
                   onRefresh: () async {
-                    controller.getUsers(true);
+                    controller.fetchUsers(true);
                   },
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(
@@ -100,13 +100,13 @@ class HomePage extends GetView<HomeController> {
               failed: (error) {
                 final message = AppUtils.getErrorMessage(error?.errors) ?? '';
                 return AppRefreshLayout(
-                  onRefresh: controller.getUsers,
+                  onRefresh: controller.fetchUsers,
                   child: Text(message),
                 );
               },
               initial: () {
                 return AppRefreshLayout(
-                  onRefresh: controller.getUsers,
+                  onRefresh: controller.fetchUsers,
                   child: const Text('There is no Users yet.'),
                 );
               },

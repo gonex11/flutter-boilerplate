@@ -1,7 +1,8 @@
 import 'package:flutter_boilerplate/modules/auth/presentation/bindings/auth_binding.dart';
+import 'package:flutter_boilerplate/modules/auth/presentation/pages/login_page.dart';
+import 'package:flutter_boilerplate/modules/user/presentation/bindings/create_user_binding.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/bindings/user_binding.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/pages/create_user_page.dart';
-import 'package:flutter_boilerplate/modules/auth/presentation/pages/login_page.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/pages/user_detail_page.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +35,7 @@ class AppPages {
     GetPage(
       name: _Paths.createUser,
       page: () => const CreateUserPage(),
-      binding: UserBinding(),
+      binding: CreateUserBinding(),
     ),
   ];
 }

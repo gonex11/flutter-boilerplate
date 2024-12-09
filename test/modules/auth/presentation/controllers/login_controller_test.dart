@@ -38,7 +38,7 @@ void main() {
 
     test('state should success if login is successful', () async {
       // Arrange
-      when(mockAuthRepository.login(tUsername, tPassword))
+      when(mockAuthRepository.login(tLoginPayload))
           .thenAnswer((_) async => const Right(tTokenModel));
       // Act
       controller.unameController.text = tUsername;
@@ -52,7 +52,7 @@ void main() {
 
     test('state should failed if login is unsuccessful', () async {
       // Arrange
-      when(mockAuthRepository.login(tUsername, tPassword)).thenAnswer(
+      when(mockAuthRepository.login(tLoginPayload)).thenAnswer(
           (_) async => const Left(ServerFailure(tBaseErrorResponse)));
       // Act
       controller.unameController.text = tUsername;
