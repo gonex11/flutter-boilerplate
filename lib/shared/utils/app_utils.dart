@@ -51,7 +51,7 @@ abstract class AppUtils {
   }
 
   static FormFieldValidator<String?> passwordValidator([
-    String? confirmTe,
+    String? confirmText,
     int min = 8,
   ]) {
     return FormBuilderValidators.compose([
@@ -74,8 +74,9 @@ abstract class AppUtils {
       FormBuilderValidators.hasSpecialChars(
         errorText: AppLocalizations.passwordSpecialCharacterMessage,
       ),
-      (value) =>
-          value == confirmTe ? null : AppLocalizations.passwordNotMatchMessage,
+      (value) => (confirmText == null || value == confirmText)
+          ? null
+          : AppLocalizations.passwordNotMatchMessage,
     ]);
   }
 }

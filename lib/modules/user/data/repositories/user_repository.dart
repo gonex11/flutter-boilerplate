@@ -22,8 +22,8 @@ class UserRepository {
     if (await _networkInfo.isConnected) {
       try {
         final result = await _remoteDataSource.fetchUsers();
-        _localDataSource.cacheUsers(result);
-        return Right(result);
+        _localDataSource.cacheUsers(result.data!);
+        return Right(result.data!);
       } on ApiException catch (e) {
         return Left(ServerFailure(e.error));
       }
@@ -40,7 +40,7 @@ class UserRepository {
   Future<Either<Failure, UserModel>> getUserById(int id) async {
     try {
       final result = await _remoteDataSource.getUserById(id);
-      return Right(result);
+      return Right(result.data!);
     } on ApiException catch (e) {
       return Left(ServerFailure(e.error));
     }
@@ -49,7 +49,7 @@ class UserRepository {
   Future<Either<Failure, UserModel>> addUser(UserPayload payload) async {
     try {
       final result = await _remoteDataSource.addUser(payload);
-      return Right(result);
+      return Right(result.data!);
     } on ApiException catch (e) {
       return Left(ServerFailure(e.error));
     }

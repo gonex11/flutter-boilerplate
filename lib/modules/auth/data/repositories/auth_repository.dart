@@ -24,9 +24,9 @@ class AuthRepository {
   Future<Either<Failure, TokenModel>> login(LoginPayload payload) async {
     try {
       final result = await _remoteDataSource.login(payload);
-      await _localDataSource.setToken(result);
+      await _localDataSource.setToken(result.data!);
 
-      return Right(result);
+      return Right(result.data!);
     } on ApiException catch (e) {
       return Left(ServerFailure(e.error));
     }

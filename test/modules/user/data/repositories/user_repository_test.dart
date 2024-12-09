@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/failures.dart';
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart';
+import 'package:flutter_boilerplate/shared/responses/base_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -37,8 +38,9 @@ void main() {
         // Arrange
         when(mockLocalDataSource.cacheUsers(tUserModels))
             .thenAnswer((_) async => true);
-        when(mockRemoteDataSource.fetchUsers())
-            .thenAnswer((_) async => tUserModels);
+        when(mockRemoteDataSource.fetchUsers()).thenAnswer(
+          (_) async => BaseResponse(data: tUserModels, meta: tMetaResponse),
+        );
         // Act
         final result = await repository.fetchUsers();
         // Assert
@@ -100,7 +102,7 @@ void main() {
         () async {
       // Arrange
       when(mockRemoteDataSource.getUserById(testId))
-          .thenAnswer((_) async => tUserModel);
+          .thenAnswer((_) async => const BaseResponse(data: tUserModel));
       // Act
       final result = await repository.getUserById(testId);
       // Assert
@@ -129,7 +131,7 @@ void main() {
         () async {
       // Arrange
       when(mockRemoteDataSource.addUser(tUserPayload))
-          .thenAnswer((_) async => tUserModel);
+          .thenAnswer((_) async => const BaseResponse(data: tUserModel));
       // Act
       final result = await repository.addUser(tUserPayload);
       // Assert

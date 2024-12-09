@@ -1,5 +1,5 @@
-import 'package:flutter_boilerplate/shared/responses/base_list_response.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
+import 'package:flutter_boilerplate/shared/responses/base_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../dummy_data/dummy_objects.dart';
@@ -7,23 +7,23 @@ import '../../dummy_data/dummy_objects.dart';
 void main() {
   test('should return a valid model from JSON', () async {
     // Arrange
-    final Map<String, dynamic> jsonMap = tBaseListJson;
+    final Map<String, dynamic> jsonMap = tBaseJson;
     // Act
-    final result = BaseListResponse.fromJson(
+    final result = BaseResponse.fromJson(
       jsonMap,
-      (json) => UserModel.fromJson(json as Map<String, dynamic>),
+      (json) => (json as List).map((e) => UserModel.fromJson(e)).toList(),
     );
     // Assert
-    expect(result, tBaseListResponse);
+    expect(result, tBaseResponse);
   });
 
   test('should return a JSON map containing proper data', () async {
     // Act
-    final result = tBaseListResponse.toJson(
-      (user) => user.toJson(),
+    final result = tBaseResponse.toJson(
+      (user) => user.map((e) => e.toJson()).toList(),
     );
     // Assert
-    final expectedJsonMap = tBaseListJson;
+    final expectedJsonMap = tBaseJson;
     expect(result, expectedJsonMap);
   });
 }

@@ -2,13 +2,16 @@ import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/servic
 import 'package:flutter_boilerplate/modules/auth/data/models/login_payload.dart';
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
+import 'package:flutter_boilerplate/shared/responses/base_response.dart';
 
 class AuthRemoteDataSource {
   final AuthService _authService;
 
   const AuthRemoteDataSource(this._authService);
 
-  Future<UserModel> getLoggedUser() => _authService.getLoggedUser();
+  Future<BaseResponse<UserModel>> getLoggedUser() =>
+      _authService.getLoggedUser();
 
-  Future<TokenModel> login(LoginPayload payload) => _authService.login(payload);
+  Future<BaseResponse<TokenModel>> login(LoginPayload payload) =>
+      _authService.login(payload);
 }

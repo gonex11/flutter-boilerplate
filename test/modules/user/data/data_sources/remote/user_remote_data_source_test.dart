@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
-import 'package:flutter_boilerplate/shared/responses/base_list_response.dart';
+import 'package:flutter_boilerplate/shared/responses/base_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -20,10 +20,10 @@ void main() {
   });
 
   group('getUsers', () {
-    final testUserModels = BaseListResponse.fromJson(
+    final testUserModels = BaseResponse.fromJson(
       jsonDecode(readJson('dummy_data/jsons/list_user_response.json')),
-      (json) => UserModel.fromJson(json as Map<String, dynamic>),
-    ).data;
+      (json) => (json as List).map((e) => UserModel.fromJson(e)).toList(),
+    );
 
     test('should return a list of users when success', () async {
       // Arrange
@@ -46,7 +46,10 @@ void main() {
     test('should return a users by given id when success', () async {
       // Arrange
       when(mockUserService.getUserById(testId)).thenAnswer(
-        (_) async => testUserModel,
+        (_) async => BaseResponse(
+          data: testUserModel,
+          meta: tMetaResponse,
+        ),
       );
       // Act
       final result = await dataSource.getUserById(testId);
@@ -63,7 +66,10 @@ void main() {
     test('should create user when success', () async {
       // Arrange
       when(mockUserService.addUser(tUserPayload)).thenAnswer(
-        (_) async => testUserModel,
+        (_) async => BaseResponse(
+          data: testUserModel,
+          meta: tMetaResponse,
+        ),
       );
       // Act
       final result = await dataSource.addUser(tUserPayload);

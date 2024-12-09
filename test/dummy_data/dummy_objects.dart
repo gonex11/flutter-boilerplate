@@ -5,7 +5,7 @@ import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entitie
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart';
 import 'package:flutter_boilerplate/shared/responses/base_error_response.dart';
-import 'package:flutter_boilerplate/shared/responses/base_list_response.dart';
+import 'package:flutter_boilerplate/shared/responses/base_response.dart';
 import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
 import 'package:flutter_boilerplate/shared/responses/meta_response.dart';
 
@@ -59,15 +59,6 @@ const tUserModel = UserModel(
 
 final tUserModels = [tUserModel];
 
-// const tUserSessionModel = UserModel(
-//   id: 1,
-//   username: 'username',
-//   firstName: 'firstName',
-//   lastName: 'lastName',
-// );
-
-// final tUserSessionModels = [tUserSessionModel];
-
 const tUserEntity = UserEntity(
   id: 1,
   username: 'username',
@@ -111,12 +102,12 @@ const tBaseErrorResponse = BaseErrorResponse(
   errors: [tErrorDetailResponse],
 );
 
-final tBaseListJson = {
+final tBaseJson = {
   'meta': tMetaJson,
   'data': [tUserJson],
 };
 
-const tBaseListResponse = BaseListResponse<UserModel>(
+const tBaseResponse = BaseResponse<List<UserModel>>(
   meta: tMetaResponse,
   data: [tUserModel],
 );

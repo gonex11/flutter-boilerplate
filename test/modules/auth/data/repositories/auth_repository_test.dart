@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/failures.dart';
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart';
+import 'package:flutter_boilerplate/shared/responses/base_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -93,7 +94,7 @@ void main() {
         () async {
       // Arrange
       when(mockRemoteDataSource.login(tLoginPayload))
-          .thenAnswer((_) async => tTokenModel);
+          .thenAnswer((_) async => const BaseResponse(data: tTokenModel));
       when(mockLocalDataSource.setToken(tTokenModel))
           .thenAnswer((_) async => true);
       // Act

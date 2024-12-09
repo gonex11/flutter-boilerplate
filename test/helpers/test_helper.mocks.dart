@@ -7,44 +7,45 @@ import 'dart:async' as _i9;
 import 'dart:ui' as _i11;
 
 import 'package:dartz/dartz.dart' as _i3;
-import 'package:flutter/widgets.dart' as _i26;
+import 'package:flutter/widgets.dart' as _i27;
 import 'package:flutter_boilerplate/core/common/failures.dart' as _i13;
-import 'package:flutter_boilerplate/core/common/network_info.dart' as _i28;
-import 'package:flutter_boilerplate/core/common/token_manager.dart' as _i27;
+import 'package:flutter_boilerplate/core/common/network_info.dart' as _i29;
+import 'package:flutter_boilerplate/core/common/token_manager.dart' as _i28;
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/local/auth_local_data_source.dart'
-    as _i19;
+    as _i20;
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/auth_remote_data_source.dart'
-    as _i18;
+    as _i19;
 import 'package:flutter_boilerplate/modules/auth/data/data_sources/remote/services/auth_service.dart'
-    as _i24;
+    as _i25;
 import 'package:flutter_boilerplate/modules/auth/data/models/auth_validate_model.dart'
-    as _i15;
+    as _i16;
 import 'package:flutter_boilerplate/modules/auth/data/models/login_payload.dart'
-    as _i14;
+    as _i15;
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart'
-    as _i5;
+    as _i14;
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart'
     as _i12;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/db/user_dao.dart'
-    as _i22;
-import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entities/user_entity.dart'
     as _i23;
+import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entities/user_entity.dart'
+    as _i24;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/user_local_data_source.dart'
-    as _i21;
+    as _i22;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/services/user_service.dart'
-    as _i25;
+    as _i26;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/user_remote_data_source.dart'
-    as _i20;
+    as _i21;
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart'
-    as _i4;
+    as _i8;
 import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart'
-    as _i17;
+    as _i18;
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart'
-    as _i16;
+    as _i17;
 import 'package:flutter_boilerplate/modules/user/presentation/controllers/home_controller.dart'
-    as _i7;
-import 'package:flutter_boilerplate/shared/utils/result_state.dart' as _i8;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i6;
+    as _i6;
+import 'package:flutter_boilerplate/shared/responses/base_response.dart' as _i4;
+import 'package:flutter_boilerplate/shared/utils/result_state.dart' as _i7;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i5;
 import 'package:get/get.dart' as _i2;
 import 'package:get/get_state_manager/src/simple/list_notifier.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
@@ -93,8 +94,9 @@ class _FakeEither_2<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
         );
 }
 
-class _FakeUserModel_3 extends _i1.SmartFake implements _i4.UserModel {
-  _FakeUserModel_3(
+class _FakeBaseResponse_3<T> extends _i1.SmartFake
+    implements _i4.BaseResponse<T> {
+  _FakeBaseResponse_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -103,8 +105,8 @@ class _FakeUserModel_3 extends _i1.SmartFake implements _i4.UserModel {
         );
 }
 
-class _FakeTokenModel_4 extends _i1.SmartFake implements _i5.TokenModel {
-  _FakeTokenModel_4(
+class _FakeIOSOptions_4 extends _i1.SmartFake implements _i5.IOSOptions {
+  _FakeIOSOptions_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -113,8 +115,9 @@ class _FakeTokenModel_4 extends _i1.SmartFake implements _i5.TokenModel {
         );
 }
 
-class _FakeIOSOptions_5 extends _i1.SmartFake implements _i6.IOSOptions {
-  _FakeIOSOptions_5(
+class _FakeAndroidOptions_5 extends _i1.SmartFake
+    implements _i5.AndroidOptions {
+  _FakeAndroidOptions_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -123,9 +126,8 @@ class _FakeIOSOptions_5 extends _i1.SmartFake implements _i6.IOSOptions {
         );
 }
 
-class _FakeAndroidOptions_6 extends _i1.SmartFake
-    implements _i6.AndroidOptions {
-  _FakeAndroidOptions_6(
+class _FakeLinuxOptions_6 extends _i1.SmartFake implements _i5.LinuxOptions {
+  _FakeLinuxOptions_6(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -134,8 +136,9 @@ class _FakeAndroidOptions_6 extends _i1.SmartFake
         );
 }
 
-class _FakeLinuxOptions_7 extends _i1.SmartFake implements _i6.LinuxOptions {
-  _FakeLinuxOptions_7(
+class _FakeWindowsOptions_7 extends _i1.SmartFake
+    implements _i5.WindowsOptions {
+  _FakeWindowsOptions_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -144,9 +147,8 @@ class _FakeLinuxOptions_7 extends _i1.SmartFake implements _i6.LinuxOptions {
         );
 }
 
-class _FakeWindowsOptions_8 extends _i1.SmartFake
-    implements _i6.WindowsOptions {
-  _FakeWindowsOptions_8(
+class _FakeWebOptions_8 extends _i1.SmartFake implements _i5.WebOptions {
+  _FakeWebOptions_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -155,18 +157,8 @@ class _FakeWindowsOptions_8 extends _i1.SmartFake
         );
 }
 
-class _FakeWebOptions_9 extends _i1.SmartFake implements _i6.WebOptions {
-  _FakeWebOptions_9(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeMacOsOptions_10 extends _i1.SmartFake implements _i6.MacOsOptions {
-  _FakeMacOsOptions_10(
+class _FakeMacOsOptions_9 extends _i1.SmartFake implements _i5.MacOsOptions {
+  _FakeMacOsOptions_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -178,29 +170,29 @@ class _FakeMacOsOptions_10 extends _i1.SmartFake implements _i6.MacOsOptions {
 /// A class which mocks [HomeController].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeController extends _i1.Mock implements _i7.HomeController {
+class MockHomeController extends _i1.Mock implements _i6.HomeController {
   MockHomeController() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.Rx<_i8.ResultState<List<_i4.UserModel>>> get usersState =>
+  _i2.Rx<_i7.ResultState<List<_i8.UserModel>>> get usersState =>
       (super.noSuchMethod(
         Invocation.getter(#usersState),
-        returnValue: _FakeRx_0<_i8.ResultState<List<_i4.UserModel>>>(
+        returnValue: _FakeRx_0<_i7.ResultState<List<_i8.UserModel>>>(
           this,
           Invocation.getter(#usersState),
         ),
-      ) as _i2.Rx<_i8.ResultState<List<_i4.UserModel>>>);
+      ) as _i2.Rx<_i7.ResultState<List<_i8.UserModel>>>);
 
   @override
-  _i2.Rx<_i8.ResultState<bool>> get logoutState => (super.noSuchMethod(
+  _i2.Rx<_i7.ResultState<bool>> get logoutState => (super.noSuchMethod(
         Invocation.getter(#logoutState),
-        returnValue: _FakeRx_0<_i8.ResultState<bool>>(
+        returnValue: _FakeRx_0<_i7.ResultState<bool>>(
           this,
           Invocation.getter(#logoutState),
         ),
-      ) as _i2.Rx<_i8.ResultState<bool>>);
+      ) as _i2.Rx<_i7.ResultState<bool>>);
 
   @override
   _i2.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
@@ -423,40 +415,41 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
   }
 
   @override
-  _i9.Future<_i3.Either<_i13.Failure, _i5.TokenModel>> login(
-          _i14.LoginPayload? payload) =>
+  _i9.Future<_i3.Either<_i13.Failure, _i14.TokenModel>> login(
+          _i15.LoginPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
           [payload],
         ),
-        returnValue: _i9.Future<_i3.Either<_i13.Failure, _i5.TokenModel>>.value(
-            _FakeEither_2<_i13.Failure, _i5.TokenModel>(
+        returnValue:
+            _i9.Future<_i3.Either<_i13.Failure, _i14.TokenModel>>.value(
+                _FakeEither_2<_i13.Failure, _i14.TokenModel>(
           this,
           Invocation.method(
             #login,
             [payload],
           ),
         )),
-      ) as _i9.Future<_i3.Either<_i13.Failure, _i5.TokenModel>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, _i14.TokenModel>>);
 
   @override
-  _i9.Future<_i3.Either<_i13.Failure, _i15.AuthValidateModel>> validateAuth() =>
+  _i9.Future<_i3.Either<_i13.Failure, _i16.AuthValidateModel>> validateAuth() =>
       (super.noSuchMethod(
         Invocation.method(
           #validateAuth,
           [],
         ),
         returnValue:
-            _i9.Future<_i3.Either<_i13.Failure, _i15.AuthValidateModel>>.value(
-                _FakeEither_2<_i13.Failure, _i15.AuthValidateModel>(
+            _i9.Future<_i3.Either<_i13.Failure, _i16.AuthValidateModel>>.value(
+                _FakeEither_2<_i13.Failure, _i16.AuthValidateModel>(
           this,
           Invocation.method(
             #validateAuth,
             [],
           ),
         )),
-      ) as _i9.Future<_i3.Either<_i13.Failure, _i15.AuthValidateModel>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, _i16.AuthValidateModel>>);
 
   @override
   _i9.Future<bool> logout() => (super.noSuchMethod(
@@ -471,117 +464,121 @@ class MockAuthRepository extends _i1.Mock implements _i12.AuthRepository {
 /// A class which mocks [UserRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserRepository extends _i1.Mock implements _i16.UserRepository {
+class MockUserRepository extends _i1.Mock implements _i17.UserRepository {
   MockUserRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<_i3.Either<_i13.Failure, List<_i4.UserModel>>> fetchUsers() =>
+  _i9.Future<_i3.Either<_i13.Failure, List<_i8.UserModel>>> fetchUsers() =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchUsers,
           [],
         ),
         returnValue:
-            _i9.Future<_i3.Either<_i13.Failure, List<_i4.UserModel>>>.value(
-                _FakeEither_2<_i13.Failure, List<_i4.UserModel>>(
+            _i9.Future<_i3.Either<_i13.Failure, List<_i8.UserModel>>>.value(
+                _FakeEither_2<_i13.Failure, List<_i8.UserModel>>(
           this,
           Invocation.method(
             #fetchUsers,
             [],
           ),
         )),
-      ) as _i9.Future<_i3.Either<_i13.Failure, List<_i4.UserModel>>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, List<_i8.UserModel>>>);
 
   @override
-  _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>> getUserById(int? id) =>
+  _i9.Future<_i3.Either<_i13.Failure, _i8.UserModel>> getUserById(int? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUserById,
           [id],
         ),
-        returnValue: _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>.value(
-            _FakeEither_2<_i13.Failure, _i4.UserModel>(
+        returnValue: _i9.Future<_i3.Either<_i13.Failure, _i8.UserModel>>.value(
+            _FakeEither_2<_i13.Failure, _i8.UserModel>(
           this,
           Invocation.method(
             #getUserById,
             [id],
           ),
         )),
-      ) as _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, _i8.UserModel>>);
 
   @override
-  _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>> addUser(
-          _i17.UserPayload? payload) =>
+  _i9.Future<_i3.Either<_i13.Failure, _i8.UserModel>> addUser(
+          _i18.UserPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #addUser,
           [payload],
         ),
-        returnValue: _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>.value(
-            _FakeEither_2<_i13.Failure, _i4.UserModel>(
+        returnValue: _i9.Future<_i3.Either<_i13.Failure, _i8.UserModel>>.value(
+            _FakeEither_2<_i13.Failure, _i8.UserModel>(
           this,
           Invocation.method(
             #addUser,
             [payload],
           ),
         )),
-      ) as _i9.Future<_i3.Either<_i13.Failure, _i4.UserModel>>);
+      ) as _i9.Future<_i3.Either<_i13.Failure, _i8.UserModel>>);
 }
 
 /// A class which mocks [AuthRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthRemoteDataSource extends _i1.Mock
-    implements _i18.AuthRemoteDataSource {
+    implements _i19.AuthRemoteDataSource {
   MockAuthRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<_i4.UserModel> getLoggedUser() => (super.noSuchMethod(
+  _i9.Future<_i4.BaseResponse<_i8.UserModel>> getLoggedUser() =>
+      (super.noSuchMethod(
         Invocation.method(
           #getLoggedUser,
           [],
         ),
-        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.BaseResponse<_i8.UserModel>>.value(
+            _FakeBaseResponse_3<_i8.UserModel>(
           this,
           Invocation.method(
             #getLoggedUser,
             [],
           ),
         )),
-      ) as _i9.Future<_i4.UserModel>);
+      ) as _i9.Future<_i4.BaseResponse<_i8.UserModel>>);
 
   @override
-  _i9.Future<_i5.TokenModel> login(_i14.LoginPayload? payload) =>
+  _i9.Future<_i4.BaseResponse<_i14.TokenModel>> login(
+          _i15.LoginPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
           [payload],
         ),
-        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
+        returnValue: _i9.Future<_i4.BaseResponse<_i14.TokenModel>>.value(
+            _FakeBaseResponse_3<_i14.TokenModel>(
           this,
           Invocation.method(
             #login,
             [payload],
           ),
         )),
-      ) as _i9.Future<_i5.TokenModel>);
+      ) as _i9.Future<_i4.BaseResponse<_i14.TokenModel>>);
 }
 
 /// A class which mocks [AuthLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthLocalDataSource extends _i1.Mock
-    implements _i19.AuthLocalDataSource {
+    implements _i20.AuthLocalDataSource {
   MockAuthLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<bool> setToken(_i5.TokenModel? tokenResponse) =>
+  _i9.Future<bool> setToken(_i14.TokenModel? tokenResponse) =>
       (super.noSuchMethod(
         Invocation.method(
           #setToken,
@@ -622,72 +619,84 @@ class MockAuthLocalDataSource extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserRemoteDataSource extends _i1.Mock
-    implements _i20.UserRemoteDataSource {
+    implements _i21.UserRemoteDataSource {
   MockUserRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<List<_i4.UserModel>> fetchUsers() => (super.noSuchMethod(
+  _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>> fetchUsers() =>
+      (super.noSuchMethod(
         Invocation.method(
           #fetchUsers,
           [],
         ),
-        returnValue: _i9.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
-      ) as _i9.Future<List<_i4.UserModel>>);
+        returnValue: _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>>.value(
+            _FakeBaseResponse_3<List<_i8.UserModel>>(
+          this,
+          Invocation.method(
+            #fetchUsers,
+            [],
+          ),
+        )),
+      ) as _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>>);
 
   @override
-  _i9.Future<_i4.UserModel> getUserById(int? id) => (super.noSuchMethod(
+  _i9.Future<_i4.BaseResponse<_i8.UserModel>> getUserById(int? id) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getUserById,
           [id],
         ),
-        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.BaseResponse<_i8.UserModel>>.value(
+            _FakeBaseResponse_3<_i8.UserModel>(
           this,
           Invocation.method(
             #getUserById,
             [id],
           ),
         )),
-      ) as _i9.Future<_i4.UserModel>);
+      ) as _i9.Future<_i4.BaseResponse<_i8.UserModel>>);
 
   @override
-  _i9.Future<_i4.UserModel> addUser(_i17.UserPayload? payload) =>
+  _i9.Future<_i4.BaseResponse<_i8.UserModel>> addUser(
+          _i18.UserPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #addUser,
           [payload],
         ),
-        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.BaseResponse<_i8.UserModel>>.value(
+            _FakeBaseResponse_3<_i8.UserModel>(
           this,
           Invocation.method(
             #addUser,
             [payload],
           ),
         )),
-      ) as _i9.Future<_i4.UserModel>);
+      ) as _i9.Future<_i4.BaseResponse<_i8.UserModel>>);
 }
 
 /// A class which mocks [UserLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserLocalDataSource extends _i1.Mock
-    implements _i21.UserLocalDataSource {
+    implements _i22.UserLocalDataSource {
   MockUserLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<List<_i4.UserModel>> getCachedUsers() => (super.noSuchMethod(
+  _i9.Future<List<_i8.UserModel>> getCachedUsers() => (super.noSuchMethod(
         Invocation.method(
           #getCachedUsers,
           [],
         ),
-        returnValue: _i9.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
-      ) as _i9.Future<List<_i4.UserModel>>);
+        returnValue: _i9.Future<List<_i8.UserModel>>.value(<_i8.UserModel>[]),
+      ) as _i9.Future<List<_i8.UserModel>>);
 
   @override
-  _i9.Future<bool> cacheUsers(List<_i4.UserModel>? users) =>
+  _i9.Future<bool> cacheUsers(List<_i8.UserModel>? users) =>
       (super.noSuchMethod(
         Invocation.method(
           #cacheUsers,
@@ -700,23 +709,23 @@ class MockUserLocalDataSource extends _i1.Mock
 /// A class which mocks [UserDao].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserDao extends _i1.Mock implements _i22.UserDao {
+class MockUserDao extends _i1.Mock implements _i23.UserDao {
   MockUserDao() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<List<_i23.UserEntity>> getAll() => (super.noSuchMethod(
+  _i9.Future<List<_i24.UserEntity>> getAll() => (super.noSuchMethod(
         Invocation.method(
           #getAll,
           [],
         ),
         returnValue:
-            _i9.Future<List<_i23.UserEntity>>.value(<_i23.UserEntity>[]),
-      ) as _i9.Future<List<_i23.UserEntity>>);
+            _i9.Future<List<_i24.UserEntity>>.value(<_i24.UserEntity>[]),
+      ) as _i9.Future<List<_i24.UserEntity>>);
 
   @override
-  _i9.Future<void> insertAll(List<_i23.UserEntity>? users) =>
+  _i9.Future<void> insertAll(List<_i24.UserEntity>? users) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertAll,
@@ -730,159 +739,175 @@ class MockUserDao extends _i1.Mock implements _i22.UserDao {
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i24.AuthService {
+class MockAuthService extends _i1.Mock implements _i25.AuthService {
   MockAuthService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<_i4.UserModel> getLoggedUser() => (super.noSuchMethod(
+  _i9.Future<_i4.BaseResponse<_i8.UserModel>> getLoggedUser() =>
+      (super.noSuchMethod(
         Invocation.method(
           #getLoggedUser,
           [],
         ),
-        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.BaseResponse<_i8.UserModel>>.value(
+            _FakeBaseResponse_3<_i8.UserModel>(
           this,
           Invocation.method(
             #getLoggedUser,
             [],
           ),
         )),
-      ) as _i9.Future<_i4.UserModel>);
+      ) as _i9.Future<_i4.BaseResponse<_i8.UserModel>>);
 
   @override
-  _i9.Future<_i5.TokenModel> login(_i14.LoginPayload? payload) =>
+  _i9.Future<_i4.BaseResponse<_i14.TokenModel>> login(
+          _i15.LoginPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #login,
           [payload],
         ),
-        returnValue: _i9.Future<_i5.TokenModel>.value(_FakeTokenModel_4(
+        returnValue: _i9.Future<_i4.BaseResponse<_i14.TokenModel>>.value(
+            _FakeBaseResponse_3<_i14.TokenModel>(
           this,
           Invocation.method(
             #login,
             [payload],
           ),
         )),
-      ) as _i9.Future<_i5.TokenModel>);
+      ) as _i9.Future<_i4.BaseResponse<_i14.TokenModel>>);
 }
 
 /// A class which mocks [UserService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserService extends _i1.Mock implements _i25.UserService {
+class MockUserService extends _i1.Mock implements _i26.UserService {
   MockUserService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i9.Future<List<_i4.UserModel>> fetchUsers() => (super.noSuchMethod(
+  _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>> fetchUsers() =>
+      (super.noSuchMethod(
         Invocation.method(
           #fetchUsers,
           [],
         ),
-        returnValue: _i9.Future<List<_i4.UserModel>>.value(<_i4.UserModel>[]),
-      ) as _i9.Future<List<_i4.UserModel>>);
+        returnValue: _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>>.value(
+            _FakeBaseResponse_3<List<_i8.UserModel>>(
+          this,
+          Invocation.method(
+            #fetchUsers,
+            [],
+          ),
+        )),
+      ) as _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>>);
 
   @override
-  _i9.Future<_i4.UserModel> getUserById(int? id) => (super.noSuchMethod(
+  _i9.Future<_i4.BaseResponse<_i8.UserModel>> getUserById(int? id) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getUserById,
           [id],
         ),
-        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.BaseResponse<_i8.UserModel>>.value(
+            _FakeBaseResponse_3<_i8.UserModel>(
           this,
           Invocation.method(
             #getUserById,
             [id],
           ),
         )),
-      ) as _i9.Future<_i4.UserModel>);
+      ) as _i9.Future<_i4.BaseResponse<_i8.UserModel>>);
 
   @override
-  _i9.Future<_i4.UserModel> addUser(_i17.UserPayload? payload) =>
+  _i9.Future<_i4.BaseResponse<_i8.UserModel>> addUser(
+          _i18.UserPayload? payload) =>
       (super.noSuchMethod(
         Invocation.method(
           #addUser,
           [payload],
         ),
-        returnValue: _i9.Future<_i4.UserModel>.value(_FakeUserModel_3(
+        returnValue: _i9.Future<_i4.BaseResponse<_i8.UserModel>>.value(
+            _FakeBaseResponse_3<_i8.UserModel>(
           this,
           Invocation.method(
             #addUser,
             [payload],
           ),
         )),
-      ) as _i9.Future<_i4.UserModel>);
+      ) as _i9.Future<_i4.BaseResponse<_i8.UserModel>>);
 }
 
 /// A class which mocks [FlutterSecureStorage].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFlutterSecureStorage extends _i1.Mock
-    implements _i6.FlutterSecureStorage {
+    implements _i5.FlutterSecureStorage {
   MockFlutterSecureStorage() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.IOSOptions get iOptions => (super.noSuchMethod(
+  _i5.IOSOptions get iOptions => (super.noSuchMethod(
         Invocation.getter(#iOptions),
-        returnValue: _FakeIOSOptions_5(
+        returnValue: _FakeIOSOptions_4(
           this,
           Invocation.getter(#iOptions),
         ),
-      ) as _i6.IOSOptions);
+      ) as _i5.IOSOptions);
 
   @override
-  _i6.AndroidOptions get aOptions => (super.noSuchMethod(
+  _i5.AndroidOptions get aOptions => (super.noSuchMethod(
         Invocation.getter(#aOptions),
-        returnValue: _FakeAndroidOptions_6(
+        returnValue: _FakeAndroidOptions_5(
           this,
           Invocation.getter(#aOptions),
         ),
-      ) as _i6.AndroidOptions);
+      ) as _i5.AndroidOptions);
 
   @override
-  _i6.LinuxOptions get lOptions => (super.noSuchMethod(
+  _i5.LinuxOptions get lOptions => (super.noSuchMethod(
         Invocation.getter(#lOptions),
-        returnValue: _FakeLinuxOptions_7(
+        returnValue: _FakeLinuxOptions_6(
           this,
           Invocation.getter(#lOptions),
         ),
-      ) as _i6.LinuxOptions);
+      ) as _i5.LinuxOptions);
 
   @override
-  _i6.WindowsOptions get wOptions => (super.noSuchMethod(
+  _i5.WindowsOptions get wOptions => (super.noSuchMethod(
         Invocation.getter(#wOptions),
-        returnValue: _FakeWindowsOptions_8(
+        returnValue: _FakeWindowsOptions_7(
           this,
           Invocation.getter(#wOptions),
         ),
-      ) as _i6.WindowsOptions);
+      ) as _i5.WindowsOptions);
 
   @override
-  _i6.WebOptions get webOptions => (super.noSuchMethod(
+  _i5.WebOptions get webOptions => (super.noSuchMethod(
         Invocation.getter(#webOptions),
-        returnValue: _FakeWebOptions_9(
+        returnValue: _FakeWebOptions_8(
           this,
           Invocation.getter(#webOptions),
         ),
-      ) as _i6.WebOptions);
+      ) as _i5.WebOptions);
 
   @override
-  _i6.MacOsOptions get mOptions => (super.noSuchMethod(
+  _i5.MacOsOptions get mOptions => (super.noSuchMethod(
         Invocation.getter(#mOptions),
-        returnValue: _FakeMacOsOptions_10(
+        returnValue: _FakeMacOsOptions_9(
           this,
           Invocation.getter(#mOptions),
         ),
-      ) as _i6.MacOsOptions);
+      ) as _i5.MacOsOptions);
 
   @override
   void registerListener({
     required String? key,
-    required _i26.ValueChanged<String?>? listener,
+    required _i27.ValueChanged<String?>? listener,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -899,7 +924,7 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   void unregisterListener({
     required String? key,
-    required _i26.ValueChanged<String?>? listener,
+    required _i27.ValueChanged<String?>? listener,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -937,12 +962,12 @@ class MockFlutterSecureStorage extends _i1.Mock
   _i9.Future<void> write({
     required String? key,
     required String? value,
-    _i6.IOSOptions? iOptions,
-    _i6.AndroidOptions? aOptions,
-    _i6.LinuxOptions? lOptions,
-    _i6.WebOptions? webOptions,
-    _i6.MacOsOptions? mOptions,
-    _i6.WindowsOptions? wOptions,
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -966,12 +991,12 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   _i9.Future<String?> read({
     required String? key,
-    _i6.IOSOptions? iOptions,
-    _i6.AndroidOptions? aOptions,
-    _i6.LinuxOptions? lOptions,
-    _i6.WebOptions? webOptions,
-    _i6.MacOsOptions? mOptions,
-    _i6.WindowsOptions? wOptions,
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -993,12 +1018,12 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   _i9.Future<bool> containsKey({
     required String? key,
-    _i6.IOSOptions? iOptions,
-    _i6.AndroidOptions? aOptions,
-    _i6.LinuxOptions? lOptions,
-    _i6.WebOptions? webOptions,
-    _i6.MacOsOptions? mOptions,
-    _i6.WindowsOptions? wOptions,
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1020,12 +1045,12 @@ class MockFlutterSecureStorage extends _i1.Mock
   @override
   _i9.Future<void> delete({
     required String? key,
-    _i6.IOSOptions? iOptions,
-    _i6.AndroidOptions? aOptions,
-    _i6.LinuxOptions? lOptions,
-    _i6.WebOptions? webOptions,
-    _i6.MacOsOptions? mOptions,
-    _i6.WindowsOptions? wOptions,
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1047,12 +1072,12 @@ class MockFlutterSecureStorage extends _i1.Mock
 
   @override
   _i9.Future<Map<String, String>> readAll({
-    _i6.IOSOptions? iOptions,
-    _i6.AndroidOptions? aOptions,
-    _i6.LinuxOptions? lOptions,
-    _i6.WebOptions? webOptions,
-    _i6.MacOsOptions? mOptions,
-    _i6.WindowsOptions? wOptions,
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1072,12 +1097,12 @@ class MockFlutterSecureStorage extends _i1.Mock
 
   @override
   _i9.Future<void> deleteAll({
-    _i6.IOSOptions? iOptions,
-    _i6.AndroidOptions? aOptions,
-    _i6.LinuxOptions? lOptions,
-    _i6.WebOptions? webOptions,
-    _i6.MacOsOptions? mOptions,
-    _i6.WindowsOptions? wOptions,
+    _i5.IOSOptions? iOptions,
+    _i5.AndroidOptions? aOptions,
+    _i5.LinuxOptions? lOptions,
+    _i5.WebOptions? webOptions,
+    _i5.MacOsOptions? mOptions,
+    _i5.WindowsOptions? wOptions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1109,7 +1134,7 @@ class MockFlutterSecureStorage extends _i1.Mock
 /// A class which mocks [TokenManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTokenManager extends _i1.Mock implements _i27.TokenManager {
+class MockTokenManager extends _i1.Mock implements _i28.TokenManager {
   MockTokenManager() {
     _i1.throwOnMissingStub(this);
   }
@@ -1136,7 +1161,7 @@ class MockTokenManager extends _i1.Mock implements _i27.TokenManager {
 /// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i28.NetworkInfo {
+class MockNetworkInfo extends _i1.Mock implements _i29.NetworkInfo {
   MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }

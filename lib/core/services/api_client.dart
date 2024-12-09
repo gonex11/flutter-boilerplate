@@ -7,16 +7,16 @@ import 'package:flutter_boilerplate/core/common/interceptors.dart';
 import 'package:get/get.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-abstract class ApiConfig {
-  factory ApiConfig(Dio dio, {String? baseUrl}) {
-    dio.options.baseUrl = baseUrl ?? '';
-    dio.httpClientAdapter = IOHttpClientAdapter(
-      createHttpClient: () {
-        final SecurityContext scontext = SecurityContext();
-        HttpClient client = HttpClient(context: scontext)
-          ..badCertificateCallback =
-              (X509Certificate cert, String host, int port) => true;
-        return client;
+abstract class ApiClient {
+  static Dio getDio(String baseUrl) {
+    final Dio dio = Dio();
+
+    dio.options = BaseOptions(
+      baseUrl: baseUrl,
+      connectTimeout: const Duration(seconds: 15),
+      receiveTimeout: const Duration(seconds: 15),
+      headers: {
+        'Content-Type': 'application/json',
       },
     );
 
@@ -34,13 +34,22 @@ abstract class ApiConfig {
       maxWidth: 90,
     );
 
-    dio.options.responseType = ResponseType.json;
     dio.interceptors.addAll([
       refreshTokenInterceptor,
       errorInterceptor,
       if (kDebugMode) loggerInterceptor,
     ]);
 
-    return ApiConfig(dio, baseUrl: baseUrl);
+    dio.httpClientAdapter = IOHttpClientAdapter(
+      createHttpClient: () {
+        final SecurityContext scontext = SecurityContext();
+        HttpClient client = HttpClient(context: scontext)
+          ..badCertificateCallback =
+              (X509Certificate cert, String host, int port) => true;
+        return client;
+      },
+    );
+
+    return dio;
   }
 }
