@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -25,13 +26,21 @@ class AppSkeletonizer extends StatelessWidget {
       containersColor: containersColor,
       ignoreContainers: ignoreContainers,
       enableSwitchAnimation: true,
-      effect: ShimmerEffect(
-        baseColor: (baseColor != null) ? baseColor! : theme.dividerColor,
-        highlightColor: theme.disabledColor,
+      effect: PulseEffect(
+        from: theme.disabledColor,
+        to: theme.dividerColor,
         duration: const Duration(seconds: 1),
       ),
       enabled: enabled,
-      child: child,
+      child: Animate(
+        effects: [
+          FadeEffect(
+            duration: 500.ms,
+            curve: Curves.easeIn,
+          )
+        ],
+        child: child,
+      ),
     );
   }
 }

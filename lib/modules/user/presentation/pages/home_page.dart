@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/widgets/user_tile.dart';
 import 'package:flutter_boilerplate/shared/utils/app_fakes.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_list_view.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_refresh_layout.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_skeletonizer.dart';
-import 'package:flutter_boilerplate/shared/widgets/bottom_sheet_helper.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_state_message.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
@@ -20,7 +22,7 @@ class HomePage extends GetView<HomeController> {
     return PopScope(
       onPopInvokedWithResult: (didPop, result) {
         if (didPop && result == true) {
-          controller.fetchUsers(true);
+          controller.onRefresh();
         }
       },
       child: Scaffold(
@@ -40,8 +42,7 @@ class HomePage extends GetView<HomeController> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: colorScheme.primary,
           onPressed: () {
-            // Get.toNamed(AppRoutes.createUser);
-            BottomSheetHelper.showNoInternetBottomSheet();
+            Get.toNamed(AppRoutes.createUser);
           },
           child: Icon(
             Icons.add,
@@ -71,29 +72,21 @@ class HomePage extends GetView<HomeController> {
                 );
               },
               success: (data) {
-                return RefreshIndicator.adaptive(
-                  backgroundColor: colorScheme.surfaceBright,
-                  color: colorScheme.primary,
-                  onRefresh: () async {
-                    controller.fetchUsers(true);
-                  },
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics(),
-                    ),
-                    padding: const EdgeInsets.all(16),
+                return AppRefreshLayout(
+                  onRefresh: controller.onRefresh,
+                  child: AppListView(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 90),
                     itemCount: data.length,
-                    separatorBuilder: (_, __) {
-                      return const SizedBox(height: 16);
-                    },
                     itemBuilder: (context, index) {
                       final user = data[index];
-                      return UserTile(
-                        onTap: () => Get.toNamed(
-                          AppRoutes.user,
-                          arguments: user.id,
+                      return Animate(
+                        child: UserTile(
+                          onTap: () => Get.toNamed(
+                            AppRoutes.user,
+                            arguments: user.id,
+                          ),
+                          user: user,
                         ),
-                        user: user,
                       );
                     },
                   ),
@@ -102,14 +95,18 @@ class HomePage extends GetView<HomeController> {
               failed: (error) {
                 final message = AppUtils.getErrorMessage(error?.errors) ?? '';
                 return AppRefreshLayout(
-                  onRefresh: controller.fetchUsers,
-                  child: Text(message),
+                  onRefresh: controller.onRefresh,
+                  child: AppStateMessage(
+                    child: Text(message),
+                  ),
                 );
               },
               initial: () {
                 return AppRefreshLayout(
-                  onRefresh: controller.fetchUsers,
-                  child: const Text('There is no Users yet.'),
+                  onRefresh: controller.onRefresh,
+                  child: const AppStateMessage(
+                    child: Text('There is no Users yet.'),
+                  ),
                 );
               },
             ),

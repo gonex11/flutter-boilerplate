@@ -2,32 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppRefreshLayout extends StatelessWidget {
-  final Future<void> Function() onRefresh;
+  final Future Function() onRefresh;
   final Widget child;
 
   const AppRefreshLayout({
     super.key,
-    required this.onRefresh,
     required this.child,
+    required this.onRefresh,
   });
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = context.theme.colorScheme;
+    final theme = context.theme;
+    final colorScheme = theme.colorScheme;
+
     return RefreshIndicator.adaptive(
-      backgroundColor: colorScheme.surfaceBright,
-      color: colorScheme.primary,
+      backgroundColor: colorScheme.primary,
+      color: colorScheme.onPrimary,
       onRefresh: onRefresh,
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(
-          parent: AlwaysScrollableScrollPhysics(),
-        ),
-        slivers: [
-          SliverFillRemaining(
-            child: Center(child: child),
-          ),
-        ],
-      ),
+      child: child,
     );
   }
 }

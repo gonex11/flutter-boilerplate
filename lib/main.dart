@@ -5,7 +5,6 @@ import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_boilerplate/shared/utils/app_translations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
 import 'package:flutter_boilerplate/shared/widgets/bottom_sheet_helper.dart';
-import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:get/get.dart';
 
 import 'core/routes/app_pages.dart';
@@ -38,9 +37,6 @@ class App extends StatelessWidget {
           translations: AppTranslations(),
           locale: Get.deviceLocale,
           fallbackLocale: Locale(AppConstants.general.enLocale),
-          localizationsDelegates: const [
-            FormBuilderLocalizations.delegate,
-          ],
           initialRoute: AppPages.initial,
           themeMode: ThemeMode.system,
           theme: AppThemes.lightTheme,

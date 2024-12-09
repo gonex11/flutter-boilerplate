@@ -37,6 +37,7 @@ dependencies:
     floor: ^1.5.0
     flutter:
         sdk: flutter
+    flutter_animate: ^4.5.2
     flutter_native_splash: ^2.4.1
     flutter_secure_storage: ^9.2.2
     form_builder_validators: ^11.0.0

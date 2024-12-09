@@ -23,7 +23,7 @@ class CreateUserPage extends GetView<CreateUserController> {
       onPopInvokedWithResult: (didPop, result) {
         if (didPop && result == true) {
           final homeController = Get.find<HomeController>();
-          homeController.fetchUsers(true);
+          homeController.onRefresh();
         }
       },
       child: KeyboardDismisser(
