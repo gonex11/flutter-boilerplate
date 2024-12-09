@@ -6,6 +6,7 @@ import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_refresh_layout.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_skeletonizer.dart';
+import 'package:flutter_boilerplate/shared/widgets/bottom_sheet_helper.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
@@ -39,7 +40,8 @@ class HomePage extends GetView<HomeController> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: colorScheme.primary,
           onPressed: () {
-            Get.toNamed(AppRoutes.createUser);
+            // Get.toNamed(AppRoutes.createUser);
+            BottomSheetHelper.showNoInternetBottomSheet();
           },
           child: Icon(
             Icons.add,

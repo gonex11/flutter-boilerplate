@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/core/common/app_binding.dart';
-import 'package:flutter_boilerplate/modules/connectivity/presentation/widgets/no_internet_bottom_sheet.dart';
 import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -18,24 +17,6 @@ abstract class AppUtils {
     Get.bottomSheet(
       isDismissible: true,
       isScrollControlled: true,
-      child,
-    );
-  }
-
-  static void showNoInternetBottomSheet() {
-    Get.bottomSheet(
-      enableDrag: false,
-      isDismissible: false,
-      isScrollControlled: true,
-      const NoInternetBottomSheet(
-        key: ValueKey('noInternetBottomSheet'),
-      ),
-    );
-  }
-
-  static showDialog(Widget child) {
-    Get.dialog(
-      barrierDismissible: true,
       child,
     );
   }

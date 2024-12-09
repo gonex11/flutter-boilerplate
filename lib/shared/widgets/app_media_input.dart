@@ -4,9 +4,8 @@ import 'package:flutter_boilerplate/shared/styles/app_colors.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/shared/utils/app_enums.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
-import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_bottom_sheet.dart';
-import 'package:flutter_boilerplate/shared/widgets/app_permission_alert.dart';
+import 'package:flutter_boilerplate/shared/widgets/dialog_helper.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -87,7 +86,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
         if (storageStatus.isDenied) {
           storageStatus = await Permission.storage.request();
         } else if (storageStatus.isPermanentlyDenied) {
-          AppUtils.showDialog(const AppPermissionAlert.gallery());
+          DialogHelper.showGalleryPermissionDialog();
         }
 
         if (storageStatus.isGranted) {
@@ -104,7 +103,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
           videoStatus = permissions[Permission.videos]!;
         } else if (photoStatus.isPermanentlyDenied &&
             videoStatus.isPermanentlyDenied) {
-          AppUtils.showDialog(const AppPermissionAlert.gallery());
+          DialogHelper.showGalleryPermissionDialog();
         }
 
         if (photoStatus.isGranted && videoStatus.isGranted) {
@@ -119,7 +118,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
       if (status.isDenied) {
         status = await Permission.camera.request();
       } else if (status.isPermanentlyDenied) {
-        AppUtils.showDialog(const AppPermissionAlert.camera());
+        DialogHelper.showCameraPermissionDialog();
       }
 
       if (status.isGranted) {
@@ -139,43 +138,40 @@ class _AppMediaInputState extends State<AppMediaInput> {
     final colorScheme = theme.colorScheme;
 
     return AppBottomSheet(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(
-            dense: true,
-            onTap: selectFromGallery,
-            leading: Icon(
-              Icons.image_rounded,
+      center: true,
+      children: [
+        ListTile(
+          dense: true,
+          onTap: selectFromGallery,
+          leading: Icon(
+            Icons.image_rounded,
+            color: colorScheme.onSurface,
+            size: 20,
+          ),
+          title: Text(
+            AppLocalizations.selectFromGallery,
+            style: AppFonts.mdMedium.copyWith(
               color: colorScheme.onSurface,
-              size: 20,
-            ),
-            title: Text(
-              AppLocalizations.selectFromGallery,
-              style: AppFonts.mdMedium.copyWith(
-                color: colorScheme.onSurface,
-              ),
             ),
           ),
-          Divider(color: theme.dividerColor),
-          ListTile(
-            dense: true,
-            onTap: takeCamera,
-            leading: Icon(
-              Icons.camera_alt_rounded,
+        ),
+        Divider(color: theme.dividerColor),
+        ListTile(
+          dense: true,
+          onTap: takeCamera,
+          leading: Icon(
+            Icons.camera_alt_rounded,
+            color: colorScheme.onSurface,
+            size: 20,
+          ),
+          title: Text(
+            AppLocalizations.openCamera,
+            style: AppFonts.mdMedium.copyWith(
               color: colorScheme.onSurface,
-              size: 20,
-            ),
-            title: Text(
-              AppLocalizations.openCamera,
-              style: AppFonts.mdMedium.copyWith(
-                color: colorScheme.onSurface,
-              ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

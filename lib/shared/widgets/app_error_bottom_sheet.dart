@@ -12,33 +12,30 @@ class AppErrorBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = context.theme.colorScheme;
     return AppBottomSheet(
-      child: Center(
-        child: Column(
-          children: [
-            Icon(
-              Icons.warning_rounded,
-              color: colorScheme.error,
-              size: 150,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              message,
-              textAlign: TextAlign.center,
-              style: Get.textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-              ),
-              child: AppButton(
-                onPressed: Get.back,
-                text: 'OK',
-              ),
-            )
-          ],
+      center: true,
+      children: [
+        Icon(
+          Icons.warning_rounded,
+          color: colorScheme.error,
+          size: 150,
         ),
-      ),
+        const SizedBox(height: 16),
+        Text(
+          message,
+          textAlign: TextAlign.center,
+          style: Get.textTheme.bodyLarge,
+        ),
+        const SizedBox(height: 30),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+          ),
+          child: AppButton(
+            onPressed: Get.back,
+            text: 'OK',
+          ),
+        ),
+      ],
     );
   }
 }

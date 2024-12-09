@@ -14,37 +14,31 @@ class NoInternetBottomSheet extends StatelessWidget {
     return GetBuilder<ConnectivityController>(
       builder: (controller) {
         return AppBottomSheet(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Center(
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.signal_wifi_statusbar_connected_no_internet_4_rounded,
-                    color: colorScheme.primary,
-                    size: 150,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    AppConstants.messages.networkErrorTitle,
-                    textAlign: TextAlign.center,
-                    style: AppFonts.xlBold.copyWith(
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    AppConstants.messages.networkErrorMessage,
-                    textAlign: TextAlign.center,
-                    style: AppFonts.mdRegular.copyWith(
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                ],
+          center: true,
+          scrolled: false,
+          children: [
+            Icon(
+              Icons.signal_wifi_statusbar_connected_no_internet_4_rounded,
+              color: colorScheme.primary,
+              size: 150,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              AppConstants.messages.networkErrorTitle,
+              textAlign: TextAlign.center,
+              style: AppFonts.xlBold.copyWith(
+                color: colorScheme.onSurface,
               ),
             ),
-          ),
+            const SizedBox(height: 4),
+            Text(
+              AppConstants.messages.networkErrorMessage,
+              textAlign: TextAlign.center,
+              style: AppFonts.mdRegular.copyWith(
+                color: colorScheme.onSurface,
+              ),
+            ),
+          ],
         );
       },
     );

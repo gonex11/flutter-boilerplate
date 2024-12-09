@@ -4,6 +4,7 @@ import 'package:flutter_boilerplate/shared/styles/app_themes.dart';
 import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_boilerplate/shared/utils/app_translations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/widgets/bottom_sheet_helper.dart';
 import 'package:form_builder_validators/localization/l10n.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +25,7 @@ class App extends StatelessWidget {
         final isConnected = Get.find<ConnectivityController>().isConnected;
         ever(isConnected, (value) {
           if (!value && Get.isBottomSheetOpen == false) {
-            AppUtils.showNoInternetBottomSheet();
+            BottomSheetHelper.showNoInternetBottomSheet();
           } else if (value && Get.isBottomSheetOpen == true) {
             Get.back();
           }
