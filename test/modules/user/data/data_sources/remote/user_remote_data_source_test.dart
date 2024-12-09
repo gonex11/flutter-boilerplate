@@ -39,17 +39,15 @@ void main() {
 
   group('getUserById', () {
     const testId = 1;
-    final testUserModel = UserModel.fromJson(
-      jsonDecode(readJson('dummy_data/jsons/user_response.json'))["data"],
+    final testUserModel = BaseResponse.fromJson(
+      jsonDecode(readJson('dummy_data/jsons/user_response.json')),
+      (json) => UserModel.fromJson(json as Map<String, dynamic>),
     );
 
     test('should return a users by given id when success', () async {
       // Arrange
       when(mockUserService.getUserById(testId)).thenAnswer(
-        (_) async => BaseResponse(
-          data: testUserModel,
-          meta: tMetaResponse,
-        ),
+        (_) async => testUserModel,
       );
       // Act
       final result = await dataSource.getUserById(testId);
@@ -59,17 +57,15 @@ void main() {
   });
 
   group('addUser', () {
-    final testUserModel = UserModel.fromJson(
-      jsonDecode(readJson('dummy_data/jsons/user_response.json'))["data"],
+    final testUserModel = BaseResponse.fromJson(
+      jsonDecode(readJson('dummy_data/jsons/user_response.json')),
+      (json) => UserModel.fromJson(json as Map<String, dynamic>),
     );
 
     test('should create user when success', () async {
       // Arrange
       when(mockUserService.addUser(tUserPayload)).thenAnswer(
-        (_) async => BaseResponse(
-          data: testUserModel,
-          meta: tMetaResponse,
-        ),
+        (_) async => testUserModel,
       );
       // Act
       final result = await dataSource.addUser(tUserPayload);

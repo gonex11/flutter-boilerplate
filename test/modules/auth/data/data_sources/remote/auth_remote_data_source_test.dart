@@ -21,14 +21,15 @@ void main() {
   });
 
   group('getLoggedUser', () {
-    final testUserModel = UserModel.fromJson(
-      jsonDecode(readJson('dummy_data/jsons/user_response.json'))["data"],
+    final testUserModel = BaseResponse.fromJson(
+      jsonDecode(readJson('dummy_data/jsons/user_response.json')),
+      (json) => UserModel.fromJson(json as Map<String, dynamic>),
     );
 
     test('should return a logged user when success', () async {
       // Arrange
       when(mockAuthService.getLoggedUser()).thenAnswer(
-        (_) async => BaseResponse(data: testUserModel),
+        (_) async => testUserModel,
       );
       // Act
       final result = await dataSource.getLoggedUser();
@@ -38,14 +39,15 @@ void main() {
   });
 
   group('login', () {
-    final testTokenModel = TokenModel.fromJson(
-      jsonDecode(readJson('dummy_data/jsons/token_response.json'))["data"],
+    final testTokenModel = BaseResponse.fromJson(
+      jsonDecode(readJson('dummy_data/jsons/token_response.json')),
+      (json) => TokenModel.fromJson(json as Map<String, dynamic>),
     );
 
     test('should return access token and refresh token when success', () async {
       // Arrange
-      when(mockAuthService.login(tLoginPayload.toJson())).thenAnswer(
-        (_) async => BaseResponse(data: testTokenModel),
+      when(mockAuthService.login(tLoginPayload)).thenAnswer(
+        (_) async => testTokenModel,
       );
       // Act
       final result = await dataSource.login(tLoginPayload);
