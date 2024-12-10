@@ -47,7 +47,7 @@ class AppListView extends StatelessWidget {
               parent: AlwaysScrollableScrollPhysics(),
             ),
         separatorBuilder: (context, index) {
-          return Gap(gap ?? 8);
+          return Gap(gap ?? 12);
         },
         itemBuilder: itemBuilder,
       ),

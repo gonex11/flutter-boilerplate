@@ -544,23 +544,6 @@ class MockAuthRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i9.Future<_i4.BaseResponse<_i8.UserModel>> getLoggedUser() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getLoggedUser,
-          [],
-        ),
-        returnValue: _i9.Future<_i4.BaseResponse<_i8.UserModel>>.value(
-            _FakeBaseResponse_3<_i8.UserModel>(
-          this,
-          Invocation.method(
-            #getLoggedUser,
-            [],
-          ),
-        )),
-      ) as _i9.Future<_i4.BaseResponse<_i8.UserModel>>);
-
-  @override
   _i9.Future<_i4.BaseResponse<_i14.TokenModel>> login(
           _i15.LoginPayload? payload) =>
       (super.noSuchMethod(
@@ -754,23 +737,6 @@ class MockAuthService extends _i1.Mock implements _i25.AuthService {
   MockAuthService() {
     _i1.throwOnMissingStub(this);
   }
-
-  @override
-  _i9.Future<_i4.BaseResponse<_i8.UserModel>> getLoggedUser() =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getLoggedUser,
-          [],
-        ),
-        returnValue: _i9.Future<_i4.BaseResponse<_i8.UserModel>>.value(
-            _FakeBaseResponse_3<_i8.UserModel>(
-          this,
-          Invocation.method(
-            #getLoggedUser,
-            [],
-          ),
-        )),
-      ) as _i9.Future<_i4.BaseResponse<_i8.UserModel>>);
 
   @override
   _i9.Future<_i4.BaseResponse<_i14.TokenModel>> login(
