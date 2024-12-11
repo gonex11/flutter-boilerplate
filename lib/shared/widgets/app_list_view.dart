@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class AppListView extends StatefulWidget {
   final int itemCount;
@@ -43,25 +44,23 @@ class AppListView extends StatefulWidget {
 
 class _AppListViewState extends State<AppListView> {
   late int? page;
-  late int? limit;
+  late int limit;
 
   @override
   void initState() {
-    page = widget.pagedConfig?.page;
-    limit = widget.pagedConfig?.limit;
+    final pagedConfig = widget.pagedConfig ?? AppPagedConfig();
+
+    page = pagedConfig.page;
+    limit = pagedConfig.limit;
 
     super.initState();
   }
 
   Future<void> onLoadMore() async {
-    if (widget.onLoadMore == null) {
-      page = null;
-      return;
-    }
-
-    await Future(() => widget.onLoadMore?.call(page, limit ?? 1));
-    setState(() {
-      page = (widget.itemCount < (limit ?? 10)) ? null : (page ?? 1) + 1;
+    await Future(() => widget.onLoadMore?.call(page, limit)).then((_) {
+      setState(() {
+        page = (widget.itemCount < limit) ? null : (page ?? 1) + 1;
+      });
     });
   }
 
@@ -102,28 +101,24 @@ class _AppListViewState extends State<AppListView> {
           },
           itemBuilder: (context, index) {
             if (index == widget.itemCount) {
-              return Visibility(
-                visible: widget.loadMoreWidget == null,
-                replacement: widget.loadMoreWidget ?? const SizedBox(),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: CircularProgressIndicator.adaptive(
-                            strokeWidth: 2,
+              return Skeleton.ignore(
+                child: Visibility(
+                  visible: widget.loadMoreWidget == null,
+                  replacement: widget.loadMoreWidget ?? const SizedBox(),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const CupertinoActivityIndicator(radius: 8),
+                          const SizedBox(width: 8),
+                          Text(
+                            AppLocalizations.loading,
+                            style: AppFonts.mdMedium,
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          AppLocalizations.loading,
-                          style: AppFonts.mdMedium,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -142,7 +137,7 @@ class AppPagedConfig {
   final int limit;
 
   AppPagedConfig({
-    this.page = 1,
+    this.page = 2,
     this.limit = 10,
   });
 }

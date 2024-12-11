@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show clampDouble;
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
@@ -362,9 +363,8 @@ class AppRefreshIndicatorState extends State<AppRefreshIndicator>
                     animation: _positionController,
                     builder: (BuildContext context, Widget? child) {
                       final typeToIcon = {
-                        _AppRefreshIndicatorMode.refresh: Icons.sync_rounded,
-                        _AppRefreshIndicatorMode.snap: Icons.sync_rounded,
-                        _AppRefreshIndicatorMode.armed: Icons.sync_rounded,
+                        _AppRefreshIndicatorMode.armed:
+                            Icons.arrow_upward_rounded,
                         _AppRefreshIndicatorMode.drag:
                             Icons.arrow_downward_rounded,
                       };
@@ -383,22 +383,23 @@ class AppRefreshIndicatorState extends State<AppRefreshIndicator>
                       final icon = typeToIcon[_mode];
                       final title = typeToTitle[_mode];
 
-                      return Visibility(
-                        visible: icon != null && title != null,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              icon,
-                              size: 16,
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Visibility(
+                            visible: icon == null ||
+                                _mode == _AppRefreshIndicatorMode.refresh,
+                            replacement: Icon(icon, size: 16),
+                            child: const CupertinoActivityIndicator(
+                              radius: 8,
                             ),
-                            const SizedBox(width: 12),
-                            Text(
-                              title ?? '',
-                              style: AppFonts.mdMedium,
-                            ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            title ?? '',
+                            style: AppFonts.mdMedium,
+                          ),
+                        ],
                       );
                     },
                   ),
