@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 abstract class AppFonts {
   static final AppFontSize _fontSize = AppFontSize._();
-  static const TextStyle _default = TextStyle();
+  static final TextStyle _default = GoogleFonts.poppins();
 
   static TextStyle get xsRegular {
     return _default.copyWith(
@@ -64,6 +65,13 @@ abstract class AppFonts {
     return _default.copyWith(
       fontSize: _fontSize.x14,
       fontWeight: FontWeight.w600,
+    );
+  }
+
+  static TextStyle get lgMedium {
+    return _default.copyWith(
+      fontSize: _fontSize.x16,
+      fontWeight: FontWeight.w500,
     );
   }
 

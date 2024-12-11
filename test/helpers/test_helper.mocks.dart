@@ -25,6 +25,8 @@ import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart'
     as _i14;
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart'
     as _i12;
+import 'package:flutter_boilerplate/modules/home/presentation/controllers/home_controller.dart'
+    as _i6;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/db/user_dao.dart'
     as _i23;
 import 'package:flutter_boilerplate/modules/user/data/data_sources/local/entities/user_entity.dart'
@@ -41,8 +43,6 @@ import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart'
     as _i18;
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart'
     as _i17;
-import 'package:flutter_boilerplate/modules/user/presentation/controllers/home_controller.dart'
-    as _i6;
 import 'package:flutter_boilerplate/shared/responses/base_response.dart' as _i4;
 import 'package:flutter_boilerplate/shared/utils/result_state.dart' as _i7;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i5;
@@ -257,11 +257,20 @@ class MockHomeController extends _i1.Mock implements _i6.HomeController {
       ) as _i9.Future<void>);
 
   @override
-  _i9.Future<void> fetchUsers({bool? refresh = false}) => (super.noSuchMethod(
+  _i9.Future<void> fetchUsers({
+    bool? refresh = false,
+    int? page,
+    int? limit = 10,
+  }) =>
+      (super.noSuchMethod(
         Invocation.method(
           #fetchUsers,
           [],
-          {#refresh: refresh},
+          {
+            #refresh: refresh,
+            #page: page,
+            #limit: limit,
+          },
         ),
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),
@@ -481,11 +490,18 @@ class MockUserRepository extends _i1.Mock implements _i17.UserRepository {
   }
 
   @override
-  _i9.Future<_i3.Either<_i13.Failure, List<_i8.UserModel>>> fetchUsers() =>
+  _i9.Future<_i3.Either<_i13.Failure, List<_i8.UserModel>>> fetchUsers({
+    int? page,
+    int? limit = 10,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchUsers,
           [],
+          {
+            #page: page,
+            #limit: limit,
+          },
         ),
         returnValue:
             _i9.Future<_i3.Either<_i13.Failure, List<_i8.UserModel>>>.value(
@@ -494,6 +510,10 @@ class MockUserRepository extends _i1.Mock implements _i17.UserRepository {
           Invocation.method(
             #fetchUsers,
             [],
+            {
+              #page: page,
+              #limit: limit,
+            },
           ),
         )),
       ) as _i9.Future<_i3.Either<_i13.Failure, List<_i8.UserModel>>>);
@@ -619,11 +639,18 @@ class MockUserRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>> fetchUsers() =>
+  _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>> fetchUsers({
+    int? page,
+    int? limit = 10,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchUsers,
           [],
+          {
+            #page: page,
+            #limit: limit,
+          },
         ),
         returnValue: _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>>.value(
             _FakeBaseResponse_3<List<_i8.UserModel>>(
@@ -631,6 +658,10 @@ class MockUserRemoteDataSource extends _i1.Mock
           Invocation.method(
             #fetchUsers,
             [],
+            {
+              #page: page,
+              #limit: limit,
+            },
           ),
         )),
       ) as _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>>);
@@ -766,18 +797,27 @@ class MockUserService extends _i1.Mock implements _i26.UserService {
   }
 
   @override
-  _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>> fetchUsers() =>
+  _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>> fetchUsers(
+    int? page,
+    int? limit,
+  ) =>
       (super.noSuchMethod(
         Invocation.method(
           #fetchUsers,
-          [],
+          [
+            page,
+            limit,
+          ],
         ),
         returnValue: _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>>.value(
             _FakeBaseResponse_3<List<_i8.UserModel>>(
           this,
           Invocation.method(
             #fetchUsers,
-            [],
+            [
+              page,
+              limit,
+            ],
           ),
         )),
       ) as _i9.Future<_i4.BaseResponse<List<_i8.UserModel>>>);

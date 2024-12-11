@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/modules/connectivity/presentation/controllers/connectivity_controller.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
-import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
+import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_bottom_sheet.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +24,7 @@ class NoInternetBottomSheet extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              AppConstants.messages.networkErrorTitle,
+              AppLocalizations.networkErrorTitle,
               textAlign: TextAlign.center,
               style: AppFonts.xlBold.copyWith(
                 color: colorScheme.onSurface,
@@ -32,7 +32,7 @@ class NoInternetBottomSheet extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              AppConstants.messages.networkErrorMessage,
+              AppLocalizations.networkErrorMessage,
               textAlign: TextAlign.center,
               style: AppFonts.mdRegular.copyWith(
                 color: colorScheme.onSurface,

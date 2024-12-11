@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_boilerplate/core/common/failures.dart';
+import 'package:flutter_boilerplate/modules/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
-import 'package:flutter_boilerplate/modules/user/presentation/controllers/home_controller.dart';
 import 'package:flutter_boilerplate/shared/utils/result_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -27,6 +27,9 @@ void main() {
     );
   });
 
+  const testPage = 1;
+  const testLimit = 10;
+
   group('fetchUsers', () {
     test('state should initial when get users is successfully but no data',
         () async {
@@ -42,10 +45,10 @@ void main() {
 
     test('state should success when get users is successfully', () async {
       // Arrange
-      when(mockUserRepository.fetchUsers())
+      when(mockUserRepository.fetchUsers(page: testPage, limit: testLimit))
           .thenAnswer((_) async => Right(tUserModels));
       // Act
-      await controller.fetchUsers();
+      await controller.fetchUsers(refresh: true);
       // Assert
       final state = controller.usersState.value;
       expect(state, isA<ResultSuccess<List<UserModel>>>());
@@ -53,10 +56,12 @@ void main() {
 
     test('state should failed when get users is unsuccessfully', () async {
       // Arrange
-      when(mockUserRepository.fetchUsers()).thenAnswer(
-          (_) async => const Left(ServerFailure(tBaseErrorResponse)));
+      when(mockUserRepository.fetchUsers(page: testPage, limit: testLimit))
+          .thenAnswer(
+        (_) async => const Left(ServerFailure(tBaseErrorResponse)),
+      );
       // Act
-      await controller.fetchUsers();
+      await controller.fetchUsers(refresh: true);
       // Assert
       final state = controller.usersState.value;
       expect(state, isA<ResultFailed>());

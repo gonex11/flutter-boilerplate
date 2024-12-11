@@ -34,6 +34,12 @@ abstract class AppLocalizations {
   static String passwordSpecialCharacterMessage =
       'passwordSpecialCharacterMessage'.tr;
   static String passwordNotMatchMessage = 'passwordNotMatchMessage'.tr;
+  static String loading = 'loading'.tr;
+  static String refreshing = 'refreshing'.tr;
+  static String pullToRefresh = 'pullToRefresh'.tr;
+  static String releaseToRefresh = 'releaseToRefresh'.tr;
+  static String networkErrorTitle = 'networkErrorTitle'.tr;
+  static String networkErrorMessage = 'networkErrorMessage'.tr;
 
   static String passwordMinCharacterMessage(int min) =>
       'passwordMinCharacterMessage'.trParams({

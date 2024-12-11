@@ -43,6 +43,12 @@ class AppTranslations extends Translations {
         'passwordSpecialCharacterMessage':
             'Password must contain at least one special character',
         'passwordNotMatchMessage': 'Password not match',
+        'loading': 'Loading...',
+        'refreshing': 'Refreshing...',
+        'pullToRefresh': 'Pull to refresh',
+        'releaseToRefresh': 'Release to refresh',
+        'networkErrorTitle': 'No Internet Connection...',
+        'networkErrorMessage': 'Please check your connection and try again.',
       },
       'id': {
         'selectFromGallery': 'Pilih dari Galeri',
@@ -84,6 +90,12 @@ class AppTranslations extends Translations {
         'passwordSpecialCharacterMessage':
             'Password harus mengandung setidaknya satu karakter khusus',
         'passwordNotMatchMessage': 'Password tidak cocok',
+        'loading': 'Memuat...',
+        'refreshing': 'Memperbarui...',
+        'pullToRefresh': 'Tarik untuk memperbarui',
+        'releaseToRefresh': 'Lepas untuk memperbarui',
+        'networkErrorTitle': 'Tidak Ada Koneksi Internet...',
+        'networkErrorMessage': 'Silahkan periksa koneksi Anda dan coba lagi.',
       },
     };
   }

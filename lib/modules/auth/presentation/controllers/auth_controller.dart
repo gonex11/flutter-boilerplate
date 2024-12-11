@@ -1,5 +1,6 @@
-import 'package:flutter_boilerplate/core/routes/app_pages.dart';
+import 'package:flutter_boilerplate/modules/auth/data/models/auth_validate_model.dart';
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -9,20 +10,19 @@ class AuthController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    authCheck();
+    await authCheck();
     super.onInit();
   }
 
-  final isAuthenticated = false.obs;
+  final authState =
+      Rx<ResultState<AuthValidateModel>>(const ResultState.initial());
 
   Future<void> authCheck() async {
     final result = await _repository.validateAuth();
     result.fold((_) {
-      isAuthenticated.value = false;
-      Get.offAllNamed(AppRoutes.login);
+      authState.value = const ResultState.failed();
     }, (data) {
-      isAuthenticated.value = true;
-      Get.offAllNamed(AppRoutes.home);
+      authState.value = ResultState.success(data);
     });
   }
 }

@@ -8,8 +8,11 @@ class UserRemoteDataSource {
 
   const UserRemoteDataSource(this._userService);
 
-  Future<BaseResponse<List<UserModel>>> fetchUsers() =>
-      _userService.fetchUsers();
+  Future<BaseResponse<List<UserModel>>> fetchUsers({
+    int? page,
+    int limit = 10,
+  }) =>
+      _userService.fetchUsers(page, limit);
 
   Future<BaseResponse<UserModel>> getUserById(int id) =>
       _userService.getUserById(id);

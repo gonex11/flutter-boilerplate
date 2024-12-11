@@ -18,10 +18,14 @@ class UserRepository {
     this._networkInfo,
   );
 
-  Future<Either<Failure, List<UserModel>>> fetchUsers() async {
+  Future<Either<Failure, List<UserModel>>> fetchUsers({
+    int? page,
+    int limit = 10,
+  }) async {
     if (await _networkInfo.isConnected) {
       try {
-        final result = await _remoteDataSource.fetchUsers();
+        final result =
+            await _remoteDataSource.fetchUsers(page: page, limit: limit);
         _localDataSource.cacheUsers(result.data!);
         return Right(result.data!);
       } on ApiException catch (e) {

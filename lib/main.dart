@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_boilerplate/modules/auth/data/models/auth_validate_model.dart';
+import 'package:flutter_boilerplate/modules/auth/presentation/controllers/auth_controller.dart';
 import 'package:flutter_boilerplate/modules/connectivity/presentation/controllers/connectivity_controller.dart';
 import 'package:flutter_boilerplate/shared/styles/app_themes.dart';
 import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_boilerplate/shared/utils/app_translations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state.dart';
 import 'package:flutter_boilerplate/shared/widgets/bottom_sheet_helper.dart';
 import 'package:get/get.dart';
 
@@ -21,12 +24,22 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ConnectivityController>(
       initState: (_) {
+        final authState = Get.find<AuthController>().authState;
+
         final isConnected = Get.find<ConnectivityController>().isConnected;
         ever(isConnected, (value) {
           if (!value && Get.isBottomSheetOpen == false) {
             BottomSheetHelper.showNoInternetBottomSheet();
           } else if (value && Get.isBottomSheetOpen == true) {
             Get.back();
+          }
+        });
+
+        ever(authState, (value) {
+          if (value is ResultSuccess<AuthValidateModel>) {
+            Get.offAllNamed(AppRoutes.home);
+          } else {
+            Get.offAllNamed(AppRoutes.login);
           }
         });
       },

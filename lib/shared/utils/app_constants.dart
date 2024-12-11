@@ -1,11 +1,10 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 abstract class AppConstants {
   AppConstants._();
 
   static final General _general = General._();
   static General get general => _general;
-
-  static final Messages _messages = Messages._();
-  static Messages get messages => _messages;
 
   static final SecureStorageKeys _secureStorageKeys = SecureStorageKeys._();
   static SecureStorageKeys get secureStorageKeys => _secureStorageKeys;
@@ -18,15 +17,8 @@ class General {
   String get idLocale => 'id';
   String get enLocale => 'en';
   String get appDatabase => 'app_database.db';
-}
 
-class Messages {
-  Messages._();
-
-  String get cacheErrorMessage => 'Can\'t get cache data';
-  String get networkErrorTitle => 'No internet connection...';
-  String get networkErrorMessage =>
-      'Please check your internet connection and try again.';
+  String get baseUrl => dotenv.env['BASE_URL'] ?? '';
 }
 
 class SecureStorageKeys {

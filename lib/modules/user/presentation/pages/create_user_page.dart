@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/controllers/create_user_controller.dart';
-import 'package:flutter_boilerplate/modules/user/presentation/controllers/home_controller.dart';
+import 'package:flutter_boilerplate/modules/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';

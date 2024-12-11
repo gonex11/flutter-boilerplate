@@ -11,7 +11,10 @@ abstract class UserService {
   factory UserService(Dio dio) = _UserService;
 
   @GET('/users')
-  Future<BaseResponse<List<UserModel>>> fetchUsers();
+  Future<BaseResponse<List<UserModel>>> fetchUsers(
+    @Query('page') int? page,
+    @Query('limit') int limit,
+  );
 
   @GET('/users/{id}')
   Future<BaseResponse<UserModel>> getUserById(@Path() int id);

@@ -24,12 +24,13 @@ import 'package:image_picker/image_picker.dart';
 class AppBinding extends Bindings {
   @override
   Future<void> dependencies() async {
+    final baseUrl = AppConstants.general.baseUrl;
     final appDatabase = await $FloorAppDatabase
         .databaseBuilder(AppConstants.general.appDatabase)
         .build();
 
     // Externals
-    Get.lazyPut<Dio>(() => ApiClient.getDio('http://10.0.2.2:3000'));
+    Get.lazyPut<Dio>(() => ApiClient.getDio(baseUrl));
     Get.lazyPut<AndroidOptions>(
         () => const AndroidOptions(encryptedSharedPreferences: true));
     Get.lazyPut<FlutterSecureStorage>(

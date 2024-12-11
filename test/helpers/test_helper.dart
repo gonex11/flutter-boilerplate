@@ -9,7 +9,7 @@ import 'package:flutter_boilerplate/modules/user/data/data_sources/local/user_lo
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/services/user_service.dart';
 import 'package:flutter_boilerplate/modules/user/data/data_sources/remote/user_remote_data_source.dart';
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart';
-import 'package:flutter_boilerplate/modules/user/presentation/controllers/home_controller.dart';
+import 'package:flutter_boilerplate/modules/home/presentation/controllers/home_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mockito/annotations.dart';
 

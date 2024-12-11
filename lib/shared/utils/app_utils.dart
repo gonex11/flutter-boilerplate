@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_boilerplate/core/common/app_binding.dart';
 import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,8 @@ abstract class AppUtils {
 
   static Future<void> initProject() async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    await dotenv.load();
     await AppBinding().dependencies();
   }
 

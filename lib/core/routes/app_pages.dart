@@ -6,8 +6,8 @@ import 'package:flutter_boilerplate/modules/user/presentation/pages/create_user_
 import 'package:flutter_boilerplate/modules/user/presentation/pages/user_detail_page.dart';
 import 'package:get/get.dart';
 
-import '../../modules/user/presentation/bindings/home_binding.dart';
-import '../../modules/user/presentation/pages/home_page.dart';
+import '../../modules/home/presentation/bindings/home_binding.dart';
+import '../../modules/home/presentation/pages/home_page.dart';
 
 part 'app_routes.dart';
 

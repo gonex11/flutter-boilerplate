@@ -25,18 +25,36 @@ class HomeController extends GetxController {
     await fetchUsers(refresh: true);
   }
 
-  Future<void> fetchUsers({bool refresh = false}) async {
-    usersState.value = const ResultState.loading();
+  Future<void> fetchUsers({
+    bool refresh = false,
+    int? page,
+    int limit = 10,
+  }) async {
+    page = refresh ? 1 : page;
+    if (page == null) return;
 
-    final result = await _userRepository.fetchUsers();
+    if (page == 1) {
+      usersState.value = const ResultState.loading();
+    }
+
+    final result = await _userRepository.fetchUsers(page: page, limit: limit);
     result.fold((failure) {
       usersState.value = ResultState.failed(failure.error);
     }, (data) {
       if (data.isEmpty) {
-        usersState.value = const ResultState.initial();
-        return;
+        if (refresh) {
+          usersState.value = const ResultState.initial();
+          return;
+        }
+        usersState.value = ResultState.success(data);
+      } else {
+        final currentState = usersState.value;
+        usersState.value = ResultState.success(
+          (currentState is ResultSuccess<List<UserModel>>)
+              ? [...currentState.data, ...data]
+              : data,
+        );
       }
-      usersState.value = ResultState.success(data);
     });
   }
 

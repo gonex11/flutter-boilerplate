@@ -19,7 +19,10 @@ void main() {
     dataSource = UserRemoteDataSource(mockUserService);
   });
 
-  group('getUsers', () {
+  group('fetchUsers', () {
+    const testPage = 1;
+    const testLimit = 10;
+
     final testUserModels = BaseResponse.fromJson(
       jsonDecode(readJson('dummy_data/jsons/list_user_response.json')),
       (json) => (json as List).map((e) => UserModel.fromJson(e)).toList(),
@@ -27,11 +30,12 @@ void main() {
 
     test('should return a list of users when success', () async {
       // Arrange
-      when(mockUserService.fetchUsers()).thenAnswer(
+      when(mockUserService.fetchUsers(testPage, testLimit)).thenAnswer(
         (_) async => testUserModels,
       );
       // Act
-      final result = await dataSource.fetchUsers();
+      final result =
+          await dataSource.fetchUsers(page: testPage, limit: testLimit);
       // Assert
       expect(result, testUserModels);
     });
