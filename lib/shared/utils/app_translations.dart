@@ -49,6 +49,12 @@ class AppTranslations extends Translations {
         'releaseToRefresh': 'Release to refresh',
         'networkErrorTitle': 'No Internet Connection...',
         'networkErrorMessage': 'Please check your connection and try again.',
+        'yes': 'Yes',
+        'logoutTitle': 'Logout',
+        'logoutMessage': 'Are you sure you want to logout?',
+        'successTitle': 'Success',
+        'createUserSuccessMessage': 'User created successfully',
+        'ok': 'Ok',
       },
       'id': {
         'selectFromGallery': 'Pilih dari Galeri',
@@ -96,6 +102,12 @@ class AppTranslations extends Translations {
         'releaseToRefresh': 'Lepas untuk memperbarui',
         'networkErrorTitle': 'Tidak Ada Koneksi Internet...',
         'networkErrorMessage': 'Silahkan periksa koneksi Anda dan coba lagi.',
+        'yes': 'Ya',
+        'logoutTitle': 'Keluar',
+        'logoutMessage': 'Anda yakin ingin keluar?',
+        'successTitle': 'Berhasil',
+        'createUserSuccessMessage': 'User berhasil ditambahkan',
+        'ok': 'Oke',
       },
     };
   }

@@ -10,9 +10,12 @@ class AppColors {
   static const Color grey = Color(0xFF828282);
   static const Color placeholder = Color(0xFFABABAB);
   static const Color blueA20 = Color(0x29FFFFFF);
-  static const Color red = Color(0xFFDD2419);
   static const Color orange = Color(0xFFFFAB00);
-  static const Color green = Color(0xFF70C787);
+
+  static const Color error = Color(0xFFDD2419);
+  static const Color warning = Color(0xFFFFAB00);
+  static const Color info = Color(0xFF2F80ED);
+  static const Color success = Color(0xFF36B37E);
 
   static const Color lightBackground = Color(0xFFF8F8F8);
   static const Color lightText = black;
@@ -29,7 +32,7 @@ class AppColors {
   static const ColorScheme lightScheme = ColorScheme.light(
     primary: AppColors.primary,
     onPrimary: AppColors.white,
-    error: AppColors.red,
+    error: AppColors.error,
     onError: AppColors.white,
     surface: AppColors.lightBackground,
     onSurface: AppColors.lightText,
@@ -39,7 +42,7 @@ class AppColors {
   static const ColorScheme darkScheme = ColorScheme.dark(
     primary: AppColors.primary,
     onPrimary: AppColors.white,
-    error: AppColors.red,
+    error: AppColors.error,
     onError: AppColors.white,
     surface: AppColors.darkBackground,
     onSurface: AppColors.darkText,

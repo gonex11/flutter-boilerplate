@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/token_manager.dart';
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
+import 'package:flutter_boilerplate/shared/responses/base_error_response.dart';
 import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -46,10 +48,7 @@ class TokenInterceptor extends Interceptor {
 
     try {
       final payload = {'refresh_token': refreshToken};
-      final response = await _dio.post(
-        'http://10.0.2.2:3000/auth/refresh',
-        data: payload,
-      );
+      final response = await _dio.post('/auth/refresh', data: payload);
 
       final newTokens = TokenModel.fromJson(response.data);
       await _storeNewTokens(newTokens);
@@ -102,17 +101,17 @@ class TokenInterceptor extends Interceptor {
 }
 
 class ErrorInterceptor extends Interceptor {
-  // @override
-  // void onResponse(Response response, ResponseInterceptorHandler handler) {
-  //   final code = response.statusCode ?? 0;
-  //   if (!(code > -200 && code < 300)) {
-  //     final errorResponse = BaseErrorResponse.fromJson(response.data);
-  //     final exception = ApiException(
-  //       statusCode: response.statusCode ?? -1,
-  //       error: errorResponse,
-  //     );
-  //     throw exception;
-  //   }
-  //   super.onResponse(response, handler);
-  // }
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    final code = response.statusCode ?? 0;
+    if (!(code > -200 && code < 300)) {
+      final errorResponse = BaseErrorResponse.fromJson(response.data);
+      final exception = ApiException(
+        statusCode: response.statusCode ?? -1,
+        error: errorResponse,
+      );
+      throw exception;
+    }
+    super.onResponse(response, handler);
+  }
 }

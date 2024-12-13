@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/widgets/user_tile.dart';
+import 'package:flutter_boilerplate/shared/utils/alert_dialog_helper.dart';
 import 'package:flutter_boilerplate/shared/utils/app_fakes.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_fill_layout.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_list_view.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_refresh_indicator.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_skeletonizer.dart';
-import 'package:flutter_boilerplate/shared/widgets/app_state_message.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
@@ -30,7 +31,9 @@ class HomePage extends GetView<HomeController> {
           title: Text(AppLocalizations.usersTitle),
           actions: [
             IconButton(
-              onPressed: controller.logout,
+              onPressed: () => AlertDialogHelper.showLogoutDialog(
+                onConfirm: controller.logout,
+              ),
               icon: Icon(
                 Icons.exit_to_app,
                 color: colorScheme.error,
@@ -91,12 +94,12 @@ class HomePage extends GetView<HomeController> {
                 },
                 failed: (error) {
                   final message = AppUtils.getErrorMessage(error?.errors) ?? '';
-                  return AppStateMessage(
+                  return AppFillLayout(
                     child: Text(message),
                   );
                 },
                 initial: () {
-                  return const AppStateMessage(
+                  return const AppFillLayout(
                     child: Text('There is no Users yet.'),
                   );
                 },

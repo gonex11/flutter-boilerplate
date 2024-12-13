@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class AppStateMessage extends StatelessWidget {
+class AppFillLayout extends StatelessWidget {
   final Widget child;
 
-  const AppStateMessage({
+  const AppFillLayout({
     super.key,
     required this.child,
   });

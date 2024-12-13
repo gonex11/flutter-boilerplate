@@ -20,9 +20,7 @@ abstract class BottomSheetHelper {
     _showBottomSheet(
       enableDrag: false,
       isDismissible: false,
-      const NoInternetBottomSheet(
-        key: ValueKey('noInternetBottomSheet'),
-      ),
+      const NoInternetBottomSheet(),
     );
   }
 }

@@ -40,6 +40,12 @@ abstract class AppLocalizations {
   static String releaseToRefresh = 'releaseToRefresh'.tr;
   static String networkErrorTitle = 'networkErrorTitle'.tr;
   static String networkErrorMessage = 'networkErrorMessage'.tr;
+  static String yes = 'yes'.tr;
+  static String logoutTitle = 'logoutTitle'.tr;
+  static String logoutMessage = 'logoutMessage'.tr;
+  static String successTitle = 'successTitle'.tr;
+  static String createUserSuccessMessage = 'createUserSuccessMessage'.tr;
+  static String ok = 'ok'.tr;
 
   static String passwordMinCharacterMessage(int min) =>
       'passwordMinCharacterMessage'.trParams({
