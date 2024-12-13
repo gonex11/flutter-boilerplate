@@ -54,6 +54,7 @@ dependencies:
     path: ^1.9.0
     permission_handler: ^11.3.1
     pretty_dio_logger: ^1.4.0
+    pull_to_refresh_new: ^2.0.5
     retrofit: ^4.4.1
     skeletonizer: ^1.4.2
     sqflite: ^2.4.1

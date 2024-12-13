@@ -89,7 +89,7 @@ class _AppListViewState extends State<AppListView> {
           shrinkWrap: widget.shrinkWrap ?? false,
           padding: widget.padding,
           physics: widget.physics ??
-              const BouncingScrollPhysics(
+              const ClampingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics(),
               ),
           separatorBuilder: (context, index) {

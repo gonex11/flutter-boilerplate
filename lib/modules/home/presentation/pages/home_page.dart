@@ -60,8 +60,10 @@ class HomePage extends GetView<HomeController> {
                   return AppSkeletonizer(
                     enabled: true,
                     child: AppListView(
+                      shrinkWrap: true,
                       padding: const EdgeInsets.all(16),
                       itemCount: AppFakes.list.users.length,
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         final user = AppFakes.list.users[index];
                         return UserTile(
@@ -74,6 +76,8 @@ class HomePage extends GetView<HomeController> {
                 },
                 success: (data) {
                   return AppListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(16),
                     itemCount: data.length,
                     onRefresh: controller.onRefresh,

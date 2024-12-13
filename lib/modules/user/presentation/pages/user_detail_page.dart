@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/controllers/user_controller.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
-import 'package:flutter_boilerplate/shared/widgets/app_fill_layout.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_refresh_indicator.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_skeletonizer.dart';
 import 'package:get/get.dart';
@@ -31,7 +30,7 @@ class UserDetailPage extends GetView<UserController> {
                 orElse: () => const SizedBox.shrink(),
                 loading: () => const AppSkeletonizer(
                   enabled: true,
-                  child: AppFillLayout(
+                  child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,7 +43,7 @@ class UserDetailPage extends GetView<UserController> {
                   ),
                 ),
                 success: (data) {
-                  return AppFillLayout(
+                  return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
