@@ -44,7 +44,8 @@ import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart'
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart'
     as _i17;
 import 'package:flutter_boilerplate/shared/responses/base_response.dart' as _i4;
-import 'package:flutter_boilerplate/shared/utils/result_state.dart' as _i7;
+import 'package:flutter_boilerplate/shared/utils/result_state/result_state.dart'
+    as _i7;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i5;
 import 'package:get/get.dart' as _i2;
 import 'package:get/get_state_manager/src/simple/list_notifier.dart' as _i10;

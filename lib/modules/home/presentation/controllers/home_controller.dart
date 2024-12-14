@@ -2,7 +2,7 @@ import 'package:flutter_boilerplate/core/routes/app_pages.dart';
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart';
-import 'package:flutter_boilerplate/shared/utils/result_state.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state/result_state.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {

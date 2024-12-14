@@ -7,7 +7,7 @@ import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_boilerplate/shared/utils/app_translations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
 import 'package:flutter_boilerplate/shared/utils/bottom_sheet_helper.dart';
-import 'package:flutter_boilerplate/shared/utils/result_state.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state/result_state.dart';
 import 'package:get/get.dart';
 
 import 'core/routes/app_pages.dart';

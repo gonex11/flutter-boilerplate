@@ -4,7 +4,7 @@ import 'package:flutter_boilerplate/modules/auth/data/models/login_payload.dart'
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
 import 'package:flutter_boilerplate/modules/auth/data/repositories/auth_repository.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
-import 'package:flutter_boilerplate/shared/utils/result_state.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state/result_state.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';
 

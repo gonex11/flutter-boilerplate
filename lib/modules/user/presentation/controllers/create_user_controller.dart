@@ -4,7 +4,7 @@ import 'package:flutter_boilerplate/modules/user/data/models/user_payload.dart';
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart';
 import 'package:flutter_boilerplate/shared/utils/alert_dialog_helper.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
-import 'package:flutter_boilerplate/shared/utils/result_state.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state/result_state.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_error_bottom_sheet.dart';
 import 'package:get/get.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_boilerplate/modules/user/data/repositories/user_repository.dart';
-import 'package:flutter_boilerplate/shared/utils/result_state.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state/result_state.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {

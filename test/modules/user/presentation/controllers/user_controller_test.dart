@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_boilerplate/core/common/failures.dart';
 import 'package:flutter_boilerplate/modules/user/data/models/user_model.dart';
 import 'package:flutter_boilerplate/modules/user/presentation/controllers/user_controller.dart';
-import 'package:flutter_boilerplate/shared/utils/result_state.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state/result_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

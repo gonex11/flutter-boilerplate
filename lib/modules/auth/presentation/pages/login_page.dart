@@ -4,7 +4,7 @@ import 'package:flutter_boilerplate/shared/styles/app_colors.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
-import 'package:flutter_boilerplate/shared/utils/result_state.dart';
+import 'package:flutter_boilerplate/shared/utils/result_state/result_state.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_button.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_input.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
