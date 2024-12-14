@@ -38,6 +38,11 @@ abstract class AppLocalizations {
   static String refreshing = 'refreshing'.tr;
   static String pullToRefresh = 'pullToRefresh'.tr;
   static String releaseToRefresh = 'releaseToRefresh'.tr;
+  static String refreshCompleted = 'refreshCompleted'.tr;
+  static String refreshFailed = 'refreshFailed'.tr;
+  static String pullToLoadMore = 'pullToLoadMore'.tr;
+  static String releaseToLoadMore = 'releaseToLoadMore'.tr;
+  static String loadFailed = 'loadFailed'.tr;
   static String networkErrorTitle = 'networkErrorTitle'.tr;
   static String networkErrorMessage = 'networkErrorMessage'.tr;
   static String yes = 'yes'.tr;

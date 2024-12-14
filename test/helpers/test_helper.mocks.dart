@@ -257,20 +257,21 @@ class MockHomeController extends _i1.Mock implements _i6.HomeController {
       ) as _i9.Future<void>);
 
   @override
-  _i9.Future<void> fetchUsers({
-    bool? refresh = false,
-    int? page,
-    int? limit = 10,
-  }) =>
-      (super.noSuchMethod(
+  _i9.Future<void> onLoadMore() => (super.noSuchMethod(
+        Invocation.method(
+          #onLoadMore,
+          [],
+        ),
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
+
+  @override
+  _i9.Future<void> fetchUsers({bool? refresh = false}) => (super.noSuchMethod(
         Invocation.method(
           #fetchUsers,
           [],
-          {
-            #refresh: refresh,
-            #page: page,
-            #limit: limit,
-          },
+          {#refresh: refresh},
         ),
         returnValue: _i9.Future<void>.value(),
         returnValueForMissingStub: _i9.Future<void>.value(),

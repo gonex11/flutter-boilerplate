@@ -6,8 +6,7 @@ import 'package:flutter_boilerplate/shared/utils/app_fakes.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_fill_layout.dart';
-import 'package:flutter_boilerplate/shared/widgets/app_list_view.dart';
-import 'package:flutter_boilerplate/shared/widgets/app_refresh_indicator.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_refresher.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_skeletonizer.dart';
 import 'package:get/get.dart';
 
@@ -52,18 +51,22 @@ class HomePage extends GetView<HomeController> {
           ),
         ),
         body: SafeArea(
-          child: AppRefreshIndicator(
+          child: AppRefresher(
             onRefresh: controller.onRefresh,
+            onLoadMore: controller.onLoadMore,
             child: Obx(
               () => controller.usersState.value.when(
                 loading: () {
                   return AppSkeletonizer(
                     enabled: true,
-                    child: AppListView(
+                    child: ListView.separated(
                       shrinkWrap: true,
                       padding: const EdgeInsets.all(16),
                       itemCount: AppFakes.list.users.length,
                       physics: const NeverScrollableScrollPhysics(),
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(height: 12);
+                      },
                       itemBuilder: (context, index) {
                         final user = AppFakes.list.users[index];
                         return UserTile(
@@ -75,14 +78,13 @@ class HomePage extends GetView<HomeController> {
                   );
                 },
                 success: (data) {
-                  return AppListView(
+                  return ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(16),
                     itemCount: data.length,
-                    onRefresh: controller.onRefresh,
-                    onLoadMore: (page, limit) async {
-                      controller.fetchUsers(page: page, limit: limit);
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(height: 12);
                     },
                     itemBuilder: (context, index) {
                       final user = data[index];

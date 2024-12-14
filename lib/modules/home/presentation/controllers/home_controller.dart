@@ -17,6 +17,9 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  int? _page = 1;
+  final _limit = 10;
+
   final usersState =
       Rx<ResultState<List<UserModel>>>(const ResultState.initial());
   final logoutState = Rx<ResultState<bool>>(const ResultState.initial());
@@ -25,22 +28,24 @@ class HomeController extends GetxController {
     await fetchUsers(refresh: true);
   }
 
-  Future<void> fetchUsers({
-    bool refresh = false,
-    int? page,
-    int limit = 10,
-  }) async {
-    page = refresh ? 1 : page;
-    if (page == null) return;
+  Future<void> onLoadMore() async {
+    await fetchUsers();
+  }
 
-    if (page == 1) {
+  Future<void> fetchUsers({bool refresh = false}) async {
+    _page = refresh ? 1 : _page;
+    if (_page == null) return;
+
+    if (_page == 1) {
       usersState.value = const ResultState.loading();
     }
 
-    final result = await _userRepository.fetchUsers(page: page, limit: limit);
+    final result = await _userRepository.fetchUsers(page: _page, limit: _limit);
     result.fold((failure) {
       usersState.value = ResultState.failed(failure.error);
     }, (data) {
+      _page = (data.length < _limit) ? null : _page! + 1;
+
       if (data.isEmpty) {
         if (refresh) {
           usersState.value = const ResultState.initial();

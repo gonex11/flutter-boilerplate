@@ -46,6 +46,4 @@ app.*.map.json
 /.json_models/
 models.jsonc
 
-.vscode/
-**/generated/
 **/generated/
