@@ -19,6 +19,7 @@ abstract class AlertDialogHelper {
     VoidCallback? onCancel,
     bool showCancelBtn = false,
   }) {
+    final colorScheme = Get.context!.theme.colorScheme;
     final typeToColor = {
       CoolAlertType.success: AppColors.success,
       CoolAlertType.info: AppColors.info,
@@ -42,6 +43,10 @@ abstract class AlertDialogHelper {
       textTextStyle: AppFonts.mdRegular,
       showCancelBtn: showCancelBtn,
       backgroundColor: backgroundColor,
+      confirmBtnTextStyle: AppFonts.mdRegular.copyWith(
+        color: colorScheme.onPrimary,
+      ),
+      cancelBtnTextStyle: AppFonts.mdRegular,
       autoCloseDuration:
           (type != CoolAlertType.confirm) ? const Duration(seconds: 2) : null,
     );

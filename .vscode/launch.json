@@ -6,9 +6,6 @@
             "type": "dart",
             "program": "lib/main.dart",
             "flutterMode": "debug",
-            "args": [
-                "--verbose"
-            ]
         },
         {
             "name": "Profile",
