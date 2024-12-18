@@ -3,7 +3,9 @@ import 'package:flutter_boilerplate/core/common/exceptions.dart';
 import 'package:flutter_boilerplate/core/common/token_manager.dart';
 import 'package:flutter_boilerplate/modules/auth/data/models/token_model.dart';
 import 'package:flutter_boilerplate/shared/responses/base_error_response.dart';
+import 'package:flutter_boilerplate/shared/responses/error_detail_response.dart';
 import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
+import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class TokenInterceptor extends Interceptor {
@@ -104,11 +106,24 @@ class ErrorInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     final code = response.statusCode ?? 0;
-    if (!(code > -200 && code < 300)) {
+    if (!(code >= 200 && code < 300)) {
       final errorResponse = BaseErrorResponse.fromJson(response.data);
       final exception = ApiException(
         statusCode: response.statusCode ?? -1,
         error: errorResponse,
+      );
+      throw exception;
+    } else if (code >= 400) {
+      final exception = ApiException(
+        statusCode: -1,
+        error: BaseErrorResponse(
+          errors: [
+            ErrorDetailResponse(
+              code: 'unexpected_error',
+              detail: AppLocalizations.unexpectedErrorMessage,
+            ),
+          ],
+        ),
       );
       throw exception;
     }

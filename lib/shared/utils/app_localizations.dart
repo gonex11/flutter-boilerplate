@@ -52,10 +52,13 @@ abstract class AppLocalizations {
   static String createUserSuccessMessage = 'createUserSuccessMessage'.tr;
   static String ok = 'ok'.tr;
   static String emptyUsersMessage = 'emptyUsersMessage'.tr;
+  static String unexpectedErrorMessage = 'unexpectedErrorMessage'.tr;
+
   static String passwordMinCharacterMessage(int min) =>
       'passwordMinCharacterMessage'.trParams({
         'min': min.toString(),
       });
+
   static String requestPermissionTitle(String appName, String permissionType) =>
       'permissionMessage'.trParams({
         'appName': appName,

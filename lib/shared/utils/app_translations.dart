@@ -61,6 +61,8 @@ class AppTranslations extends Translations {
         'createUserSuccessMessage': 'User created successfully',
         'ok': 'Ok',
         'emptyUsersMessage': 'There is no Users yet.',
+        'unexpectedErrorMessage':
+            'Something went wrong. Please try again later.',
       },
       'id': {
         'selectFromGallery': 'Pilih dari Galeri',
@@ -120,6 +122,8 @@ class AppTranslations extends Translations {
         'createUserSuccessMessage': 'User berhasil ditambahkan',
         'ok': 'Oke',
         'emptyUsersMessage': 'Tidak ada user yang tersedia.',
+        'unexpectedErrorMessage':
+            'Terjadi kesalahan. Silahkan coba lagi nanti.',
       },
     };
   }
