@@ -60,6 +60,7 @@ class AppTranslations extends Translations {
         'successTitle': 'Success',
         'createUserSuccessMessage': 'User created successfully',
         'ok': 'Ok',
+        'emptyUsersMessage': 'There is no Users yet.',
       },
       'id': {
         'selectFromGallery': 'Pilih dari Galeri',
@@ -118,6 +119,7 @@ class AppTranslations extends Translations {
         'successTitle': 'Berhasil',
         'createUserSuccessMessage': 'User berhasil ditambahkan',
         'ok': 'Oke',
+        'emptyUsersMessage': 'Tidak ada user yang tersedia.',
       },
     };
   }

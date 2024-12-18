@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/shared/styles/app_colors.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:pull_to_refresh_new/pull_to_refresh.dart';
 
 class AppRefresher extends StatefulWidget {
   final Widget child;
-  final VoidCallback onRefresh;
-  final VoidCallback? onLoadMore;
+  final Function() onRefresh;
+  final Function()? onLoadMore;
 
   const AppRefresher({
     super.key,
@@ -50,6 +50,9 @@ class _AppRefresherState extends State<AppRefresher> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
+    final colorScheme = theme.colorScheme;
+
     return SmartRefresher(
       controller: controller,
       onRefresh: onRefresh,
@@ -57,42 +60,43 @@ class _AppRefresherState extends State<AppRefresher> {
       enablePullUp: widget.onLoadMore != null,
       physics: const BouncingScrollPhysics(),
       header: ClassicHeader(
+        refreshStyle: RefreshStyle.Follow,
         releaseText: AppLocalizations.releaseToRefresh,
         refreshingText: AppLocalizations.refreshing,
         idleText: AppLocalizations.pullToRefresh,
         completeText: AppLocalizations.refreshCompleted,
         failedText: AppLocalizations.refreshFailed,
         textStyle: AppFonts.mdRegular.copyWith(
-          color: AppColors.grey,
+          color: colorScheme.onSurface,
         ),
         outerBuilder: (child) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.only(bottom: 12),
             child: child,
           );
         },
-        idleIcon: const Icon(
+        idleIcon: Icon(
           Icons.arrow_downward_rounded,
-          color: AppColors.grey,
+          color: colorScheme.onSurface,
           size: 16,
         ),
-        releaseIcon: const Icon(
+        releaseIcon: Icon(
           Icons.arrow_upward_rounded,
-          color: AppColors.grey,
+          color: colorScheme.onSurface,
           size: 16,
         ),
-        completeIcon: const Icon(
+        completeIcon: Icon(
           Icons.check_rounded,
-          color: AppColors.grey,
+          color: colorScheme.onSurface,
           size: 16,
         ),
-        failedIcon: const Icon(
+        failedIcon: Icon(
           Icons.error_outline_outlined,
-          color: AppColors.grey,
+          color: colorScheme.onSurface,
           size: 16,
         ),
-        refreshingIcon: const CupertinoActivityIndicator(
-          color: AppColors.grey,
+        refreshingIcon: CupertinoActivityIndicator(
+          color: colorScheme.onSurface,
           radius: 8,
         ),
       ),
@@ -103,34 +107,34 @@ class _AppRefresherState extends State<AppRefresher> {
         failedText: AppLocalizations.loadFailed,
         loadStyle: LoadStyle.ShowWhenLoading,
         textStyle: AppFonts.mdRegular.copyWith(
-          color: AppColors.grey,
+          color: colorScheme.onSurface,
         ),
         outerBuilder: (child) {
           return Padding(
             padding: const EdgeInsets.only(
               top: 8,
-              bottom: 16,
+              bottom: 12,
             ),
             child: child,
           );
         },
-        idleIcon: const Icon(
+        idleIcon: Icon(
           Icons.arrow_upward_rounded,
-          color: AppColors.grey,
+          color: colorScheme.onSurface,
           size: 16,
         ),
-        canLoadingIcon: const Icon(
+        canLoadingIcon: Icon(
           Icons.arrow_downward_rounded,
-          color: AppColors.grey,
+          color: colorScheme.onSurface,
           size: 16,
         ),
-        failedIcon: const Icon(
+        failedIcon: Icon(
           Icons.error_outline_outlined,
-          color: AppColors.grey,
+          color: colorScheme.onSurface,
           size: 16,
         ),
-        loadingIcon: const CupertinoActivityIndicator(
-          color: AppColors.grey,
+        loadingIcon: CupertinoActivityIndicator(
+          color: colorScheme.onSurface,
           radius: 8,
         ),
       ),

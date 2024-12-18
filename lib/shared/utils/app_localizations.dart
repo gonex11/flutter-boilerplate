@@ -51,7 +51,7 @@ abstract class AppLocalizations {
   static String successTitle = 'successTitle'.tr;
   static String createUserSuccessMessage = 'createUserSuccessMessage'.tr;
   static String ok = 'ok'.tr;
-
+  static String emptyUsersMessage = 'emptyUsersMessage'.tr;
   static String passwordMinCharacterMessage(int min) =>
       'passwordMinCharacterMessage'.trParams({
         'min': min.toString(),

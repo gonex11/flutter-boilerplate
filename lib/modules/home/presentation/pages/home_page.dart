@@ -5,7 +5,6 @@ import 'package:flutter_boilerplate/shared/utils/alert_dialog_helper.dart';
 import 'package:flutter_boilerplate/shared/utils/app_fakes.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
-import 'package:flutter_boilerplate/shared/widgets/app_fill_layout.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_refresher.dart';
 import 'package:flutter_boilerplate/shared/widgets/app_skeletonizer.dart';
 import 'package:get/get.dart';
@@ -100,13 +99,13 @@ class HomePage extends GetView<HomeController> {
                 },
                 failed: (error) {
                   final message = AppUtils.getErrorMessage(error?.errors) ?? '';
-                  return AppFillLayout(
+                  return Center(
                     child: Text(message),
                   );
                 },
                 initial: () {
-                  return const AppFillLayout(
-                    child: Text('There is no Users yet.'),
+                  return Center(
+                    child: Text(AppLocalizations.emptyUsersMessage),
                   );
                 },
               ),
