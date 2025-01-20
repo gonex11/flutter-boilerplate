@@ -1,33 +1,41 @@
-import 'package:flutter_boilerplate/presentation/bindings/user/user_binding.dart';
-import 'package:flutter_boilerplate/presentation/views/user/create_user_view.dart';
-import 'package:flutter_boilerplate/presentation/views/user/user_detail_view.dart';
+import 'package:flutter_boilerplate/modules/auth/presentation/bindings/auth_binding.dart';
+import 'package:flutter_boilerplate/modules/auth/presentation/pages/login_page.dart';
+import 'package:flutter_boilerplate/modules/user/presentation/bindings/create_user_binding.dart';
+import 'package:flutter_boilerplate/modules/user/presentation/bindings/user_binding.dart';
+import 'package:flutter_boilerplate/modules/user/presentation/pages/create_user_page.dart';
+import 'package:flutter_boilerplate/modules/user/presentation/pages/user_detail_page.dart';
 import 'package:get/get.dart';
 
-import '../../presentation/bindings/home/home_binding.dart';
-import '../../presentation/views/home/home_view.dart';
+import '../../modules/home/presentation/bindings/home_binding.dart';
+import '../../modules/home/presentation/pages/home_page.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = AppRoutes.HOME;
+  static const initial = AppRoutes.home;
 
-  static final routes = [
+  static final pages = [
     GetPage(
-      name: _Paths.HOME,
-      page: () => const HomeView(),
+      name: _Paths.login,
+      page: () => const LoginPage(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.home,
+      page: () => const HomePage(),
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.USER,
-      page: () => const UserDetailView(),
+      name: _Paths.user,
+      page: () => const UserDetailPage(),
       binding: UserBinding(),
     ),
     GetPage(
-      name: _Paths.CREATE_USER,
-      page: () => const CreateUserView(),
-      binding: UserBinding(),
+      name: _Paths.createUser,
+      page: () => const CreateUserPage(),
+      binding: CreateUserBinding(),
     ),
   ];
 }

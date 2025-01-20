@@ -10,5 +10,14 @@ targets:
             source_gen:combining_builder:
                 options:
                     build_extensions:
-                        '^lib/data/models/{{dir}}/{{file}}.dart': 'lib/data/models/{{dir}}/generated/{{file}}.g.dart'
-                        '^lib/core/services/remote/responses/{{file}}.dart': 'lib/core/services/remote/responses/generated/{{file}}.g.dart'
+                        '^lib/core/services/{{file}}.dart': 'lib/core/services/generated/{{file}}.g.dart'
+                        '^lib/modules/{{dir}}/data/models/{{file}}.dart': 'lib/modules/{{dir}}/data/models/generated/{{file}}.g.dart'
+                        '^lib/modules/{{dir}}/data/data_sources/remote/services/{{file}}.dart': 'lib/modules/{{dir}}/data/data_sources/remote/services/generated/{{file}}.g.dart'
+                        '^lib/shared/responses/{{file}}.dart': 'lib/shared/responses/generated/{{file}}.g.dart'
+            freezed:
+                options:
+                    generic_argument_factories: true
+                    build_extensions:
+                        '^lib/modules/{{dir}}/data/models/{{file}}.dart': 'lib/modules/{{dir}}/data/models/generated/{{file}}.freezed.dart'
+                        '^lib/shared/responses/{{file}}.dart': 'lib/shared/responses/generated/{{file}}.freezed.dart'
+                        '^lib/shared/utils/{{dir}}/{{file}}.dart': 'lib/shared/utils/{{dir}}/generated/{{file}}.freezed.dart'

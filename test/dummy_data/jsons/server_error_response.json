@@ -1,0 +1,10 @@
+{
+    "type": "server_error",
+    "errors": [
+        {
+            "code": "internal_server_error",
+            "detail": "server error occured",
+            "attr": null
+        }
+    ]
+}

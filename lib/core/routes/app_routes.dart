@@ -3,15 +3,17 @@ part of 'app_pages.dart';
 abstract class AppRoutes {
   AppRoutes._();
 
-  static const HOME = _Paths.HOME;
-  static const USER = _Paths.USER;
-  static const CREATE_USER = _Paths.CREATE_USER;
+  static const home = _Paths.home;
+  static const user = _Paths.user;
+  static const createUser = _Paths.createUser;
+  static const login = _Paths.login;
 }
 
 abstract class _Paths {
   _Paths._();
 
-  static const HOME = '/home';
-  static const USER = '/user';
-  static const CREATE_USER = '/user/create';
+  static const home = '/';
+  static const user = '/user';
+  static const createUser = '/user/create';
+  static const login = '/login';
 }
