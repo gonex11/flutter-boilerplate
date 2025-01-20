@@ -34,10 +34,10 @@ void main() {
     test('state should initial when get users is successfully but no data',
         () async {
       // Arrange
-      when(mockUserRepository.fetchUsers())
+      when(mockUserRepository.fetchUsers(page: testPage, limit: testLimit))
           .thenAnswer((_) async => const Right([]));
       // Act
-      await controller.fetchUsers();
+      await controller.fetchUsers(refresh: true);
       // Assert
       final state = controller.usersState.value;
       expect(state, isA<ResultInitial>());

@@ -149,7 +149,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
             size: 20,
           ),
           title: Text(
-            AppLocalizations.selectFromGallery,
+            AppLocalizations.selectFromGallery(),
             style: AppFonts.mdMedium.copyWith(
               color: colorScheme.onSurface,
             ),
@@ -165,7 +165,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
             size: 20,
           ),
           title: Text(
-            AppLocalizations.openCamera,
+            AppLocalizations.openCamera(),
             style: AppFonts.mdMedium.copyWith(
               color: colorScheme.onSurface,
             ),
@@ -210,7 +210,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      AppLocalizations.uploadPhoto,
+                      AppLocalizations.uploadPhoto(),
                       textAlign: TextAlign.center,
                       style: AppFonts.xsMedium.copyWith(
                         color: AppColors.placeholder,
@@ -262,7 +262,7 @@ class _AppMediaInputState extends State<AppMediaInput> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      AppLocalizations.uploadVideo,
+                      AppLocalizations.uploadVideo(),
                       textAlign: TextAlign.center,
                       style: AppFonts.xsMedium.copyWith(
                         color: AppColors.placeholder,

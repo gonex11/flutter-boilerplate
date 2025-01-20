@@ -120,7 +120,7 @@ class ErrorInterceptor extends Interceptor {
           errors: [
             ErrorDetailResponse(
               code: 'unexpected_error',
-              detail: AppLocalizations.unexpectedErrorMessage,
+              detail: AppLocalizations.unexpectedErrorMessage(),
             ),
           ],
         ),

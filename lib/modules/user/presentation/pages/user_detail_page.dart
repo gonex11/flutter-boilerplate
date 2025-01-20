@@ -17,7 +17,7 @@ class UserDetailPage extends GetView<UserController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.userDetail),
+        title: Text(AppLocalizations.userDetail()),
       ),
       body: SafeArea(
         child: Center(

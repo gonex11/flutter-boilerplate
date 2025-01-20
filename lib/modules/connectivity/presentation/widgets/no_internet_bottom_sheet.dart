@@ -24,7 +24,7 @@ class NoInternetBottomSheet extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              AppLocalizations.networkErrorTitle,
+              AppLocalizations.networkErrorTitle(),
               textAlign: TextAlign.center,
               style: AppFonts.xlBold.copyWith(
                 color: colorScheme.onSurface,
@@ -32,7 +32,7 @@ class NoInternetBottomSheet extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              AppLocalizations.networkErrorMessage,
+              AppLocalizations.networkErrorMessage(),
               textAlign: TextAlign.center,
               style: AppFonts.mdRegular.copyWith(
                 color: colorScheme.onSurface,

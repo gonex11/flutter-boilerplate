@@ -26,7 +26,7 @@ class HomePage extends GetView<HomeController> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text(AppLocalizations.usersTitle),
+          title: Text(AppLocalizations.usersTitle()),
           actions: [
             IconButton(
               onPressed: () => AlertDialogHelper.showLogoutDialog(
@@ -105,7 +105,9 @@ class HomePage extends GetView<HomeController> {
                 },
                 initial: () {
                   return Center(
-                    child: Text(AppLocalizations.emptyUsersMessage),
+                    child: Text(
+                      AppLocalizations.emptyUsersMessage(),
+                    ),
                   );
                 },
               ),

@@ -177,6 +177,30 @@ class MockHomeController extends _i1.Mock implements _i6.HomeController {
   }
 
   @override
+  set page(int? _page) => super.noSuchMethod(
+        Invocation.setter(
+          #page,
+          _page,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  int get limit => (super.noSuchMethod(
+        Invocation.getter(#limit),
+        returnValue: 0,
+      ) as int);
+
+  @override
+  set limit(int? _limit) => super.noSuchMethod(
+        Invocation.setter(
+          #limit,
+          _limit,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   _i2.Rx<_i7.ResultState<List<_i8.UserModel>>> get usersState =>
       (super.noSuchMethod(
         Invocation.getter(#usersState),

@@ -40,27 +40,27 @@ abstract class AppUtils {
   ]) {
     return FormBuilderValidators.compose([
       FormBuilderValidators.required(
-        errorText: AppLocalizations.passwordRequiredMessage,
+        errorText: AppLocalizations.passwordRequiredMessage(),
       ),
       FormBuilderValidators.minLength(
         min,
         errorText: AppLocalizations.passwordMinCharacterMessage(min),
       ),
       FormBuilderValidators.hasUppercaseChars(
-        errorText: AppLocalizations.passwordUpperCaseMessage,
+        errorText: AppLocalizations.passwordUpperCaseMessage(),
       ),
       FormBuilderValidators.hasLowercaseChars(
-        errorText: AppLocalizations.passwordLowerCaseMessage,
+        errorText: AppLocalizations.passwordLowerCaseMessage(),
       ),
       FormBuilderValidators.hasNumericChars(
-        errorText: AppLocalizations.passwordNumberMessage,
+        errorText: AppLocalizations.passwordNumberMessage(),
       ),
       FormBuilderValidators.hasSpecialChars(
-        errorText: AppLocalizations.passwordSpecialCharacterMessage,
+        errorText: AppLocalizations.passwordSpecialCharacterMessage(),
       ),
       (value) => (confirmText == null || value == confirmText)
           ? null
-          : AppLocalizations.passwordNotMatchMessage,
+          : AppLocalizations.passwordNotMatchMessage(),
     ]);
   }
 }

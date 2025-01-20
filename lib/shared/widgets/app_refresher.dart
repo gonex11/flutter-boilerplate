@@ -61,11 +61,11 @@ class _AppRefresherState extends State<AppRefresher> {
       physics: const BouncingScrollPhysics(),
       header: ClassicHeader(
         refreshStyle: RefreshStyle.Follow,
-        releaseText: AppLocalizations.releaseToRefresh,
-        refreshingText: AppLocalizations.refreshing,
-        idleText: AppLocalizations.pullToRefresh,
-        completeText: AppLocalizations.refreshCompleted,
-        failedText: AppLocalizations.refreshFailed,
+        releaseText: AppLocalizations.releaseToRefresh(),
+        refreshingText: AppLocalizations.refreshing(),
+        idleText: AppLocalizations.pullToRefresh(),
+        completeText: AppLocalizations.refreshCompleted(),
+        failedText: AppLocalizations.refreshFailed(),
         textStyle: AppFonts.mdRegular.copyWith(
           color: colorScheme.onSurface,
         ),
@@ -101,10 +101,10 @@ class _AppRefresherState extends State<AppRefresher> {
         ),
       ),
       footer: ClassicFooter(
-        canLoadingText: AppLocalizations.releaseToLoadMore,
-        loadingText: AppLocalizations.loading,
-        idleText: AppLocalizations.pullToLoadMore,
-        failedText: AppLocalizations.loadFailed,
+        canLoadingText: AppLocalizations.releaseToLoadMore(),
+        loadingText: AppLocalizations.loading(),
+        idleText: AppLocalizations.pullToLoadMore(),
+        failedText: AppLocalizations.loadFailed(),
         loadStyle: LoadStyle.ShowWhenLoading,
         textStyle: AppFonts.mdRegular.copyWith(
           color: colorScheme.onSurface,

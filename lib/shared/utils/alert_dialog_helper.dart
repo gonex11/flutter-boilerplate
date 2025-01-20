@@ -1,16 +1,14 @@
-import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/shared/styles/app_colors.dart';
-import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/shared/utils/app_constants.dart';
 import 'package:flutter_boilerplate/shared/utils/app_enums.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
+import 'package:flutter_boilerplate/shared/widgets/app_alert_dialog.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 abstract class AlertDialogHelper {
-  static void _showDialog({
-    required CoolAlertType type,
+  static Future<dynamic> _showDialog({
+    required AppAlertType type,
     required String title,
     required String message,
     String? confirmBtnText,
@@ -19,51 +17,32 @@ abstract class AlertDialogHelper {
     VoidCallback? onCancel,
     bool showCancelBtn = false,
   }) {
-    final colorScheme = Get.context!.theme.colorScheme;
-    final typeToColor = {
-      CoolAlertType.success: AppColors.success,
-      CoolAlertType.info: AppColors.info,
-      CoolAlertType.confirm: AppColors.info,
-      CoolAlertType.warning: AppColors.warning,
-      CoolAlertType.error: AppColors.error,
-      CoolAlertType.loading: AppColors.grey,
-    };
-    final backgroundColor = typeToColor[type] ?? AppColors.grey;
-
-    CoolAlert.show(
-      context: Get.context!,
-      type: type,
-      confirmBtnText: confirmBtnText ?? AppLocalizations.ok,
-      cancelBtnText: cancelBtnText ?? AppLocalizations.cancel,
-      onConfirmBtnTap: onConfirm,
-      onCancelBtnTap: onCancel,
-      title: title,
-      text: message,
-      titleTextStyle: AppFonts.lgSemiBold,
-      textTextStyle: AppFonts.mdRegular,
-      showCancelBtn: showCancelBtn,
-      backgroundColor: backgroundColor,
-      confirmBtnTextStyle: AppFonts.mdRegular.copyWith(
-        color: colorScheme.onPrimary,
+    return Get.dialog(
+      AppAlertDialog(
+        type: type,
+        title: title,
+        text: message,
+        confirmBtnText: confirmBtnText,
+        cancelBtnText: cancelBtnText,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
+        showCancelBtn: showCancelBtn,
       ),
-      cancelBtnTextStyle: AppFonts.mdRegular,
-      autoCloseDuration:
-          (type != CoolAlertType.confirm) ? const Duration(seconds: 2) : null,
     );
   }
 
-  static void _showSuccessDialog({
+  static Future<dynamic> _showSuccessDialog({
     required String title,
     required String message,
   }) {
-    _showDialog(
-      type: CoolAlertType.success,
+    return _showDialog(
+      type: AppAlertType.success,
       title: title,
       message: message,
     );
   }
 
-  static void _showConfirmDialog({
+  static Future<dynamic> _showConfirmDialog({
     required String title,
     required String message,
     String? confirmBtnText,
@@ -71,10 +50,10 @@ abstract class AlertDialogHelper {
     VoidCallback? onConfirm,
     VoidCallback? onCancel,
   }) {
-    _showDialog(
-      type: CoolAlertType.confirm,
-      confirmBtnText: confirmBtnText ?? AppLocalizations.yes,
-      cancelBtnText: cancelBtnText ?? AppLocalizations.cancel,
+    return _showDialog(
+      type: AppAlertType.confirm,
+      confirmBtnText: confirmBtnText ?? AppLocalizations.yes(),
+      cancelBtnText: cancelBtnText ?? AppLocalizations.cancel(),
       title: title,
       message: message,
       onConfirm: onConfirm,
@@ -82,51 +61,51 @@ abstract class AlertDialogHelper {
     );
   }
 
-  static void showGalleryPermissionDialog() {
+  static Future<dynamic> showGalleryPermissionDialog() {
     final permission = AppPermissionAlertType.gallery.name.capitalize ?? '';
     final title = AppLocalizations.requestPermissionTitle(
       AppConstants.general.appName,
       permission,
     );
 
-    _showConfirmDialog(
-      confirmBtnText: AppLocalizations.yes,
-      cancelBtnText: AppLocalizations.cancel,
+    return _showConfirmDialog(
+      confirmBtnText: AppLocalizations.yes(),
+      cancelBtnText: AppLocalizations.cancel(),
       onConfirm: openAppSettings,
       title: title,
-      message: AppLocalizations.permissionMessage,
+      message: AppLocalizations.permissionMessage(),
     );
   }
 
-  static void showCameraPermissionDialog() {
+  static Future<dynamic> showCameraPermissionDialog() {
     final permission = AppPermissionAlertType.camera.name.capitalize ?? '';
     final title = AppLocalizations.requestPermissionTitle(
       AppConstants.general.appName,
       permission,
     );
 
-    _showConfirmDialog(
-      confirmBtnText: AppLocalizations.yes,
-      cancelBtnText: AppLocalizations.cancel,
+    return _showConfirmDialog(
+      confirmBtnText: AppLocalizations.yes(),
+      cancelBtnText: AppLocalizations.cancel(),
       onConfirm: openAppSettings,
       title: title,
-      message: AppLocalizations.permissionMessage,
+      message: AppLocalizations.permissionMessage(),
     );
   }
 
-  static void showCreateUserSuccessDialog() {
-    _showSuccessDialog(
-      title: AppLocalizations.successTitle,
-      message: AppLocalizations.createUserSuccessMessage,
+  static Future<dynamic> showCreateUserSuccessDialog() {
+    return _showSuccessDialog(
+      title: AppLocalizations.successTitle(),
+      message: AppLocalizations.createUserSuccessMessage(),
     );
   }
 
-  static void showLogoutDialog({required VoidCallback onConfirm}) {
-    _showConfirmDialog(
-      confirmBtnText: AppLocalizations.yes,
-      cancelBtnText: AppLocalizations.cancel,
-      title: AppLocalizations.logoutTitle,
-      message: AppLocalizations.logoutMessage,
+  static Future<dynamic> showLogoutDialog({required VoidCallback onConfirm}) {
+    return _showConfirmDialog(
+      confirmBtnText: AppLocalizations.yes(),
+      cancelBtnText: AppLocalizations.cancel(),
+      title: AppLocalizations.logoutTitle(),
+      message: AppLocalizations.logoutMessage(),
       onConfirm: onConfirm,
     );
   }

@@ -37,6 +37,7 @@ class AppColors {
     surface: AppColors.lightBackground,
     onSurface: AppColors.lightText,
     surfaceBright: AppColors.lightSurface,
+    onSurfaceVariant: AppColors.grey,
   );
 
   static const ColorScheme darkScheme = ColorScheme.dark(
@@ -47,5 +48,6 @@ class AppColors {
     surface: AppColors.darkBackground,
     onSurface: AppColors.darkText,
     surfaceBright: AppColors.darkSurface,
+    onSurfaceVariant: AppColors.grey,
   );
 }

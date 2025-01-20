@@ -22,7 +22,7 @@ class UserTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.onSurface.withOpacity(.1),
+            color: colorScheme.onSurface.withValues(alpha: .1),
             blurRadius: 1,
           ),
         ],

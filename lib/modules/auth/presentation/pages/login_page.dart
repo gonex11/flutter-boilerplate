@@ -37,7 +37,7 @@ class LoginPage extends GetView<LoginController> {
                   children: [
                     Center(
                       child: Text(
-                        AppLocalizations.login,
+                        AppLocalizations.login(),
                         style: AppFonts.xlBold.copyWith(
                           fontSize: 32,
                           color: colorScheme.onPrimary,
@@ -56,7 +56,7 @@ class LoginPage extends GetView<LoginController> {
                         child: Column(
                           children: [
                             Text(
-                              AppLocalizations.loginSubtitle,
+                              AppLocalizations.loginSubtitle(),
                               style: AppFonts.smRegular.copyWith(
                                 color: AppColors.grey,
                               ),
@@ -68,14 +68,14 @@ class LoginPage extends GetView<LoginController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      AppLocalizations.username,
+                                      AppLocalizations.username(),
                                       style: AppFonts.mdSemiBold,
                                     ),
                                     const SizedBox(height: 8),
                                     AppInput(
                                       controller: controller.unameController,
-                                      hintText:
-                                          AppLocalizations.usernamePlaceholder,
+                                      hintText: AppLocalizations
+                                          .usernamePlaceholder(),
                                       validator:
                                           FormBuilderValidators.required(),
                                     ),
@@ -86,14 +86,14 @@ class LoginPage extends GetView<LoginController> {
                                   children: [
                                     const SizedBox(height: 16),
                                     Text(
-                                      AppLocalizations.password,
+                                      AppLocalizations.password(),
                                       style: AppFonts.mdSemiBold,
                                     ),
                                     const SizedBox(height: 8),
                                     AppInput.password(
                                       controller: controller.passController,
-                                      hintText:
-                                          AppLocalizations.passwordPlaceholder,
+                                      hintText: AppLocalizations
+                                          .passwordPlaceholder(),
                                       validator: AppUtils.passwordValidator(),
                                     ),
                                   ],
@@ -104,7 +104,7 @@ class LoginPage extends GetView<LoginController> {
                                     isLoading: controller.loginState.value
                                         is ResultLoading,
                                     onPressed: controller.login,
-                                    text: AppLocalizations.login,
+                                    text: AppLocalizations.login(),
                                   ),
                                 ),
                               ],

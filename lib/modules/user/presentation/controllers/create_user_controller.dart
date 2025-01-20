@@ -50,11 +50,11 @@ class CreateUserController extends GetxController {
       if (Get.isBottomSheetOpen == false) {
         AppUtils.showBottomSheet(AppErrorBottomSheet(message: message));
       }
-    }, (data) async {
+    }, (data) {
       createState.value = ResultState.success(data);
 
-      Get.back(result: true);
       AlertDialogHelper.showCreateUserSuccessDialog();
+      Get.back(result: true);
     });
   }
 }

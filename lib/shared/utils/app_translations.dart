@@ -63,6 +63,11 @@ class AppTranslations extends Translations {
         'emptyUsersMessage': 'There is no Users yet.',
         'unexpectedErrorMessage':
             'Something went wrong. Please try again later.',
+        'confirm': 'Confirm',
+        'info': 'Info',
+        'warning': 'Warning',
+        'error': 'Error',
+        'success': 'Success',
       },
       'id': {
         'selectFromGallery': 'Pilih dari Galeri',
@@ -124,6 +129,11 @@ class AppTranslations extends Translations {
         'emptyUsersMessage': 'Tidak ada user yang tersedia.',
         'unexpectedErrorMessage':
             'Terjadi kesalahan. Silahkan coba lagi nanti.',
+        'confirm': 'Konfirmasi',
+        'info': 'Info',
+        'warning': 'Peringatan',
+        'error': 'Kesalahan',
+        'success': 'Berhasil',
       },
     };
   }

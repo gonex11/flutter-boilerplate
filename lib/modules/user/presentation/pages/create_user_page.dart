@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_boilerplate/modules/user/presentation/controllers/create_user_controller.dart';
 import 'package:flutter_boilerplate/modules/home/presentation/controllers/home_controller.dart';
+import 'package:flutter_boilerplate/modules/user/presentation/controllers/create_user_controller.dart';
 import 'package:flutter_boilerplate/shared/styles/app_fonts.dart';
 import 'package:flutter_boilerplate/shared/utils/app_localizations.dart';
 import 'package:flutter_boilerplate/shared/utils/app_utils.dart';
@@ -29,7 +29,7 @@ class CreateUserPage extends GetView<CreateUserController> {
       child: KeyboardDismisser(
         child: Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.addUser),
+            title: Text(AppLocalizations.addUser()),
           ),
           persistentFooterButtons: [
             Padding(
@@ -38,7 +38,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                 () => AppButton(
                   isLoading: controller.createState.value is ResultLoading,
                   onPressed: controller.addUser,
-                  text: AppLocalizations.save,
+                  text: AppLocalizations.save(),
                 ),
               ),
             ),
@@ -54,7 +54,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          AppLocalizations.username,
+                          AppLocalizations.username(),
                           style: AppFonts.mdRegular.copyWith(
                             color: colorScheme.onSurface,
                           ),
@@ -62,12 +62,12 @@ class CreateUserPage extends GetView<CreateUserController> {
                         const SizedBox(height: 6),
                         AppInput(
                           controller: controller.unameController,
-                          hintText: AppLocalizations.usernamePlaceholder,
+                          hintText: AppLocalizations.usernamePlaceholder(),
                           validator: FormBuilderValidators.required(),
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          AppLocalizations.firstName,
+                          AppLocalizations.firstName(),
                           style: AppFonts.mdRegular.copyWith(
                             color: colorScheme.onSurface,
                           ),
@@ -75,12 +75,12 @@ class CreateUserPage extends GetView<CreateUserController> {
                         const SizedBox(height: 6),
                         AppInput(
                           controller: controller.fNameController,
-                          hintText: AppLocalizations.firstNamePlaceholder,
+                          hintText: AppLocalizations.firstNamePlaceholder(),
                           validator: FormBuilderValidators.required(),
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          AppLocalizations.lastName,
+                          AppLocalizations.lastName(),
                           style: AppFonts.mdRegular.copyWith(
                             color: colorScheme.onSurface,
                           ),
@@ -88,12 +88,12 @@ class CreateUserPage extends GetView<CreateUserController> {
                         const SizedBox(height: 6),
                         AppInput(
                           controller: controller.lNameController,
-                          hintText: AppLocalizations.lastNamePlaceholder,
+                          hintText: AppLocalizations.lastNamePlaceholder(),
                           validator: FormBuilderValidators.required(),
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          AppLocalizations.password,
+                          AppLocalizations.password(),
                           style: AppFonts.mdRegular.copyWith(
                             color: colorScheme.onSurface,
                           ),
@@ -101,7 +101,7 @@ class CreateUserPage extends GetView<CreateUserController> {
                         const SizedBox(height: 6),
                         AppInput.password(
                           controller: controller.passController,
-                          hintText: AppLocalizations.passwordPlaceholder,
+                          hintText: AppLocalizations.passwordPlaceholder(),
                           validator: AppUtils.passwordValidator(),
                         ),
                       ],
