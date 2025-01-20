@@ -9,8 +9,8 @@ import 'package:permission_handler/permission_handler.dart';
 abstract class AlertDialogHelper {
   static Future<dynamic> _showDialog({
     required AppAlertType type,
-    required String title,
-    required String message,
+    String? title,
+    String? message,
     String? confirmBtnText,
     String? cancelBtnText,
     VoidCallback? onConfirm,
@@ -28,17 +28,7 @@ abstract class AlertDialogHelper {
         onCancel: onCancel,
         showCancelBtn: showCancelBtn,
       ),
-    );
-  }
-
-  static Future<dynamic> _showSuccessDialog({
-    required String title,
-    required String message,
-  }) {
-    return _showDialog(
-      type: AppAlertType.success,
-      title: title,
-      message: message,
+      barrierDismissible: type != AppAlertType.loading,
     );
   }
 
@@ -94,7 +84,8 @@ abstract class AlertDialogHelper {
   }
 
   static Future<dynamic> showCreateUserSuccessDialog() {
-    return _showSuccessDialog(
+    return _showDialog(
+      type: AppAlertType.loading,
       title: AppLocalizations.successTitle(),
       message: AppLocalizations.createUserSuccessMessage(),
     );

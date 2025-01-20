@@ -35,7 +35,8 @@ class AppAlertDialog extends StatefulWidget {
 class _AppAlertDialogState extends State<AppAlertDialog> {
   @override
   void initState() {
-    if (widget.type != AppAlertType.confirm) {
+    if (widget.type != AppAlertType.confirm &&
+        widget.type != AppAlertType.loading) {
       Future.delayed(const Duration(seconds: 1), () {
         if (mounted) {
           Get.back();
@@ -57,16 +58,16 @@ class _AppAlertDialogState extends State<AppAlertDialog> {
       AppAlertType.confirm => Icons.info_rounded,
       AppAlertType.warning => Icons.warning_rounded,
       AppAlertType.error => Icons.error_rounded,
-      AppAlertType.loading => Icons.hourglass_empty_rounded,
+      _ => Icons.info_rounded
     };
 
     final defaultTitle = switch (widget.type) {
-      AppAlertType.success => 'Success',
-      AppAlertType.info => 'Info',
-      AppAlertType.confirm => 'Confirm',
-      AppAlertType.warning => 'Warning',
-      AppAlertType.error => 'Error',
-      AppAlertType.loading => 'Loading',
+      AppAlertType.success => AppLocalizations.success(),
+      AppAlertType.info => AppLocalizations.info(),
+      AppAlertType.confirm => AppLocalizations.confirm(),
+      AppAlertType.warning => AppLocalizations.warning(),
+      AppAlertType.error => AppLocalizations.error(),
+      AppAlertType.loading => AppLocalizations.loading(),
     };
 
     final backgroundColor = switch (widget.type) {
@@ -97,16 +98,24 @@ class _AppAlertDialogState extends State<AppAlertDialog> {
               color: backgroundColor,
             ),
             child: Center(
-              child: Icon(
-                icon,
-                color: colorScheme.onSurface,
-                size: 78,
+              child: Visibility(
+                visible: widget.type != AppAlertType.loading,
+                replacement: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation(colorScheme.onPrimary),
+                ),
+                child: Icon(
+                  icon,
+                  color: colorScheme.onSurface,
+                  size: 78,
+                ),
               ),
             ),
           ),
-          const SizedBox(height: 8),
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 24,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -114,7 +123,10 @@ class _AppAlertDialogState extends State<AppAlertDialog> {
                   widget.title ?? defaultTitle,
                   style: AppFonts.xlBold,
                 ),
-                const SizedBox(height: 8),
+                Visibility(
+                  visible: widget.text != null,
+                  child: const SizedBox(height: 8),
+                ),
                 Visibility(
                   visible: widget.text != null,
                   child: Text(
@@ -122,41 +134,47 @@ class _AppAlertDialogState extends State<AppAlertDialog> {
                     style: AppFonts.mdSemiBold,
                   ),
                 ),
-                const SizedBox(height: 32),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Visibility(
-                      visible: widget.type == AppAlertType.confirm ||
-                          widget.showCancelBtn,
-                      child: Flexible(
-                        child: AppButton.text(
+                Visibility(
+                  visible: widget.text != null,
+                  child: const SizedBox(height: 24),
+                ),
+                Visibility(
+                  visible: widget.type != AppAlertType.loading,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Visibility(
+                        visible: widget.type == AppAlertType.confirm ||
+                            widget.showCancelBtn,
+                        child: Flexible(
+                          child: AppButton.text(
+                            radius: 50,
+                            height: 38,
+                            width: context.mediaQuerySize.width * .25,
+                            onPressed: widget.onCancel ?? Get.back,
+                            textColor: colorScheme.onSurface,
+                            text: widget.cancelBtnText ??
+                                AppLocalizations.cancel(),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: widget.type == AppAlertType.confirm ||
+                            widget.showCancelBtn,
+                        child: const SizedBox(width: 24),
+                      ),
+                      Flexible(
+                        child: AppButton(
                           radius: 50,
                           height: 38,
                           width: context.mediaQuerySize.width * .25,
-                          onPressed: widget.onCancel ?? Get.back,
-                          textColor: colorScheme.onSurface,
-                          text:
-                              widget.cancelBtnText ?? AppLocalizations.cancel(),
+                          onPressed: widget.onConfirm,
+                          backgroundColor: AppColors.success,
+                          text: AppLocalizations.ok(),
                         ),
                       ),
-                    ),
-                    Visibility(
-                      visible: widget.type == AppAlertType.confirm ||
-                          widget.showCancelBtn,
-                      child: const SizedBox(width: 24),
-                    ),
-                    Flexible(
-                      child: AppButton(
-                        radius: 50,
-                        height: 38,
-                        width: context.mediaQuerySize.width * .25,
-                        onPressed: widget.onConfirm,
-                        backgroundColor: AppColors.success,
-                        text: AppLocalizations.ok(),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
